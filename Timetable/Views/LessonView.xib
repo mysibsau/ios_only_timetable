@@ -11,94 +11,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LessonView" customModule="Timetable" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="1RT-cV-9j9"/>
-                <outlet property="lessonView" destination="jKK-5L-CFa" id="gmI-Z6-rwB"/>
-                <outlet property="place" destination="JCS-xo-Zne" id="Dbz-Xq-qfO"/>
-                <outlet property="professor" destination="Ydu-70-HxR" id="IkG-n7-Daq"/>
-                <outlet property="subject" destination="Il0-Ob-anj" id="Pyj-Fy-zQY"/>
-                <outlet property="time" destination="FG1-Cw-MIz" id="ErX-RV-vmn"/>
-                <outlet property="type" destination="DKF-PT-yos" id="pCi-fs-krl"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="322" height="164"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKK-5L-CFa">
-                    <rect key="frame" x="8" y="8" width="306" height="148"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Очень длинное название предмета которых не бывает" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Il0-Ob-anj">
-                            <rect key="frame" x="8" y="8" width="290" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="(вид занятия)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKF-PT-yos">
-                            <rect key="frame" x="8" y="32.5" width="290" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Преподаватель" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydu-70-HxR">
-                            <rect key="frame" x="8" y="58.5" width="290" height="28"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="749" text="c ЧЧ:ММ до ЧЧ:ММ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FG1-Cw-MIz">
-                            <rect key="frame" x="8" y="119.5" width="290" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Место учебы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCS-xo-Zne">
-                            <rect key="frame" x="8" y="94.5" width="290" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="JCS-xo-Zne" secondAttribute="trailing" constant="8" id="5Z1-oM-eCh"/>
-                        <constraint firstAttribute="trailing" secondItem="DKF-PT-yos" secondAttribute="trailing" constant="8" id="7JG-Cg-Kaj"/>
-                        <constraint firstItem="Ydu-70-HxR" firstAttribute="top" secondItem="DKF-PT-yos" secondAttribute="bottom" constant="8" id="B5h-kU-BCZ"/>
-                        <constraint firstItem="Il0-Ob-anj" firstAttribute="leading" secondItem="jKK-5L-CFa" secondAttribute="leading" constant="8" id="K0f-Oo-HTY"/>
-                        <constraint firstItem="DKF-PT-yos" firstAttribute="top" secondItem="Il0-Ob-anj" secondAttribute="bottom" constant="4" id="K6h-3r-vxO"/>
-                        <constraint firstItem="JCS-xo-Zne" firstAttribute="leading" secondItem="jKK-5L-CFa" secondAttribute="leading" constant="8" id="UeK-BJ-R5A"/>
-                        <constraint firstItem="JCS-xo-Zne" firstAttribute="top" secondItem="Ydu-70-HxR" secondAttribute="bottom" constant="8" id="VyG-Ur-bJR"/>
-                        <constraint firstAttribute="trailing" secondItem="Il0-Ob-anj" secondAttribute="trailing" constant="8" id="W1F-ir-ju8"/>
-                        <constraint firstItem="FG1-Cw-MIz" firstAttribute="top" secondItem="JCS-xo-Zne" secondAttribute="bottom" constant="4" id="WY3-04-RK9"/>
-                        <constraint firstAttribute="trailing" secondItem="FG1-Cw-MIz" secondAttribute="trailing" constant="8" id="adx-nb-fHv"/>
-                        <constraint firstItem="Ydu-70-HxR" firstAttribute="leading" secondItem="jKK-5L-CFa" secondAttribute="leading" constant="8" id="coQ-Th-ggq"/>
-                        <constraint firstAttribute="bottom" secondItem="FG1-Cw-MIz" secondAttribute="bottom" constant="8" id="hmG-tF-u8P"/>
-                        <constraint firstItem="DKF-PT-yos" firstAttribute="leading" secondItem="jKK-5L-CFa" secondAttribute="leading" constant="8" id="sG8-uM-fty"/>
-                        <constraint firstItem="Il0-Ob-anj" firstAttribute="top" secondItem="jKK-5L-CFa" secondAttribute="top" constant="8" id="sGd-zw-T2W"/>
-                        <constraint firstItem="FG1-Cw-MIz" firstAttribute="leading" secondItem="jKK-5L-CFa" secondAttribute="leading" constant="8" id="tT4-oa-xLa"/>
-                        <constraint firstAttribute="trailing" secondItem="Ydu-70-HxR" secondAttribute="trailing" constant="8" id="tr6-HA-blf"/>
-                    </constraints>
-                </view>
-            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jKK-5L-CFa" secondAttribute="trailing" constant="8" id="5o1-Ew-gxN"/>
-                <constraint firstItem="jKK-5L-CFa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="cW8-Ql-NSC"/>
-                <constraint firstAttribute="bottom" secondItem="jKK-5L-CFa" secondAttribute="bottom" constant="8" id="eQ9-YR-NKz"/>
-                <constraint firstItem="jKK-5L-CFa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="zWI-jp-gqd"/>
-            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="134.78260869565219" y="-350.22321428571428"/>
         </view>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oMj-wh-MtB">
-            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <nil key="textColor"/>
-            <nil key="highlightedColor"/>
-            <point key="canvasLocation" x="11" y="-254"/>
-        </label>
     </objects>
 </document>
