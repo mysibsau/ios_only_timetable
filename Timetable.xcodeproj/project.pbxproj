@@ -14,6 +14,10 @@
 		4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */; };
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
+		4A2338F6243C5BA0002C0746 /* LessonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338F5243C5BA0002C0746 /* LessonView.xib */; };
+		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
+		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
+		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		4A2338E6243C58C5002C0746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A2338F5243C5BA0002C0746 /* LessonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonView.xib; sourceTree = "<group>"; };
+		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
+		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +68,50 @@
 			children = (
 				4A2338DA243C58C2002C0746 /* AppDelegate.swift */,
 				4A2338DC243C58C2002C0746 /* SceneDelegate.swift */,
-				4A2338DE243C58C2002C0746 /* ViewController.swift */,
-				4A2338E0243C58C2002C0746 /* Main.storyboard */,
+				4A2338F3243C5AC7002C0746 /* Model */,
+				4A2338F1243C5A94002C0746 /* Storyboards */,
+				4A2338F2243C5AAA002C0746 /* ViewControllers */,
+				4A2338F4243C5AD4002C0746 /* Views */,
 				4A2338E6243C58C5002C0746 /* Assets.xcassets */,
-				4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */,
 				4A2338EB243C58C5002C0746 /* Info.plist */,
 				4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */,
 			);
 			path = Timetable;
+			sourceTree = "<group>";
+		};
+		4A2338F1243C5A94002C0746 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4A2338E0243C58C2002C0746 /* Main.storyboard */,
+				4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4A2338F2243C5AAA002C0746 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A2338DE243C58C2002C0746 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4A2338F3243C5AC7002C0746 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A2338F9243CA860002C0746 /* Lesson.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A2338F4243C5AD4002C0746 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A2338F5243C5BA0002C0746 /* LessonView.xib */,
+				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
+				4A60025E243CD1CC00077C81 /* Colors.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +174,7 @@
 			files = (
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
+				4A2338F6243C5BA0002C0746 /* LessonView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +188,9 @@
 			files = (
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
 				4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */,
+				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
+				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
+				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
 			);
@@ -220,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -274,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -295,7 +343,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ooo.Timetable;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.Timetable-SibSU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -313,7 +361,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ooo.Timetable;
+				PRODUCT_BUNDLE_IDENTIFIER = "ooo.Timetable-SibSU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
