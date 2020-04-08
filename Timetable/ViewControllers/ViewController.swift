@@ -28,40 +28,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         let lesson1 = LessonView()
-        lesson1.subject.text = "Ахритектура вычислительных систем"
-        lesson1.type.text = "(Лабораторная работа)"
-        lesson1.professor.text = "Богданов Константив Васильевич(?)"
-        lesson1.place.text = "Л - 313"
-        lesson1.time.text = "9:40 - 11:10"
+        lesson1.addTime(time: "9:40 - 11:10")
+        lesson1.addSubgroup(subject: "Ахритектура вычислительных систем", type: "(Лабораторная работа)", proffesor: "Богданов Константив Васильевич(?)", place: "Л 313")
         
         let lesson2 = LessonView()
-        lesson2.subject.text = "Объектно-ориентированное программирование"
-        lesson2.type.text = "(лекция)"
-        lesson2.professor.text = "Добрая бабуля с:"
-        lesson2.place.text = "Л - 319"
-        lesson2.time.text = "11:30 - 13:00"
+        lesson2.addTime(time: "13:30 - 15:00")
+        lesson2.addSubgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", proffesor: "Добрая бабуля с:", place: "Л 319")
+        lesson2.addSubgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", proffesor: "Богданов Константив Васильевич(?)", place: "Л 319")
         
         let lesson3 = LessonView()
-        lesson3.subject.text = "Ахритектура вычислительных систем"
-        lesson3.type.text = "(лекция)"
-        lesson3.professor.text = "Богданов Константив Васильевич(?)"
-        lesson3.place.text = "Л - 319"
-        lesson3.time.text = "13:30 - 15:00"
+        lesson3.addTime(time: "15:10 - 16:40")
+        lesson3.addSubgroup(subject: "Вычислительная математика", type: "(практика)", proffesor: "Охорзин Дед Почти", place: "Н 304")
         
         let lesson4 = LessonView()
-        lesson4.subject.text = "Вычислительная математика"
-        lesson4.type.text = "(практика)"
-        lesson4.professor.text = "Охорзин Дед Почти"
-        lesson4.place.text = "Н - 304"
-        lesson4.time.text = "15:10 - 16:40"
-        
-        let lesson5 = LessonView()
-        lesson5.subject.text = "Вычислительная математика"
-        lesson5.type.text = "(практика)"
-        lesson5.professor.text = "Охорзин Дед Почти"
-        lesson5.place.text = "Н - 304"
-        lesson5.time.text = "15:10 - 16:40"
-        
+        lesson4.addTime(time: "15:10 - 16:40")
+        lesson4.addSubgroup(subject: "Вычислительная математика", type: "(практика)", proffesor: "Охорзин Дед Почти", place: "Н 304")
+                
         stackView.addArrangedSubview(lesson1)
         lesson1.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         stackView.addArrangedSubview(lesson2)
@@ -70,8 +52,6 @@ class ViewController: UIViewController {
         lesson3.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         stackView.addArrangedSubview(lesson4)
         lesson4.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        stackView.addArrangedSubview(lesson5)
-        lesson5.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         
     }
     
@@ -95,7 +75,6 @@ class ViewController: UIViewController {
         stackView.spacing = 0
         
         scrollView.addSubview(stackView)
-        
         // расставляем констраинты на полное прилигание с scrollView
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true

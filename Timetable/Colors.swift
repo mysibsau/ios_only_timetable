@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Colors {
+public class Colors {
     
     static var shadowColor: UIColor {
         if #available(iOS 13, *) {
@@ -52,6 +52,34 @@ class Colors {
     
     static var sibsuGreen: UIColor {
         return UIColor(red: 138.0/255.0, green: 189.0/255.0, blue: 100.0/255.0, alpha: 1.0)
+    }
+    
+    static var white: UIColor {
+        if #available(iOS 13, *) {
+            return UIColor.systemBackground
+        } else {
+            /// Return a fallback color for iOS 12 and lower.
+            return UIColor.white
+        }
+    }
+    
+    static var black: UIColor {
+        if #available(iOS 13, *) {
+            return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+                if UITraitCollection.userInterfaceStyle == .dark {
+                    /// Return the color for Dark Mode
+                    // было 15
+                    return UIColor.white
+                } else {
+                    /// Return the color for Light Mode
+                    // было 240
+                    return UIColor.black
+                }
+            }
+        } else {
+            /// Return a fallback color for iOS 12 and lower.
+            return UIColor.black
+        }
     }
     
 }

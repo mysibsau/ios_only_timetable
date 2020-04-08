@@ -18,6 +18,8 @@
 		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
+		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
+		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
+		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 				4A2338F1243C5A94002C0746 /* Storyboards */,
 				4A2338F2243C5AAA002C0746 /* ViewControllers */,
 				4A2338F4243C5AD4002C0746 /* Views */,
+				4A60025E243CD1CC00077C81 /* Colors.swift */,
 				4A2338E6243C58C5002C0746 /* Assets.xcassets */,
 				4A2338EB243C58C5002C0746 /* Info.plist */,
 				4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */,
@@ -109,7 +114,8 @@
 			children = (
 				4A2338F5243C5BA0002C0746 /* LessonView.xib */,
 				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
-				4A60025E243CD1CC00077C81 /* Colors.swift */,
+				4A9C9137243DCB04009F67A8 /* SubgroupView.xib */,
+				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +181,7 @@
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
 				4A2338F6243C5BA0002C0746 /* LessonView.xib in Resources */,
+				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
 				4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
