@@ -18,6 +18,7 @@
 		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
+		4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 			children = (
 				4A2338DA243C58C2002C0746 /* AppDelegate.swift */,
 				4A2338DC243C58C2002C0746 /* SceneDelegate.swift */,
+				4A610861243F0AD8008BCB90 /* Extensions */,
 				4A2338F3243C5AC7002C0746 /* Model */,
 				4A2338F1243C5A94002C0746 /* Storyboards */,
 				4A2338F2243C5AAA002C0746 /* ViewControllers */,
@@ -118,6 +121,14 @@
 				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4A610861243F0AD8008BCB90 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
 				4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */,
+				4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,

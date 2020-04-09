@@ -59,22 +59,28 @@ class LessonView: UIView {
         contentView.addSubview(wrapper)
         // расставляем констрейнты для подВью с отступов в 8 к контентВью
         wrapper.translatesAutoresizingMaskIntoConstraints = false
-        wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
-        wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
-        wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        wrapper.addConstraintsOnAllSides(to: contentView, withConstantForTop: 8, leadint: 8, trailing: -8, bottom: -4)
+//        wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+//        wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
+//        wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
+//        wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
         
         wrapper.addSubview(subgroupStack)
         // расставляем констрейнты для стекВью с отступами в 8 к подВью
         subgroupStack.translatesAutoresizingMaskIntoConstraints = false
-        subgroupStack.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 8).isActive = true
-        subgroupStack.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -8).isActive = true
-        subgroupStack.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 8).isActive = true
-        subgroupStack.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: -8).isActive = true
+        subgroupStack.addConstraintsOnAllSides(to: wrapper, withConstant: 8)
+//        subgroupStack.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 8).isActive = true
+//        subgroupStack.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -8).isActive = true
+//        subgroupStack.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 8).isActive = true
+//        subgroupStack.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: -8).isActive = true
     }
 }
 
 extension LessonView {
+    
+    public func addSubject() {
+        
+    }
     
     public func addSubgroup(subject: String, type: String, proffesor: String, place: String) {
         // добавляем разделительную линию, если в стеке уже есть подгруппы
@@ -141,4 +147,27 @@ extension LessonView {
         super.traitCollectionDidChange(previousTraitCollection)
         
     }
+}
+
+
+extension LessonView {
+    
+    func addConstraintsOnAllSides(for forView: UIView, to toView: UIView, withConstant: CGFloat) {
+        
+        forView.topAnchor.constraint(equalTo: toView.topAnchor, constant: withConstant).isActive = true
+        forView.leadingAnchor.constraint(equalTo: toView.leadingAnchor, constant: withConstant).isActive = true
+        forView.trailingAnchor.constraint(equalTo: toView.trailingAnchor, constant: -withConstant).isActive = true
+        forView.bottomAnchor.constraint(equalTo: toView.bottomAnchor, constant: -withConstant).isActive = true
+        
+    }
+    
+    func addConstraintsOnAllSides(for forView: UIView, to toView: UIView, withConstantForTop: CGFloat, leadint: CGFloat, trailing: CGFloat, bottom: CGFloat) {
+        
+        forView.topAnchor.constraint(equalTo: toView.topAnchor, constant: withConstantForTop).isActive = true
+        forView.leadingAnchor.constraint(equalTo: toView.leadingAnchor, constant: leadint).isActive = true
+        forView.trailingAnchor.constraint(equalTo: toView.trailingAnchor, constant: trailing).isActive = true
+        forView.bottomAnchor.constraint(equalTo: toView.bottomAnchor, constant: bottom).isActive = true
+        
+    }
+    
 }
