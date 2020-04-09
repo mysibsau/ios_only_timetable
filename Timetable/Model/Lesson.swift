@@ -8,11 +8,16 @@
 
 import Foundation
 
-struct Lesson {
-    
+struct Subgroup {
     let subject: String
     let type: String
-    let professor: String
+    let professors: [String]
+    let place: String
+}
+
+struct Lesson {
     
+    let time: String
+    let subgroups: [Subgroup]
     
 }

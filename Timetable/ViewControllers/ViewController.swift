@@ -27,31 +27,50 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        let lesson1 = LessonView()
-        lesson1.addTime(time: "9:40 - 11:10")
-        lesson1.addSubgroup(subject: "Ахритектура вычислительных систем", type: "(Лабораторная работа)", proffesor: "Богданов Константив Васильевич(?)", place: "Л 313")
         
-        let lesson2 = LessonView()
-        lesson2.addTime(time: "13:30 - 15:00")
-        lesson2.addSubgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", proffesor: "Добрая бабуля с:", place: "Л 319")
-        lesson2.addSubgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", proffesor: "Богданов Константив Васильевич(?)", place: "Л 319")
+        let lesson1 = Lesson(
+            time: "11:30 - 13:00",
+            subgroups: [
+                Subgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], place: "СПОРТЗАЛ")
+            ]
+        )
+        let lessonView1 = LessonView()
+        lessonView1.set(lesson: lesson1)
         
-        let lesson3 = LessonView()
-        lesson3.addTime(time: "15:10 - 16:40")
-        lesson3.addSubgroup(subject: "Вычислительная математика", type: "(практика)", proffesor: "Охорзин Дед Почти", place: "Н 304")
+        let lesson2 = Lesson(
+            time: "13:30 - 15:00",
+            subgroups: [
+                Subgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", professors: ["Добрая бабуля"], place: "Л 319"),
+                Subgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", professors: ["Богданов Константив Васильевич(?)"], place: "Л 315")
+            ]
+        )
+        let lessonView2 = LessonView()
+        lessonView2.set(lesson: lesson2)
         
-        let lesson4 = LessonView()
-        lesson4.addTime(time: "15:10 - 16:40")
-        lesson4.addSubgroup(subject: "Вычислительная математика", type: "(практика)", proffesor: "Охорзин Дед Почти", place: "Н 304")
+        let lesson3 = Lesson(
+            time: "15:10 - 16:40",
+            subgroups: [
+                Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")
+            ]
+        )
+        let lessonView3 = LessonView()
+        lessonView3.set(lesson: lesson3)
+        
+        let lesson4 = Lesson(
+            time: "16:50 - 18:20",
+            subgroups: [Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")]
+        )
+        let lessonView4 = LessonView()
+        lessonView4.set(lesson: lesson4)
                 
-        stackView.addArrangedSubview(lesson1)
-        lesson1.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        stackView.addArrangedSubview(lesson2)
-        lesson2.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        stackView.addArrangedSubview(lesson3)
-        lesson3.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        stackView.addArrangedSubview(lesson4)
-        lesson4.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        stackView.addArrangedSubview(lessonView1)
+        lessonView1.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        stackView.addArrangedSubview(lessonView2)
+        lessonView2.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        stackView.addArrangedSubview(lessonView3)
+        lessonView3.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        stackView.addArrangedSubview(lessonView4)
+        lessonView4.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         
     }
     

@@ -19,17 +19,16 @@ class SubgroupView: UIView {
     @IBOutlet weak var place: UILabel!
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
-        setupUI()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         loadXib()
-        setupUI()
+        setupViews()
     }
     
     private func loadXib() {
@@ -40,14 +39,8 @@ class SubgroupView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
-    private func setupUI() {
-        setupLessonView()
+    private func setupViews() {
         setupLabels()
-    }
-    
-    private func setupLessonView() {
-        
-        //lessonView.layer.shadowColor = Colors.shadowColor.cgColor
     }
     
     private func setupLabels() {
