@@ -15,25 +15,28 @@ import UIKit
 
 class LessonView: UIView {
     
-    @IBOutlet weak var contentView: UIView!
+    let contentView = UIView()
     let wrapper = UIView()
     let subgroupStack = UIStackView()
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadXib()
-        setupUI()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        loadXib()
-        setupUI()
+        setupViews()
     }
     
     
-    private func setupUI() {
+    private func setupViews() {
+        
+        addSubview(contentView)
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         setupStackView()
         
         contentView.backgroundColor = Colors.backgroungColor
@@ -41,38 +44,22 @@ class LessonView: UIView {
         wrapper.layer.cornerRadius = 15
     }
     
-    private func loadXib() {
-        // загружаем xib из какого-то Boundle (можно чекнуть документацию)
-        Bundle.main.loadNibNamed("LessonView", owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
     private func setupStackView() {
         // настраиваем свойства StackView
         subgroupStack.backgroundColor = .clear
         subgroupStack.axis = .vertical
         subgroupStack.distribution = .equalSpacing
-        subgroupStack.spacing = 2
+        subgroupStack.spacing = 1 // было 2
         
         contentView.addSubview(wrapper)
-        // расставляем констрейнты для подВью с отступов в 8 к контентВью
+        // расставляем констрейнты для подВью к контентВью
         wrapper.translatesAutoresizingMaskIntoConstraints = false
         wrapper.addConstraintsOnAllSides(to: contentView, withConstantForTop: 8, leadint: 8, trailing: -8, bottom: -4)
-//        wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-//        wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
-//        wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
-//        wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
         
         wrapper.addSubview(subgroupStack)
         // расставляем констрейнты для стекВью с отступами в 8 к подВью
         subgroupStack.translatesAutoresizingMaskIntoConstraints = false
         subgroupStack.addConstraintsOnAllSides(to: wrapper, withConstant: 8)
-//        subgroupStack.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 8).isActive = true
-//        subgroupStack.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: -8).isActive = true
-//        subgroupStack.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 8).isActive = true
-//        subgroupStack.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: -8).isActive = true
     }
 }
 
@@ -92,8 +79,9 @@ extension LessonView {
             spaceBeforeLine.heightAnchor.constraint(equalToConstant: 2).isActive = true
             spaceBeforeLine.widthAnchor.constraint(equalTo: subgroupStack.widthAnchor).isActive = true
             
+            // добавление разделительной черты
             let separator = UIView()
-            let line = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+            let line = UIView()
             separator.backgroundColor = .clear
             line.backgroundColor = Colors.backgroungColor
 
@@ -114,7 +102,6 @@ extension LessonView {
             subgroupStack.addArrangedSubview(spaceAfterLine)
             spaceAfterLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
             spaceAfterLine.widthAnchor.constraint(equalTo: subgroupStack.widthAnchor).isActive = true
-
         }
         
         let subgroupView = SubgroupView()
@@ -147,27 +134,4 @@ extension LessonView {
         super.traitCollectionDidChange(previousTraitCollection)
         
     }
-}
-
-
-extension LessonView {
-    
-    func addConstraintsOnAllSides(for forView: UIView, to toView: UIView, withConstant: CGFloat) {
-        
-        forView.topAnchor.constraint(equalTo: toView.topAnchor, constant: withConstant).isActive = true
-        forView.leadingAnchor.constraint(equalTo: toView.leadingAnchor, constant: withConstant).isActive = true
-        forView.trailingAnchor.constraint(equalTo: toView.trailingAnchor, constant: -withConstant).isActive = true
-        forView.bottomAnchor.constraint(equalTo: toView.bottomAnchor, constant: -withConstant).isActive = true
-        
-    }
-    
-    func addConstraintsOnAllSides(for forView: UIView, to toView: UIView, withConstantForTop: CGFloat, leadint: CGFloat, trailing: CGFloat, bottom: CGFloat) {
-        
-        forView.topAnchor.constraint(equalTo: toView.topAnchor, constant: withConstantForTop).isActive = true
-        forView.leadingAnchor.constraint(equalTo: toView.leadingAnchor, constant: leadint).isActive = true
-        forView.trailingAnchor.constraint(equalTo: toView.trailingAnchor, constant: trailing).isActive = true
-        forView.bottomAnchor.constraint(equalTo: toView.bottomAnchor, constant: bottom).isActive = true
-        
-    }
-    
 }
