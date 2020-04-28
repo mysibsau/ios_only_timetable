@@ -24,6 +24,11 @@
 		4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E7124585886005FADD7 /* RGroupWeek.swift */; };
 		4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E73245858A0005FADD7 /* RGroupTimetable.swift */; };
 		4A415E76245858B7005FADD7 /* RGroupConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E75245858B7005FADD7 /* RGroupConsultation.swift */; };
+		4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E79245859BD005FADD7 /* RProfessorLesson.swift */; };
+		4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E7E245859FE005FADD7 /* RProfessorDay.swift */; };
+		4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8024585A12005FADD7 /* RProfessorWeek.swift */; };
+		4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */; };
+		4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */; };
@@ -51,6 +56,11 @@
 		4A415E7124585886005FADD7 /* RGroupWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupWeek.swift; sourceTree = "<group>"; };
 		4A415E73245858A0005FADD7 /* RGroupTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupTimetable.swift; sourceTree = "<group>"; };
 		4A415E75245858B7005FADD7 /* RGroupConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupConsultation.swift; sourceTree = "<group>"; };
+		4A415E79245859BD005FADD7 /* RProfessorLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorLesson.swift; sourceTree = "<group>"; };
+		4A415E7E245859FE005FADD7 /* RProfessorDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorDay.swift; sourceTree = "<group>"; };
+		4A415E8024585A12005FADD7 /* RProfessorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorWeek.swift; sourceTree = "<group>"; };
+		4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorTimetable.swift; sourceTree = "<group>"; };
+		4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultation.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -156,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				4A415E62245855DD005FADD7 /* Entities */,
-				4A415E6B24585802005FADD7 /* Timetable */,
+				4A415E6B24585802005FADD7 /* TimetableAndConsultation */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -171,12 +181,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		4A415E6B24585802005FADD7 /* Timetable */ = {
+		4A415E6B24585802005FADD7 /* TimetableAndConsultation */ = {
 			isa = PBXGroup;
 			children = (
 				4A415E6C24585816005FADD7 /* GroupTimetableAndConsultation */,
+				4A415E7724585986005FADD7 /* ProfessorTimetableAndConsultation */,
 			);
-			path = Timetable;
+			path = TimetableAndConsultation;
 			sourceTree = "<group>";
 		};
 		4A415E6C24585816005FADD7 /* GroupTimetableAndConsultation */ = {
@@ -189,6 +200,18 @@
 				4A415E75245858B7005FADD7 /* RGroupConsultation.swift */,
 			);
 			path = GroupTimetableAndConsultation;
+			sourceTree = "<group>";
+		};
+		4A415E7724585986005FADD7 /* ProfessorTimetableAndConsultation */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E79245859BD005FADD7 /* RProfessorLesson.swift */,
+				4A415E7E245859FE005FADD7 /* RProfessorDay.swift */,
+				4A415E8024585A12005FADD7 /* RProfessorWeek.swift */,
+				4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */,
+				4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */,
+			);
+			path = ProfessorTimetableAndConsultation;
 			sourceTree = "<group>";
 		};
 		4A610861243F0AD8008BCB90 /* Extensions */ = {
@@ -328,6 +351,8 @@
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */,
+				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
+				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
 				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
 				4A415E76245858B7005FADD7 /* RGroupConsultation.swift in Sources */,
@@ -337,10 +362,13 @@
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
+				4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */,
 				4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */,
+				4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
+				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
