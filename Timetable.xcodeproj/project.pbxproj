@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,11 +12,13 @@
 		4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DC243C58C2002C0746 /* SceneDelegate.swift */; };
 		4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DE243C58C2002C0746 /* ViewController.swift */; };
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
-		4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */; };
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
 		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
+		4A415E652458561F005FADD7 /* RGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E642458561F005FADD7 /* RGroup.swift */; };
+		4A415E6724585627005FADD7 /* RProfessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6624585627005FADD7 /* RProfessor.swift */; };
+		4A415E692458562D005FADD7 /* RPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E682458562D005FADD7 /* RPlace.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */; };
@@ -31,12 +33,14 @@
 		4A2338DC243C58C2002C0746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4A2338DE243C58C2002C0746 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A2338E1243C58C2002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timetable.xcdatamodel; sourceTree = "<group>"; };
 		4A2338E6243C58C5002C0746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		4A415E642458561F005FADD7 /* RGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroup.swift; sourceTree = "<group>"; };
+		4A415E6624585627005FADD7 /* RProfessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessor.swift; sourceTree = "<group>"; };
+		4A415E682458562D005FADD7 /* RPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlace.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -64,7 +68,6 @@
 				EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */,
 				C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -92,14 +95,13 @@
 				4A2338DA243C58C2002C0746 /* AppDelegate.swift */,
 				4A2338DC243C58C2002C0746 /* SceneDelegate.swift */,
 				4A610861243F0AD8008BCB90 /* Extensions */,
-				4A2338F3243C5AC7002C0746 /* Model */,
 				4A2338F1243C5A94002C0746 /* Storyboards */,
 				4A2338F2243C5AAA002C0746 /* ViewControllers */,
 				4A2338F4243C5AD4002C0746 /* Views */,
+				4A2338F3243C5AC7002C0746 /* Model */,
 				4A60025E243CD1CC00077C81 /* Colors.swift */,
 				4A2338E6243C58C5002C0746 /* Assets.xcassets */,
 				4A2338EB243C58C5002C0746 /* Info.plist */,
-				4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -124,6 +126,7 @@
 		4A2338F3243C5AC7002C0746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A415E61245855A8005FADD7 /* Realm */,
 				4A2338F9243CA860002C0746 /* Lesson.swift */,
 			);
 			path = Model;
@@ -137,6 +140,24 @@
 				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4A415E61245855A8005FADD7 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E62245855DD005FADD7 /* Entities */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		4A415E62245855DD005FADD7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E642458561F005FADD7 /* RGroup.swift */,
+				4A415E6624585627005FADD7 /* RProfessor.swift */,
+				4A415E682458562D005FADD7 /* RPlace.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		4A610861243F0AD8008BCB90 /* Extensions */ = {
@@ -274,14 +295,16 @@
 			files = (
 				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
-				4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */,
+				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
+				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
+				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,19 +504,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */,
-			);
-			currentVersion = 4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */;
-			path = Timetable.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 4A2338CF243C58C2002C0746 /* Project object */;
 }

@@ -42,7 +42,7 @@ public class Colors {
             }
         } else {
             /// Return a fallback color for iOS 12 and lower.
-            return UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
+            return UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
         }
     }
     

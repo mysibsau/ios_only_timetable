@@ -16,8 +16,6 @@ struct Subgroup {
 }
 
 struct Lesson {
-    
     let time: String
     let subgroups: [Subgroup]
-    
 }

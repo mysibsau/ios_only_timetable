@@ -58,7 +58,9 @@ class ViewController: UIViewController {
         
         let lesson4 = Lesson(
             time: "16:50 - 18:20",
-            subgroups: [Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")]
+            subgroups: [
+                Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")
+            ]
         )
         let lessonView4 = LessonView()
         lessonView4.set(lesson: lesson4)
