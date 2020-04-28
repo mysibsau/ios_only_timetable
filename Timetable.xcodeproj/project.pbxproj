@@ -29,6 +29,11 @@
 		4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8024585A12005FADD7 /* RProfessorWeek.swift */; };
 		4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */; };
 		4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */; };
+		4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */; };
+		4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8924585BD2005FADD7 /* RPlaceDay.swift */; };
+		4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */; };
+		4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */; };
+		4A415E9024585C0A005FADD7 /* RPlaceConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8F24585C0A005FADD7 /* RPlaceConsultation.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */; };
@@ -61,6 +66,11 @@
 		4A415E8024585A12005FADD7 /* RProfessorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorWeek.swift; sourceTree = "<group>"; };
 		4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorTimetable.swift; sourceTree = "<group>"; };
 		4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultation.swift; sourceTree = "<group>"; };
+		4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceLesson.swift; sourceTree = "<group>"; };
+		4A415E8924585BD2005FADD7 /* RPlaceDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceDay.swift; sourceTree = "<group>"; };
+		4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceWeek.swift; sourceTree = "<group>"; };
+		4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceTimetable.swift; sourceTree = "<group>"; };
+		4A415E8F24585C0A005FADD7 /* RPlaceConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceConsultation.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -186,6 +196,7 @@
 			children = (
 				4A415E6C24585816005FADD7 /* GroupTimetableAndConsultation */,
 				4A415E7724585986005FADD7 /* ProfessorTimetableAndConsultation */,
+				4A415E8624585B33005FADD7 /* PlaceTimetableAndConsultation */,
 			);
 			path = TimetableAndConsultation;
 			sourceTree = "<group>";
@@ -212,6 +223,18 @@
 				4A415E8424585A49005FADD7 /* RProfessorConsultation.swift */,
 			);
 			path = ProfessorTimetableAndConsultation;
+			sourceTree = "<group>";
+		};
+		4A415E8624585B33005FADD7 /* PlaceTimetableAndConsultation */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */,
+				4A415E8924585BD2005FADD7 /* RPlaceDay.swift */,
+				4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */,
+				4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */,
+				4A415E8F24585C0A005FADD7 /* RPlaceConsultation.swift */,
+			);
+			path = PlaceTimetableAndConsultation;
 			sourceTree = "<group>";
 		};
 		4A610861243F0AD8008BCB90 /* Extensions */ = {
@@ -348,8 +371,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
+				4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */,
 				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
+				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
 				4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */,
 				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
 				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
@@ -360,8 +385,10 @@
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4A415E702458586B005FADD7 /* RGroupDay.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
+				4A415E9024585C0A005FADD7 /* RPlaceConsultation.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
+				4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */,
 				4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */,
 				4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */,
 				4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */,
@@ -369,6 +396,7 @@
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
+				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
