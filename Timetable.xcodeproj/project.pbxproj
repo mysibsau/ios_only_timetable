@@ -41,6 +41,7 @@
 		4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9D24585ED0005FADD7 /* RPlaceExam.swift */; };
 		4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9F24585EED005FADD7 /* RPlaceSession.swift */; };
 		4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */; };
+		4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AA245B58E4008105DE /* DataManager.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */; };
@@ -85,6 +86,7 @@
 		4A415E9D24585ED0005FADD7 /* RPlaceExam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceExam.swift; sourceTree = "<group>"; };
 		4A415E9F24585EED005FADD7 /* RPlaceSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceSession.swift; sourceTree = "<group>"; };
 		4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+CascadeDeleting.swift"; sourceTree = "<group>"; };
+		4A4C94AA245B58E4008105DE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
@@ -170,7 +172,7 @@
 		4A2338F3243C5AC7002C0746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4A415E61245855A8005FADD7 /* Realm */,
+				4A4C94A9245B58B1008105DE /* DataManager */,
 				4A2338F9243CA860002C0746 /* Lesson.swift */,
 			);
 			path = Model;
@@ -296,6 +298,15 @@
 				4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A4C94A9245B58B1008105DE /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E61245855A8005FADD7 /* Realm */,
+				4A4C94AA245B58E4008105DE /* DataManager.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		4A610861243F0AD8008BCB90 /* Extensions */ = {
@@ -462,6 +473,7 @@
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,
+				4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
