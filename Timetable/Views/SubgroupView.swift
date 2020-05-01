@@ -40,6 +40,7 @@ class SubgroupView: UIView {
     }
     
     private func setupViews() {
+        contentView.backgroundColor = Colors.contentColor
         setupLabels()
     }
     

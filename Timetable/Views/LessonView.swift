@@ -40,7 +40,7 @@ class LessonView: UIView {
         
         subgroupStackView.backgroundColor = .clear
         contentView.backgroundColor = Colors.backgroungColor
-        wrapperView.backgroundColor = Colors.white
+        wrapperView.backgroundColor = Colors.contentColor
         wrapperView.layer.cornerRadius = 15
     }
     

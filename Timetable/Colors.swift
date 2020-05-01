@@ -33,7 +33,8 @@ public class Colors {
                 if UITraitCollection.userInterfaceStyle == .dark {
                     /// Return the color for Dark Mode
                     // было 15
-                    return UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
+                    //return UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
+                    return UIColor.systemBackground
                 } else {
                     /// Return the color for Light Mode
                     // было 240
@@ -54,9 +55,22 @@ public class Colors {
         return UIColor(red: 138.0/255.0, green: 189.0/255.0, blue: 100.0/255.0, alpha: 1.0)
     }
     
-    static var white: UIColor {
+    static var contentColor: UIColor {
         if #available(iOS 13, *) {
-            return UIColor.systemBackground
+            return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+                if UITraitCollection.userInterfaceStyle == .dark {
+                    /// Return the color for Dark Mode
+                    // было 15
+                    //return UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
+                    return UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
+                } else {
+                    /// Return the color for Light Mode
+                    // было 240
+                    return UIColor.systemBackground
+                }
+            }
+            //return UIColor.systemBackground
+            //return UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
         } else {
             /// Return a fallback color for iOS 12 and lower.
             return UIColor.white

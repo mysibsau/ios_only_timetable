@@ -42,6 +42,8 @@ protocol GettingSession {
 
 class DataManager {
     
+    static let sharedInstance = DataManager()
+    
     // загруженные данные
     private let realmCaches: Realm
     // данные пользователя

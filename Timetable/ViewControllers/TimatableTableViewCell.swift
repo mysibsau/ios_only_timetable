@@ -23,6 +23,7 @@ class TimetableViewController: UIViewController {
         setupStackView()
 
         view.backgroundColor = Colors.backgroungColor
+        title = "БПИ18-01"
     }
     
     override func viewDidLoad() {

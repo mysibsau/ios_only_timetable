@@ -42,11 +42,11 @@
 		4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */; };
 		4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AA245B58E4008105DE /* DataManager.swift */; };
 		4A4C94AD245B63B0008105DE /* TimatableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */; };
-		4A4C94B1245B64F3008105DE /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94B0245B64F3008105DE /* ChoiceViewController.swift */; };
-		4A4C94B5245B687C008105DE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94B4245B687C008105DE /* CustomTabBarController.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+remove.swift */; };
+		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
+		4A67A377245C6677003765D2 /* SearchObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A376245C6677003765D2 /* SearchObjectsViewController.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
 /* End PBXBuildFile section */
@@ -89,11 +89,11 @@
 		4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+CascadeDeleting.swift"; sourceTree = "<group>"; };
 		4A4C94AA245B58E4008105DE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimatableTableViewCell.swift; sourceTree = "<group>"; };
-		4A4C94B0245B64F3008105DE /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
-		4A4C94B4245B687C008105DE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addConstraints.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+remove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+remove.swift"; sourceTree = "<group>"; };
+		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
+		4A67A376245C6677003765D2 /* SearchObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchObjectsViewController.swift; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */,
-				4A4C94B0245B64F3008105DE /* ChoiceViewController.swift */,
-				4A4C94B4245B687C008105DE /* CustomTabBarController.swift */,
+				4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */,
+				4A67A376245C6677003765D2 /* SearchObjectsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -455,7 +455,6 @@
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
 				4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */,
-				4A4C94B5245B687C008105DE /* CustomTabBarController.swift in Sources */,
 				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
 				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
@@ -472,16 +471,17 @@
 				4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
 				4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */,
+				4A67A377245C6677003765D2 /* SearchObjectsViewController.swift in Sources */,
 				4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */,
 				4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */,
 				4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
-				4A4C94B1245B64F3008105DE /* ChoiceViewController.swift in Sources */,
 				4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */,
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,
 				4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */,
+				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
