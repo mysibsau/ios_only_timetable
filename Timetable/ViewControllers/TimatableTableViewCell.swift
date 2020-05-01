@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  TimatableTableViewCell.swift
 //  Timetable
 //
-//  Created by art-off on 07.04.2020.
+//  Created by art-off on 01.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
@@ -26,7 +26,6 @@ class TimetableViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         
         let lesson1 = Lesson(
             time: "11:30 - 13:00",

@@ -50,10 +50,10 @@ class DataManager {
     init() {
         let cachesURL = try! FileManager.default
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("default.realm")
+            .appendingPathComponent("sibsu.realm")
         let documentsURL = try! FileManager.default
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("default.realm")
+            .appendingPathComponent("sibsu.realm")
         
         let cachesConfig = Realm.Configuration(fileURL: cachesURL)
         let documentsConfig = Realm.Configuration(fileURL: documentsURL)
