@@ -41,12 +41,16 @@
 		4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9F24585EED005FADD7 /* RPlaceSession.swift */; };
 		4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */; };
 		4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AA245B58E4008105DE /* DataManager.swift */; };
-		4A4C94AD245B63B0008105DE /* TimatableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */; };
+		4A4C94AD245B63B0008105DE /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
 		4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */; };
 		4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+remove.swift */; };
 		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
 		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
+		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
+		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
+		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
+		4A92077B245DE1FF00D050EB /* FocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A92077A245DE1FF00D050EB /* FocusView.xib */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
 /* End PBXBuildFile section */
@@ -88,12 +92,16 @@
 		4A415E9F24585EED005FADD7 /* RPlaceSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceSession.swift; sourceTree = "<group>"; };
 		4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+CascadeDeleting.swift"; sourceTree = "<group>"; };
 		4A4C94AA245B58E4008105DE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimatableTableViewCell.swift; sourceTree = "<group>"; };
+		4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addConstraints.swift"; sourceTree = "<group>"; };
 		4A610864243FAE77008BCB90 /* UIStackView+remove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+remove.swift"; sourceTree = "<group>"; };
 		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
 		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		4A92077A245DE1FF00D050EB /* FocusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FocusView.xib; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,9 +176,10 @@
 		4A2338F2243C5AAA002C0746 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A4C94AC245B63B0008105DE /* TimatableTableViewCell.swift */,
+				4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */,
 				4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */,
 				4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */,
+				4A920772245DCFF800D050EB /* TimetableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -190,6 +199,9 @@
 				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
 				4A9C9137243DCB04009F67A8 /* SubgroupView.xib */,
 				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
+				4A920776245DDEED00D050EB /* MenuCell.swift */,
+				4A920778245DDF4000D050EB /* MenuCell.xib */,
+				4A92077A245DE1FF00D050EB /* FocusView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,8 +406,10 @@
 			files = (
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
+				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
+				4A92077B245DE1FF00D050EB /* FocusView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,8 +472,10 @@
 				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
 				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
+				4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */,
+				4A920777245DDEED00D050EB /* MenuCell.swift in Sources */,
 				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
-				4A4C94AD245B63B0008105DE /* TimatableTableViewCell.swift in Sources */,
+				4A4C94AD245B63B0008105DE /* DayTableViewCell.swift in Sources */,
 				4A415E76245858B7005FADD7 /* RGroupConsultation.swift in Sources */,
 				4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */,
 				4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */,

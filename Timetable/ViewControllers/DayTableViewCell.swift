@@ -1,5 +1,5 @@
 //
-//  TimatableTableViewCell.swift
+//  DayTableViewCell.swift
 //  Timetable
 //
 //  Created by art-off on 01.05.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimetableViewController: UIViewController {
+class DayViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
@@ -126,8 +126,8 @@ class TimetableViewController: UIViewController {
         scrollView.addSubview(stackView)
         // расставляем констраинты на полное прилигание с scrollView
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -0).isActive = true
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
