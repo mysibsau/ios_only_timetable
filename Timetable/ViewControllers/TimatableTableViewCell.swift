@@ -23,7 +23,31 @@ class TimetableViewController: UIViewController {
         setupStackView()
 
         view.backgroundColor = Colors.backgroungColor
-        title = "БПИ18-01"
+        navigationItem.title = "БПИ18-01"
+        
+//        let mainView = UIView()
+//        let label = UILabel()
+//        label.text = "bla bla"
+//        let segmentContoller = UISegmentedControl(items: ["F", "S"])
+//        mainView.addSubview(label)
+//        mainView.addSubview(segmentContoller)
+//
+//        //mainView.translatesAutoresizingMaskIntoConstraints = false
+//        //label.translatesAutoresizingMaskIntoConstraints = false
+//        //segmentContoller.translatesAutoresizingMaskIntoConstraints = false
+//
+//        mainView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        mainView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//
+//        label.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
+//        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
+//        segmentContoller.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
+//        segmentContoller.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        
+        //navigationItem.titleView = mainView
+        
     }
     
     override func viewDidLoad() {
@@ -102,8 +126,8 @@ class TimetableViewController: UIViewController {
         scrollView.addSubview(stackView)
         // расставляем констраинты на полное прилигание с scrollView
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8).isActive = true
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
