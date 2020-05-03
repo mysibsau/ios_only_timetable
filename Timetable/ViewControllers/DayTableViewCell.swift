@@ -19,38 +19,19 @@ class DayViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        print("loadView    \(self)")
+        
         setupScrollView()
         setupStackView()
 
         view.backgroundColor = Colors.backgroungColor
         navigationItem.title = "БПИ18-01"
-        
-//        let mainView = UIView()
-//        let label = UILabel()
-//        label.text = "bla bla"
-//        let segmentContoller = UISegmentedControl(items: ["F", "S"])
-//        mainView.addSubview(label)
-//        mainView.addSubview(segmentContoller)
-//
-//        //mainView.translatesAutoresizingMaskIntoConstraints = false
-//        //label.translatesAutoresizingMaskIntoConstraints = false
-//        //segmentContoller.translatesAutoresizingMaskIntoConstraints = false
-//
-//        mainView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        mainView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-//
-//        label.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
-//        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
-//        segmentContoller.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-//        segmentContoller.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        
-        
-        //navigationItem.titleView = mainView
-        
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print("viewDidLoad \(self)")
         
         let lesson1 = Lesson(
             time: "11:30 - 13:00",
@@ -92,15 +73,6 @@ class DayViewController: UIViewController {
             stackView.addArrangedSubview(lessonView)
             lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         }
-        
-//        stackView.addArrangedSubview(lessonView1)
-//        lessonView1.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-//        stackView.addArrangedSubview(lessonView2)
-//        lessonView2.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-//        stackView.addArrangedSubview(lessonView3)
-//        lessonView3.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-//        stackView.addArrangedSubview(lessonView4)
-//        lessonView4.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         
     }
     

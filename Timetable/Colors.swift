@@ -10,6 +10,8 @@ import UIKit
 
 public class Colors {
     
+    
+    // MARK: УБРАТЬ ЕГО НХЙ ---------------------------
     static var shadowColor: UIColor {
         if #available(iOS 13, *) {
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
@@ -47,14 +49,6 @@ public class Colors {
         }
     }
     
-    static var sibsuBlue: UIColor {
-        return UIColor(red: 75.0/255.0, green: 123.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-    }
-    
-    static var sibsuGreen: UIColor {
-        return UIColor(red: 138.0/255.0, green: 189.0/255.0, blue: 100.0/255.0, alpha: 1.0)
-    }
-    
     static var contentColor: UIColor {
         if #available(iOS 13, *) {
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
@@ -70,6 +64,39 @@ public class Colors {
             /// Return a fallback color for iOS 12 and lower.
             return UIColor.white
         }
+    }
+    
+    static var topBarColor: UIColor {
+        if #available(iOS 13, *){
+            return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+                if UITraitCollection.userInterfaceStyle == .dark {
+                    /// Return the color for Dark Mode
+                    return UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)
+                } else {
+                    /// Return the color for Light Mode
+                    return UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 245.0/255.0)
+                }
+            }
+        } else {
+            return UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 245.0/255.0)
+        }
+    }
+    
+    static var label: UIColor {
+        if #available(iOS 13, *) {
+            return UIColor.label
+        } else {
+            /// Return a fallback color for iOS 12 and lower.
+            return UIColor.black
+        }
+    }
+    
+    static var sibsuBlue: UIColor {
+        return UIColor(red: 75.0/255.0, green: 123.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+    }
+    
+    static var sibsuGreen: UIColor {
+        return UIColor(red: 138.0/255.0, green: 189.0/255.0, blue: 100.0/255.0, alpha: 1.0)
     }
     
     static var black: UIColor {

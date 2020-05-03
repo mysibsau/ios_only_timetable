@@ -11,29 +11,37 @@ import PagingKit
 
 class TimetableViewController: UIViewController {
     
+    var weeks: [Week]?
+    
+    @IBOutlet weak var numberWeekSegmentedView: UIView!
+    @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
     var menuViewController: PagingMenuViewController!
     var contentViewController: PagingContentViewController!
     
     let focusView = UnderlineFocusView()
     
-    
-    static var viewController: (UIColor) -> UIViewController = { (color) in
-        let vc = UIViewController()
-        vc.view.backgroundColor = color
-        return vc
-    }
-    
     var dataSource = [
-        (menuTitle: "Пон", vc: DayViewController()),
-        (menuTitle: "Вт", vc: DayViewController()),
-        (menuTitle: "Ср", vc: DayViewController()),
-        (menuTitle: "Чт", vc: DayViewController()),
-        (menuTitle: "Пт", vc: DayViewController()),
-        (menuTitle: "Сб", vc: DayViewController())
+        //[
+            (menuTitle: "Пн", vc: DayViewController()),
+            (menuTitle: "Вт", vc: DayViewController()),
+            (menuTitle: "Ср", vc: DayViewController()),
+            (menuTitle: "Чт", vc: DayViewController()),
+            (menuTitle: "Пт", vc: DayViewController()),
+            (menuTitle: "Сб", vc: DayViewController())
+        //]
     ]
     
-
-    lazy var firstLoad: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
+//    var dataSource = [
+//        (),
+//        (),
+//        (),
+//        (),
+//        (),
+//        (),
+//    ]
+    
+    // для того, чтобы menuViewController занимал ровно весь экран
+    private lazy var firstLoad: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
         menuViewController?.reloadData()
         contentViewController?.reloadData { [weak self] in
             self?.adjustfocusViewWidth(index: 0, percent: 0)
@@ -44,25 +52,22 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(navigationController?.navigationBar.tintColor)
-        print(navigationController?.toolbar.barTintColor)
         // убираем нижний бордер у наб бара
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "БПИ18-01"
         
+        numberWeekSegmentedView.backgroundColor = Colors.topBarColor
+        menuViewController.view.backgroundColor = Colors.topBarColor
+        
+        // для скрола у последнего и первого элемента
+        contentViewController.scrollView.bounces = true
+        contentViewController.view.backgroundColor = Colors.backgroungColor
+        
         focusView.underlineColor = .systemBlue
-        focusView.underlineHeight = 2
+        focusView.underlineHeight = 3
 
         menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
-        //menuViewController.register(type: TitleLabelMenuViewCell.self, forCellWithReuseIdentifier: "MenuCell")
-        //menuViewController.registerFocusView(nib: UINib(nibName: "FocusView", bundle: nil))
         menuViewController.registerFocusView(view: focusView)
-        
-        contentViewController.scrollView.bounces = true
-        //focusView.underlineWidth = 40
-        
-        //menuViewController.view.backgroundColor = Colors.contentColor
-        contentViewController.view.backgroundColor = Colors.backgroungColor
         
         menuViewController.reloadData()
         contentViewController.reloadData()
@@ -84,77 +89,15 @@ class TimetableViewController: UIViewController {
             contentViewController.delegate = self
         }
     }
-
+    
+    
+    @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
+        print("RELOAD")
+        menuViewController.reloadData()
+        contentViewController.reloadData()
+    }
+    
 }
-
-//extension TimetableViewController: PagingMenuViewControllerDataSource {
-//    func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
-//        let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index)  as! MenuCell
-//        //cell.titleLabel.text = dataSource[index].menuTitle
-//        return cell
-//    }
-//
-//    func menuViewController(viewController: PagingMenuViewController, widthForItemAt index: Int) -> CGFloat {
-//        focusView.underlineWidth = viewController.view.bounds.width / CGFloat(dataSource.count)
-//        return viewController.view.bounds.width / CGFloat(dataSource.count)
-//    }
-//
-//    var insets: UIEdgeInsets {
-//        if #available(iOS 11.0, *) {
-//            return view.safeAreaInsets
-//        } else {
-//            return .zero
-//        }
-//    }
-//
-//    func numberOfItemsForMenuViewController(viewController: PagingMenuViewController) -> Int {
-//        return dataSource.count
-//    }
-//}
-//
-//extension TimetableViewController: PagingContentViewControllerDataSource {
-//    func numberOfItemsForContentViewController(viewController: PagingContentViewController) -> Int {
-//        return dataSource.count
-//    }
-//
-//    func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
-//        return dataSource[index].vc
-//    }
-//}
-//
-//extension TimetableViewController: PagingMenuViewControllerDelegate {
-//    func menuViewController(viewController: PagingMenuViewController, didSelect page: Int, previousPage: Int) {
-//        print("MENU VIEW did select: page - \(page), previousPage - \(previousPage)")
-//        contentViewController.scroll(to: page, animated: true)
-//    }
-//}
-//
-//extension TimetableViewController: PagingContentViewControllerDelegate {
-//    func contentViewController(viewController: PagingContentViewController, didManualScrollOn index: Int, percent: CGFloat) {
-//        print("CONTENT VIEW did manual scroll on : index - \(index), percent - \(percent)")
-//        if index == 0 && percent < -0.20 {
-//            contentViewController.scroll(to: dataSource.count-1, animated: true)
-//            menuViewController.scroll(index: dataSource.count-1, animated: true)
-//            return
-//        }
-//        if index == dataSource.count-1 && percent > 0.20 {
-//            contentViewController.scroll(to: 0, animated: true)
-//            menuViewController.scroll(index: 0, animated: true)
-//            return
-//        }
-//        menuViewController.scroll(index: index, percent: percent, animated: false)
-//        adjustfocusViewWidth(index: index, percent: percent)
-//    }
-//
-//    func adjustfocusViewWidth(index: Int, percent: CGFloat) {
-//        guard let leftCell = menuViewController.cellForItem(at: index) as? TitleLabelMenuViewCell,
-//            let rightCell = menuViewController.cellForItem(at: index + 1) as? TitleLabelMenuViewCell else {
-//            return
-//        }
-//        focusView.underlineWidth = rightCell.calcIntermediateLabelSize(with: leftCell, percent: percent)
-//    }
-//}
-
 
 
 extension TimetableViewController: PagingMenuViewControllerDataSource {
@@ -182,6 +125,7 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
     }
 
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
+        //return DayViewController()
         return dataSource[index].vc
     }
 
@@ -200,7 +144,7 @@ extension TimetableViewController: PagingContentViewControllerDelegate {
     func contentViewController(viewController: PagingContentViewController, didManualScrollOn index: Int, percent: CGFloat) {
         menuViewController.scroll(index: index, percent: percent, animated: true)
     }
-    
+
     func adjustfocusViewWidth(index: Int, percent: CGFloat) {
         guard let leftCell = menuViewController.cellForItem(at: index) as? TitleLabelMenuViewCell,
             let rightCell = menuViewController.cellForItem(at: index + 1) as? TitleLabelMenuViewCell else {
