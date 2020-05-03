@@ -24,4 +24,17 @@ extension UIView {
         self.bottomAnchor.constraint(equalTo: toView.bottomAnchor, constant: bottom).isActive = true
     }
     
+    func addConstraintsOnAllSides(to toLayoutGuide: UILayoutGuide, withConstant: CGFloat) {
+        self.topAnchor.constraint(equalTo: toLayoutGuide.topAnchor, constant: withConstant).isActive = true
+        self.leadingAnchor.constraint(equalTo: toLayoutGuide.leadingAnchor, constant: withConstant).isActive = true
+        self.trailingAnchor.constraint(equalTo: toLayoutGuide.trailingAnchor, constant: -withConstant).isActive = true
+        self.bottomAnchor.constraint(equalTo: toLayoutGuide.bottomAnchor, constant: -withConstant).isActive = true
+    }
+    
+    func addConstraintsOnAllSides(to toLayoutGuide: UILayoutGuide, withConstantForTop: CGFloat, leadint: CGFloat, trailing: CGFloat, bottom: CGFloat) {
+        self.topAnchor.constraint(equalTo: toLayoutGuide.topAnchor, constant: withConstantForTop).isActive = true
+        self.leadingAnchor.constraint(equalTo: toLayoutGuide.leadingAnchor, constant: leadint).isActive = true
+        self.trailingAnchor.constraint(equalTo: toLayoutGuide.trailingAnchor, constant: trailing).isActive = true
+        self.bottomAnchor.constraint(equalTo: toLayoutGuide.bottomAnchor, constant: bottom).isActive = true
+    }
 }

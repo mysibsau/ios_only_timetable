@@ -321,7 +321,7 @@
             <objects>
                 <viewController id="iVC-NL-00b" customClass="PagingContentViewController" customModule="PagingKit" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Yb-cd-Q0q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="655"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QHA-Ir-OLj"/>

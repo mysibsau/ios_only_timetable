@@ -52,6 +52,8 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        
         // убираем нижний бордер у наб бара
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "БПИ18-01"
