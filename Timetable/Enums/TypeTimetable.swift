@@ -1,5 +1,5 @@
 //
-//  Day.swift
+//  TypeTimetable.swift
 //  Timetable
 //
 //  Created by art-off on 04.05.2020.
@@ -8,6 +8,8 @@
 
 import Foundation
 
-struct Day {
-    var lessons: [Lesson]
+enum TypeTimetable {
+    case gruop
+    case professor
+    case place
 }

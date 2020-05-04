@@ -23,12 +23,14 @@ class SubgroupView: UIView {
         super.init(frame: frame)
         loadXib()
         setupViews()
+        addRecongnizers()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         loadXib()
         setupViews()
+        addRecongnizers()
     }
     
     private func loadXib() {
@@ -44,6 +46,11 @@ class SubgroupView: UIView {
         setupLabels()
     }
     
+    private func addRecongnizers() {
+        let longRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        self.addGestureRecognizer(longRecognizer)
+    }
+    
     private func setupLabels() {
         for label in [subject, type, professor, place] {
             label?.textAlignment = .left
@@ -56,6 +63,10 @@ class SubgroupView: UIView {
         subject.textColor = Colors.sibsuBlue
         type.textColor = Colors.sibsuGreen
         professor.textColor = .systemGray
+    }
+    
+    @objc func longPress() {
+        //print(subject.text)
     }
     
 }

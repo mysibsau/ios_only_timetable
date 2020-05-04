@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E2D5B063E6ABC7FB3706B6E /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */; };
 		4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DA243C58C2002C0746 /* AppDelegate.swift */; };
 		4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DC243C58C2002C0746 /* SceneDelegate.swift */; };
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
@@ -50,10 +49,30 @@
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
 		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
 		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
-		4A92077B245DE1FF00D050EB /* FocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A92077A245DE1FF00D050EB /* FocusView.xib */; };
+		4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; };
+		4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A324604B2400D050EB /* Notification+Name.swift */; };
+		4A9207A724604E7900D050EB /* TypeTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A624604E7900D050EB /* TypeTimetable.swift */; };
+		4A9207A924604F8200D050EB /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A824604F8200D050EB /* Week.swift */; };
+		4A9207AB24604FC300D050EB /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AA24604FC300D050EB /* Day.swift */; };
+		4A9207AD2460531400D050EB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AC2460531400D050EB /* Common.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A9207A22460495E00D050EB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +120,12 @@
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
-		4A92077A245DE1FF00D050EB /* FocusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FocusView.xib; sourceTree = "<group>"; };
+		4A92079F2460495E00D050EB /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A9207A324604B2400D050EB /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
+		4A9207A624604E7900D050EB /* TypeTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTimetable.swift; sourceTree = "<group>"; };
+		4A9207A824604F8200D050EB /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
+		4A9207AA24604FC300D050EB /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		4A9207AC2460531400D050EB /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E2D5B063E6ABC7FB3706B6E /* Pods_Timetable.framework in Frameworks */,
+				4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				4A2338DA243C58C2002C0746 /* AppDelegate.swift */,
+				4A9207AC2460531400D050EB /* Common.swift */,
 				4A2338DC243C58C2002C0746 /* SceneDelegate.swift */,
+				4A9207A524604E5E00D050EB /* Enums */,
 				4A610861243F0AD8008BCB90 /* Extensions */,
 				4A2338F1243C5A94002C0746 /* Storyboards */,
 				4A2338F2243C5AAA002C0746 /* ViewControllers */,
@@ -189,6 +215,8 @@
 			children = (
 				4A4C94A9245B58B1008105DE /* DataManager */,
 				4A2338F9243CA860002C0746 /* Lesson.swift */,
+				4A9207A824604F8200D050EB /* Week.swift */,
+				4A9207AA24604FC300D050EB /* Day.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,7 +229,6 @@
 				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
 				4A920776245DDEED00D050EB /* MenuCell.swift */,
 				4A920778245DDF4000D050EB /* MenuCell.xib */,
-				4A92077A245DE1FF00D050EB /* FocusView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,13 +359,23 @@
 			children = (
 				4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */,
 				4A610864243FAE77008BCB90 /* UIStackView+remove.swift */,
+				4A9207A324604B2400D050EB /* Notification+Name.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A9207A524604E5E00D050EB /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4A9207A624604E7900D050EB /* TypeTimetable.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A92079F2460495E00D050EB /* Pods_Timetable.framework */,
 				3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */,
 			);
 			name = Frameworks;
@@ -356,6 +393,7 @@
 				4A2338D4243C58C2002C0746 /* Frameworks */,
 				4A2338D5243C58C2002C0746 /* Resources */,
 				F946E34A75C1942984207A55 /* [CP] Embed Pods Frameworks */,
+				4A9207A22460495E00D050EB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -409,7 +447,6 @@
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
-				4A92077B245DE1FF00D050EB /* FocusView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +502,8 @@
 				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
 				4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */,
 				4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */,
+				4A9207AB24604FC300D050EB /* Day.swift in Sources */,
+				4A9207AD2460531400D050EB /* Common.swift in Sources */,
 				4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */,
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
@@ -485,6 +524,7 @@
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A415E9024585C0A005FADD7 /* RPlaceConsultation.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */,
+				4A9207A924604F8200D050EB /* Week.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
 				4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */,
 				4A415E8524585A49005FADD7 /* RProfessorConsultation.swift in Sources */,
@@ -498,7 +538,9 @@
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,
 				4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */,
 				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
+				4A9207A724604E7900D050EB /* TypeTimetable.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
+				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
 			);

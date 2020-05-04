@@ -13,7 +13,13 @@ class DayViewController: UIViewController {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    var lessons = [Lesson]()
+    var day: Day?
+    
+    
+    convenience init(day: Day) {
+        self.init()
+        self.day = day
+    }
     
     
     override func loadView() {
@@ -31,7 +37,7 @@ class DayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewDidLoad \(self)")
+//        print("viewDidLoad \(self)")
         
         let lesson1 = Lesson(
             time: "11:30 - 13:00",
@@ -62,20 +68,24 @@ class DayViewController: UIViewController {
             ]
         )
         
-        lessons.append(lesson1)
-        lessons.append(lesson2)
-        lessons.append(lesson3)
-        lessons.append(lesson4)
+        day = Day(lessons: [lesson1, lesson2, lesson3, lesson4])
+//        day?.lessons.append(lesson1)
+//        day?.lessons.append(lesson2)
+//        day?.lessons.append(lesson3)
+//        day?.lessons.append(lesson4)
         
-        for lesson in lessons {
-            let lessonView = LessonView()
-            lessonView.set(lesson: lesson)
-            stackView.addArrangedSubview(lessonView)
-            lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        if let day = day {
+            for lesson in day.lessons {
+                let lessonView = LessonView(lesson: lesson)
+                //lessonView.set(lesson: lesson)
+                stackView.addArrangedSubview(lessonView)
+                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+            }
         }
         
     }
     
+    // MARK: - Setup any View
     private func setupScrollView() {
         view.addSubview(scrollView)
         // убираем полосы прокрутки

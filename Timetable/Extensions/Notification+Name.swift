@@ -1,5 +1,5 @@
 //
-//  Day.swift
+//  Notification+Name.swift
 //  Timetable
 //
 //  Created by art-off on 04.05.2020.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Day {
-    var lessons: [Lesson]
+extension Notification.Name {
+    //static let 
 }

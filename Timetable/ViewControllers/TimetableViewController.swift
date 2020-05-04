@@ -11,7 +11,9 @@ import PagingKit
 
 class TimetableViewController: UIViewController {
     
-    var weeks: [Week]?
+    var typeTimetable: TypeTimetable?
+    var week: [Week]?
+    
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
     @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
