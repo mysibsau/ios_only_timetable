@@ -28,15 +28,18 @@ class TimetableViewController: UIViewController {
         let wrapper = UIView(frame: view.bounds)
         wrapper.backgroundColor = Colors.backgroungColor
         view.addSubview(wrapper)
+        
         let label = UILabel(frame: view.bounds)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.text = "Выберите\nгруппу, преподавателя\nили кабинет\nв 'Поиск'"
         label.textAlignment = .center
         label.numberOfLines = 0
+        
         wrapper.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
         label.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+        
         return wrapper
     }()
     

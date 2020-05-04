@@ -36,13 +36,15 @@ class DayViewController: UIViewController {
         super.viewDidLoad()
         
         guard let day = day else {
-            let l = UILabel(frame: view.bounds)
-            l.font = UIFont.boldSystemFont(ofSize: 20)
-            l.text = "В этот день нет занятий"
-            view.addSubview(l)
-            l.translatesAutoresizingMaskIntoConstraints = false
-            l.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            l.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            let label = UILabel(frame: view.bounds)
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+            label.text = "В этот день нет занятий"
+            
+            view.addSubview(label)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            
             return
         }
     
