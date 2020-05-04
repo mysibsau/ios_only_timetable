@@ -1,15 +1,18 @@
 //
-//  Subgroup.swift
+//  SubgroupPlaceView.swift
 //  Timetable
 //
-//  Created by art-off on 08.04.2020.
+//  Created by art-off on 04.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
-
-class SubgroupView: UIView {
+class SubgroupPlaceView: UIView {
+    
+    var groupsId: [Int]?
+    var professorsId: [Int]?
+    
     
     @IBOutlet weak var contentView: UIView!
     
@@ -66,18 +69,11 @@ class SubgroupView: UIView {
     }
     
     @objc func longPress() {
-        //print(subject.text)
-    }
-    
-}
-
-
-extension SubgroupView {
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+        // 1. let timetable = DataManager.sharedInstance.getTimetable(forProfessor: professorId)
+        // NotificationCenter.default.post(name: .didSelectProfessor, object: self, userInfo: [0: timetalbe])
         
-        // тут написать открытие преподавателя или что-то подобное
+        // 2. let timetable = DataManager.sharedinstance.gettimetable(forPlace: placeId)
+        // NotificationCenter.default.post(name: .didSelectPlace, object: self, userInfo: [0: timetalbe])
     }
-    
+
 }

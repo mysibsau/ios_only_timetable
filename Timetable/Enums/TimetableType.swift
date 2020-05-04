@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TypeTimetable {
+enum TimetableType {
     case gruop
     case professor
     case place

@@ -9,5 +9,5 @@
 import Foundation
 
 struct Week {
-    var days: [Day]
+    var days: [Day?]
 }

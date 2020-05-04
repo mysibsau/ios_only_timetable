@@ -11,8 +11,9 @@ import PagingKit
 
 class TimetableViewController: UIViewController {
     
-    var typeTimetable: TypeTimetable?
-    var week: [Week]?
+    var type: TimetableType?
+    var weeks: [Week]?
+    var currWeek = 0
     
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
@@ -22,25 +23,23 @@ class TimetableViewController: UIViewController {
     
     let focusView = UnderlineFocusView()
     
-    var dataSource = [
-        //[
-            (menuTitle: "Пн", vc: DayViewController()),
-            (menuTitle: "Вт", vc: DayViewController()),
-            (menuTitle: "Ср", vc: DayViewController()),
-            (menuTitle: "Чт", vc: DayViewController()),
-            (menuTitle: "Пт", vc: DayViewController()),
-            (menuTitle: "Сб", vc: DayViewController())
-        //]
-    ]
+    // для случая, если не выбрана группа/преподаватель/кабинет
+    lazy var wrapperWithLabel: UIView = {
+        let wrapper = UIView(frame: view.bounds)
+        wrapper.backgroundColor = Colors.backgroungColor
+        view.addSubview(wrapper)
+        let label = UILabel(frame: view.bounds)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "Выберите\nгруппу, преподавателя\nили кабинет\nв 'Поиск'"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        wrapper.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
+        label.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+        return wrapper
+    }()
     
-//    var dataSource = [
-//        (),
-//        (),
-//        (),
-//        (),
-//        (),
-//        (),
-//    ]
     
     // для того, чтобы menuViewController занимал ровно весь экран
     private lazy var firstLoad: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
@@ -54,14 +53,21 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weeks = []
+        weeks?.append(Common.getWeek1())
+        weeks?.append(Common.getWeek2())
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+        
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        numberWeekSegmentedView.backgroundColor = Colors.topBarColor
+        menuViewController.view.backgroundColor = Colors.topBarColor
         
         // убираем нижний бордер у наб бара
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "БПИ18-01"
-        
-        numberWeekSegmentedView.backgroundColor = Colors.topBarColor
-        menuViewController.view.backgroundColor = Colors.topBarColor
         
         // для скрола у последнего и первого элемента
         contentViewController.scrollView.bounces = true
@@ -75,6 +81,12 @@ class TimetableViewController: UIViewController {
         
         menuViewController.reloadData()
         contentViewController.reloadData()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // скрываем вью предложения выбора, если weeks != nil и наоборот
+        wrapperWithLabel.isHidden = !(weeks == nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,9 +106,24 @@ class TimetableViewController: UIViewController {
         }
     }
     
+    // MARK: - Методы для NotificationCenter
+    @objc func onDidSelectGroup(_ notification: Notification) {
+        type = .gruop
+    }
     
+    @objc func onDidSelectProfessor(_ notification: Notification) {
+        type = .professor
+    }
+    
+    @objc func onDidSelectPlace(_ notification: Notification) {
+        type = .place
+    }
+    
+    // MARK: Изменение недели (нечетная / четная)
     @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
+        currWeek = numberWeekSegmented.selectedSegmentIndex
         print("RELOAD")
+        // сюда вставить измеение
         menuViewController.reloadData()
         contentViewController.reloadData()
     }
@@ -107,7 +134,8 @@ class TimetableViewController: UIViewController {
 extension TimetableViewController: PagingMenuViewControllerDataSource {
 
     func numberOfItemsForMenuViewController(viewController: PagingMenuViewController) -> Int {
-        return dataSource.count
+        //return dataSource.count
+        return 6
     }
 
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
@@ -117,7 +145,8 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     }
 
     func menuViewController(viewController: PagingMenuViewController, widthForItemAt index: Int) -> CGFloat {
-        return viewController.view.bounds.width / CGFloat(dataSource.count)
+        //return viewController.view.bounds.width / CGFloat(dataSource.count)
+        return viewController.view.bounds.width / CGFloat(6)
     }
 
 }
@@ -125,12 +154,17 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
 extension TimetableViewController: PagingContentViewControllerDataSource {
 
     func numberOfItemsForContentViewController(viewController: PagingContentViewController) -> Int {
-        return dataSource.count
+        //return dataSource.count
+        return 6
     }
 
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
         //return DayViewController()
-        return dataSource[index].vc
+        //return dataSource[index].vc
+        guard let weeks = weeks else {
+            return UIViewController()
+        }
+        return DayViewController(day: weeks[currWeek].days[index])
     }
 
 }

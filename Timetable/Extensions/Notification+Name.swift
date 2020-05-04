@@ -9,5 +9,7 @@
 import Foundation
 
 extension Notification.Name {
-    //static let 
+    static let didSelectGroup = Notification.Name("didSelectGroup")
+    static let didSelectProfessor = Notification.Name("didSelectProfessor")
+    static let didSelectPlace = Notification.Name("didSelectPlace")
 }

@@ -16,7 +16,7 @@ class DayViewController: UIViewController {
     var day: Day?
     
     
-    convenience init(day: Day) {
+    convenience init(day: Day?) {
         self.init()
         self.day = day
     }
@@ -24,8 +24,6 @@ class DayViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
-        print("loadView    \(self)")
         
         setupScrollView()
         setupStackView()
@@ -37,50 +35,21 @@ class DayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("viewDidLoad \(self)")
-        
-        let lesson1 = Lesson(
-            time: "11:30 - 13:00",
-            subgroups: [
-                Subgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], place: "СПОРТЗАЛ")
-            ]
-        )
-        
-        let lesson2 = Lesson(
-            time: "13:30 - 15:00",
-            subgroups: [
-                Subgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", professors: ["Добрая бабуля"], place: "Л 319"),
-                Subgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", professors: ["Богданов Константив Васильевич(?)"], place: "Л 315")
-            ]
-        )
-        
-        let lesson3 = Lesson(
-            time: "15:10 - 16:40",
-            subgroups: [
-                Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")
-            ]
-        )
-        
-        let lesson4 = Lesson(
-            time: "16:50 - 18:20",
-            subgroups: [
-                Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")
-            ]
-        )
-        
-        day = Day(lessons: [lesson1, lesson2, lesson3, lesson4])
-//        day?.lessons.append(lesson1)
-//        day?.lessons.append(lesson2)
-//        day?.lessons.append(lesson3)
-//        day?.lessons.append(lesson4)
-        
-        if let day = day {
-            for lesson in day.lessons {
-                let lessonView = LessonView(lesson: lesson)
-                //lessonView.set(lesson: lesson)
-                stackView.addArrangedSubview(lessonView)
-                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-            }
+        guard let day = day else {
+            let l = UILabel(frame: view.bounds)
+            l.font = UIFont.boldSystemFont(ofSize: 20)
+            l.text = "В этот день нет занятий"
+            view.addSubview(l)
+            l.translatesAutoresizingMaskIntoConstraints = false
+            l.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            l.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            return
+        }
+    
+        for lesson in day.lessons {
+            let lessonView = LessonView(lesson: lesson)
+            stackView.addArrangedSubview(lessonView)
+            lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         }
         
     }
