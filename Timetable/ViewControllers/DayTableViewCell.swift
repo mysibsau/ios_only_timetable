@@ -35,6 +35,7 @@ class DayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // если нет занятий в этот день - ставим label с "В этот день нет занятий"
         guard let day = day else {
             let label = UILabel(frame: view.bounds)
             label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -47,7 +48,8 @@ class DayViewController: UIViewController {
             
             return
         }
-    
+        
+        // заполняем день занятиями
         for lesson in day.lessons {
             let lessonView = LessonView(lesson: lesson)
             stackView.addArrangedSubview(lessonView)

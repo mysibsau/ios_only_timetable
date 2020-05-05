@@ -31,7 +31,7 @@ class TimetableViewController: UIViewController {
         
         let label = UILabel(frame: view.bounds)
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Выберите\nгруппу, преподавателя\nили кабинет\nв 'Поиск'"
+        label.text = "Выберите\nгруппу,\nпреподавателя\nили кабинет\nв 'Поиск'"
         label.textAlignment = .center
         label.numberOfLines = 0
         

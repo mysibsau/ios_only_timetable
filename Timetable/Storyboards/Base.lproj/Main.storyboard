@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AP0-kD-WJk">
-                                <rect key="frame" x="0.0" y="163" width="414" height="650"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="649"/>
                                 <connections>
                                     <segue destination="iVC-NL-00b" kind="embed" id="Six-wV-nsi"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3D-16-vrD">
-                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="31"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4NW-hl-8PI">
                                         <rect key="frame" x="8" y="0.0" width="398" height="31"/>
@@ -43,13 +43,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="4NW-hl-8PI" firstAttribute="leading" secondItem="d3D-16-vrD" secondAttribute="leading" constant="8" id="2vV-jv-mFm"/>
-                                    <constraint firstAttribute="bottom" secondItem="4NW-hl-8PI" secondAttribute="bottom" id="JP0-0O-JeU"/>
+                                    <constraint firstAttribute="bottom" secondItem="4NW-hl-8PI" secondAttribute="bottom" constant="1" id="JP0-0O-JeU"/>
                                     <constraint firstAttribute="trailing" secondItem="4NW-hl-8PI" secondAttribute="trailing" constant="8" id="T2l-pY-KLH"/>
                                     <constraint firstItem="4NW-hl-8PI" firstAttribute="top" secondItem="d3D-16-vrD" secondAttribute="top" id="TMK-Sv-VBX"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPv-0y-jwE">
-                                <rect key="frame" x="0.0" y="118" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="obV-Af-tkk"/>
                                 </constraints>
