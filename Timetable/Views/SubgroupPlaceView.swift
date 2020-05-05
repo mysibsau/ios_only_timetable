@@ -1,15 +1,18 @@
 //
-//  Subgroup.swift
+//  SubgroupPlaceView.swift
 //  Timetable
 //
-//  Created by art-off on 08.04.2020.
+//  Created by art-off on 04.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
-
-class SubgroupView: UIView {
+class SubgroupPlaceView: UIView {
+    
+    var groupsId: [Int]?
+    var professorsId: [Int]?
+    
     
     @IBOutlet weak var contentView: UIView!
     
@@ -19,17 +22,18 @@ class SubgroupView: UIView {
     @IBOutlet weak var place: UILabel!
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
-        setupUI()
+        setupViews()
+        addRecongnizers()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         loadXib()
-        setupUI()
+        setupViews()
+        addRecongnizers()
     }
     
     private func loadXib() {
@@ -40,14 +44,14 @@ class SubgroupView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
-    private func setupUI() {
-        setupLessonView()
+    private func setupViews() {
+        contentView.backgroundColor = Colors.contentColor
         setupLabels()
     }
     
-    private func setupLessonView() {
-        
-        //lessonView.layer.shadowColor = Colors.shadowColor.cgColor
+    private func addRecongnizers() {
+        let longRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        self.addGestureRecognizer(longRecognizer)
     }
     
     private func setupLabels() {
@@ -64,4 +68,12 @@ class SubgroupView: UIView {
         professor.textColor = .systemGray
     }
     
+    @objc func longPress() {
+        // 1. let timetable = DataManager.sharedInstance.getTimetable(forProfessor: professorId)
+        // NotificationCenter.default.post(name: .didSelectProfessor, object: self, userInfo: [0: timetalbe])
+        
+        // 2. let timetable = DataManager.sharedinstance.gettimetable(forPlace: placeId)
+        // NotificationCenter.default.post(name: .didSelectPlace, object: self, userInfo: [0: timetalbe])
+    }
+
 }

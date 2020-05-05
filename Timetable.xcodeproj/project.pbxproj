@@ -3,41 +3,139 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DA243C58C2002C0746 /* AppDelegate.swift */; };
 		4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DC243C58C2002C0746 /* SceneDelegate.swift */; };
-		4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DE243C58C2002C0746 /* ViewController.swift */; };
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
-		4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */; };
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
-		4A2338F6243C5BA0002C0746 /* LessonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338F5243C5BA0002C0746 /* LessonView.xib */; };
 		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
+		4A415E652458561F005FADD7 /* RGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E642458561F005FADD7 /* RGroup.swift */; };
+		4A415E6724585627005FADD7 /* RProfessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6624585627005FADD7 /* RProfessor.swift */; };
+		4A415E692458562D005FADD7 /* RPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E682458562D005FADD7 /* RPlace.swift */; };
+		4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6D2458584F005FADD7 /* RGroupLesson.swift */; };
+		4A415E702458586B005FADD7 /* RGroupDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6F2458586B005FADD7 /* RGroupDay.swift */; };
+		4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E7124585886005FADD7 /* RGroupWeek.swift */; };
+		4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E73245858A0005FADD7 /* RGroupTimetable.swift */; };
+		4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E79245859BD005FADD7 /* RProfessorLesson.swift */; };
+		4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E7E245859FE005FADD7 /* RProfessorDay.swift */; };
+		4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8024585A12005FADD7 /* RProfessorWeek.swift */; };
+		4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */; };
+		4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */; };
+		4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8924585BD2005FADD7 /* RPlaceDay.swift */; };
+		4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */; };
+		4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */; };
+		4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9524585E6E005FADD7 /* RGroupExam.swift */; };
+		4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9724585E87005FADD7 /* RGroupSession.swift */; };
+		4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9924585E9F005FADD7 /* RProfessorExam.swift */; };
+		4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9B24585EB5005FADD7 /* RProfessorSession.swift */; };
+		4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9D24585ED0005FADD7 /* RPlaceExam.swift */; };
+		4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E9F24585EED005FADD7 /* RPlaceSession.swift */; };
+		4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */; };
+		4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AA245B58E4008105DE /* DataManager.swift */; };
+		4A4C94AD245B63B0008105DE /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */; };
 		4A60025F243CD1CC00077C81 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60025E243CD1CC00077C81 /* Colors.swift */; };
+		4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */; };
+		4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+remove.swift */; };
+		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
+		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
+		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
+		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
+		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
+		4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; };
+		4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A324604B2400D050EB /* Notification+Name.swift */; };
+		4A9207A724604E7900D050EB /* TimetableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A624604E7900D050EB /* TimetableType.swift */; };
+		4A9207A924604F8200D050EB /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A824604F8200D050EB /* Week.swift */; };
+		4A9207AB24604FC300D050EB /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AA24604FC300D050EB /* Day.swift */; };
+		4A9207AD2460531400D050EB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AC2460531400D050EB /* Common.swift */; };
+		4A9207B1246061AA00D050EB /* RProfessorConsultations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B0246061AA00D050EB /* RProfessorConsultations.swift */; };
+		4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B2246061FD00D050EB /* RProfessorConsultation.swift */; };
+		4A9207B5246062D000D050EB /* RProfessorConsultationDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B4246062D000D050EB /* RProfessorConsultationDay.swift */; };
+		4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */; };
+		4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B824606DE200D050EB /* SubgroupProfessorVeiw.swift */; };
+		4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
-		4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */; };
+		4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4A9207A22460495E00D050EB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338D7243C58C2002C0746 /* Timetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338DA243C58C2002C0746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A2338DC243C58C2002C0746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4A2338DE243C58C2002C0746 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A2338E1243C58C2002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timetable.xcdatamodel; sourceTree = "<group>"; };
 		4A2338E6243C58C5002C0746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A2338F5243C5BA0002C0746 /* LessonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonView.xib; sourceTree = "<group>"; };
 		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		4A415E642458561F005FADD7 /* RGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroup.swift; sourceTree = "<group>"; };
+		4A415E6624585627005FADD7 /* RProfessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessor.swift; sourceTree = "<group>"; };
+		4A415E682458562D005FADD7 /* RPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlace.swift; sourceTree = "<group>"; };
+		4A415E6D2458584F005FADD7 /* RGroupLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupLesson.swift; sourceTree = "<group>"; };
+		4A415E6F2458586B005FADD7 /* RGroupDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupDay.swift; sourceTree = "<group>"; };
+		4A415E7124585886005FADD7 /* RGroupWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupWeek.swift; sourceTree = "<group>"; };
+		4A415E73245858A0005FADD7 /* RGroupTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupTimetable.swift; sourceTree = "<group>"; };
+		4A415E79245859BD005FADD7 /* RProfessorLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorLesson.swift; sourceTree = "<group>"; };
+		4A415E7E245859FE005FADD7 /* RProfessorDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorDay.swift; sourceTree = "<group>"; };
+		4A415E8024585A12005FADD7 /* RProfessorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorWeek.swift; sourceTree = "<group>"; };
+		4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorTimetable.swift; sourceTree = "<group>"; };
+		4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceLesson.swift; sourceTree = "<group>"; };
+		4A415E8924585BD2005FADD7 /* RPlaceDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceDay.swift; sourceTree = "<group>"; };
+		4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceWeek.swift; sourceTree = "<group>"; };
+		4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceTimetable.swift; sourceTree = "<group>"; };
+		4A415E9524585E6E005FADD7 /* RGroupExam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupExam.swift; sourceTree = "<group>"; };
+		4A415E9724585E87005FADD7 /* RGroupSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroupSession.swift; sourceTree = "<group>"; };
+		4A415E9924585E9F005FADD7 /* RProfessorExam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorExam.swift; sourceTree = "<group>"; };
+		4A415E9B24585EB5005FADD7 /* RProfessorSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorSession.swift; sourceTree = "<group>"; };
+		4A415E9D24585ED0005FADD7 /* RPlaceExam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceExam.swift; sourceTree = "<group>"; };
+		4A415E9F24585EED005FADD7 /* RPlaceSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlaceSession.swift; sourceTree = "<group>"; };
+		4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+CascadeDeleting.swift"; sourceTree = "<group>"; };
+		4A4C94AA245B58E4008105DE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		4A60025E243CD1CC00077C81 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addConstraints.swift"; sourceTree = "<group>"; };
+		4A610864243FAE77008BCB90 /* UIStackView+remove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+remove.swift"; sourceTree = "<group>"; };
+		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
+		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		4A92079F2460495E00D050EB /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A9207A324604B2400D050EB /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
+		4A9207A624604E7900D050EB /* TimetableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableType.swift; sourceTree = "<group>"; };
+		4A9207A824604F8200D050EB /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
+		4A9207AA24604FC300D050EB /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		4A9207AC2460531400D050EB /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		4A9207B0246061AA00D050EB /* RProfessorConsultations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultations.swift; sourceTree = "<group>"; };
+		4A9207B2246061FD00D050EB /* RProfessorConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultation.swift; sourceTree = "<group>"; };
+		4A9207B4246062D000D050EB /* RProfessorConsultationDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultationDay.swift; sourceTree = "<group>"; };
+		4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultationWeek.swift; sourceTree = "<group>"; };
+		4A9207B824606DE200D050EB /* SubgroupProfessorVeiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupProfessorVeiw.swift; sourceTree = "<group>"; };
+		4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupPlaceView.swift; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
-		4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupView.swift; sourceTree = "<group>"; };
+		4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupGroupView.swift; sourceTree = "<group>"; };
+		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
+		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +143,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C82DCF9BCB3EE5EE7427EBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */,
+				C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4A2338CE243C58C2002C0746 = {
 			isa = PBXGroup;
 			children = (
 				4A2338D9243C58C2002C0746 /* Timetable */,
 				4A2338D8243C58C2002C0746 /* Products */,
+				2C82DCF9BCB3EE5EE7427EBE /* Pods */,
+				65C6908D043D41676AB2D7E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,15 +181,17 @@
 			isa = PBXGroup;
 			children = (
 				4A2338DA243C58C2002C0746 /* AppDelegate.swift */,
+				4A9207AC2460531400D050EB /* Common.swift */,
 				4A2338DC243C58C2002C0746 /* SceneDelegate.swift */,
-				4A2338F3243C5AC7002C0746 /* Model */,
+				4A9207A524604E5E00D050EB /* Enums */,
+				4A610861243F0AD8008BCB90 /* Extensions */,
 				4A2338F1243C5A94002C0746 /* Storyboards */,
 				4A2338F2243C5AAA002C0746 /* ViewControllers */,
 				4A2338F4243C5AD4002C0746 /* Views */,
+				4A2338F3243C5AC7002C0746 /* Model */,
 				4A60025E243CD1CC00077C81 /* Colors.swift */,
 				4A2338E6243C58C5002C0746 /* Assets.xcassets */,
 				4A2338EB243C58C5002C0746 /* Info.plist */,
-				4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -96,7 +208,10 @@
 		4A2338F2243C5AAA002C0746 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A2338DE243C58C2002C0746 /* ViewController.swift */,
+				4A4C94AC245B63B0008105DE /* DayTableViewCell.swift */,
+				4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */,
+				4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */,
+				4A920772245DCFF800D050EB /* TimetableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -104,7 +219,10 @@
 		4A2338F3243C5AC7002C0746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A4C94A9245B58B1008105DE /* DataManager */,
 				4A2338F9243CA860002C0746 /* Lesson.swift */,
+				4A9207AA24604FC300D050EB /* Day.swift */,
+				4A9207A824604F8200D050EB /* Week.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,12 +230,180 @@
 		4A2338F4243C5AD4002C0746 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A2338F5243C5BA0002C0746 /* LessonView.xib */,
 				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
 				4A9C9137243DCB04009F67A8 /* SubgroupView.xib */,
-				4A9C9139243DCB3E009F67A8 /* SubgroupView.swift */,
+				4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */,
+				4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */,
+				4A9207B824606DE200D050EB /* SubgroupProfessorVeiw.swift */,
+				4A920776245DDEED00D050EB /* MenuCell.swift */,
+				4A920778245DDF4000D050EB /* MenuCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4A415E61245855A8005FADD7 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4A415EA224586488005FADD7 /* Extensions */,
+				4A415E62245855DD005FADD7 /* Entities */,
+				4A415E6B24585802005FADD7 /* Timetable */,
+				4A415E9124585D60005FADD7 /* Session */,
+				4A9207AE246060F400D050EB /* Consultation */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		4A415E62245855DD005FADD7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E642458561F005FADD7 /* RGroup.swift */,
+				4A415E6624585627005FADD7 /* RProfessor.swift */,
+				4A415E682458562D005FADD7 /* RPlace.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		4A415E6B24585802005FADD7 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E6C24585816005FADD7 /* GroupTimetable */,
+				4A415E7724585986005FADD7 /* ProfessorTimetable */,
+				4A415E8624585B33005FADD7 /* PlaceTimetable */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
+		4A415E6C24585816005FADD7 /* GroupTimetable */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E6D2458584F005FADD7 /* RGroupLesson.swift */,
+				4A415E6F2458586B005FADD7 /* RGroupDay.swift */,
+				4A415E7124585886005FADD7 /* RGroupWeek.swift */,
+				4A415E73245858A0005FADD7 /* RGroupTimetable.swift */,
+			);
+			path = GroupTimetable;
+			sourceTree = "<group>";
+		};
+		4A415E7724585986005FADD7 /* ProfessorTimetable */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E79245859BD005FADD7 /* RProfessorLesson.swift */,
+				4A415E7E245859FE005FADD7 /* RProfessorDay.swift */,
+				4A415E8024585A12005FADD7 /* RProfessorWeek.swift */,
+				4A415E8224585A28005FADD7 /* RProfessorTimetable.swift */,
+			);
+			path = ProfessorTimetable;
+			sourceTree = "<group>";
+		};
+		4A415E8624585B33005FADD7 /* PlaceTimetable */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E8724585B5D005FADD7 /* RPlaceLesson.swift */,
+				4A415E8924585BD2005FADD7 /* RPlaceDay.swift */,
+				4A415E8B24585BE5005FADD7 /* RPlaceWeek.swift */,
+				4A415E8D24585BF9005FADD7 /* RPlaceTimetable.swift */,
+			);
+			path = PlaceTimetable;
+			sourceTree = "<group>";
+		};
+		4A415E9124585D60005FADD7 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E9224585E33005FADD7 /* GroupSession */,
+				4A415E9324585E3D005FADD7 /* ProfessorSession */,
+				4A415E9424585E45005FADD7 /* PlaceSession */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		4A415E9224585E33005FADD7 /* GroupSession */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E9524585E6E005FADD7 /* RGroupExam.swift */,
+				4A415E9724585E87005FADD7 /* RGroupSession.swift */,
+			);
+			path = GroupSession;
+			sourceTree = "<group>";
+		};
+		4A415E9324585E3D005FADD7 /* ProfessorSession */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E9924585E9F005FADD7 /* RProfessorExam.swift */,
+				4A415E9B24585EB5005FADD7 /* RProfessorSession.swift */,
+			);
+			path = ProfessorSession;
+			sourceTree = "<group>";
+		};
+		4A415E9424585E45005FADD7 /* PlaceSession */ = {
+			isa = PBXGroup;
+			children = (
+				4A415E9D24585ED0005FADD7 /* RPlaceExam.swift */,
+				4A415E9F24585EED005FADD7 /* RPlaceSession.swift */,
+			);
+			path = PlaceSession;
+			sourceTree = "<group>";
+		};
+		4A415EA224586488005FADD7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A415EA3245864BF005FADD7 /* Realm+CascadeDeleting.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A4C94A9245B58B1008105DE /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				4A4C94AA245B58E4008105DE /* DataManager.swift */,
+				4A415E61245855A8005FADD7 /* Realm */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		4A610861243F0AD8008BCB90 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A610862243F0AF3008BCB90 /* UIView+addConstraints.swift */,
+				4A610864243FAE77008BCB90 /* UIStackView+remove.swift */,
+				4A9207A324604B2400D050EB /* Notification+Name.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A9207A524604E5E00D050EB /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4A9207A624604E7900D050EB /* TimetableType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		4A9207AE246060F400D050EB /* Consultation */ = {
+			isa = PBXGroup;
+			children = (
+				4A9207AF2460617A00D050EB /* ProfessorConsultation */,
+			);
+			path = Consultation;
+			sourceTree = "<group>";
+		};
+		4A9207AF2460617A00D050EB /* ProfessorConsultation */ = {
+			isa = PBXGroup;
+			children = (
+				4A9207B2246061FD00D050EB /* RProfessorConsultation.swift */,
+				4A9207B4246062D000D050EB /* RProfessorConsultationDay.swift */,
+				4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */,
+				4A9207B0246061AA00D050EB /* RProfessorConsultations.swift */,
+			);
+			path = ProfessorConsultation;
+			sourceTree = "<group>";
+		};
+		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A92079F2460495E00D050EB /* Pods_Timetable.framework */,
+				3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +413,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A2338EE243C58C5002C0746 /* Build configuration list for PBXNativeTarget "Timetable" */;
 			buildPhases = (
+				547C5DB7100B80AB20001E95 /* [CP] Check Pods Manifest.lock */,
 				4A2338D3243C58C2002C0746 /* Sources */,
 				4A2338D4243C58C2002C0746 /* Frameworks */,
 				4A2338D5243C58C2002C0746 /* Resources */,
+				F946E34A75C1942984207A55 /* [CP] Embed Pods Frameworks */,
+				4A9207A22460495E00D050EB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,7 +469,7 @@
 			files = (
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
-				4A2338F6243C5BA0002C0746 /* LessonView.xib in Resources */,
+				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
@@ -188,19 +477,100 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		547C5DB7100B80AB20001E95 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Timetable-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F946E34A75C1942984207A55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A2338D3243C58C2002C0746 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9C913A243DCB3E009F67A8 /* SubgroupView.swift in Sources */,
-				4A2338DF243C58C2002C0746 /* ViewController.swift in Sources */,
-				4A2338E5243C58C2002C0746 /* Timetable.xcdatamodeld in Sources */,
+				4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */,
+				4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */,
+				4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */,
+				4A9207AB24604FC300D050EB /* Day.swift in Sources */,
+				4A9207AD2460531400D050EB /* Common.swift in Sources */,
+				4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */,
+				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
+				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
+				4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */,
+				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
+				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
 				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
+				4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */,
+				4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */,
+				4A920777245DDEED00D050EB /* MenuCell.swift in Sources */,
+				4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */,
+				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
+				4A4C94AD245B63B0008105DE /* DayTableViewCell.swift in Sources */,
+				4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */,
+				4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */,
+				4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */,
+				4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
+				4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */,
+				4A9207B1246061AA00D050EB /* RProfessorConsultations.swift in Sources */,
+				4A415E702458586B005FADD7 /* RGroupDay.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
+				4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */,
+				4A9207A924604F8200D050EB /* Week.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
+				4A415E8A24585BD2005FADD7 /* RPlaceDay.swift in Sources */,
+				4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */,
+				4A9207B5246062D000D050EB /* RProfessorConsultationDay.swift in Sources */,
+				4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
+				4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */,
+				4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */,
+				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
+				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
+				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,
+				4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */,
+				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
+				4A9207A724604E7900D050EB /* TimetableType.swift in Sources */,
+				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
+				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
+				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
+				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +712,7 @@
 		};
 		4A2338EF243C58C5002C0746 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -360,6 +731,7 @@
 		};
 		4A2338F0243C58C5002C0746 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -398,19 +770,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4A2338E3243C58C2002C0746 /* Timetable.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */,
-			);
-			currentVersion = 4A2338E4243C58C2002C0746 /* Timetable.xcdatamodel */;
-			path = Timetable.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 4A2338CF243C58C2002C0746 /* Project object */;
 }
