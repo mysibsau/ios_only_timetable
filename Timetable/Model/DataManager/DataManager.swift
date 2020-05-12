@@ -14,11 +14,11 @@ import RealmSwift
 //
 
 protocol GetingEntities {
-    func getProfessors() -> Results<RProfessor>
     func getGroups() -> Results<RGroup>
+    func getProfessors() -> Results<RProfessor>
     func getPlaces() -> Results<RPlace>
-    func getSaveProfessors() -> Results<RProfessor>
     func getSaveGruops() -> Results<RGroup>
+    func getSaveProfessors() -> Results<RProfessor>
     func getSavePlaces() -> Results<RPlace>
 }
 

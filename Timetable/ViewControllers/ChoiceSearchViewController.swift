@@ -36,16 +36,16 @@ class ChoiceSearchViewController: UITableViewController {
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let groupsViewController = GroupsTableViewController()
-//        if indexPath.row == 0 {
-//            //searchObjectsViewController.objects = DataManager.sharedInstance.getGroups()
-//        } else if indexPath.row == 1 {
-//            //searchObjectsViewController.objects = DataManager.sharedInstance.getProfessors()
-//        } else if indexPath.row == 2 {
-//            //searchObjectsViewController.objects = DataManager.sharedInstance.getPlaces()
-//        }
-//
-        navigationController?.pushViewController(groupsViewController, animated: true)
+
+        if indexPath.row == 0 {
+            let groupsViewController = GroupsTableViewController()
+            groupsViewController.data = [
+                DataManager.shared.getSaveGruops(),
+                DataManager.shared.getGroups()
+            ]
+            navigationController?.pushViewController(groupsViewController, animated: true)
+        }
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

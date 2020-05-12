@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addGroups()
         //Common.addProfessors()
         //Common.addPlaces()
+        //Common.addSaveGroups()
         
         return true
     }

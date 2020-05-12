@@ -146,6 +146,25 @@ class Common {
         DataManager.shared.write(places: places)
     }
     
+    static func addSaveGroups() {
+        
+        var groups = [RGroup]()
+        
+        for i in [4, 20, 40, 94] {
+            let group = RGroup()
+            group.id = i
+            group.name = "\(i)name"
+            group.email = "\(i)email"
+            group.leaderName = "\(i)ln"
+            group.leaderEmail = nil
+            group.leaderPhone = "\(i)lp"
+            
+            groups.append(group)
+        }
+        
+        DataManager.shared.writeSave(groups: groups)
+    }
+    
 }
 
 //@objc dynamic var id = 0

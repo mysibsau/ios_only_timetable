@@ -13,38 +13,57 @@ class GroupsTableViewController: UITableViewController {
     
     //private var data: [Results<RGroup>?]!
     
-    var data : [[String]] = [[], ["Phil", "Tania", "Monica"]]
-    var filtredData = [String]()
+    // Первый элемент массива - сохранненные группа, второй - все
+    var data: [Results<RGroup>]!
+    private var filtredData: [Results<RGroup>]!
     
-    let searchController = UISearchController(searchResultsController: nil)
+    // MARK: Для SearchController'а
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView = UITableView(frame: self.tableView.frame, style: .grouped)
+        // Меняем слишь table view на .grouped
+        tableView = UITableView(frame: self.tableView.frame, style: .grouped)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
-        
+        setupSearchController()
     }
     
+    // MARK: Установка SearchController'а
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Введите"
+        searchController.searchBar.placeholder = "Поиск"
         
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        // Для того, чтобы поиск был доступен сразу, без необходимости свайпать вниз (нужно поставить false)
+        navigationItem.hidesSearchBarWhenScrolling = true
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        if isFiltering {
+            return filtredData.count
+        }
         return data.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isFiltering {
+            return filtredData[section].count
+        }
         return data[section].count
     }
     
@@ -54,28 +73,46 @@ class GroupsTableViewController: UITableViewController {
         } else if section == 1 {
             return "Все"
         } else {
+            // если вдруг появится третий раздел (:
             return "Что-то странное"
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "\(indexPath.section) \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
+        let group: RGroup
+        if isFiltering {
+            group = filtredData[indexPath.section][indexPath.row]
+        } else {
+            group = data[indexPath.section][indexPath.row]
+        }
+        
+        cell.textLabel?.text = group.name
         return cell
+    }
+    
+    // MARK: ТУТ НАПИСАТЬ ПЕРЕХОД НА ДЕТАЛЬНЫЙ ПРОСМОТР ГРУППЫ
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .green
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }
 
 extension GroupsTableViewController: UISearchResultsUpdating {
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
-    
+
     private func filterContentForSearchText(_ searchText: String) {
-        filtredData = data[1].filter { $0.lowercased().contains(searchText.lowercased()) }
+        filtredData = [
+            data[0].filter("name CONTAINS[c] '\(searchText)'"),
+            data[1].filter("name CONTAINS[c] '\(searchText)'")
+        ]
         tableView.reloadData()
     }
-    
+
 }
