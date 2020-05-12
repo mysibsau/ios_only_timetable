@@ -89,7 +89,7 @@ class TimetableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // скрываем вью предложения выбора, если weeks != nil и наоборот
-        wrapperWithLabel.isHidden = !(weeks == nil)
+        wrapperWithLabel.isHidden = weeks != nil
     }
     
     override func viewDidLayoutSubviews() {
@@ -97,6 +97,7 @@ class TimetableViewController: UIViewController {
         firstLoad?()
     }
     
+    // MARK: Для настройки PagingKit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? PagingMenuViewController {
             menuViewController = vc
@@ -125,7 +126,7 @@ class TimetableViewController: UIViewController {
     // MARK: Изменение недели (нечетная / четная)
     @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
         currWeek = numberWeekSegmented.selectedSegmentIndex
-        print("RELOAD")
+        //print("RELOAD")
         // сюда вставить измеение
         menuViewController.reloadData()
         contentViewController.reloadData()
@@ -134,19 +135,23 @@ class TimetableViewController: UIViewController {
 }
 
 
+// MARK: - Настройка меню
 extension TimetableViewController: PagingMenuViewControllerDataSource {
-
+    
+    // MARK: Число ячеек меню
     func numberOfItemsForMenuViewController(viewController: PagingMenuViewController) -> Int {
         //return dataSource.count
         return 6
     }
-
+    
+    // MARK: Формирование ячейки ( НУЖНО ДОПИСАТЬ ЕЩЕЕЕЕ )
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
         //cell.titleLabel.text = dataSource[index].menuTitle
         return cell
     }
-
+    
+    // MARK: Расчет ширины ячейки
     func menuViewController(viewController: PagingMenuViewController, widthForItemAt index: Int) -> CGFloat {
         //return viewController.view.bounds.width / CGFloat(dataSource.count)
         return viewController.view.bounds.width / CGFloat(6)
@@ -154,13 +159,16 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
 
 }
 
+// MARK: - Настройка слайдящихся экранов
 extension TimetableViewController: PagingContentViewControllerDataSource {
-
+    
+    // MARK: Число экранов
     func numberOfItemsForContentViewController(viewController: PagingContentViewController) -> Int {
         //return dataSource.count
         return 6
     }
 
+    // MARK: Отправка ViewController'а для индекса
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
         //return DayViewController()
         //return dataSource[index].vc
@@ -172,20 +180,25 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
 
 }
 
+// MARK: - Делегат для меню
 extension TimetableViewController: PagingMenuViewControllerDelegate {
-
+    
+    // MARK: Метод для перехода по выбранному пункту меню
     func menuViewController(viewController: PagingMenuViewController, didSelect page: Int, previousPage: Int) {
         contentViewController.scroll(to: page, animated: true)
     }
 
 }
 
+// MARK: - Делегат для слайдящихся экранов
 extension TimetableViewController: PagingContentViewControllerDelegate {
 
+    // MARK: Метод для синхронизации выбранного пункта в меню и текущего экрана
     func contentViewController(viewController: PagingContentViewController, didManualScrollOn index: Int, percent: CGFloat) {
         menuViewController.scroll(index: index, percent: percent, animated: true)
     }
 
+    // MARK: Странная функция, которая помогает сделать ячейки меню правльной ширины (возможно стоит перенести в делегат меню)
     func adjustfocusViewWidth(index: Int, percent: CGFloat) {
         guard let leftCell = menuViewController.cellForItem(at: index) as? TitleLabelMenuViewCell,
             let rightCell = menuViewController.cellForItem(at: index + 1) as? TitleLabelMenuViewCell else {

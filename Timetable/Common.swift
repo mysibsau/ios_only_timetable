@@ -62,17 +62,100 @@ class Common {
         return day
     }
     
+    static func getDay3() -> Day {
+        let lesson1 = Lesson(
+            time: "33:33 - 33:00",
+            subgroups: [
+                Subgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], place: "СПОРТЗАЛ")
+            ]
+        )
+        
+        let lesson4 = Lesson(
+            time: "16:33 - 18:33",
+            subgroups: [
+                Subgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], place: "Н 304")
+            ]
+        )
+        
+        let day = Day(lessons: [lesson1, lesson4])
+        return day
+    }
+    
     static func getWeek1() -> Week {
         let week = Week(days: [
-            getDay1(), nil, nil, getDay2(), getDay1(), nil, getDay1()
+            getDay1(), nil, nil, getDay2(), getDay3(), nil
         ])
         return week
     }
     
     static func getWeek2() -> Week {
         let week = Week(days: [
-            nil, nil, nil, getDay1(), getDay1(), nil, getDay2()
+            nil, nil, getDay3(), getDay1(), getDay1(), nil
         ])
         return week
     }
+    
+    static func addGroups() {
+        
+        var groups = [RGroup]()
+        
+        for i in 0...100 {
+            let group = RGroup()
+            group.id = i
+            group.name = "\(i)name"
+            group.email = "\(i)email"
+            group.leaderName = "\(i)ln"
+            group.leaderEmail = nil
+            group.leaderPhone = "\(i)lp"
+            
+            groups.append(group)
+        }
+        
+        DataManager.shared.write(groups: groups)
+    }
+    
+    static func addProfessors() {
+        
+        var professors = [RProfessor]()
+        
+        for i in 0...100 {
+            let professor = RProfessor()
+            professor.id = i
+            professor.name = "\(i)name"
+            professor.email = "\(i)email"
+            professor.department = "\(i)d"
+            
+            professors.append(professor)
+        }
+        
+        DataManager.shared.write(professors: professors)
+    }
+    
+    static func addPlaces() {
+        
+        var places = [RPlace]()
+        
+        for i in 0...100 {
+            let place = RPlace()
+            place.id = i
+            place.name = "\(i)name"
+            
+            places.append(place)
+        }
+        
+        DataManager.shared.write(places: places)
+    }
+    
 }
+
+//@objc dynamic var id = 0
+//@objc dynamic var name = ""
+//@objc dynamic var email: String? = nil
+//// информация о старосте
+//@objc dynamic var leaderName: String? = nil
+//@objc dynamic var leaderEmail: String? = nil
+//@objc dynamic var leaderPhone: String? = nil
+//
+//override class func primaryKey() -> String? {
+//    return "id"
+//}

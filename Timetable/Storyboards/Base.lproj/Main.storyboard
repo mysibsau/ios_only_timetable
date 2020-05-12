@@ -266,22 +266,6 @@
             </objects>
             <point key="canvasLocation" x="2982.608695652174" y="458.70535714285711"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="umV-OB-2GA">
-            <objects>
-                <viewController id="9Gn-6E-6hb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5py-a8-Xsu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="p43-ga-7IR"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Tr5-0h-tHz"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U3a-Il-oV4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2983" y="1154"/>
-        </scene>
         <!--Дополнительно-->
         <scene sceneID="DIx-6c-nYV">
             <objects>
@@ -294,12 +278,41 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9Gn-6E-6hb" kind="relationship" relationship="rootViewController" id="fOn-pd-dBi"/>
+                        <segue destination="pdB-8b-Hcl" kind="relationship" relationship="rootViewController" id="MEs-LH-XKc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6d-Gb-7zF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2203" y="1154"/>
+        </scene>
+        <!--Groups Table View Controller-->
+        <scene sceneID="wQ8-MB-8J5">
+            <objects>
+                <tableViewController id="pdB-8b-Hcl" customClass="GroupsTableViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AAO-bk-srh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MbJ-bW-BAr">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MbJ-bW-BAr" id="yLr-x4-I5N">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pdB-8b-Hcl" id="IAE-aJ-x5P"/>
+                            <outlet property="delegate" destination="pdB-8b-Hcl" id="rYs-4v-wvl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="lRV-rn-lRi"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bEY-YJ-Otb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2983" y="1154"/>
         </scene>
         <!--Paging Menu View Controller-->
         <scene sceneID="zol-Kf-qFx">
@@ -321,7 +334,7 @@
             <objects>
                 <viewController id="iVC-NL-00b" customClass="PagingContentViewController" customModule="PagingKit" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Yb-cd-Q0q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="649"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QHA-Ir-OLj"/>

@@ -40,9 +40,19 @@ protocol GettingSession {
     func getSession(forPlace place: Int)          // ->
 }
 
+protocol WritingEntities {
+    func writeSave(groups: [RGroup])
+    func writeSave(professro: [RProfessor])
+    func writeSave(places: [RPlace])
+    func write(groups: [RGroup])
+    func write(professors: [RProfessor])
+    func write(places: [RPlace])
+}
+
+
 class DataManager {
     
-    static let sharedInstance = DataManager()
+    static let shared = DataManager()
     
     // загруженные данные
     private let realmCaches: Realm
@@ -103,4 +113,44 @@ extension DataManager: GetingEntities {
         return places
     }
     
+}
+
+extension DataManager: WritingEntities {
+    
+    func writeSave(groups: [RGroup]) {
+        try? realmDocuments.write {
+            realmDocuments.add(groups, update: .modified)
+        }
+    }
+    
+    func writeSave(professro: [RProfessor]) {
+        try? realmDocuments.write {
+            realmDocuments.add(professro, update: .modified)
+        }
+    }
+    
+    func writeSave(places: [RPlace]) {
+        try? realmDocuments.write {
+            realmDocuments.add(places, update: .modified)
+        }
+    }
+    
+    func write(groups: [RGroup]) {
+        try? realmCaches.write {
+            realmCaches.add(groups, update: .modified)
+        }
+    }
+    
+    func write(professors: [RProfessor]) {
+        try? realmCaches.write {
+            realmCaches.add(professors, update: .modified)
+        }
+    }
+    
+    func write(places: [RPlace]) {
+        try? realmCaches.write {
+            realmCaches.add(places, update: .modified)
+        }
+    }
+
 }
