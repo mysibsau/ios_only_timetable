@@ -11,14 +11,14 @@ import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
     
-    //private var data: [Results<RGroup>?]!
-    
     // Первый элемент массива - сохранненные группа, второй - все
     var data: [Results<RGroup>]!
     private var filtredData: [Results<RGroup>]!
     
+    
     // MARK: Для SearchController'а
     private let searchController = UISearchController(searchResultsController: nil)
+    
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -50,6 +50,7 @@ class GroupsTableViewController: UITableViewController {
         // Для того, чтобы поиск был доступен сразу, без необходимости свайпать вниз (нужно поставить false)
         navigationItem.hidesSearchBarWhenScrolling = true
     }
+    
 
     // MARK: - Table view data source
 
@@ -104,15 +105,21 @@ class GroupsTableViewController: UITableViewController {
 extension GroupsTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-
-    private func filterContentForSearchText(_ searchText: String) {
+        // filterContentForSearchText(searchController.searchBar.text!)
+        guard let searchText = searchController.searchBar.text else { return }
         filtredData = [
             data[0].filter("name CONTAINS[c] '\(searchText)'"),
             data[1].filter("name CONTAINS[c] '\(searchText)'")
         ]
         tableView.reloadData()
     }
+
+//    private func filterContentForSearchText(_ searchText: String) {
+//        filtredData = [
+//            data[0].filter("name CONTAINS[c] '\(searchText)'"),
+//            data[1].filter("name CONTAINS[c] '\(searchText)'")
+//        ]
+//        tableView.reloadData()
+//    }
 
 }
