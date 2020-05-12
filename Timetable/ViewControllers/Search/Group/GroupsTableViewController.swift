@@ -95,9 +95,11 @@ class GroupsTableViewController: UITableViewController {
     
     // MARK: ТУТ НАПИСАТЬ ПЕРЕХОД НА ДЕТАЛЬНЫЙ ПРОСМОТР ГРУППЫ
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = UIViewController()
+//        vc.view.backgroundColor = .green
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        //let detailVC = DetailGroupViewController(group: )
     }
 
 }
