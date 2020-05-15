@@ -12,7 +12,7 @@
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
-		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
+		4A2338F8243C5BFC002C0746 /* StackViewCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
 		4A415E652458561F005FADD7 /* RGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E642458561F005FADD7 /* RGroup.swift */; };
 		4A415E6724585627005FADD7 /* RProfessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6624585627005FADD7 /* RProfessor.swift */; };
@@ -48,8 +48,6 @@
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
 		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
 		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
-		4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; };
-		4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A324604B2400D050EB /* Notification+Name.swift */; };
 		4A9207A724604E7900D050EB /* TimetableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A624604E7900D050EB /* TimetableType.swift */; };
 		4A9207A924604F8200D050EB /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A824604F8200D050EB /* Week.swift */; };
@@ -63,21 +61,8 @@
 		4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */; };
+		BAA5C01998D096918E2C1EF4 /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4A9207A22460495E00D050EB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4A9207A12460495E00D050EB /* Pods_Timetable.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +73,7 @@
 		4A2338E6243C58C5002C0746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
+		4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewCornerRadius.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		4A415E642458561F005FADD7 /* RGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroup.swift; sourceTree = "<group>"; };
 		4A415E6624585627005FADD7 /* RProfessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessor.swift; sourceTree = "<group>"; };
@@ -147,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9207A02460495E00D050EB /* Pods_Timetable.framework in Frameworks */,
+				BAA5C01998D096918E2C1EF4 /* Pods_Timetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +217,7 @@
 		4A2338F4243C5AD4002C0746 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
+				4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */,
 				4A9C9137243DCB04009F67A8 /* SubgroupView.xib */,
 				4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */,
 				4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */,
@@ -447,8 +432,7 @@
 				4A2338D3243C58C2002C0746 /* Sources */,
 				4A2338D4243C58C2002C0746 /* Frameworks */,
 				4A2338D5243C58C2002C0746 /* Resources */,
-				F946E34A75C1942984207A55 /* [CP] Embed Pods Frameworks */,
-				4A9207A22460495E00D050EB /* Embed Frameworks */,
+				7F2DBFC2DF23863EDE3D5DDF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -531,7 +515,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F946E34A75C1942984207A55 /* [CP] Embed Pods Frameworks */ = {
+		7F2DBFC2DF23863EDE3D5DDF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,7 +550,7 @@
 				4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */,
 				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
 				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
-				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
+				4A2338F8243C5BFC002C0746 /* StackViewCornerRadius.swift in Sources */,
 				4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */,
 				4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */,
 				4A920777245DDEED00D050EB /* MenuCell.swift in Sources */,

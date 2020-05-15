@@ -55,16 +55,12 @@ class GroupsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if isFiltering {
-            return filtredData.count
-        }
+        if isFiltering { return filtredData.count }
         return data.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filtredData[section].count
-        }
+        if isFiltering { return filtredData[section].count }
         return data[section].count
     }
     
@@ -95,11 +91,17 @@ class GroupsTableViewController: UITableViewController {
     
     // MARK: ТУТ НАПИСАТЬ ПЕРЕХОД НА ДЕТАЛЬНЫЙ ПРОСМОТР ГРУППЫ
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = UIViewController()
-//        vc.view.backgroundColor = .green
-//        navigationController?.pushViewController(vc, animated: true)
         
-        //let detailVC = DetailGroupViewController(group: )
+        let group: RGroup
+        if isFiltering {
+            group = filtredData[indexPath.section][indexPath.row]
+        } else {
+            group = data[indexPath.section][indexPath.row]
+        }
+        
+        let detailVC = DetailGroupViewController(group: group)
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }
@@ -115,13 +117,5 @@ extension GroupsTableViewController: UISearchResultsUpdating {
         ]
         tableView.reloadData()
     }
-
-//    private func filterContentForSearchText(_ searchText: String) {
-//        filtredData = [
-//            data[0].filter("name CONTAINS[c] '\(searchText)'"),
-//            data[1].filter("name CONTAINS[c] '\(searchText)'")
-//        ]
-//        tableView.reloadData()
-//    }
 
 }

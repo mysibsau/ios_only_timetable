@@ -1,23 +1,27 @@
 //
-//  LessonView.swift
+//  StackViewCornerRadius.swift
 //  Timetable
 //
 //  Created by art-off on 07.04.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-// LessonView.xib: сначала лежит UIView, на которую
+// StackViewCornerRadius.xib: сначала лежит UIView, на которую
 // с констрейтами 8 по всем сторонам я кладу UIView,
 // на которой уже и закрепляю все UILabel
 
 
 import UIKit
 
-class LessonView: UIView {
+class StackViewCornerRadius: UIView {
     
     private let contentView = UIView()
     private let wrapperView = UIView()
     private let subgroupStackView = UIStackView()
+    
+    var spacing: CGFloat = 2 {
+        didSet { subgroupStackView.spacing = self.spacing }
+    }
     
     
     override init(frame: CGRect) {
@@ -48,7 +52,7 @@ class LessonView: UIView {
         // настраиваем свойства StackView
         subgroupStackView.axis = .vertical
         subgroupStackView.distribution = .equalSpacing
-        subgroupStackView.spacing = 2 // было 2
+        subgroupStackView.spacing = spacing // было 2
         
         contentView.addSubview(wrapperView)
         // расставляем констрейнты для подВью к контентВью
@@ -64,7 +68,7 @@ class LessonView: UIView {
 
 
 // MARK: - Все для установки нового занятия на это вью
-extension LessonView {
+extension StackViewCornerRadius {
     
     convenience init(lesson: Lesson) {
         self.init()
@@ -117,7 +121,7 @@ extension LessonView {
     }
     
     // MARK: Добавлени разделительной линии (для подгрупп)
-    private func addSeparatorLine() {
+    func addSeparatorLine() {
         // добавление дополнительного отступа перед линией
         let spaceBeforeLine = UIView()
         spaceBeforeLine.backgroundColor = .clear
@@ -164,8 +168,23 @@ extension LessonView {
     
 }
 
+// MARK: - Все для добавления обычных label
+extension StackViewCornerRadius {
+    
+    func addLabel(text: String) {
+        let label = UILabel()
+        label.text = text
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        subgroupStackView.addArrangedSubview(label)
+        label.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+    }
+    
+}
 
-extension LessonView {
+
+extension StackViewCornerRadius {
     // для отрисовки интерфейса при смене темы
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

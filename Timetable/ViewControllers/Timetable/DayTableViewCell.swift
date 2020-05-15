@@ -51,7 +51,7 @@ class DayViewController: UIViewController {
         
         // заполняем день занятиями
         for lesson in day.lessons {
-            let lessonView = LessonView(lesson: lesson)
+            let lessonView = StackViewCornerRadius(lesson: lesson)
             stackView.addArrangedSubview(lessonView)
             lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         }

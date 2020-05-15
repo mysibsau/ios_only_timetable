@@ -10,11 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailGroupViewController" customModule="Timetable" customModuleProvider="target">
             <connections>
-                <outlet property="email" destination="Koc-3C-BXl" id="A3B-HJ-P9R"/>
-                <outlet property="leaderEmail" destination="Uhh-Hb-ctY" id="Of8-eZ-tBh"/>
-                <outlet property="leaderName" destination="Yyd-Xs-rxI" id="rsN-qf-wxf"/>
-                <outlet property="leaderPhone" destination="Z9Y-Db-da4" id="jt9-ZM-1Z9"/>
-                <outlet property="name" destination="Uyt-PE-jsb" id="uXP-h7-Ybl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,104 +17,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название группы:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuk-Al-5Iu">
-                    <rect key="frame" x="20" y="64" width="144" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="БПИ18-01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-PE-jsb">
-                    <rect key="frame" x="60" y="93" width="334" height="24"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPp-4s-VAQ">
-                    <rect key="frame" x="20" y="137" width="46" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bpi1801@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Koc-3C-BXl">
-                    <rect key="frame" x="60" y="166" width="334" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Староста" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ee-Ow-2gW">
-                    <rect key="frame" x="20" y="230" width="113" height="30"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ФИО:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onP-iG-rms">
-                    <rect key="frame" x="20" y="268" width="44" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Козырев Константин Николаевич" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyd-Xs-rxI">
-                    <rect key="frame" x="60" y="297" width="334" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CA-k0-6ET">
-                    <rect key="frame" x="20" y="338" width="46" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="koz@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhh-Hb-ctY">
-                    <rect key="frame" x="60" y="367" width="334" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Телефон:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqR-lI-foQ">
-                    <rect key="frame" x="20" y="408" width="74" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+7 (929) 333-84-54" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Y-Db-da4">
-                    <rect key="frame" x="60" y="437" width="334" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="onP-iG-rms" firstAttribute="top" secondItem="4Ee-Ow-2gW" secondAttribute="bottom" constant="8" id="094-ew-aI1"/>
-                <constraint firstItem="Z9Y-Db-da4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="0r2-73-LDv"/>
-                <constraint firstItem="4Ee-Ow-2gW" firstAttribute="top" secondItem="Koc-3C-BXl" secondAttribute="bottom" constant="40" id="1z8-qW-JO8"/>
-                <constraint firstItem="zuk-Al-5Iu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="67e-Qo-qZu"/>
-                <constraint firstItem="OPp-4s-VAQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7xE-fz-9tf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uyt-PE-jsb" secondAttribute="trailing" constant="20" id="Eol-R1-Fgv"/>
-                <constraint firstItem="Uyt-PE-jsb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="G2v-iL-kVU"/>
-                <constraint firstItem="4Ee-Ow-2gW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="GGW-XY-TI8"/>
-                <constraint firstItem="3CA-k0-6ET" firstAttribute="top" secondItem="Yyd-Xs-rxI" secondAttribute="bottom" constant="20" id="GMb-yT-YqH"/>
-                <constraint firstItem="gqR-lI-foQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="GPy-d4-4fL"/>
-                <constraint firstItem="Koc-3C-BXl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="GXe-3o-ZmG"/>
-                <constraint firstItem="3CA-k0-6ET" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="LKL-pd-c4H"/>
-                <constraint firstItem="Uhh-Hb-ctY" firstAttribute="top" secondItem="3CA-k0-6ET" secondAttribute="bottom" constant="8" id="O0a-aw-l9r"/>
-                <constraint firstItem="Yyd-Xs-rxI" firstAttribute="top" secondItem="onP-iG-rms" secondAttribute="bottom" constant="8" id="PJ7-MM-ZON"/>
-                <constraint firstItem="Koc-3C-BXl" firstAttribute="top" secondItem="OPp-4s-VAQ" secondAttribute="bottom" constant="8" id="WoM-u8-0io"/>
-                <constraint firstItem="gqR-lI-foQ" firstAttribute="top" secondItem="Uhh-Hb-ctY" secondAttribute="bottom" constant="20" id="abX-nU-aGu"/>
-                <constraint firstItem="Uhh-Hb-ctY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="epn-46-XDn"/>
-                <constraint firstItem="Uyt-PE-jsb" firstAttribute="top" secondItem="zuk-Al-5Iu" secondAttribute="bottom" constant="8" id="g9S-gS-nSe"/>
-                <constraint firstItem="zuk-Al-5Iu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hgz-2K-crY"/>
-                <constraint firstItem="onP-iG-rms" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jLh-ft-q72"/>
-                <constraint firstItem="Yyd-Xs-rxI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="jv8-Mo-68D"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z9Y-Db-da4" secondAttribute="trailing" constant="20" id="mIv-3S-447"/>
-                <constraint firstItem="Z9Y-Db-da4" firstAttribute="top" secondItem="gqR-lI-foQ" secondAttribute="bottom" constant="8" id="mVY-UL-I8Q"/>
-                <constraint firstItem="OPp-4s-VAQ" firstAttribute="top" secondItem="Uyt-PE-jsb" secondAttribute="bottom" constant="20" id="rOE-fu-1cg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Yyd-Xs-rxI" secondAttribute="trailing" constant="20" id="rcB-fe-bsh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Koc-3C-BXl" secondAttribute="trailing" constant="20" id="vwG-HJ-nOI"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uhh-Hb-ctY" secondAttribute="trailing" constant="20" id="xRI-xf-Zf9"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="140.625"/>
         </view>
