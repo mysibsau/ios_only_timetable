@@ -372,20 +372,12 @@
 			isa = PBXGroup;
 			children = (
 				4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */,
-				4A6C1CF4246B27430048CD1A /* Group */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		4A6C1CF4246B27430048CD1A /* Group */ = {
-			isa = PBXGroup;
-			children = (
 				4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */,
 				4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */,
 				4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */,
 				4A6C1CF5246B28890048CD1A /* DetailViewController.swift */,
 			);
-			path = Group;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		4A9207A524604E5E00D050EB /* Enums */ = {

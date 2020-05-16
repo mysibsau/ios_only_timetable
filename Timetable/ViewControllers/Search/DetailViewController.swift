@@ -11,8 +11,12 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var data: [[String]]!
-    var type: EntitiesType!
+    var isSave: Bool!
+    private var type: EntitiesType!
+    private var id: Int!
     
+    
+    var buttons: [(text: String, color: UIColor)]!
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     
@@ -29,7 +33,9 @@ class DetailViewController: UIViewController {
         view.backgroundColor = Colors.backgroungColor
     }
 
-    convenience init(group: RGroup) {
+    // MARK: - Init
+    
+    convenience init(group: RGroup, isSave: Bool) {
         self.init()
         
         navigationItem.title = group.name
@@ -48,9 +54,12 @@ class DetailViewController: UIViewController {
         
         data = [tableData1, tableData2]
         type = .gruop
+        id = group.id
+        self.isSave = isSave
+        updateButtons()
     }
     
-    convenience init(professor: RProfessor) {
+    convenience init(professor: RProfessor, isSave: Bool) {
         self.init()
         
         // Фамилия преподавателя в nav bar
@@ -65,9 +74,12 @@ class DetailViewController: UIViewController {
         
         data = [tableData]
         type = .gruop
+        id = professor.id
+        self.isSave = isSave
+        updateButtons()
     }
     
-    convenience init(place: RPlace) {
+    convenience init(place: RPlace, isSave: Bool) {
         self.init()
         
         navigationItem.title = place.name
@@ -79,7 +91,12 @@ class DetailViewController: UIViewController {
         
         data = [tableData]
         type = .place
+        id = place.id
+        self.isSave = isSave
+        updateButtons()
     }
+    
+    //MARK: - Setup View
     
     private func setupTableView() {
         view.addSubview(tableView)
@@ -88,24 +105,43 @@ class DetailViewController: UIViewController {
         tableView.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
-
+    
+    private func updateButtons() {
+        buttons = [
+            isSave ? ("Удалить из 'Сохраненные'", .red) : ("Добавить в 'Сохраненные'", Colors.sibsuGreen),
+            ("Показать расписание", .systemBlue)
+        ]
+    }
 
 }
 
 extension DetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return data.count + buttons.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // для секций с кнопкой
+        if section >= data.count { return 1 }
         return data[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        // для кнопок
+        if indexPath.section >= data.count {
+            let indexButton = indexPath.section - data.count
+            cell.textLabel?.text = buttons[indexButton].text
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = buttons[indexButton].color
+            return cell
+        }
         
         cell.textLabel?.text = data[indexPath.section][indexPath.row]
         
@@ -118,4 +154,12 @@ extension DetailViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension DetailViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.section, indexPath.row)
+    }
+
 }

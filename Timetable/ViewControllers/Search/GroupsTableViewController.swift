@@ -1,19 +1,19 @@
 //
-//  PlacesTableViewController.swift
+//  GroupsTableViewController.swift
 //  Timetable
 //
-//  Created by art-off on 15.05.2020.
+//  Created by art-off on 01.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class PlacesTableViewController: UITableViewController {
-
+class GroupsTableViewController: UITableViewController {
+    
     // Первый элемент массива - сохранненные группа, второй - все
-    var data: [Results<RPlace>]!
-    private var filtredData: [Results<RPlace>]!
+    var data: [Results<RGroup>]!
+    private var filtredData: [Results<RGroup>]!
     
     
     // MARK: Для SearchController'а
@@ -26,6 +26,7 @@ class PlacesTableViewController: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,34 +78,45 @@ class PlacesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let place: RPlace
+        let group: RGroup
         if isFiltering {
-            place = filtredData[indexPath.section][indexPath.row]
+            group = filtredData[indexPath.section][indexPath.row]
         } else {
-            place = data[indexPath.section][indexPath.row]
+            group = data[indexPath.section][indexPath.row]
         }
         
-        cell.textLabel?.text = place.name
+        cell.textLabel?.text = group.name
         return cell
     }
     
+    // MARK: - Table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let place: RPlace
+        let group: RGroup
+        let isSave: Bool
+        
         if isFiltering {
-            place = filtredData[indexPath.section][indexPath.row]
+            group = filtredData[indexPath.section][indexPath.row]
         } else {
-            place = data[indexPath.section][indexPath.row]
+            group = data[indexPath.section][indexPath.row]
         }
         
-        let detailVC = DetailViewController(place: place)
+        // содержится ли данный объект в сохраненных
+        if data[0].filter("id = \(group.id)").count == 0 {
+            isSave = false
+        } else {
+            isSave = true
+        }
+        
+        let detailVC = DetailViewController(group: group, isSave: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }
 
-extension PlacesTableViewController: UISearchResultsUpdating {
+extension GroupsTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }

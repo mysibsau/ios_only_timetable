@@ -1,5 +1,5 @@
 //
-//  ProfessorsTableViewController.swift
+//  PlacesTableViewController.swift
 //  Timetable
 //
 //  Created by art-off on 15.05.2020.
@@ -9,11 +9,11 @@
 import UIKit
 import RealmSwift
 
-class ProfessorsTableViewController: UITableViewController {
+class PlacesTableViewController: UITableViewController {
 
     // Первый элемент массива - сохранненные группа, второй - все
-    var data: [Results<RProfessor>]!
-    private var filtredData: [Results<RProfessor>]!
+    var data: [Results<RPlace>]!
+    private var filtredData: [Results<RPlace>]!
     
     
     // MARK: Для SearchController'а
@@ -26,7 +26,6 @@ class ProfessorsTableViewController: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,34 +77,45 @@ class ProfessorsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let professor: RProfessor
+        let place: RPlace
         if isFiltering {
-            professor = filtredData[indexPath.section][indexPath.row]
+            place = filtredData[indexPath.section][indexPath.row]
         } else {
-            professor = data[indexPath.section][indexPath.row]
+            place = data[indexPath.section][indexPath.row]
         }
         
-        cell.textLabel?.text = professor.name
+        cell.textLabel?.text = place.name
         return cell
     }
     
+    // MARK: - Table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let professor: RProfessor
+        let place: RPlace
+        let isSave: Bool
+        
         if isFiltering {
-            professor = filtredData[indexPath.section][indexPath.row]
+            place = filtredData[indexPath.section][indexPath.row]
         } else {
-            professor = data[indexPath.section][indexPath.row]
+            place = data[indexPath.section][indexPath.row]
         }
         
-        let detailVC = DetailViewController(professor: professor)
+        // содержится ли данный объект в сохраненных
+        if data[0].filter("id = \(place.id)").count == 0 {
+            isSave = false
+        } else {
+            isSave = true
+        }
+        
+        let detailVC = DetailViewController(place: place, isSave: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }
 
-extension ProfessorsTableViewController: UISearchResultsUpdating {
+extension PlacesTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }

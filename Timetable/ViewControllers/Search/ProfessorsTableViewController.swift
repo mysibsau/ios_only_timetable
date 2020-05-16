@@ -1,19 +1,19 @@
 //
-//  GroupsTableViewController.swift
+//  ProfessorsTableViewController.swift
 //  Timetable
 //
-//  Created by art-off on 01.05.2020.
+//  Created by art-off on 15.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class GroupsTableViewController: UITableViewController {
-    
+class ProfessorsTableViewController: UITableViewController {
+
     // Первый элемент массива - сохранненные группа, второй - все
-    var data: [Results<RGroup>]!
-    private var filtredData: [Results<RGroup>]!
+    var data: [Results<RProfessor>]!
+    private var filtredData: [Results<RProfessor>]!
     
     
     // MARK: Для SearchController'а
@@ -78,34 +78,45 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let group: RGroup
+        let professor: RProfessor
         if isFiltering {
-            group = filtredData[indexPath.section][indexPath.row]
+            professor = filtredData[indexPath.section][indexPath.row]
         } else {
-            group = data[indexPath.section][indexPath.row]
+            professor = data[indexPath.section][indexPath.row]
         }
         
-        cell.textLabel?.text = group.name
+        cell.textLabel?.text = professor.name
         return cell
     }
     
+    // MARK: - Table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let group: RGroup
+        let professor: RProfessor
+        let isSave: Bool
+        
         if isFiltering {
-            group = filtredData[indexPath.section][indexPath.row]
+            professor = filtredData[indexPath.section][indexPath.row]
         } else {
-            group = data[indexPath.section][indexPath.row]
+            professor = data[indexPath.section][indexPath.row]
         }
         
-        let detailVC = DetailViewController(group: group)
+        // содержится ли данный объект в сохраненных
+        if data[0].filter("id = \(professor.id)").count == 0 {
+            isSave = false
+        } else {
+            isSave = true
+        }
+        
+        let detailVC = DetailViewController(professor: professor, isSave: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }
 
-extension GroupsTableViewController: UISearchResultsUpdating {
+extension ProfessorsTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
