@@ -10,10 +10,14 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    var data: [[String]]!
+    var data: [[(text: String, color: UIColor?)]]!
     var isSave: Bool!
+    
     private var type: EntitiesType!
     private var id: Int!
+    
+    private var firstSectionHeader: String? = nil
+    private var secondSectionHeader: String? = nil
     
     
     var buttons: [(text: String, color: UIColor)]!
@@ -40,22 +44,25 @@ class DetailViewController: UIViewController {
         
         navigationItem.title = group.name
         
+        // Формируем данные для отображения в таблице
         let tableData1 = [
-            "Группа",
-            group.name,
-            group.email ?? "Нет email"
+            (group.name, nil),
+            group.email != nil ? (group.email!, nil) : ("Нет email", UIColor.gray)
         ]
         let tableData2 = [
-            "Староста",
-            group.leaderName ?? "Нет ФИО",
-            group.leaderEmail ?? "Нет email",
-            group.leaderPhone ?? "Нет номера"
+            group.leaderName  != nil ? (group.leaderName!, nil)  : ("Нет ФИО", UIColor.gray),
+            group.leaderEmail != nil ? (group.leaderEmail!, nil) : ("Нет email", UIColor.gray),
+            group.leaderPhone != nil ? (group.leaderPhone!, nil) : ("Нет номера", UIColor.gray)
         ]
+        
+        firstSectionHeader = "Группа"
+        secondSectionHeader = "Староста"
         
         data = [tableData1, tableData2]
         type = .gruop
         id = group.id
         self.isSave = isSave
+        
         updateButtons()
     }
     
@@ -65,17 +72,20 @@ class DetailViewController: UIViewController {
         // Фамилия преподавателя в nav bar
         navigationItem.title = String(professor.name.split(separator: " ")[0])
         
+        // Формируем данные для отображения в таблице
         let tableData = [
-            "Преподаватель",
-            professor.name,
-            professor.department ?? "Нет кафедры",
-            professor.email ?? "Нет телефона"
+            (professor.name, nil),
+            professor.department != nil ? (professor.department!, nil) : ("Нет кафедры", UIColor.gray),
+            professor.email      != nil ? (professor.email!, nil)      : ("Нет email", UIColor.gray)
         ]
+        
+        firstSectionHeader = "Преподаватель"
         
         data = [tableData]
         type = .gruop
         id = professor.id
         self.isSave = isSave
+        
         updateButtons()
     }
     
@@ -84,15 +94,18 @@ class DetailViewController: UIViewController {
         
         navigationItem.title = place.name
         
+        // Формируем данные для отображения в таблице
         let tableData = [
-            "Кабинет",
-            place.name
+            (place.name, UIColor?(nil))
         ]
+        
+        firstSectionHeader = "Кабинет"
         
         data = [tableData]
         type = .place
         id = place.id
         self.isSave = isSave
+        
         updateButtons()
     }
     
@@ -124,6 +137,16 @@ extension DetailViewController: UITableViewDataSource {
         return data.count + buttons.count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return firstSectionHeader
+        } else if section == 1 {
+            return secondSectionHeader
+        } else {
+            return nil
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // для секций с кнопкой
         if section >= data.count { return 1 }
@@ -133,23 +156,22 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
         
         // для кнопок
         if indexPath.section >= data.count {
             let indexButton = indexPath.section - data.count
             cell.textLabel?.text = buttons[indexButton].text
-            cell.textLabel?.textAlignment = .center
             cell.textLabel?.textColor = buttons[indexButton].color
+            cell.textLabel?.textAlignment = .center
+            
             return cell
         }
         
-        cell.textLabel?.text = data[indexPath.section][indexPath.row]
-        
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        if indexPath.row == 0 {
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        }
+        let currElem = data[indexPath.section][indexPath.row]
+        cell.textLabel?.text = currElem.text
+        cell.textLabel?.textColor = currElem.color
         
         return cell
     }
