@@ -11,7 +11,7 @@ import PagingKit
 
 class TimetableViewController: UIViewController {
     
-    var type: TimetableType?
+    var type: EntitiesType?
     var weeks: [Week]?
     var currWeek = 0
     

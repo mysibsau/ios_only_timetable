@@ -70,12 +70,12 @@ class DataManager {
         let cachesConfig = Realm.Configuration(fileURL: cachesURL)
         let documentsConfig = Realm.Configuration(fileURL: documentsURL)
         
+        print(cachesURL)
+        print(documentsURL)
+        
         realmCaches = try! Realm(configuration: cachesConfig)
         realmDocuments = try! Realm(configuration: documentsConfig)
         
-        // УДОЛИТЬ
-        print(cachesURL)
-        print(documentsURL)
     }
     
 }

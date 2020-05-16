@@ -1,5 +1,5 @@
 //
-//  TypeTimetable.swift
+//  EntitiesType.swift
 //  Timetable
 //
 //  Created by art-off on 04.05.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TimetableType {
+enum EntitiesType {
     case gruop
     case professor
     case place

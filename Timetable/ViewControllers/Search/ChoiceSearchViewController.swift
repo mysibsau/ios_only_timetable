@@ -43,7 +43,27 @@ class ChoiceSearchViewController: UITableViewController {
                 DataManager.shared.getSaveGruops(),
                 DataManager.shared.getGroups()
             ]
+            
             navigationController?.pushViewController(groupsViewController, animated: true)
+            
+        } else if indexPath.row == 1 {
+            let professorViewController = ProfessorsTableViewController()
+            professorViewController.data = [
+                DataManager.shared.getSaveProfessors(),
+                DataManager.shared.getProfessors()
+            ]
+            
+            navigationController?.pushViewController(professorViewController, animated: true)
+            
+        } else if indexPath.row == 2 {
+            let placeViewController = PlacesTableViewController()
+            placeViewController.data = [
+                DataManager.shared.getSavePlaces(),
+                DataManager.shared.getPlaces()
+            ]
+            
+            navigationController?.pushViewController(placeViewController, animated: true)
+            
         }
         
     }

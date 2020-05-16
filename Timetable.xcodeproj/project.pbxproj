@@ -43,13 +43,14 @@
 		4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+remove.swift */; };
 		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
 		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
-		4A6C1CF7246B28890048CD1A /* DetailGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailGroupViewController.swift */; };
-		4A6C1CF8246B28890048CD1A /* DetailGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF6246B28890048CD1A /* DetailGroupViewController.xib */; };
+		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
+		4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */; };
+		4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */; };
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
 		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
 		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
 		4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A324604B2400D050EB /* Notification+Name.swift */; };
-		4A9207A724604E7900D050EB /* TimetableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A624604E7900D050EB /* TimetableType.swift */; };
+		4A9207A724604E7900D050EB /* EntitiesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A624604E7900D050EB /* EntitiesType.swift */; };
 		4A9207A924604F8200D050EB /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207A824604F8200D050EB /* Week.swift */; };
 		4A9207AB24604FC300D050EB /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AA24604FC300D050EB /* Day.swift */; };
 		4A9207AD2460531400D050EB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207AC2460531400D050EB /* Common.swift */; };
@@ -104,14 +105,15 @@
 		4A610864243FAE77008BCB90 /* UIStackView+remove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+remove.swift"; sourceTree = "<group>"; };
 		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
 		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		4A6C1CF5246B28890048CD1A /* DetailGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGroupViewController.swift; sourceTree = "<group>"; };
-		4A6C1CF6246B28890048CD1A /* DetailGroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailGroupViewController.xib; sourceTree = "<group>"; };
+		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsTableViewController.swift; sourceTree = "<group>"; };
+		4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		4A92079F2460495E00D050EB /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9207A324604B2400D050EB /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
-		4A9207A624604E7900D050EB /* TimetableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableType.swift; sourceTree = "<group>"; };
+		4A9207A624604E7900D050EB /* EntitiesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesType.swift; sourceTree = "<group>"; };
 		4A9207A824604F8200D050EB /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		4A9207AA24604FC300D050EB /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		4A9207AC2460531400D050EB /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -379,8 +381,9 @@
 			isa = PBXGroup;
 			children = (
 				4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */,
-				4A6C1CF5246B28890048CD1A /* DetailGroupViewController.swift */,
-				4A6C1CF6246B28890048CD1A /* DetailGroupViewController.xib */,
+				4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */,
+				4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */,
+				4A6C1CF5246B28890048CD1A /* DetailViewController.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -388,7 +391,7 @@
 		4A9207A524604E5E00D050EB /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				4A9207A624604E7900D050EB /* TimetableType.swift */,
+				4A9207A624604E7900D050EB /* EntitiesType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -484,7 +487,6 @@
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
-				4A6C1CF8246B28890048CD1A /* DetailGroupViewController.xib in Resources */,
 				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
@@ -545,6 +547,8 @@
 				4A9207AB24604FC300D050EB /* Day.swift in Sources */,
 				4A9207AD2460531400D050EB /* Common.swift in Sources */,
 				4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */,
+				4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */,
+				4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */,
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
 				4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */,
@@ -564,7 +568,7 @@
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */,
 				4A9207B1246061AA00D050EB /* RProfessorConsultations.swift in Sources */,
-				4A6C1CF7246B28890048CD1A /* DetailGroupViewController.swift in Sources */,
+				4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */,
 				4A415E702458586B005FADD7 /* RGroupDay.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */,
@@ -582,7 +586,7 @@
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,
 				4A4C94AB245B58E4008105DE /* DataManager.swift in Sources */,
 				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
-				4A9207A724604E7900D050EB /* TimetableType.swift in Sources */,
+				4A9207A724604E7900D050EB /* EntitiesType.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
 				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,

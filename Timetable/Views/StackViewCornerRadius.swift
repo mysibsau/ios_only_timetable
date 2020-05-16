@@ -184,6 +184,7 @@ extension StackViewCornerRadius {
 }
 
 
+// MARK: ВОЗМОЖНО СТОИТ УБРАТЬ ЭТО (Если не буду юзать в итоге)
 extension StackViewCornerRadius {
     // для отрисовки интерфейса при смене темы
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
