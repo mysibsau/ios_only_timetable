@@ -147,10 +147,38 @@ extension GroupsTableViewController: UISearchResultsUpdating {
 }
 
 // MARK: - Showing Timetable
-extension GroupsTableViewController: ShowingTimetable {
+extension GroupsTableViewController: DetailViewDelegate {
     
+    // MARK: ЭТО ДОПИСАТЬ ТОЛЬКО ПРИНТИТ БЛЯДЬ
     func showTimetable(withId id: Int) {
         print(id)
     }
     
+    // MARK: Добавление в избранные
+    func addToFavorite(objectWithId id: Int) {
+        // проверяем, вдруг этот объект уже в Избранном
+        guard data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для добавления
+        let allGroups = data[1].filter("id = \(id)")
+        guard let group = allGroups.first else { return }
+        
+        // добавляем в избранные
+        DataManager.shared.writeFavorite(group: group)
+        tableView.reloadData()
+    }
+    
+    // MARK: Удаление из избранных
+    func removeFromFavorite(objectWithId id: Int) {
+        // проверяем, вдруг этого объекта нет в Избранном
+        guard !data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для удаления
+        let favoriteGroups = data[0].filter("id = \(id)")
+        guard let group = favoriteGroups.first else { return }
+        
+        // Удаляем из избранных
+        DataManager.shared.deleteFavorite(group: group)
+        tableView.reloadData()
+    }
 }

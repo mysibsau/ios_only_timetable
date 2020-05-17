@@ -147,10 +147,18 @@ extension PlacesTableViewController: UISearchResultsUpdating {
 }
 
 // MARK: - Showing Timetable
-extension PlacesTableViewController: ShowingTimetable {
+extension PlacesTableViewController: DetailViewDelegate {
     
     func showTimetable(withId id: Int) {
         print(id)
+    }
+    
+    func addToFavorite(objectWithId id: Int) {
+        print("add to favorite")
+    }
+    
+    func removeFromFavorite(objectWithId id: Int) {
+        print("remove from favorite")
     }
     
 }

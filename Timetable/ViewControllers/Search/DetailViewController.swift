@@ -12,7 +12,7 @@ class DetailViewController: UIViewController {
 
     var data: [[(text: String, color: UIColor?)]]!
     var isFavorite: Bool!
-    var delegate: ShowingTimetable?
+    var delegate: DetailViewDelegate?
     
     private var buttons: [(text: String, color: UIColor, action: () -> ())]!
     
@@ -148,9 +148,9 @@ extension DetailViewController {
     private func updateButtons() {
         let addOrDeleteButton: (String, UIColor, () -> ())
         if isFavorite {
-            addOrDeleteButton = ("Удалить из 'Избранное'", .red, addOrDeleteFromFavorite)
+            addOrDeleteButton = ("Удалить из 'Избранное'", .red, addOrDeleteFavorite)
         } else {
-            addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFromFavorite)
+            addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFavorite)
         }
         let showButton = ("Показать расписание", UIColor.systemBlue, showTimetableHandler)
         
@@ -160,20 +160,23 @@ extension DetailViewController {
         ]
     }
     
-    private func addOrDeleteFromFavorite() {
+    private func addOrDeleteFavorite() {
+        guard let delegate = delegate else { return }
         
-        if type == EntitiesType.gruop {
-            print("Группа")
-        } else if type == EntitiesType.professor {
-            print("Профессор")
-        } else if type == EntitiesType.place {
-            print("Место")
+        if !isFavorite {
+            delegate.addToFavorite(objectWithId: id)
+        } else {
+            delegate.removeFromFavorite(objectWithId: id)
         }
+        
+        isFavorite = !isFavorite
+        updateButtons()
+        tableView.reloadData()
     }
     
     private func showTimetableHandler() {
-        //print("ShowBtn")
-        delegate?.showTimetable(withId: id)
+        guard let delegate = delegate else { return }
+        delegate.showTimetable(withId: id)
     }
 }
 

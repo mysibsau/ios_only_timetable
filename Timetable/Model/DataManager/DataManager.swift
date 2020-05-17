@@ -138,74 +138,87 @@ extension DataManager: GetingEntities {
 extension DataManager: WritingEntities {
     
     func writeFavorite(groups: [RGroup]) {
+        // Если эти объекты уже будут в одном из хранилищь - так мы обезопасим себя от ошибки
+        let copyGroups = groups.map { $0.newObject() }
         try? realmDocuments.write {
-            realmDocuments.add(groups, update: .modified)
+            realmDocuments.add(copyGroups, update: .modified)
         }
     }
     
     func writeFavorite(group: RGroup) {
+        let copyGroup = group.newObject()
         try? realmDocuments.write {
-            realmDocuments.add(group, update: .modified)
+            realmDocuments.add(copyGroup, update: .modified)
         }
     }
     
     func writeFavorite(professors: [RProfessor]) {
+        let copyProfessors = professors.map { $0.newObject() }
         try? realmDocuments.write {
-            realmDocuments.add(professors, update: .modified)
+            realmDocuments.add(copyProfessors, update: .modified)
         }
     }
     
     func writeFavorite(professor: RProfessor) {
+        let copyProfessor = professor.newObject()
         try? realmDocuments.write {
-            realmDocuments.add(professor, update: .modified)
+            realmDocuments.add(copyProfessor, update: .modified)
         }
     }
     
     func writeFavorite(places: [RPlace]) {
+        let copyPlaces = places.map { $0.newObject() }
         try? realmDocuments.write {
-            realmDocuments.add(places, update: .modified)
+            realmDocuments.add(copyPlaces, update: .modified)
         }
     }
     
     func writeFavorite(place: RPlace) {
+        let copyPlace = place.newObject()
         try? realmDocuments.write {
-            realmDocuments.add(place, update: .modified)
+            realmDocuments.add(copyPlace, update: .modified)
         }
     }
     
     func write(groups: [RGroup]) {
+        let copyGroups = groups.map { $0.newObject() }
         try? realmCaches.write {
-            realmCaches.add(groups, update: .modified)
+            realmCaches.add(copyGroups, update: .modified)
         }
     }
     
     func write(group: RGroup) {
+        let copyGroup = group.newObject()
         try? realmCaches.write {
-            realmCaches.add(group, update: .modified)
+            realmCaches.add(copyGroup, update: .modified)
         }
     }
     
     func write(professors: [RProfessor]) {
+        let copyProfessors = professors.map { $0.newObject() }
         try? realmCaches.write {
-            realmCaches.add(professors, update: .modified)
+            realmCaches.add(copyProfessors, update: .modified)
         }
     }
     
     func write(professor: RProfessor) {
+        let copyProfessor = professor.newObject()
         try? realmCaches.write {
-            realmCaches.add(professor, update: .modified)
+            realmCaches.add(copyProfessor, update: .modified)
         }
     }
     
     func write(places: [RPlace]) {
+        let copyPlaces = places.map { $0.newObject() }
         try? realmCaches.write {
-            realmCaches.add(places, update: .modified)
+            realmCaches.add(copyPlaces, update: .modified)
         }
     }
     
     func write(place: RPlace) {
+        let copyPlace = place.newObject()
         try? realmCaches.write {
-            realmCaches.add(place, update: .modified)
+            realmCaches.add(copyPlace, update: .modified)
         }
     }
 

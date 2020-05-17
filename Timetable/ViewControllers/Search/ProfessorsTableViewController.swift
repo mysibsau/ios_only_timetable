@@ -147,10 +147,18 @@ extension ProfessorsTableViewController: UISearchResultsUpdating {
 }
 
 // MARK: - Showing Timetable
-extension ProfessorsTableViewController: ShowingTimetable {
+extension ProfessorsTableViewController: DetailViewDelegate {
     
     func showTimetable(withId id: Int) {
         print(id)
+    }
+    
+    func addToFavorite(objectWithId id: Int) {
+        print("add to favorite")
+    }
+    
+    func removeFromFavorite(objectWithId id: Int) {
+        print("remove from favorite")
     }
     
 }

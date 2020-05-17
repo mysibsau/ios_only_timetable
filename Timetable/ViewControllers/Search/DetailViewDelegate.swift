@@ -8,6 +8,8 @@
 
 import Foundation
 
-protocol ShowingTimetable {
-    func showTimetable(withId: Int)
+protocol DetailViewDelegate {
+    func showTimetable(withId id: Int)
+    func addToFavorite(objectWithId id: Int)
+    func removeFromFavorite(objectWithId id: Int)
 }
