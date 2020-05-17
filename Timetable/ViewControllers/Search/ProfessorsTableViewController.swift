@@ -31,6 +31,8 @@ class ProfessorsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Преподаватели"
+        
         // Меняем слишь table view на .grouped
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -66,7 +68,7 @@ class ProfessorsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Сохраненные"
+            return "Избранное"
         } else if section == 1 {
             return "Все"
         } else {
@@ -109,7 +111,7 @@ class ProfessorsTableViewController: UITableViewController {
             isSave = true
         }
         
-        let detailVC = DetailViewController(professor: professor, isSave: isSave)
+        let detailVC = DetailViewController(professor: professor, isFavorite: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

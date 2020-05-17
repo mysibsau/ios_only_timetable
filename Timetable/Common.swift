@@ -146,7 +146,7 @@ class Common {
         DataManager.shared.write(places: places)
     }
     
-    static func addSaveGroups() {
+    static func addFavoriteGroups() {
         
         var groups = [RGroup]()
         
@@ -162,7 +162,7 @@ class Common {
             groups.append(group)
         }
         
-        DataManager.shared.writeSave(groups: groups)
+        DataManager.shared.writeFavorite(groups: groups)
     }
     
 }

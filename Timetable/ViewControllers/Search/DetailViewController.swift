@@ -11,16 +11,15 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var data: [[(text: String, color: UIColor?)]]!
-    var isSave: Bool!
+    var isFavorite: Bool!
+    
+    private var buttons: [(text: String, color: UIColor, action: () -> ())]!
     
     private var type: EntitiesType!
     private var id: Int!
     
     private var firstSectionHeader: String? = nil
     private var secondSectionHeader: String? = nil
-    
-    
-    var buttons: [(text: String, color: UIColor)]!
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     
@@ -39,7 +38,7 @@ class DetailViewController: UIViewController {
 
     // MARK: - Init
     
-    convenience init(group: RGroup, isSave: Bool) {
+    convenience init(group: RGroup, isFavorite: Bool) {
         self.init()
         
         navigationItem.title = group.name
@@ -61,12 +60,12 @@ class DetailViewController: UIViewController {
         data = [tableData1, tableData2]
         type = .gruop
         id = group.id
-        self.isSave = isSave
+        self.isFavorite = isFavorite
         
         updateButtons()
     }
     
-    convenience init(professor: RProfessor, isSave: Bool) {
+    convenience init(professor: RProfessor, isFavorite: Bool) {
         self.init()
         
         // Фамилия преподавателя в nav bar
@@ -84,12 +83,12 @@ class DetailViewController: UIViewController {
         data = [tableData]
         type = .gruop
         id = professor.id
-        self.isSave = isSave
+        self.isFavorite = isFavorite
         
         updateButtons()
     }
     
-    convenience init(place: RPlace, isSave: Bool) {
+    convenience init(place: RPlace, isFavorite: Bool) {
         self.init()
         
         navigationItem.title = place.name
@@ -104,7 +103,7 @@ class DetailViewController: UIViewController {
         data = [tableData]
         type = .place
         id = place.id
-        self.isSave = isSave
+        self.isFavorite = isFavorite
         
         updateButtons()
     }
@@ -121,14 +120,43 @@ class DetailViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
+
+}
+
+// MARK: - Для кнопок
+extension DetailViewController {
     
     private func updateButtons() {
+        let addOrDeleteButton: (String, UIColor, () -> ())
+        if isFavorite {
+            addOrDeleteButton = ("Удалить из 'Избранное'", .red, addOrDeleteFromFavorite)
+        } else {
+            addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFromFavorite)
+        }
+        let showButton = ("Показать расписание", UIColor.systemBlue, showTimetable)
+        
         buttons = [
-            isSave ? ("Удалить из 'Сохраненные'", .red) : ("Добавить в 'Сохраненные'", Colors.sibsuGreen),
-            ("Показать расписание", .systemBlue)
+            addOrDeleteButton,
+            showButton
         ]
     }
-
+    
+    private func addOrDeleteFromFavorite() {
+        
+        print("AddBtn")
+        
+//        if type == EntitiesType.gruop {
+//            print("Группа")
+//        } else if type == EntitiesType.professor {
+//            print("Профессор")
+//        } else if type == EntitiesType.place {
+//            print("Место")
+//        }
+    }
+    
+    private func showTimetable() {
+        print("ShowBtn")
+    }
 }
 
 extension DetailViewController: UITableViewDataSource {
@@ -181,7 +209,11 @@ extension DetailViewController: UITableViewDataSource {
 extension DetailViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.row)
+        // для обработки нажатий кнопок
+        if indexPath.section >= data.count {
+            let indexButton = indexPath.section - data.count
+            buttons[indexButton].action()
+        }
     }
 
 }

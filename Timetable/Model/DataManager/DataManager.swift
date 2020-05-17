@@ -17,9 +17,9 @@ protocol GetingEntities {
     func getGroups() -> Results<RGroup>
     func getProfessors() -> Results<RProfessor>
     func getPlaces() -> Results<RPlace>
-    func getSaveGruops() -> Results<RGroup>
-    func getSaveProfessors() -> Results<RProfessor>
-    func getSavePlaces() -> Results<RPlace>
+    func getFavoriteGruops() -> Results<RGroup>
+    func getFavoriteProfessors() -> Results<RProfessor>
+    func getFavoritePlaces() -> Results<RPlace>
 }
 
 protocol GettingTimetable {
@@ -41,12 +41,33 @@ protocol GettingSession {
 }
 
 protocol WritingEntities {
-    func writeSave(groups: [RGroup])
-    func writeSave(professro: [RProfessor])
-    func writeSave(places: [RPlace])
+    func writeFavorite(groups: [RGroup])
+    func writeFavorite(group: RGroup)
+    func writeFavorite(professors: [RProfessor])
+    func writeFavorite(professor: RProfessor)
+    func writeFavorite(places: [RPlace])
+    func writeFavorite(place: RPlace)
     func write(groups: [RGroup])
+    func write(group: RGroup)
     func write(professors: [RProfessor])
+    func write(professor: RProfessor)
     func write(places: [RPlace])
+    func write(place: RPlace)
+}
+
+protocol DeletingEntities {
+    func deleteFavorite(groups: [RGroup])
+    func deleteFavorite(group: RGroup)
+    func deleteFavorite(professors: [RProfessor])
+    func deleteFavorite(professor: RProfessor)
+    func deleteFavorite(places: [RPlace])
+    func deleteFavorite(place: RPlace)
+    func delete(groups: [RGroup])
+    func delete(group: RGroup)
+    func delete(professors: [RProfessor])
+    func delete(professor: RProfessor)
+    func delete(places: [RPlace])
+    func delete(place: RPlace)
 }
 
 
@@ -70,12 +91,11 @@ class DataManager {
         let cachesConfig = Realm.Configuration(fileURL: cachesURL)
         let documentsConfig = Realm.Configuration(fileURL: documentsURL)
         
-        print(cachesURL)
-        print(documentsURL)
-        
         realmCaches = try! Realm(configuration: cachesConfig)
         realmDocuments = try! Realm(configuration: documentsConfig)
         
+        print(cachesURL)
+        print(documentsURL)
     }
     
 }
@@ -98,17 +118,17 @@ extension DataManager: GetingEntities {
         return places
     }
     
-    func getSaveProfessors() -> Results<RProfessor> {
+    func getFavoriteProfessors() -> Results<RProfessor> {
         let professors = realmDocuments.objects(RProfessor.self)
         return professors
     }
     
-    func getSaveGruops() -> Results<RGroup> {
+    func getFavoriteGruops() -> Results<RGroup> {
         let groups = realmDocuments.objects(RGroup.self)
         return groups
     }
     
-    func getSavePlaces() -> Results<RPlace> {
+    func getFavoritePlaces() -> Results<RPlace> {
         let places = realmDocuments.objects(RPlace.self)
         return places
     }
@@ -117,21 +137,39 @@ extension DataManager: GetingEntities {
 
 extension DataManager: WritingEntities {
     
-    func writeSave(groups: [RGroup]) {
+    func writeFavorite(groups: [RGroup]) {
         try? realmDocuments.write {
             realmDocuments.add(groups, update: .modified)
         }
     }
     
-    func writeSave(professro: [RProfessor]) {
+    func writeFavorite(group: RGroup) {
         try? realmDocuments.write {
-            realmDocuments.add(professro, update: .modified)
+            realmDocuments.add(group, update: .modified)
         }
     }
     
-    func writeSave(places: [RPlace]) {
+    func writeFavorite(professors: [RProfessor]) {
+        try? realmDocuments.write {
+            realmDocuments.add(professors, update: .modified)
+        }
+    }
+    
+    func writeFavorite(professor: RProfessor) {
+        try? realmDocuments.write {
+            realmDocuments.add(professor, update: .modified)
+        }
+    }
+    
+    func writeFavorite(places: [RPlace]) {
         try? realmDocuments.write {
             realmDocuments.add(places, update: .modified)
+        }
+    }
+    
+    func writeFavorite(place: RPlace) {
+        try? realmDocuments.write {
+            realmDocuments.add(place, update: .modified)
         }
     }
     
@@ -141,9 +179,21 @@ extension DataManager: WritingEntities {
         }
     }
     
+    func write(group: RGroup) {
+        try? realmCaches.write {
+            realmCaches.add(group, update: .modified)
+        }
+    }
+    
     func write(professors: [RProfessor]) {
         try? realmCaches.write {
             realmCaches.add(professors, update: .modified)
+        }
+    }
+    
+    func write(professor: RProfessor) {
+        try? realmCaches.write {
+            realmCaches.add(professor, update: .modified)
         }
     }
     
@@ -152,5 +202,87 @@ extension DataManager: WritingEntities {
             realmCaches.add(places, update: .modified)
         }
     }
+    
+    func write(place: RPlace) {
+        try? realmCaches.write {
+            realmCaches.add(place, update: .modified)
+        }
+    }
 
+}
+
+extension DataManager: DeletingEntities {
+    
+    func deleteFavorite(groups: [RGroup]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(groups)
+        }
+    }
+    
+    func deleteFavorite(group: RGroup) {
+        try? realmDocuments.write {
+            realmDocuments.delete(group)
+        }
+    }
+    
+    func deleteFavorite(professors: [RProfessor]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(professors)
+        }
+    }
+    
+    func deleteFavorite(professor: RProfessor) {
+        try? realmDocuments.write {
+            realmDocuments.delete(professor)
+        }
+    }
+    
+    func deleteFavorite(places: [RPlace]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(places)
+        }
+    }
+    
+    func deleteFavorite(place: RPlace) {
+        try? realmDocuments.write {
+            realmDocuments.delete(place)
+        }
+    }
+    
+    func delete(groups: [RGroup]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(groups)
+        }
+    }
+    
+    func delete(group: RGroup) {
+        try? realmDocuments.write {
+            realmDocuments.delete(group)
+        }
+    }
+    
+    func delete(professors: [RProfessor]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(professors)
+        }
+    }
+    
+    func delete(professor: RProfessor) {
+        try? realmDocuments.write {
+            realmDocuments.delete(professor)
+        }
+    }
+    
+    func delete(places: [RPlace]) {
+        try? realmDocuments.write {
+            realmDocuments.delete(places)
+        }
+    }
+    
+    func delete(place: RPlace) {
+        try? realmDocuments.write {
+            realmDocuments.delete(place)
+        }
+    }
+    
 }

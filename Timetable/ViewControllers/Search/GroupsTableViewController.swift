@@ -31,6 +31,8 @@ class GroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Группы"
+        
         // Меняем слишь table view на .grouped
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -66,7 +68,7 @@ class GroupsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Сохраненные"
+            return "Избранное"
         } else if section == 1 {
             return "Все"
         } else {
@@ -109,7 +111,7 @@ class GroupsTableViewController: UITableViewController {
             isSave = true
         }
         
-        let detailVC = DetailViewController(group: group, isSave: isSave)
+        let detailVC = DetailViewController(group: group, isFavorite: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

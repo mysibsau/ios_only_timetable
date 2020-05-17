@@ -30,6 +30,8 @@ class PlacesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Кабинеты"
+        
         // Меняем слишь table view на .grouped
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -65,7 +67,7 @@ class PlacesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Сохраненные"
+            return "Избранное"
         } else if section == 1 {
             return "Все"
         } else {
@@ -108,7 +110,7 @@ class PlacesTableViewController: UITableViewController {
             isSave = true
         }
         
-        let detailVC = DetailViewController(place: place, isSave: isSave)
+        let detailVC = DetailViewController(place: place, isFavorite: isSave)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
