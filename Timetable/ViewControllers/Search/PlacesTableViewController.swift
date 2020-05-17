@@ -16,7 +16,7 @@ class PlacesTableViewController: UITableViewController {
     private var filtredData: [Results<RPlace>]!
     
     
-    // MARK: Для SearchController'а
+    // MARK: - Для SearchController'а
     private let searchController = UISearchController(searchResultsController: nil)
     
     private var searchBarIsEmpty: Bool {
@@ -27,6 +27,7 @@ class PlacesTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
 
+    // MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,10 +37,25 @@ class PlacesTableViewController: UITableViewController {
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
+        // добавляем отработку длинного нажатия (открытие расписания)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showTimetableHandler(longPressGesture:)))
+        longPressGesture.minimumPressDuration = 0.7
+        tableView.addGestureRecognizer(longPressGesture)
+        
         setupSearchController()
     }
     
-    // MARK: Установка SearchController'а
+    // MARK: - Обработчик длинного нажатия для открытия расписания
+    @objc private func showTimetableHandler(longPressGesture: UILongPressGestureRecognizer) {
+        let point = longPressGesture.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
+        
+        let place = data[indexPath.section][indexPath.row]
+        
+        showTimetable(withId: place.id)
+    }
+    
+    // MARK: - Установка SearchController'а
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -54,7 +70,6 @@ class PlacesTableViewController: UITableViewController {
     
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isFiltering { return filtredData.count }
         return data.count
@@ -91,7 +106,6 @@ class PlacesTableViewController: UITableViewController {
     }
     
     // MARK: - Table view delegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let place: RPlace
@@ -111,12 +125,14 @@ class PlacesTableViewController: UITableViewController {
         }
         
         let detailVC = DetailViewController(place: place, isFavorite: isSave)
+        detailVC.delegate = self
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
 }
 
+// MARK: - Search Results Updating
 extension PlacesTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -128,4 +144,13 @@ extension PlacesTableViewController: UISearchResultsUpdating {
         tableView.reloadData()
     }
 
+}
+
+// MARK: - Showing Timetable
+extension PlacesTableViewController: ShowingTimetable {
+    
+    func showTimetable(withId id: Int) {
+        print(id)
+    }
+    
 }

@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
 
     var data: [[(text: String, color: UIColor?)]]!
     var isFavorite: Bool!
+    var delegate: ShowingTimetable?
     
     private var buttons: [(text: String, color: UIColor, action: () -> ())]!
     
@@ -81,7 +82,7 @@ class DetailViewController: UIViewController {
         firstSectionHeader = "Преподаватель"
         
         data = [tableData]
-        type = .gruop
+        type = .professor
         id = professor.id
         self.isFavorite = isFavorite
         
@@ -119,9 +120,27 @@ class DetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        // добавляем отработку длинного нажатия (копирование)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(copyTextFromCell(longPressGesture:)))
+        longPressGesture.minimumPressDuration = 0.7
+        tableView.addGestureRecognizer(longPressGesture)
+        
+    }
+    
+    // MARK: Обработчки для долгого нажатия
+    @objc private func copyTextFromCell(longPressGesture: UILongPressGestureRecognizer) {
+        let point = longPressGesture.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
+        
+        // обходим обработку долгого нажатия на кнопки
+        if indexPath.section < data.count {
+            UIPasteboard.general.string = data[indexPath.section][indexPath.row].text
+        }
     }
 
 }
+
 
 // MARK: - Для кнопок
 extension DetailViewController {
@@ -133,7 +152,7 @@ extension DetailViewController {
         } else {
             addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFromFavorite)
         }
-        let showButton = ("Показать расписание", UIColor.systemBlue, showTimetable)
+        let showButton = ("Показать расписание", UIColor.systemBlue, showTimetableHandler)
         
         buttons = [
             addOrDeleteButton,
@@ -143,21 +162,21 @@ extension DetailViewController {
     
     private func addOrDeleteFromFavorite() {
         
-        print("AddBtn")
-        
-//        if type == EntitiesType.gruop {
-//            print("Группа")
-//        } else if type == EntitiesType.professor {
-//            print("Профессор")
-//        } else if type == EntitiesType.place {
-//            print("Место")
-//        }
+        if type == EntitiesType.gruop {
+            print("Группа")
+        } else if type == EntitiesType.professor {
+            print("Профессор")
+        } else if type == EntitiesType.place {
+            print("Место")
+        }
     }
     
-    private func showTimetable() {
-        print("ShowBtn")
+    private func showTimetableHandler() {
+        //print("ShowBtn")
+        delegate?.showTimetable(withId: id)
     }
 }
+
 
 extension DetailViewController: UITableViewDataSource {
     
@@ -214,6 +233,8 @@ extension DetailViewController: UITableViewDelegate {
             let indexButton = indexPath.section - data.count
             buttons[indexButton].action()
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

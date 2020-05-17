@@ -15,13 +15,9 @@ class ChoiceSearchViewController: UITableViewController {
         
         title = "Поиск"
         view.backgroundColor = Colors.backgroungColor
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -66,10 +62,6 @@ class ChoiceSearchViewController: UITableViewController {
             
         }
         
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("fine")
     }
 
 }

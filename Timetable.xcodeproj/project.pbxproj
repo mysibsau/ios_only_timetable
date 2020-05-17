@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -62,10 +62,12 @@
 		4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */; };
 		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */; };
-		BAA5C01998D096918E2C1EF4 /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92079F2460495E00D050EB /* Pods_Timetable.framework */; };
+		4AC345F42471773400BAA474 /* ShowingTimetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC345F32471773400BAA474 /* ShowingTimetableProtocol.swift */; };
+		B6BAF3365B099AC8387EADC6 /* libPods-Timetable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041EBC5D4DE02BF4962DF102 /* libPods-Timetable.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041EBC5D4DE02BF4962DF102 /* libPods-Timetable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Timetable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338D7243C58C2002C0746 /* Timetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338DA243C58C2002C0746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
-		4A92079F2460495E00D050EB /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9207A324604B2400D050EB /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		4A9207A624604E7900D050EB /* EntitiesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesType.swift; sourceTree = "<group>"; };
 		4A9207A824604F8200D050EB /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 		4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupPlaceView.swift; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupGroupView.swift; sourceTree = "<group>"; };
+		4AC345F32471773400BAA474 /* ShowingTimetableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowingTimetableProtocol.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAA5C01998D096918E2C1EF4 /* Pods_Timetable.framework in Frameworks */,
+				B6BAF3365B099AC8387EADC6 /* libPods-Timetable.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */,
+				4AC345F32471773400BAA474 /* ShowingTimetableProtocol.swift */,
 				4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */,
 				4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */,
 				4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */,
@@ -410,8 +413,8 @@
 		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A92079F2460495E00D050EB /* Pods_Timetable.framework */,
 				3F4B1C5A8EEB21627999CF89 /* Pods_Timetable.framework */,
+				041EBC5D4DE02BF4962DF102 /* libPods-Timetable.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -427,7 +430,6 @@
 				4A2338D3243C58C2002C0746 /* Sources */,
 				4A2338D4243C58C2002C0746 /* Frameworks */,
 				4A2338D5243C58C2002C0746 /* Resources */,
-				7F2DBFC2DF23863EDE3D5DDF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -509,23 +511,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F2DBFC2DF23863EDE3D5DDF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -550,6 +535,7 @@
 				4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */,
 				4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */,
 				4A920777245DDEED00D050EB /* MenuCell.swift in Sources */,
+				4AC345F42471773400BAA474 /* ShowingTimetableProtocol.swift in Sources */,
 				4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */,
 				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
 				4A4C94AD245B63B0008105DE /* DayTableViewCell.swift in Sources */,
