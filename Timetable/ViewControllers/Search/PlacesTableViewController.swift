@@ -154,11 +154,29 @@ extension PlacesTableViewController: DetailViewDelegate {
     }
     
     func addToFavorite(objectWithId id: Int) {
-        print("add to favorite")
+        // проверяем, вдруг этот объект уже в Избранном
+        guard data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для добавления
+        let allPlaces = data[1].filter("id = \(id)")
+        guard let place = allPlaces.first else { return }
+        
+        // добавляем в избранные
+        DataManager.shared.writeFavorite(place: place)
+        tableView.reloadData()
     }
     
     func removeFromFavorite(objectWithId id: Int) {
-        print("remove from favorite")
+        // проверяем, вдруг этого объекта нет в Избранном
+        guard !data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для удаления
+        let favoritePlaces = data[0].filter("id = \(id)")
+        guard let place = favoritePlaces.first else { return }
+        
+        // Удаляем из избранных
+        DataManager.shared.deleteFavorite(place: place)
+        tableView.reloadData()
     }
     
 }

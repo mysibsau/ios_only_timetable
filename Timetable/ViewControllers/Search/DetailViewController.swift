@@ -38,7 +38,6 @@ class DetailViewController: UIViewController {
     }
 
     // MARK: - Init
-    
     convenience init(group: RGroup, isFavorite: Bool) {
         self.init()
         
@@ -110,7 +109,6 @@ class DetailViewController: UIViewController {
     }
     
     //MARK: - Setup View
-    
     private func setupTableView() {
         view.addSubview(tableView)
         
@@ -128,14 +126,15 @@ class DetailViewController: UIViewController {
         
     }
     
-    // MARK: Обработчки для долгого нажатия
+    // MARK: - Обработчки для долгого нажатия
     @objc private func copyTextFromCell(longPressGesture: UILongPressGestureRecognizer) {
         let point = longPressGesture.location(in: tableView)
         guard let indexPath = tableView.indexPathForRow(at: point) else { return }
         
         // обходим обработку долгого нажатия на кнопки
         if indexPath.section < data.count {
-            UIPasteboard.general.string = data[indexPath.section][indexPath.row].text
+            let cellText = data[indexPath.section][indexPath.row].text
+            UIPasteboard.general.string = cellText
         }
     }
 
@@ -148,10 +147,11 @@ extension DetailViewController {
     private func updateButtons() {
         let addOrDeleteButton: (String, UIColor, () -> ())
         if isFavorite {
-            addOrDeleteButton = ("Удалить из 'Избранное'", .red, addOrDeleteFavorite)
+            addOrDeleteButton = ("Удалить из 'Избранное'", UIColor.systemRed, addOrDeleteFavorite)
         } else {
             addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFavorite)
         }
+        
         let showButton = ("Показать расписание", UIColor.systemBlue, showTimetableHandler)
         
         buttons = [
@@ -180,7 +180,7 @@ extension DetailViewController {
     }
 }
 
-
+// MARK: - Table View Data Source
 extension DetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -228,6 +228,7 @@ extension DetailViewController: UITableViewDataSource {
     
 }
 
+// MARK: - Table View Delegate
 extension DetailViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

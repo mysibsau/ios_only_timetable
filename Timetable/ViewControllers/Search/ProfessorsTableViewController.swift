@@ -154,11 +154,29 @@ extension ProfessorsTableViewController: DetailViewDelegate {
     }
     
     func addToFavorite(objectWithId id: Int) {
-        print("add to favorite")
+        // проверяем, вдруг этот объект уже в Избранном
+        guard data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для добавления
+        let allProfessors = data[1].filter("id = \(id)")
+        guard let professor = allProfessors.first else { return }
+        
+        // добавляем в избранные
+        DataManager.shared.writeFavorite(professor: professor)
+        tableView.reloadData()
     }
     
     func removeFromFavorite(objectWithId id: Int) {
-        print("remove from favorite")
+        // проверяем, вдруг этого объекта нет в Избранном
+        guard !data[0].filter("id = \(id)").isEmpty else { return }
+        
+        // Выбираем объект для удаления
+        let favoriteProfessors = data[0].filter("id = \(id)")
+        guard let professor = favoriteProfessors.first else { return }
+        
+        // Удаляем из избранных
+        DataManager.shared.deleteFavorite(professor: professor)
+        tableView.reloadData()
     }
     
 }
