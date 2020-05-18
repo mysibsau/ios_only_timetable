@@ -18,12 +18,12 @@ class TimetableViewController: UIViewController {
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
     @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
-    var menuViewController: PagingMenuViewController!
+    var menuViewController: PagingMenuViewController!           // возможно нужно сделать их private
     var contentViewController: PagingContentViewController!
     
     let focusView = UnderlineFocusView()
     
-    // для случая, если не выбрана группа/преподаватель/кабинет
+    // MARK: Для случая, если не выбрана группа/преподаватель/кабинет
     lazy var wrapperWithLabel: UIView = {
         let wrapper = UIView(frame: view.bounds)
         wrapper.backgroundColor = Colors.backgroungColor
@@ -44,7 +44,7 @@ class TimetableViewController: UIViewController {
     }()
     
     
-    // для того, чтобы menuViewController занимал ровно весь экран
+    // MARK: Для того, чтобы menuViewController занимал ровно весь экран
     private lazy var firstLoad: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
         menuViewController?.reloadData()
         contentViewController?.reloadData { [weak self] in
@@ -59,10 +59,6 @@ class TimetableViewController: UIViewController {
         weeks = []
         weeks?.append(Common.getWeek1())
         weeks?.append(Common.getWeek2())
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
         
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
@@ -85,6 +81,10 @@ class TimetableViewController: UIViewController {
         menuViewController.reloadData()
         contentViewController.reloadData()
         
+        // регистрируем наблюдателя за уведомлениями
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,17 +110,32 @@ class TimetableViewController: UIViewController {
         }
     }
     
-    // MARK: - Методы для NotificationCenter
+    // MARK: - Методы для Notification Center
     @objc func onDidSelectGroup(_ notification: Notification) {
         type = .gruop
+        if let a = notification.userInfo as? [Int: String] {
+            print("IN onDidSelectGroup")
+            print(a[0])
+            print(a[1])
+        }
     }
     
     @objc func onDidSelectProfessor(_ notification: Notification) {
         type = .professor
+        if let a = notification.userInfo as? [Int: String] {
+            print("IN onDidSelectProfessor")
+            print(a[0])
+            print(a[1])
+        }
     }
     
     @objc func onDidSelectPlace(_ notification: Notification) {
         type = .place
+        if let a = notification.userInfo as? [Int: String] {
+            print("IN onDidSelectPlace")
+            print(a[0])
+            print(a[1])
+        }
     }
     
     // MARK: Изменение недели (нечетная / четная)

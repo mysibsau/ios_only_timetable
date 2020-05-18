@@ -9,68 +9,6 @@
 import Foundation
 import RealmSwift
 
-//
-// поменять названия протоколов
-//
-
-protocol GetingEntities {
-    func getGroups() -> Results<RGroup>
-    func getProfessors() -> Results<RProfessor>
-    func getPlaces() -> Results<RPlace>
-    func getFavoriteGruops() -> Results<RGroup>
-    func getFavoriteProfessors() -> Results<RProfessor>
-    func getFavoritePlaces() -> Results<RPlace>
-}
-
-protocol GettingTimetable {
-    func getTimetable(forGroup group: Int)          // ->
-    func getTimetable(forProfessor professor: Int)  // ->
-    func getTimetable(forPlace place: Int)          // ->
-}
-
-protocol GettingConsultations {
-    func getConsultations(forGroup group: Int)          // ->
-    func getConsultations(forProfessor professor: Int)  // ->
-    func getConsultations(forPlace place: Int)          // ->
-}
-
-protocol GettingSession {
-    func getSession(forGroup group: Int)          // ->
-    func getSession(forProfessor professor: Int)  // ->
-    func getSession(forPlace place: Int)          // ->
-}
-
-protocol WritingEntities {
-    func writeFavorite(groups: [RGroup])
-    func writeFavorite(group: RGroup)
-    func writeFavorite(professors: [RProfessor])
-    func writeFavorite(professor: RProfessor)
-    func writeFavorite(places: [RPlace])
-    func writeFavorite(place: RPlace)
-    func write(groups: [RGroup])
-    func write(group: RGroup)
-    func write(professors: [RProfessor])
-    func write(professor: RProfessor)
-    func write(places: [RPlace])
-    func write(place: RPlace)
-}
-
-protocol DeletingEntities {
-    func deleteFavorite(groups: [RGroup])
-    func deleteFavorite(group: RGroup)
-    func deleteFavorite(professors: [RProfessor])
-    func deleteFavorite(professor: RProfessor)
-    func deleteFavorite(places: [RPlace])
-    func deleteFavorite(place: RPlace)
-    func delete(groups: [RGroup])
-    func delete(group: RGroup)
-    func delete(professors: [RProfessor])
-    func delete(professor: RProfessor)
-    func delete(places: [RPlace])
-    func delete(place: RPlace)
-}
-
-
 class DataManager {
     
     static let shared = DataManager()
@@ -100,8 +38,8 @@ class DataManager {
     
 }
 
-
-extension DataManager: GetingEntities {
+// MARK: - Getting Entities
+extension DataManager: GettingEntities {
     
     func getProfessors() -> Results<RProfessor> {
         let professors = realmCaches.objects(RProfessor.self)
@@ -135,6 +73,7 @@ extension DataManager: GetingEntities {
     
 }
 
+// MARK: - Writing Entities
 extension DataManager: WritingEntities {
     
     func writeFavorite(groups: [RGroup]) {
@@ -224,6 +163,7 @@ extension DataManager: WritingEntities {
 
 }
 
+// MARK: - Deleting Entities
 extension DataManager: DeletingEntities {
     
     func deleteFavorite(groups: [RGroup]) {

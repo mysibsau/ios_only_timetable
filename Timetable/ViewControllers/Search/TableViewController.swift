@@ -45,13 +45,13 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
     
     // MARK: - Добавление обработки длинного нажатия на ячейку ДЛЯ ОТКРЫТИЯ ДЕТАЛЬНОГО ПРОСМОТА
     private func addLongGestureRecognizer() {
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showTimetableHandler(longPressGesture:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showDetailHandler(longPressGesture:)))
         //longPressGesture.minimumPressDuration = 0.7
         tableView.addGestureRecognizer(longPressGesture)
     }
     
     // MARK: Обработчик длинного нажатия для открытия детального просмотра
-    @objc private func showTimetableHandler(longPressGesture: UILongPressGestureRecognizer) {
+    @objc private func showDetailHandler(longPressGesture: UILongPressGestureRecognizer) {
         // Чтобы он срабатывал только один раз
         guard longPressGesture.state == .began else { return }
         
@@ -88,6 +88,10 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
             navigationController?.pushViewController(detailVC, animated: true)
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
+        
+        // Леграя вибрация в конце длинного нажатия
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
     }
     
     // MARK: - Установка SearchController'а
@@ -184,7 +188,18 @@ extension TableViewController: DetailViewDelegate {
     
     // MARK: ЭТО ДОПИСАТЬ ТОЛЬКО ПРИНТИТ БЛЯДЬ
     func showTimetable(withId id: Int) {
-        print(id)
+        // берем группу с нужным id из всех групп
+        // потом нужно просто запросить расписание из бд
+        guard let object = data[1].filter("id = \(id)").first else { return }
+        
+        if let object = object as? RGroup {
+            NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: "Hello1", 1: "World1"])
+        } else if let object = object as? RProfessor {
+            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: "Hello2", 1: "World2"])
+        } else if let object = object as? RPlace {
+            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: "Hello3", 1: "World3"])
+        }
+        
     }
     
     // MARK: Добавление в избранные
