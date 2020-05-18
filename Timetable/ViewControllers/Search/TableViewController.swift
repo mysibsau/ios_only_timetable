@@ -38,26 +38,55 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         // добавляем отработку длинного нажатия (открытие расписания)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showTimetableHandler(longPressGesture:)))
-        longPressGesture.minimumPressDuration = 0.7
-        tableView.addGestureRecognizer(longPressGesture)
+        addLongGestureRecognizer()
         
         setupSearchController()
     }
     
-    // MARK: - Обработчик длинного нажатия для открытия расписания
+    // MARK: - Добавление обработки длинного нажатия на ячейку ДЛЯ ОТКРЫТИЯ ДЕТАЛЬНОГО ПРОСМОТА
+    private func addLongGestureRecognizer() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showTimetableHandler(longPressGesture:)))
+        //longPressGesture.minimumPressDuration = 0.7
+        tableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    // MARK: Обработчик длинного нажатия для открытия детального просмотра
     @objc private func showTimetableHandler(longPressGesture: UILongPressGestureRecognizer) {
+        // Чтобы он срабатывал только один раз
+        guard longPressGesture.state == .began else { return }
+        
         let point = longPressGesture.location(in: tableView)
         guard let indexPath = tableView.indexPathForRow(at: point) else { return }
         
-        let object = data[indexPath.section][indexPath.row]
+        let object: REntitie
+        if isFiltering {
+            object = filtredData[indexPath.section][indexPath.row]
+        } else {
+            object = data[indexPath.section][indexPath.row]
+        }
+        
+        // Отображение Детального экрана
+        let isFavorite: Bool
+        let detailVC: DetailViewController
         
         if let object = object as? RGroup {
-            showTimetable(withId: object.id)
+            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
+            detailVC = DetailViewController(group: object, isFavorite: isFavorite)
+            detailVC.delegate = self
+            navigationController?.pushViewController(detailVC, animated: true)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         } else if let object = object as? RProfessor {
-            showTimetable(withId: object.id)
+            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
+            detailVC = DetailViewController(professor: object, isFavorite: isFavorite)
+            detailVC.delegate = self
+            navigationController?.pushViewController(detailVC, animated: true)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         } else if let object = object as? RPlace {
-            showTimetable(withId: object.id)
+            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
+            detailVC = DetailViewController(place: object, isFavorite: isFavorite)
+            detailVC.delegate = self
+            navigationController?.pushViewController(detailVC, animated: true)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
     
@@ -96,6 +125,14 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return "Для детального просмотра и добавления или удаления избранных нажмите и удерживайте нужную ячейку"
+        } else {
+            return nil
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
@@ -119,32 +156,14 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let object: REntitie
-        if isFiltering {
-            object = filtredData[indexPath.section][indexPath.row]
-        } else {
-            object = data[indexPath.section][indexPath.row]
-        }
-        
-        let isFavorite: Bool
-        let detailVC: DetailViewController
+        let object = data[indexPath.section][indexPath.row]
         
         if let object = object as? RGroup {
-            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
-            detailVC = DetailViewController(group: object, isFavorite: isFavorite)
-            detailVC.delegate = self
-            navigationController?.pushViewController(detailVC, animated: true)
+            showTimetable(withId: object.id)
         } else if let object = object as? RProfessor {
-            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
-            detailVC = DetailViewController(professor: object, isFavorite: isFavorite)
-            detailVC.delegate = self
-            navigationController?.pushViewController(detailVC, animated: true)
+            showTimetable(withId: object.id)
         } else if let object = object as? RPlace {
-            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
-            detailVC = DetailViewController(place: object, isFavorite: isFavorite)
-            detailVC.delegate = self
-            navigationController?.pushViewController(detailVC, animated: true)
+            showTimetable(withId: object.id)
         }
     }
     
