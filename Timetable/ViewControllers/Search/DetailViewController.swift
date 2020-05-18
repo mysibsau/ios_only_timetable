@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
     private var firstSectionHeader: String? = nil
     private var secondSectionHeader: String? = nil
     
-    let tableView = UITableView(frame: .zero, style: .grouped)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     
     
     override func loadView() {
