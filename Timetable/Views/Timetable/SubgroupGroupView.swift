@@ -25,13 +25,15 @@ class SubgroupGroupView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadXib()
-        setupViews()
-        addRecongnizers()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         loadXib()
         setupViews()
         addRecongnizers()

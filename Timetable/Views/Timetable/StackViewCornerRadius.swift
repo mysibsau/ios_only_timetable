@@ -100,9 +100,10 @@ extension StackViewCornerRadius {
     // MARK: Добавление времени к расписанию
     private func addTime(time: String) {
         let attribetedTime = NSMutableAttributedString(string: time)
-        attribetedTime.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: 5))
+        attribetedTime.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: NSRange(location: 0, length: 5))
         
         let timeLabel = UILabel()
+        timeLabel.font = UIFont.systemFont(ofSize: 16)
         timeLabel.attributedText = attribetedTime
         timeLabel.textAlignment = .left
         subgroupStackView.addArrangedSubview(timeLabel)
@@ -163,25 +164,26 @@ extension StackViewCornerRadius {
         subgroupView.place.text = place
         
         subgroupStackView.addArrangedSubview(subgroupView)
-        subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+        // возможно эта строчка и не нужна
+        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
     }
     
 }
 
-// MARK: - Все для добавления обычных label
-extension StackViewCornerRadius {
-    
-    func addLabel(text: String) {
-        let label = UILabel()
-        label.text = text
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        subgroupStackView.addArrangedSubview(label)
-        label.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
-    }
-    
-}
+//// MARK: - Все для добавления обычных label
+//extension StackViewCornerRadius {
+//    
+//    func addLabel(text: String) {
+//        let label = UILabel()
+//        label.text = text
+//        label.textAlignment = .left
+//        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
+//        subgroupStackView.addArrangedSubview(label)
+//        label.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+//    }
+//    
+//}
 
 
 // MARK: ВОЗМОЖНО СТОИТ УБРАТЬ ЭТО (Если не буду юзать в итоге)

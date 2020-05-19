@@ -41,12 +41,13 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         addLongGestureRecognizer()
         
         setupSearchController()
+        
+        //view.backgroundColor = Colors.backgroungColor
     }
     
     // MARK: - Добавление обработки длинного нажатия на ячейку ДЛЯ ОТКРЫТИЯ ДЕТАЛЬНОГО ПРОСМОТА
     private func addLongGestureRecognizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showDetailHandler(longPressGesture:)))
-        //longPressGesture.minimumPressDuration = 0.7
         tableView.addGestureRecognizer(longPressGesture)
     }
     
@@ -90,8 +91,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         }
         
         // Леграя вибрация в конце длинного нажатия
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
+        UIDevice.vibrate()
     }
     
     // MARK: - Установка SearchController'а

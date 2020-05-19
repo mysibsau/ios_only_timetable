@@ -24,6 +24,9 @@ class DetailViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
+    // нижняя надпись, которыя появляется при копировании текста
+    private let alertView = AlertView(alertText: "Текст скопирован")
+    
     
     override func loadView() {
         super.loadView()
@@ -33,8 +36,11 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = Colors.backgroungColor
+        
+        // скрываем алерт надпись
+        alertView.isHidden = true
     }
 
     // MARK: - Init
@@ -128,6 +134,9 @@ class DetailViewController: UIViewController {
     
     // MARK: - Обработчки для долгого нажатия
     @objc private func copyTextFromCell(longPressGesture: UILongPressGestureRecognizer) {
+        // Чтобы он срабатывал только один раз
+        guard longPressGesture.state == .began else { return }
+        
         let point = longPressGesture.location(in: tableView)
         guard let indexPath = tableView.indexPathForRow(at: point) else { return }
         
@@ -135,7 +144,35 @@ class DetailViewController: UIViewController {
         if indexPath.section < data.count {
             let cellText = data[indexPath.section][indexPath.row].text
             UIPasteboard.general.string = cellText
+            // Леграя вибрация в конце длинного нажатия
+            UIDevice.vibrate()
+            showAlertView()
         }
+    }
+    
+    private func showAlertView() {
+        if !view.subviews.contains(alertView) {
+            view.addSubview(alertView)
+            
+            alertView.translatesAutoresizingMaskIntoConstraints = false
+            
+            alertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+            alertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
+            alertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+        }
+        
+        alertView.alpha = 1.0
+        alertView.isHidden = false
+        
+        UIView.animate(
+            withDuration: 3.0,
+            animations: {
+                self.alertView.alpha = 0.0
+            },
+            completion: { finished in
+                if finished { self.alertView.isHidden = true }
+            }
+        )
     }
 
 }

@@ -41,10 +41,12 @@ public class Colors {
                     /// Return the color for Light Mode
                     // было 240
                     return UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+                    //return UIColor.systemGray6
                 }
             }
         } else {
             /// Return a fallback color for iOS 12 and lower.
+            //return UIColor.systemGray6
             return UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
         }
     }
