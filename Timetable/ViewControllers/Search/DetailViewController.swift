@@ -64,7 +64,7 @@ class DetailViewController: UIViewController {
         secondSectionHeader = "Староста"
         
         data = [tableData1, tableData2]
-        type = .gruop
+        type = .group
         id = group.id
         self.isFavorite = isFavorite
         
@@ -164,15 +164,7 @@ class DetailViewController: UIViewController {
         alertView.alpha = 1.0
         alertView.isHidden = false
         
-        UIView.animate(
-            withDuration: 3.0,
-            animations: {
-                self.alertView.alpha = 0.0
-            },
-            completion: { finished in
-                if finished { self.alertView.isHidden = true }
-            }
-        )
+        alertView.hideWithAnimation()
     }
 
 }

@@ -12,14 +12,14 @@ import PagingKit
 class TimetableViewController: UIViewController {
     
     var type: EntitiesType?
-    var weeks: [Week]?
+    var weeks: [Any]?
     var currWeek = 0
     
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
     @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
-    var menuViewController: PagingMenuViewController!           // возможно нужно сделать их private
-    var contentViewController: PagingContentViewController!
+    private var menuViewController: PagingMenuViewController!
+    private var contentViewController: PagingContentViewController!
     
     let focusView = UnderlineFocusView()
     
@@ -56,30 +56,21 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weeks = []
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        type = .group
+        weeks = [Week]()
         weeks?.append(Common.getWeek1())
         weeks?.append(Common.getWeek2())
-        
-        numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        numberWeekSegmentedView.backgroundColor = Colors.topBarColor
-        menuViewController.view.backgroundColor = Colors.topBarColor
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         
         // убираем нижний бордер у наб бара
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "БПИ18-01"
         
-        // для скрола у последнего и первого элемента
-        contentViewController.scrollView.bounces = true
-        contentViewController.view.backgroundColor = Colors.backgroungColor
+        numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        numberWeekSegmentedView.backgroundColor = Colors.topBarColor
         
-        focusView.underlineColor = .systemBlue
-        focusView.underlineHeight = 3
-
-        menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
-        menuViewController.registerFocusView(view: focusView)
-        
-        menuViewController.reloadData()
-        contentViewController.reloadData()
+        setupPagingKit()
         
         // регистрируем наблюдателя за уведомлениями
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
@@ -97,7 +88,24 @@ class TimetableViewController: UIViewController {
         firstLoad?()
     }
     
-    // MARK: Для настройки PagingKit
+    // MARK: - Для настройки PagingKit
+    private func setupPagingKit() {
+        menuViewController.view.backgroundColor = Colors.topBarColor
+        
+        // для скрола у последнего и первого элемента
+        contentViewController.scrollView.bounces = true
+        contentViewController.view.backgroundColor = Colors.backgroungColor
+        
+        focusView.underlineColor = .systemBlue
+        focusView.underlineHeight = 3
+        
+        menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
+        menuViewController.registerFocusView(view: focusView)
+        
+        menuViewController.reloadData()
+        contentViewController.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? PagingMenuViewController {
             menuViewController = vc
@@ -112,12 +120,14 @@ class TimetableViewController: UIViewController {
     
     // MARK: - Методы для Notification Center
     @objc func onDidSelectGroup(_ notification: Notification) {
-        type = .gruop
+        type = .group
         if let a = notification.userInfo as? [Int: String] {
             print("IN onDidSelectGroup")
             print(a[0])
             print(a[1])
         }
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        // тут weeks будет ставиться
     }
     
     @objc func onDidSelectProfessor(_ notification: Notification) {
@@ -127,6 +137,8 @@ class TimetableViewController: UIViewController {
             print(a[0])
             print(a[1])
         }
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        // тут weeks будет ставиться
     }
     
     @objc func onDidSelectPlace(_ notification: Notification) {
@@ -136,9 +148,11 @@ class TimetableViewController: UIViewController {
             print(a[0])
             print(a[1])
         }
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        // тут weeks будет ставиться
     }
     
-    // MARK: Изменение недели (нечетная / четная)
+    // MARK: - Изменение недели (нечетная / четная)
     @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
         currWeek = numberWeekSegmented.selectedSegmentIndex
         //print("RELOAD")
@@ -147,6 +161,18 @@ class TimetableViewController: UIViewController {
         contentViewController.reloadData()
     }
     
+    // MARK: - Загрузка расписания из UserDefaults
+    private func loadTimetableFromUserDetaults() {
+        // берем из UserDefaults тип расписания (группа, преподаватель, кабинет)
+        guard let timetableTypeString = UserDefaultsConfig.timetableType else { return }
+        guard let timetableType = EntitiesType(rawValue: timetableTypeString) else { return }
+        
+        guard let timetableId = UserDefaultsConfig.timetableId else { return }
+        
+        // ТУТ ДОПИСАТЬ ЗАПИСЬ В weeks
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        // тут weeks будет ставиться
+    }
 }
 
 
@@ -190,7 +216,15 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         guard let weeks = weeks else {
             return UIViewController()
         }
-        return DayViewController(day: weeks[currWeek].days[index])
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        if type == .group {
+            if let weeks = weeks as? [Week] {
+                return DayViewController(day: weeks[currWeek].days[index])
+            }
+        }
+        return UIViewController()
+        //return DayViewController(day: weeks[currWeek].days[index])
+        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
     }
 
 }

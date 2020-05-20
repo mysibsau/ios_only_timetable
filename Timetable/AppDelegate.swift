@@ -6,6 +6,7 @@
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 
@@ -22,12 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addProfessors()
         //Common.addPlaces()
         //Common.addFavoriteGroups()
+//        UserDefaults.standard.set(, forKey: "1111")
+//        print(UserDefaults.standard.object(forKey: "1111"))
+        
+//        print(UserDefaultsConfig.timetableType)
+//        UserDefaultsConfig.timetableType = EntitiesType.professor.raw
+//        print(UserDefaultsConfig.timetableType)
+        
+        
         
         return true
     }
 
     // MARK: UISceneSession Lifecycle
-
     @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.

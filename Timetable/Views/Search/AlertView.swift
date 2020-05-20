@@ -57,4 +57,17 @@ class AlertView: UIView {
         alertLabel.lineBreakMode = .byWordWrapping
     }
     
+    // MARK: Скрытие view с анимацией
+    func hideWithAnimation() {
+        UIView.animate(
+            withDuration: 3.0,
+            animations: {
+                self.alpha = 0.0
+            },
+            completion: { finished in
+                if finished { self.isHidden = true }
+            }
+        )
+    }
+    
 }

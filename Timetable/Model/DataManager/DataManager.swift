@@ -239,3 +239,26 @@ extension DataManager: DeletingEntities {
     }
     
 }
+
+// MARK: - Getting Timetable
+extension DataManager: GettingTimetable {
+    
+    func getTimetable(forGroupId groupId: Int) -> RGroupTimetable? {
+        let timetables = realmDocuments.objects(RGroupTimetable.self).filter("groupId = \(groupId)")
+        guard let timetable = timetables.first else { return nil }
+        return timetable
+    }
+    
+    func getTimetable(forProfessorId professorId: Int) -> RProfessorTimetable? {
+        let timetables = realmDocuments.objects(RProfessorTimetable.self).filter("professorId = \(professorId)")
+        guard let timetable = timetables.first else { return nil }
+        return timetable
+    }
+    
+    func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable? {
+        let timetables = realmDocuments.objects(RPlaceTimetable.self).filter("placeId = \(placeId)")
+        guard let timetable = timetables.first else { return nil }
+        return timetable
+    }
+    
+}
