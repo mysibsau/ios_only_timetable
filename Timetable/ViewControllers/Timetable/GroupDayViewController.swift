@@ -1,22 +1,22 @@
 //
-//  DayTableViewCell.swift
+//  GroupDayViewController.swift
 //  Timetable
 //
-//  Created by art-off on 01.05.2020.
+//  Created by art-off on 20.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
-class DayViewController: UIViewController {
+class GroupDayViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    var day: Day?
+    var day: GroupDay?
     
     
-    convenience init(day: Day?) {
+    convenience init(day: GroupDay?) {
         self.init()
         self.day = day
     }

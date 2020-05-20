@@ -10,8 +10,8 @@ import RealmSwift
 
 protocol WritingTimetable {
 
-    func writeTimetable(forGroupId groupId: Int)
-    func writeTimetable(forProfessorId professorId: Int)
-    func writeTimetable(forPlaceId placeId: Int)
+    func write(groupTimetable: RGroupTimetable)
+    func write(professorTimetable: RProfessorTimetable)
+    func write(placeTimetable: RPlaceTimetable)
     
 }

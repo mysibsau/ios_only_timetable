@@ -70,13 +70,13 @@ class StackViewCornerRadius: UIView {
 // MARK: - Все для установки нового занятия на это вью
 extension StackViewCornerRadius {
     
-    convenience init(lesson: Lesson) {
+    convenience init(lesson: GroupLesson) {
         self.init()
         self.set(lesson: lesson)
     }
     
     // MARK: Установка нового занятия
-    private func set(lesson: Lesson) {
+    private func set(lesson: GroupLesson) {
         // если тут уже было занятие, то удаляем его
         subgroupStackView.removeAllArrangedSubviews()
         

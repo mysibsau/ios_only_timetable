@@ -17,4 +17,8 @@ protocol GettingEntities {
     func getFavoriteProfessors() -> Results<RProfessor>
     func getFavoritePlaces() -> Results<RPlace>
     
+    func getGroup(withId id: Int) -> RGroup?
+    func getProfessor(withId id: Int) -> RProfessor?
+    func getPlace(withId id: Int) -> RPlace?
+    
 }

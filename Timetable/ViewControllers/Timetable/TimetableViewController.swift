@@ -58,9 +58,12 @@ class TimetableViewController: UIViewController {
         
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         type = .group
-        weeks = [Week]()
-        weeks?.append(Common.getWeek1())
-        weeks?.append(Common.getWeek2())
+        weeks = [GroupWeek]()
+//        weeks?.append(Common.getWeek1())
+//        weeks?.append(Common.getWeek2())
+        let timetable = DataManager.shared.getTimetable(forGroupId: 1)!
+        weeks?.append(timetable.weeks[0])
+        weeks?.append(timetable.weeks[1])
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         
         // убираем нижний бордер у наб бара
@@ -218,8 +221,9 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         }
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         if type == .group {
-            if let weeks = weeks as? [Week] {
-                return DayViewController(day: weeks[currWeek].days[index])
+            if let weeks = weeks as? [GroupWeek] {
+                //return GroupDayViewController(day: weeks[currWeek].days[index])
+                return GroupDayViewController(day: weeks[currWeek].days[index])
             }
         }
         return UIViewController()

@@ -71,6 +71,25 @@ extension DataManager: GettingEntities {
         return places
     }
     
+    func getGroup(withId id: Int) -> RGroup? {
+        //let group = realmCaches.object(ofType: RGroup.self, forPrimaryKey: 1)
+        let groups = realmCaches.objects(RGroup.self).filter("id = \(id)")
+        guard let group = groups.first else { return nil }
+        return group
+    }
+    
+    func getProfessor(withId id: Int) -> RProfessor? {
+        let professors = realmCaches.objects(RProfessor.self).filter("id = \(id)")
+        guard let professor = professors.first else { return nil }
+        return professor
+    }
+    
+    func getPlace(withId id: Int) -> RPlace? {
+        let places = realmCaches.objects(RPlace.self).filter("id = \(id)")
+        guard let place = places.first else { return nil }
+        return place
+    }
+    
 }
 
 // MARK: - Writing Entities
@@ -243,10 +262,13 @@ extension DataManager: DeletingEntities {
 // MARK: - Getting Timetable
 extension DataManager: GettingTimetable {
     
-    func getTimetable(forGroupId groupId: Int) -> RGroupTimetable? {
+    func getTimetable(forGroupId groupId: Int) -> GroupTimetable? {
         let timetables = realmDocuments.objects(RGroupTimetable.self).filter("groupId = \(groupId)")
         guard let timetable = timetables.first else { return nil }
-        return timetable
+        
+        let groupTimetable = getGroupTimetable(from: timetable)
+        
+        return groupTimetable
     }
     
     func getTimetable(forProfessorId professorId: Int) -> RProfessorTimetable? {
@@ -261,4 +283,102 @@ extension DataManager: GettingTimetable {
         return timetable
     }
     
+}
+
+// MARK: - Writing Timetable
+extension DataManager: WritingTimetable {
+    
+    func write(groupTimetable: RGroupTimetable) {
+        try? realmDocuments.write {
+            realmDocuments.add(groupTimetable, update: .modified)
+        }
+    }
+    
+    func write(professorTimetable: RProfessorTimetable) {
+        try? realmDocuments.write {
+            realmDocuments.add(professorTimetable, update: .modified)
+        }
+    }
+    
+    func write(placeTimetable: RPlaceTimetable) {
+        try? realmDocuments.write {
+            realmDocuments.add(placeTimetable, update: .modified)
+        }
+    }
+    
+}
+
+// MARK: - Для перевода данных из классов Realm к структурам, используемых в приложении
+extension DataManager {
+
+    // MARK: Перевод объекта РАСПИСАНИЯ ГРУППЫ Realm к структуре, используемой в приложении
+    private func getGroupTimetable(from timetable: RGroupTimetable) -> GroupTimetable {
+        var groupWeeks = [GroupWeek]()
+
+        // пробегаемся по всем неделям (по дву)
+        for week in timetable.weeks {
+
+            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
+            var groupDays: [GroupDay?] = [nil, nil, nil, nil, nil, nil]
+
+            // пробегаемся во всем дням недели
+            for day in week.days {
+
+                var groupLessons = [GroupLesson]()
+                
+                // пробегаемся по всем занятиям дня
+                for lesson in day.lessons {
+
+                    var groupSubgroups = [GroupSubgroup]()
+                    
+                    // пробегаемся по всех подргуппам занятия
+                    for subgroup in lesson.subgroups {
+
+                        var professorsName = [String]()
+                        // берем имя преподавателя из БД с помощью id
+                        for id in subgroup.professors {
+                            let professor = getProfessor(withId: id)
+                            if let professor = professor {
+                                professorsName.append(professor.name)
+                            } else {
+                                professorsName.append("Ошибка")
+                            }
+                        }
+                        
+                        // копируем подргуппу
+                        let groupSubgroup = GroupSubgroup(
+                            subject: subgroup.subject,
+                            type: subgroup.type,
+                            professors: professorsName,
+                            professorsId: Array(subgroup.professors),
+                            place: subgroup.place)
+
+                        groupSubgroups.append(groupSubgroup)
+                    }
+                    
+                    // добавляем занятие в массив занятий
+                    let groupLesson = GroupLesson(time: lesson.time, subgroups: groupSubgroups)
+                    groupLessons.append(groupLesson)
+                }
+                
+                let groupDay = GroupDay(lessons: groupLessons)
+                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
+                if day.number >= 0 && day.number <= 5 {
+                    // заменяем nil
+                    groupDays[day.number] = groupDay
+                }
+            }
+
+            let groupWeek = GroupWeek(days: groupDays)
+            groupWeeks.append(groupWeek)
+        }
+
+        let groupTimetable = GroupTimetable(weeks: groupWeeks)
+        return groupTimetable
+    }
+    
+    // MARK: Перевод объекта РАСПИСАНИЯ ПРОФЕССОРА Realm к структуре, используемой в приложении
+    
+    // MARK: Перевод объекта РАСПИСАНИЯ КАБИНЕТА Realm к структуре, используемой в приложении
+
 }
