@@ -37,14 +37,21 @@ class GroupDayViewController: UIViewController {
         
         // если нет занятий в этот день - ставим label с "В этот день нет занятий"
         guard let day = day else {
-            let label = UILabel(frame: view.bounds)
+            let label = UILabel(frame: .zero)
             label.font = UIFont.boldSystemFont(ofSize: 20)
             label.text = "В этот день нет занятий"
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+
             
             view.addSubview(label)
+            
             label.translatesAutoresizingMaskIntoConstraints = false
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            //label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
             
             return
         }

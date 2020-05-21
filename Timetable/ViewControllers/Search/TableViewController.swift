@@ -190,14 +190,19 @@ extension TableViewController: DetailViewDelegate {
     func showTimetable(withId id: Int) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
-        guard let object = data[1].filter("id = \(id)").first else { return }
+        guard let entitie = data[1].filter("id = \(id)").first else { return }
         
-        if let object = object as? RGroup {
-            NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: "Hello1", 1: "World1"])
-        } else if let object = object as? RProfessor {
-            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: "Hello2", 1: "World2"])
-        } else if let object = object as? RPlace {
-            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: "Hello3", 1: "World3"])
+        if let group = entitie as? RGroup {
+            let optionalTimetable = DataManager.shared.getTimetable(forGroupId: group.id)
+            guard let timetable = optionalTimetable else {
+                // тут вставить спинет и включать ее когда расписание грузится
+                return
+            }
+            NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetable])
+        } else if let group = entitie as? RProfessor {
+            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: group])
+        } else if let group = entitie as? RPlace {
+            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: group])
         }
         
     }

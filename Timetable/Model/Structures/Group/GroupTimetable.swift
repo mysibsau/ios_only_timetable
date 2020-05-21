@@ -10,6 +10,7 @@ import Foundation
 
 struct GroupTimetable {
     
+    let groupId: Int
     let weeks: [GroupWeek]
     
 }

@@ -31,14 +31,17 @@ class TimetableViewController: UIViewController {
         
         let label = UILabel(frame: view.bounds)
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Выберите\nгруппу,\nпреподавателя\nили кабинет\nв 'Поиск'"
+        label.text = "Выберите группу, преподавателя или кабинет в 'Поиск'"
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         
         wrapper.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
+        // центрируем label
         label.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
-        label.centerXAnchor.constraint(equalTo: wrapper.centerXAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 20).isActive = true
+        label.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: -20).isActive = true
         
         return wrapper
     }()
@@ -56,24 +59,18 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        type = .group
-        weeks = [GroupWeek]()
-//        weeks?.append(Common.getWeek1())
-//        weeks?.append(Common.getWeek2())
-        let timetable = DataManager.shared.getTimetable(forGroupId: 1)!
-        weeks?.append(timetable.weeks[0])
-        weeks?.append(timetable.weeks[1])
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        
-        // убираем нижний бордер у наб бара
+        // убираем нижний бордер у navigaton bar
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "БПИ18-01"
         
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
+        numberWeekSegmented.selectedSegmentIndex = currWeek
         
         setupPagingKit()
+        
+        // загружаем расписание с помощью его id из UserDefaults, если там есть информация
+        loadTimetableFromUserDetaults()
         
         // регистрируем наблюдателя за уведомлениями
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
@@ -123,22 +120,30 @@ class TimetableViewController: UIViewController {
     
     // MARK: - Методы для Notification Center
     @objc func onDidSelectGroup(_ notification: Notification) {
-        type = .group
-        if let a = notification.userInfo as? [Int: String] {
+        if let userInfo = notification.userInfo as? [Int: GroupTimetable] {
+            type = .group
+            
             print("IN onDidSelectGroup")
-            print(a[0])
-            print(a[1])
+            guard let groupTimetable = userInfo[0] else { return }
+            weeks = [GroupTimetable]()
+            weeks?.append(groupTimetable.weeks[0])
+            weeks?.append(groupTimetable.weeks[1])
+            
+            // Сохраняем выбранное расписание в UserDefaults
+            UserDefaultsConfig.timetableType = type?.raw
+            UserDefaultsConfig.timetableId = groupTimetable.groupId
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
         }
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        // тут weeks будет ставиться
     }
     
     @objc func onDidSelectProfessor(_ notification: Notification) {
         type = .professor
-        if let a = notification.userInfo as? [Int: String] {
+        if let a = notification.userInfo as? [Int: RProfessor] {
             print("IN onDidSelectProfessor")
             print(a[0])
-            print(a[1])
+            //print(a[1])
         }
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         // тут weeks будет ставиться
@@ -146,22 +151,13 @@ class TimetableViewController: UIViewController {
     
     @objc func onDidSelectPlace(_ notification: Notification) {
         type = .place
-        if let a = notification.userInfo as? [Int: String] {
+        if let a = notification.userInfo as? [Int: RPlace] {
             print("IN onDidSelectPlace")
             print(a[0])
-            print(a[1])
+            //print(a[1])
         }
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         // тут weeks будет ставиться
-    }
-    
-    // MARK: - Изменение недели (нечетная / четная)
-    @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
-        currWeek = numberWeekSegmented.selectedSegmentIndex
-        //print("RELOAD")
-        // сюда вставить измеение
-        menuViewController.reloadData()
-        contentViewController.reloadData()
     }
     
     // MARK: - Загрузка расписания из UserDefaults
@@ -170,11 +166,38 @@ class TimetableViewController: UIViewController {
         guard let timetableTypeString = UserDefaultsConfig.timetableType else { return }
         guard let timetableType = EntitiesType(rawValue: timetableTypeString) else { return }
         
+        // берем из UserDefaults id расписания
         guard let timetableId = UserDefaultsConfig.timetableId else { return }
         
-        // ТУТ ДОПИСАТЬ ЗАПИСЬ В weeks
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        // тут weeks будет ставиться
+        if timetableType == .group {
+            guard let groupTimetable = DataManager.shared.getTimetable(forGroupId: timetableId) else { return }
+            
+            weeks = [GroupTimetable]()
+            weeks?.append(groupTimetable.weeks[0])
+            weeks?.append(groupTimetable.weeks[1])
+            
+            type = timetableType
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
+        } else if timetableType == .professor {
+            
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
+        } else if timetableType == .place {
+            
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
+        }
+    }
+    
+    // MARK: - Изменение недели (нечетная / четная)
+    @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
+        currWeek = numberWeekSegmented.selectedSegmentIndex
+        menuViewController.reloadData()
+        contentViewController.reloadData()
     }
 }
 
@@ -221,9 +244,9 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         }
         // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
         if type == .group {
-            if let weeks = weeks as? [GroupWeek] {
+            if let _weeks = weeks as? [GroupWeek] {
                 //return GroupDayViewController(day: weeks[currWeek].days[index])
-                return GroupDayViewController(day: weeks[currWeek].days[index])
+                return GroupDayViewController(day: _weeks[currWeek].days[index])
             }
         }
         return UIViewController()

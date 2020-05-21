@@ -72,21 +72,23 @@ extension DataManager: GettingEntities {
     }
     
     func getGroup(withId id: Int) -> RGroup? {
-        //let group = realmCaches.object(ofType: RGroup.self, forPrimaryKey: 1)
-        let groups = realmCaches.objects(RGroup.self).filter("id = \(id)")
-        guard let group = groups.first else { return nil }
+        let group = realmCaches.object(ofType: RGroup.self, forPrimaryKey: 1)
+        //let groups = realmCaches.objects(RGroup.self).filter("id = \(id)")
+        //guard let group = groups.first else { return nil }
         return group
     }
     
     func getProfessor(withId id: Int) -> RProfessor? {
-        let professors = realmCaches.objects(RProfessor.self).filter("id = \(id)")
-        guard let professor = professors.first else { return nil }
+        let professor = realmCaches.object(ofType: RProfessor.self, forPrimaryKey: id)
+        //let professors = realmCaches.objects(RProfessor.self).filter("id = \(id)")
+        //guard let professor = professors.first else { return nil }
         return professor
     }
     
     func getPlace(withId id: Int) -> RPlace? {
-        let places = realmCaches.objects(RPlace.self).filter("id = \(id)")
-        guard let place = places.first else { return nil }
+        let place = realmCaches.object(ofType: RPlace.self, forPrimaryKey: id)
+        //let places = realmCaches.objects(RPlace.self).filter("id = \(id)")
+        //guard let place = places.first else { return nil }
         return place
     }
     
@@ -263,8 +265,9 @@ extension DataManager: DeletingEntities {
 extension DataManager: GettingTimetable {
     
     func getTimetable(forGroupId groupId: Int) -> GroupTimetable? {
-        let timetables = realmDocuments.objects(RGroupTimetable.self).filter("groupId = \(groupId)")
-        guard let timetable = timetables.first else { return nil }
+        let optionalTimetable = realmDocuments.object(ofType: RGroupTimetable.self, forPrimaryKey: groupId)
+        //let timetables = realmDocuments.objects(RGroupTimetable.self).filter("groupId = \(groupId)")
+        guard let timetable = optionalTimetable  else { return nil }
         
         let groupTimetable = getGroupTimetable(from: timetable)
         
@@ -272,14 +275,16 @@ extension DataManager: GettingTimetable {
     }
     
     func getTimetable(forProfessorId professorId: Int) -> RProfessorTimetable? {
-        let timetables = realmDocuments.objects(RProfessorTimetable.self).filter("professorId = \(professorId)")
-        guard let timetable = timetables.first else { return nil }
+        //let timetables = realmDocuments.objects(RProfessorTimetable.self).filter("professorId = \(professorId)")
+        let optionalTimetable = realmDocuments.object(ofType: RProfessorTimetable.self, forPrimaryKey: professorId)
+        guard let timetable = optionalTimetable else { return nil }
         return timetable
     }
     
     func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable? {
-        let timetables = realmDocuments.objects(RPlaceTimetable.self).filter("placeId = \(placeId)")
-        guard let timetable = timetables.first else { return nil }
+        //let timetables = realmDocuments.objects(RPlaceTimetable.self).filter("placeId = \(placeId)")
+        let optionalTimetable = realmDocuments.object(ofType: RPlaceTimetable.self, forPrimaryKey: placeId)
+        guard let timetable = optionalTimetable else { return nil }
         return timetable
     }
     
@@ -373,7 +378,8 @@ extension DataManager {
             groupWeeks.append(groupWeek)
         }
 
-        let groupTimetable = GroupTimetable(weeks: groupWeeks)
+        //let groupTimetable = GroupTimetable(groupId: timatable.groupId, weeks: groupWeeks)
+        let groupTimetable = GroupTimetable(groupId: timetable.groupId, weeks: groupWeeks)
         return groupTimetable
     }
     
