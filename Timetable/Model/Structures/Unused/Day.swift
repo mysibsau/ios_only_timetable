@@ -1,5 +1,5 @@
 //
-//  Week.swift
+//  Day.swift
 //  Timetable
 //
 //  Created by art-off on 04.05.2020.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Week {
-    var days: [Day?]
-}
+//struct Day {
+//    var lessons: [Lesson]
+//}

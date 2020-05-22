@@ -1,25 +1,29 @@
 //
-//  LessonView.swift
+//  StackViewCornerRadius.swift
 //  Timetable
 //
 //  Created by art-off on 07.04.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-// LessonView.xib: сначала лежит UIView, на которую
+// StackViewCornerRadius.xib: сначала лежит UIView, на которую
 // с констрейтами 8 по всем сторонам я кладу UIView,
 // на которой уже и закрепляю все UILabel
 
 
 import UIKit
 
-class LessonView: UIView {
+class StackViewCornerRadius: UIView {
     
     private let contentView = UIView()
     private let wrapperView = UIView()
     private let subgroupStackView = UIStackView()
     
+    var spacing: CGFloat = 2 {
+        didSet { subgroupStackView.spacing = self.spacing }
+    }
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -30,7 +34,7 @@ class LessonView: UIView {
         setupViews()
     }
     
-    
+    // MARK: - Setup Views
     private func setupViews() {
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -48,7 +52,7 @@ class LessonView: UIView {
         // настраиваем свойства StackView
         subgroupStackView.axis = .vertical
         subgroupStackView.distribution = .equalSpacing
-        subgroupStackView.spacing = 2 // было 2
+        subgroupStackView.spacing = spacing // было 2
         
         contentView.addSubview(wrapperView)
         // расставляем констрейнты для подВью к контентВью
@@ -63,16 +67,16 @@ class LessonView: UIView {
 }
 
 
-// MARK: - Все для установки нового занятия на это вью
-extension LessonView {
+// MARK: - Все для установки нового занятия на это вью (пока только для групп)
+extension StackViewCornerRadius {
     
-    convenience init(lesson: Lesson) {
+    convenience init(lesson: GroupLesson) {
         self.init()
         self.set(lesson: lesson)
     }
     
-    // MARK: Установка нового занятия
-    private func set(lesson: Lesson) {
+    // MARK: Установка нового занятия для группы
+    private func set(lesson: GroupLesson) {
         // если тут уже было занятие, то удаляем его
         subgroupStackView.removeAllArrangedSubviews()
         
@@ -96,9 +100,10 @@ extension LessonView {
     // MARK: Добавление времени к расписанию
     private func addTime(time: String) {
         let attribetedTime = NSMutableAttributedString(string: time)
-        attribetedTime.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: 5))
+        attribetedTime.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: NSRange(location: 0, length: 5))
         
         let timeLabel = UILabel()
+        timeLabel.font = UIFont.systemFont(ofSize: 16)
         timeLabel.attributedText = attribetedTime
         timeLabel.textAlignment = .left
         subgroupStackView.addArrangedSubview(timeLabel)
@@ -117,7 +122,7 @@ extension LessonView {
     }
     
     // MARK: Добавлени разделительной линии (для подгрупп)
-    private func addSeparatorLine() {
+    func addSeparatorLine() {
         // добавление дополнительного отступа перед линией
         let spaceBeforeLine = UIView()
         spaceBeforeLine.backgroundColor = .clear
@@ -159,13 +164,14 @@ extension LessonView {
         subgroupView.place.text = place
         
         subgroupStackView.addArrangedSubview(subgroupView)
-        subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+        // возможно эта строчка и не нужна
+        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
     }
     
 }
 
-
-extension LessonView {
+// MARK: ВОЗМОЖНО СТОИТ УБРАТЬ ЭТО (Если не буду юзать в итоге)
+extension StackViewCornerRadius {
     // для отрисовки интерфейса при смене темы
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

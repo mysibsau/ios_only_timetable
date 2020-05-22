@@ -13,7 +13,7 @@ class RProfessor: Object {
     
     @objc dynamic var id = 0
     @objc dynamic var name = ""
-    @objc dynamic var department = ""
+    @objc dynamic var department: String? = nil
     @objc dynamic var email: String? = nil
     
     override class func primaryKey() -> String? {

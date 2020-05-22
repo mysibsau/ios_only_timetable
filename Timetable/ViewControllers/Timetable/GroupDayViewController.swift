@@ -1,27 +1,27 @@
 //
-//  DayTableViewCell.swift
+//  GroupDayViewController.swift
 //  Timetable
 //
-//  Created by art-off on 01.05.2020.
+//  Created by art-off on 20.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
-class DayViewController: UIViewController {
+class GroupDayViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    var day: Day?
+    var day: GroupDay?
     
-    
-    convenience init(day: Day?) {
+    // MARK: - Initialization
+    convenience init(day: GroupDay?) {
         self.init()
         self.day = day
     }
     
-    
+    // MARK: - Overrides
     override func loadView() {
         super.loadView()
         
@@ -37,21 +37,28 @@ class DayViewController: UIViewController {
         
         // если нет занятий в этот день - ставим label с "В этот день нет занятий"
         guard let day = day else {
-            let label = UILabel(frame: view.bounds)
+            let label = UILabel(frame: .zero)
             label.font = UIFont.boldSystemFont(ofSize: 20)
             label.text = "В этот день нет занятий"
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+
             
             view.addSubview(label)
+            
             label.translatesAutoresizingMaskIntoConstraints = false
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            //label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
             
             return
         }
         
         // заполняем день занятиями
         for lesson in day.lessons {
-            let lessonView = LessonView(lesson: lesson)
+            let lessonView = StackViewCornerRadius(lesson: lesson)
             stackView.addArrangedSubview(lessonView)
             lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         }
