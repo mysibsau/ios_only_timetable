@@ -21,30 +21,11 @@ class TimetableViewController: UIViewController {
     private var menuViewController: PagingMenuViewController!
     private var contentViewController: PagingContentViewController!
     
+    // линия, для выбранной ячейки в меню
     let focusView = UnderlineFocusView()
     
     // MARK: Для случая, если не выбрана группа/преподаватель/кабинет
-    lazy var wrapperWithLabel: UIView = {
-        let wrapper = UIView(frame: view.bounds)
-        wrapper.backgroundColor = Colors.backgroungColor
-        view.addSubview(wrapper)
-        
-        let label = UILabel(frame: view.bounds)
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Выберите группу, преподавателя или кабинет в 'Поиск'"
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        
-        wrapper.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        // центрируем label
-        label.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 20).isActive = true
-        label.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: -20).isActive = true
-        
-        return wrapper
-    }()
+    let alertForChoice = WrapperViewWithLabel(text: "Выберите группу, преподавателя или кабинет в 'Поиск'")
     
     
     // MARK: Для того, чтобы menuViewController занимал ровно весь экран
@@ -61,7 +42,7 @@ class TimetableViewController: UIViewController {
         
         // убираем нижний бордер у navigaton bar
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        navigationItem.title = "БПИ18-01"
+        navigationItem.title = "Расписание"
         
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
@@ -79,8 +60,18 @@ class TimetableViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // скрываем вью предложения выбора, если weeks != nil и наоборот
-        wrapperWithLabel.isHidden = weeks != nil
+        // если расписание есть, то нет смысла показывать надпись
+        guard weeks == nil else {
+            alertForChoice.isHidden = true
+            return
+        }
+        
+        // добавляем, если view с этой надписью еще не добавлена в subview
+        if !view.subviews.contains(alertForChoice) {
+            view.addSubview(alertForChoice)
+            alertForChoice.frame = view.bounds
+        }
+        alertForChoice.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {

@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(UserDefaultsConfig.timetableType)
         
         //Common.addGroupTimetable1()
+        Common.addGroupTimetable5()
         
         
         

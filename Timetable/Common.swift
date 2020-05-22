@@ -241,6 +241,16 @@ class Common {
         return week
     }
     
+    static func getGroupWeek3() -> RGroupWeek {
+        let week = RGroupWeek()
+        week.number = 1
+        week.days.append(getGroupDay0())
+        week.days.append(getGroupDay1())
+        week.days.append(getGroupDay2())
+
+        return week
+    }
+    
     
     static func addGroupTimetable1() {
         
@@ -249,6 +259,16 @@ class Common {
 
         timetable.weeks.append(getGroupWeek1())
         timetable.weeks.append(getGroupWeek2())
+        
+        DataManager.shared.write(groupTimetable: timetable)
+    }
+    
+    static func addGroupTimetable5() {
+        let timetable = RGroupTimetable()
+        timetable.groupId = 5
+
+        timetable.weeks.append(getGroupWeek1())
+        timetable.weeks.append(getGroupWeek3())
         
         DataManager.shared.write(groupTimetable: timetable)
     }
