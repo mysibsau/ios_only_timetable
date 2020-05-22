@@ -123,6 +123,8 @@ class TimetableViewController: UIViewController {
             weeks?.append(groupTimetable.weeks[0])
             weeks?.append(groupTimetable.weeks[1])
             
+            navigationItem.title = groupTimetable.groupName
+            
             // Сохраняем выбранное расписание в UserDefaults
             UserDefaultsConfig.timetableType = type?.raw
             UserDefaultsConfig.timetableId = groupTimetable.groupId
@@ -163,6 +165,8 @@ class TimetableViewController: UIViewController {
             weeks?.append(groupTimetable.weeks[1])
             
             type = timetableType
+            
+            navigationItem.title = groupTimetable.groupName
             
             menuViewController.reloadData()
             contentViewController.reloadData()

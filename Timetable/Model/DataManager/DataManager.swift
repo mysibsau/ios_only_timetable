@@ -266,10 +266,11 @@ extension DataManager: GettingTimetable {
     
     func getTimetable(forGroupId groupId: Int) -> GroupTimetable? {
         let optionalTimetable = realmDocuments.object(ofType: RGroupTimetable.self, forPrimaryKey: groupId)
-        //let timetables = realmDocuments.objects(RGroupTimetable.self).filter("groupId = \(groupId)")
-        guard let timetable = optionalTimetable  else { return nil }
+        let optionalGroup = realmCaches.object(ofType: RGroup.self, forPrimaryKey: groupId)
+        guard let timetable = optionalTimetable else { return nil }
+        guard let group = optionalGroup else { return nil }
         
-        let groupTimetable = getGroupTimetable(from: timetable)
+        let groupTimetable = getGroupTimetable(from: timetable, groupName: group.name)
         
         return groupTimetable
     }
@@ -317,7 +318,7 @@ extension DataManager: WritingTimetable {
 extension DataManager {
 
     // MARK: Перевод объекта РАСПИСАНИЯ ГРУППЫ Realm к структуре, используемой в приложении
-    private func getGroupTimetable(from timetable: RGroupTimetable) -> GroupTimetable {
+    private func getGroupTimetable(from timetable: RGroupTimetable, groupName: String) -> GroupTimetable {
         var groupWeeks = [GroupWeek]()
 
         // пробегаемся по всем неделям (по дву)
@@ -378,7 +379,7 @@ extension DataManager {
             groupWeeks.append(groupWeek)
         }
 
-        let groupTimetable = GroupTimetable(groupId: timetable.groupId, weeks: groupWeeks)
+        let groupTimetable = GroupTimetable(groupId: timetable.groupId, groupName: groupName, weeks: groupWeeks)
         return groupTimetable
     }
     

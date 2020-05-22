@@ -199,6 +199,7 @@ extension TableViewController: DetailViewDelegate {
                 return
             }
             NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetable])
+            // FIXME: Тут происходит дизбалансный вызов
             tabBarController?.selectedIndex = 0
             navigationController?.popToRootViewController(animated: true)
         } else if let group = entitie as? RProfessor {
