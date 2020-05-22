@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Common.addGroups()
-        //Common.addProfessors()
-        //Common.addPlaces()
-        //Common.addFavoriteGroups()
+        Common.addGroups()
+        Common.addProfessors()
+        Common.addPlaces()
+        Common.addFavoriteGroups()
 //        UserDefaults.standard.set(, forKey: "1111")
 //        print(UserDefaults.standard.object(forKey: "1111"))
         
