@@ -208,10 +208,29 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="J61-H8-uz6" kind="relationship" relationship="rootViewController" id="WSU-kr-xXk"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6d-Gb-7zF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2203" y="1154"/>
+        </scene>
+        <!--Additional View Controller-->
+        <scene sceneID="i3t-k3-AbJ">
+            <objects>
+                <viewController id="J61-H8-uz6" customClass="AdditionalViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A15-rU-5NC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="VRJ-dN-cwv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="raU-Gl-PmX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5X-TE-Pb6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2983" y="1154"/>
         </scene>
         <!--Paging Menu View Controller-->
         <scene sceneID="zol-Kf-qFx">
