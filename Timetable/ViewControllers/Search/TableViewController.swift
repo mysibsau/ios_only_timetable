@@ -203,14 +203,14 @@ extension TableViewController: DetailViewDelegate {
             navigationController?.popToRootViewController(animated: true)
         } else if let group = entitie as? RProfessor {
             
-            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: group])
-            tabBarController?.selectedIndex = 0
-            navigationController?.popToRootViewController(animated: true)
+            //NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: group])
+            //tabBarController?.selectedIndex = 0
+            //navigationController?.popToRootViewController(animated: true)
         } else if let group = entitie as? RPlace {
             
-            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: group])
-            tabBarController?.selectedIndex = 0
-            navigationController?.popToRootViewController(animated: true)
+            //NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: group])
+            //tabBarController?.selectedIndex = 0
+            //navigationController?.popToRootViewController(animated: true)
         }
         
     }
