@@ -23,6 +23,7 @@ class SubgroupGroupView: UIView {
     @IBOutlet weak var place: UILabel!
     
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -39,6 +40,7 @@ class SubgroupGroupView: UIView {
         addRecongnizers()
     }
     
+    // MARK: Setup Views
     private func loadXib() {
         // загружаем xib из какого-то Boundle (можно чекнуть документацию)
         Bundle.main.loadNibNamed("SubgroupView", owner: self, options: nil)
@@ -50,11 +52,6 @@ class SubgroupGroupView: UIView {
     private func setupViews() {
         contentView.backgroundColor = Colors.contentColor
         setupLabels()
-    }
-    
-    private func addRecongnizers() {
-        let longRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        self.addGestureRecognizer(longRecognizer)
     }
     
     private func setupLabels() {
@@ -71,6 +68,12 @@ class SubgroupGroupView: UIView {
         professor.textColor = .systemGray
     }
     
+    // MARK: - Recongnizers
+    private func addRecongnizers() {
+        let longRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        self.addGestureRecognizer(longRecognizer)
+    }
+    
     @objc func longPress() {
         // 1. let timetable = DataManager.sharedInstance.getTimetable(forProfessor: professorId)
         // NotificationCenter.default.post(name: .didSelectProfessor, object: self, userInfo: [0: timetalbe])
@@ -81,7 +84,7 @@ class SubgroupGroupView: UIView {
     
 }
 
-
+// MARK: - Обработка нажатий (еще не решил что использовать, длинные или нет)
 extension SubgroupGroupView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

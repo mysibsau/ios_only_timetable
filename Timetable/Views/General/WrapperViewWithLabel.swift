@@ -12,6 +12,7 @@ class WrapperViewWithLabel: UIView {
     
     let label = UILabel()
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -27,6 +28,7 @@ class WrapperViewWithLabel: UIView {
         label.text = text
     }
     
+    // MARK: - Setup Views
     private func setupView() {
         backgroundColor = Colors.backgroungColor
         

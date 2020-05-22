@@ -18,10 +18,11 @@ class TimetableViewController: UIViewController {
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
     @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
+    
+    // MARK: Верхрее меню и контент для PagingKit
     private var menuViewController: PagingMenuViewController!
     private var contentViewController: PagingContentViewController!
-    
-    // линия, для выбранной ячейки в меню
+    // MARK: линия, для выбранной ячейки в меню
     let focusView = UnderlineFocusView()
     
     // MARK: Для случая, если не выбрана группа/преподаватель/кабинет
@@ -37,6 +38,7 @@ class TimetableViewController: UIViewController {
         self?.firstLoad = nil
     }
     
+    // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +46,7 @@ class TimetableViewController: UIViewController {
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "Расписание"
         
+        // настройка сегментера
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
         numberWeekSegmented.selectedSegmentIndex = currWeek
@@ -133,22 +136,14 @@ class TimetableViewController: UIViewController {
         type = .professor
         if let a = notification.userInfo as? [Int: RProfessor] {
             print("IN onDidSelectProfessor")
-            print(a[0])
-            //print(a[1])
         }
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        // тут weeks будет ставиться
     }
     
     @objc func onDidSelectPlace(_ notification: Notification) {
         type = .place
         if let a = notification.userInfo as? [Int: RPlace] {
             print("IN onDidSelectPlace")
-            print(a[0])
-            //print(a[1])
         }
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
-        // тут weeks будет ставиться
     }
     
     // MARK: - Загрузка расписания из UserDefaults
@@ -184,7 +179,8 @@ class TimetableViewController: UIViewController {
         }
     }
     
-    // MARK: - Изменение недели (нечетная / четная)
+    // MARK: - IBActions
+    // MARK: Изменение недели (нечетная / четная)
     @IBAction func numberWeekChanged(_ sender: UISegmentedControl) {
         currWeek = numberWeekSegmented.selectedSegmentIndex
         menuViewController.reloadData()
@@ -204,6 +200,7 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     
     // MARK: Формирование ячейки ( НУЖНО ДОПИСАТЬ ЕЩЕЕЕЕ )
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
+        // FIXME: сделать нормальные числа и недели
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
         //cell.titleLabel.text = dataSource[index].menuTitle
         return cell
@@ -228,21 +225,22 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
 
     // MARK: Отправка ViewController'а для индекса
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
+        // FIXME: сделать нормальные числа и недели
+        
         //return DayViewController()
         //return dataSource[index].vc
         guard let weeks = weeks else {
             return UIViewController()
         }
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
+        // тут будет проверка на тип сущности, которой будет отображаться расписание (группа, преподаватель, кабинет)
+        // FIXME: Не нужна тут проверка типа, скорее всего
         if type == .group {
-            if let _weeks = weeks as? [GroupWeek] {
+            if let weeks = weeks as? [GroupWeek] {
                 //return GroupDayViewController(day: weeks[currWeek].days[index])
-                return GroupDayViewController(day: _weeks[currWeek].days[index])
+                return GroupDayViewController(day: weeks[currWeek].days[index])
             }
         }
         return UIViewController()
-        //return DayViewController(day: weeks[currWeek].days[index])
-        // MARK: ЭТИ СТРОКИ --------------------------------------------------------------------------------------------------------------
     }
 
 }

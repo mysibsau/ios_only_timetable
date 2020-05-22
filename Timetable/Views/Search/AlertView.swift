@@ -15,6 +15,7 @@ class AlertView: UIView {
     @IBOutlet weak var alertLabel: UILabel!
     
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -30,6 +31,7 @@ class AlertView: UIView {
         alertLabel.text = alertText
     }
     
+    // MARK: - Setup Views
     private func commonInit() {
         loadXib()
         setupViews()
@@ -57,7 +59,7 @@ class AlertView: UIView {
         alertLabel.lineBreakMode = .byWordWrapping
     }
     
-    // MARK: Скрытие view с анимацией
+    // MARK: - Скрытие view с анимацией
     func hideWithAnimation() {
         UIView.animate(
             withDuration: 3.0,

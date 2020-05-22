@@ -15,13 +15,13 @@ class GroupDayViewController: UIViewController {
     
     var day: GroupDay?
     
-    
+    // MARK: - Initialization
     convenience init(day: GroupDay?) {
         self.init()
         self.day = day
     }
     
-    
+    // MARK: - Overrides
     override func loadView() {
         super.loadView()
         

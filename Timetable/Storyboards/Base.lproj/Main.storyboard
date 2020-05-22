@@ -105,10 +105,10 @@
             </objects>
             <point key="canvasLocation" x="1270" y="144"/>
         </scene>
-        <!--View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="6h9-eR-cZe">
             <objects>
-                <viewController id="WRP-ah-zxY" sceneMemberID="viewController">
+                <viewController id="WRP-ah-zxY" customClass="SessionViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MBU-Fo-yij">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

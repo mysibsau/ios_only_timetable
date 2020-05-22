@@ -378,7 +378,6 @@ extension DataManager {
             groupWeeks.append(groupWeek)
         }
 
-        //let groupTimetable = GroupTimetable(groupId: timatable.groupId, weeks: groupWeeks)
         let groupTimetable = GroupTimetable(groupId: timetable.groupId, weeks: groupWeeks)
         return groupTimetable
     }

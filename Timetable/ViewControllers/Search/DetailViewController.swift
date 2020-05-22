@@ -14,20 +14,24 @@ class DetailViewController: UIViewController {
     var isFavorite: Bool!
     var delegate: DetailViewDelegate?
     
+    // MARK: - Private
+    // MARK: Массив кнопок
     private var buttons: [(text: String, color: UIColor, action: () -> ())]!
     
     private var type: EntitiesType!
     private var id: Int!
     
+    // MARK: Заголовки для 1 и 2 секции
     private var firstSectionHeader: String? = nil
     private var secondSectionHeader: String? = nil
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
-    // нижняя надпись, которыя появляется при копировании текста
+    // MARK: Нижняя надпись, которыя появляется при копировании текста
     private let alertView = AlertView(alertText: "Текст скопирован")
     
     
+    // MARK: - Overrides
     override func loadView() {
         super.loadView()
         
@@ -43,7 +47,7 @@ class DetailViewController: UIViewController {
         alertView.isHidden = true
     }
 
-    // MARK: - Init
+    // MARK: - Initialization
     convenience init(group: RGroup, isFavorite: Bool) {
         self.init()
         

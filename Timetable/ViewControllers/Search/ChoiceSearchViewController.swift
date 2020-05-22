@@ -18,7 +18,7 @@ class ChoiceSearchViewController: UITableViewController{
     ]
     
 
-    // MARK: - View Did Load
+    // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +59,7 @@ class ChoiceSearchViewController: UITableViewController{
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Раньше создавал 3 отдельных класса: для Групп, Преподавателей, Мест
-        // Сейчас создал один класс с дженериками и почти все норм, осталось поиск прикрутить
+        // Сейчас создал один класс с дженериками
         
         if indexPath.row == 0 {
             let groupTableViewController = TableViewController<RGroup>()

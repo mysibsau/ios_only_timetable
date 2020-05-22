@@ -23,7 +23,7 @@ class StackViewCornerRadius: UIView {
         didSet { subgroupStackView.spacing = self.spacing }
     }
     
-    
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -34,7 +34,7 @@ class StackViewCornerRadius: UIView {
         setupViews()
     }
     
-    
+    // MARK: - Setup Views
     private func setupViews() {
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -67,7 +67,7 @@ class StackViewCornerRadius: UIView {
 }
 
 
-// MARK: - Все для установки нового занятия на это вью
+// MARK: - Все для установки нового занятия на это вью (пока только для групп)
 extension StackViewCornerRadius {
     
     convenience init(lesson: GroupLesson) {
@@ -75,7 +75,7 @@ extension StackViewCornerRadius {
         self.set(lesson: lesson)
     }
     
-    // MARK: Установка нового занятия
+    // MARK: Установка нового занятия для группы
     private func set(lesson: GroupLesson) {
         // если тут уже было занятие, то удаляем его
         subgroupStackView.removeAllArrangedSubviews()
@@ -169,22 +169,6 @@ extension StackViewCornerRadius {
     }
     
 }
-
-//// MARK: - Все для добавления обычных label
-//extension StackViewCornerRadius {
-//    
-//    func addLabel(text: String) {
-//        let label = UILabel()
-//        label.text = text
-//        label.textAlignment = .left
-//        label.numberOfLines = 0
-//        label.lineBreakMode = .byWordWrapping
-//        subgroupStackView.addArrangedSubview(label)
-//        label.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
-//    }
-//    
-//}
-
 
 // MARK: ВОЗМОЖНО СТОИТ УБРАТЬ ЭТО (Если не буду юзать в итоге)
 extension StackViewCornerRadius {

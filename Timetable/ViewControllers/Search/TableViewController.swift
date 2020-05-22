@@ -27,7 +27,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         return searchController.isActive && !searchBarIsEmpty
     }
 
-    // MARK: - View Did Load
+    // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -186,7 +186,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
 // MARK: - Showing Timetable
 extension TableViewController: DetailViewDelegate {
     
-    // MARK: ЭТО ДОПИСАТЬ ТОЛЬКО ПРИНТИТ БЛЯДЬ
+    // MARK: Открытие расписания
     func showTimetable(withId id: Int) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
