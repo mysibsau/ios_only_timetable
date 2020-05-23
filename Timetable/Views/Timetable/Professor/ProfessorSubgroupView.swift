@@ -1,25 +1,23 @@
 //
-//  Subgroup.swift
+//  ProfessorSubgroupView.swift
 //  Timetable
 //
-//  Created by art-off on 08.04.2020.
+//  Created by art-off on 23.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
+class ProfessorSubgroupView: UIView {
 
-class SubgroupGroupView: UIView {
-    
-    var professorsId: [Int]?
+    var groupsId: [Int]?
     var placeId: Int?
-    
     
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var subject: UILabel!
     @IBOutlet weak var type: UILabel!
-    @IBOutlet weak var professor: UILabel!
+    @IBOutlet weak var group: UILabel!
     @IBOutlet weak var place: UILabel!
     
     
@@ -43,7 +41,7 @@ class SubgroupGroupView: UIView {
     // MARK: Setup Views
     private func loadXib() {
         // загружаем xib из какого-то Boundle (можно чекнуть документацию)
-        Bundle.main.loadNibNamed("SubgroupView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("GroupSubgroupView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -55,7 +53,7 @@ class SubgroupGroupView: UIView {
     }
     
     private func setupLabels() {
-        for label in [subject, type, professor, place] {
+        for label in [subject, type, group, place] {
             label?.textAlignment = .left
             label?.numberOfLines = 0
             label?.lineBreakMode = .byWordWrapping
@@ -65,7 +63,7 @@ class SubgroupGroupView: UIView {
         
         subject.textColor = Colors.sibsuBlue
         type.textColor = Colors.sibsuGreen
-        professor.textColor = .systemGray
+        group.textColor = .systemGray
     }
     
     // MARK: - Recongnizers
@@ -81,16 +79,5 @@ class SubgroupGroupView: UIView {
         // 2. let timetable = DataManager.sharedinstance.gettimetable(forPlace: placeId)
         // NotificationCenter.default.post(name: .didSelectPlace, object: self, userInfo: [0: timetalbe])
     }
-    
-}
 
-// MARK: - Обработка нажатий (еще не решил что использовать, длинные или нет)
-extension SubgroupGroupView {
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        // тут написать открытие преподавателя или что-то подобное
-    }
-    
 }

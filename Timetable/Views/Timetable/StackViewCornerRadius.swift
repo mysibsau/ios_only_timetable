@@ -157,7 +157,7 @@ extension StackViewCornerRadius {
     
     // MARK: Добавление подргуппы (испльзутеся и тогда, когда подргуппа одна)
     private func addSubgroup(subject: String, type: String, proffesor: String, place: String) {
-        let subgroupView = SubgroupGroupView()
+        let subgroupView = GroupSubgroupView()
         subgroupView.subject.text = subject
         subgroupView.type.text = type
         subgroupView.professor.text = proffesor

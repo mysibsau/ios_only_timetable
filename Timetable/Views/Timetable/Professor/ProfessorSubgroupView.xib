@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfessorSubgroupView" customModule="Timetable" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="pF5-fD-W1H"/>
+                <outlet property="group" destination="Rdc-KZ-NWX" id="HzG-6h-vzC"/>
+                <outlet property="place" destination="LUb-Cj-ZWS" id="ohq-Ng-DEB"/>
+                <outlet property="subject" destination="jaa-nk-Ete" id="o5v-FP-5Dq"/>
+                <outlet property="type" destination="7Hr-Xk-F6o" id="Q2M-En-VBB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Очень длинное название предмета которых не бывает" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaa-nk-Ete">
+                    <rect key="frame" x="0.0" y="0.0" width="373" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="(вид занятия)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hr-Xk-F6o">
+                    <rect key="frame" x="0.0" y="21.5" width="373" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Группа" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdc-KZ-NWX">
+                    <rect key="frame" x="0.0" y="46.5" width="373" height="23.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Место учебы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUb-Cj-ZWS">
+                    <rect key="frame" x="0.0" y="72" width="373" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="jaa-nk-Ete" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DAc-Qa-lIS"/>
+                <constraint firstAttribute="trailing" secondItem="jaa-nk-Ete" secondAttribute="trailing" id="IEr-UJ-zct"/>
+                <constraint firstItem="7Hr-Xk-F6o" firstAttribute="top" secondItem="jaa-nk-Ete" secondAttribute="bottom" constant="2" id="K6Z-Bc-uw5"/>
+                <constraint firstItem="7Hr-Xk-F6o" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Q9U-29-vdX"/>
+                <constraint firstItem="LUb-Cj-ZWS" firstAttribute="top" secondItem="Rdc-KZ-NWX" secondAttribute="bottom" constant="2" id="SRY-b8-yad"/>
+                <constraint firstItem="Rdc-KZ-NWX" firstAttribute="top" secondItem="7Hr-Xk-F6o" secondAttribute="bottom" constant="8" id="T4u-zf-Ltu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="LUb-Cj-ZWS" secondAttribute="bottom" id="bDE-g1-UXj"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7Hr-Xk-F6o" secondAttribute="trailing" id="g5x-Hb-uPe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LUb-Cj-ZWS" secondAttribute="trailing" id="hip-vT-9as"/>
+                <constraint firstItem="LUb-Cj-ZWS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hyt-55-jfW"/>
+                <constraint firstItem="Rdc-KZ-NWX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="skn-ij-KOG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rdc-KZ-NWX" secondAttribute="trailing" id="tkK-dB-94g"/>
+                <constraint firstItem="jaa-nk-Ete" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xJ5-9G-Jb3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="107.97101449275362" y="-155.69196428571428"/>
+        </view>
+    </objects>
+</document>

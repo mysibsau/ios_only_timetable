@@ -60,8 +60,8 @@
 		4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */; };
 		4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B824606DE200D050EB /* SubgroupProfessorVeiw.swift */; };
 		4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */; };
-		4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* SubgroupView.xib */; };
-		4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */; };
+		4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* GroupSubgroupView.xib */; };
+		4A9C913A243DCB3E009F67A8 /* GroupSubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* GroupSubgroupView.swift */; };
 		4AC345F42471773400BAA474 /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC345F32471773400BAA474 /* DetailViewDelegate.swift */; };
 		4AC345F62471922200BAA474 /* RGroup+newObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC345F52471922200BAA474 /* RGroup+newObject.swift */; };
 		4AC345F8247192A100BAA474 /* RProfessor+newObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC345F7247192A100BAA474 /* RProfessor+newObject.swift */; };
@@ -89,6 +89,8 @@
 		4AC64C7C2477B44100081D55 /* WrapperViewWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C7B2477B44100081D55 /* WrapperViewWithLabel.swift */; };
 		4AC64C7F2477C34300081D55 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C7E2477C34300081D55 /* SessionViewController.swift */; };
 		4AC64C832477F63D00081D55 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C822477F63D00081D55 /* AdditionalViewController.swift */; };
+		4AC64C872479728700081D55 /* ProfessorSubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */; };
+		4AC64C892479730100081D55 /* ProfessorSubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,8 +149,8 @@
 		4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultationWeek.swift; sourceTree = "<group>"; };
 		4A9207B824606DE200D050EB /* SubgroupProfessorVeiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupProfessorVeiw.swift; sourceTree = "<group>"; };
 		4A9207BA24606F2C00D050EB /* SubgroupPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupPlaceView.swift; sourceTree = "<group>"; };
-		4A9C9137243DCB04009F67A8 /* SubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubgroupView.xib; sourceTree = "<group>"; };
-		4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubgroupGroupView.swift; sourceTree = "<group>"; };
+		4A9C9137243DCB04009F67A8 /* GroupSubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSubgroupView.xib; sourceTree = "<group>"; };
+		4A9C9139243DCB3E009F67A8 /* GroupSubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubgroupView.swift; sourceTree = "<group>"; };
 		4AC345F32471773400BAA474 /* DetailViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
 		4AC345F52471922200BAA474 /* RGroup+newObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RGroup+newObject.swift"; sourceTree = "<group>"; };
 		4AC345F7247192A100BAA474 /* RProfessor+newObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RProfessor+newObject.swift"; sourceTree = "<group>"; };
@@ -176,6 +178,8 @@
 		4AC64C7B2477B44100081D55 /* WrapperViewWithLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperViewWithLabel.swift; sourceTree = "<group>"; };
 		4AC64C7E2477C34300081D55 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		4AC64C822477F63D00081D55 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
+		4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorSubgroupView.swift; sourceTree = "<group>"; };
+		4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorSubgroupView.xib; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -496,8 +500,8 @@
 			isa = PBXGroup;
 			children = (
 				4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */,
-				4A9C9139243DCB3E009F67A8 /* SubgroupGroupView.swift */,
-				4A9C9137243DCB04009F67A8 /* SubgroupView.xib */,
+				4AC64C842479723D00081D55 /* Group */,
+				4AC64C852479725500081D55 /* Professor */,
 				4AC64C7924767CE200081D55 /* PagingKit */,
 			);
 			path = Timetable;
@@ -620,6 +624,24 @@
 			path = Additional;
 			sourceTree = "<group>";
 		};
+		4AC64C842479723D00081D55 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				4A9C9139243DCB3E009F67A8 /* GroupSubgroupView.swift */,
+				4A9C9137243DCB04009F67A8 /* GroupSubgroupView.xib */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		4AC64C852479725500081D55 /* Professor */ = {
+			isa = PBXGroup;
+			children = (
+				4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */,
+				4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */,
+			);
+			path = Professor;
+			sourceTree = "<group>";
+		};
 		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,9 +711,10 @@
 			files = (
 				4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */,
 				4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */,
+				4AC64C892479730100081D55 /* ProfessorSubgroupView.xib in Resources */,
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4AC64C4F2472F8C400081D55 /* AlertView.xib in Resources */,
-				4A9C9138243DCB04009F67A8 /* SubgroupView.xib in Resources */,
+				4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,7 +751,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9C913A243DCB3E009F67A8 /* SubgroupGroupView.swift in Sources */,
+				4A9C913A243DCB3E009F67A8 /* GroupSubgroupView.swift in Sources */,
 				4AC64C6424742EFD00081D55 /* WritingSession.swift in Sources */,
 				4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */,
 				4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */,
@@ -791,6 +814,7 @@
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
 				4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */,
 				4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */,
+				4AC64C872479728700081D55 /* ProfessorSubgroupView.swift in Sources */,
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,

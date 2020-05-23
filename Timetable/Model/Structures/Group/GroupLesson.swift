@@ -15,6 +15,7 @@ struct GroupSubgroup {
     let professors: [String]
     let professorsId: [Int]
     let place: String
+    //let placeId: Int?
     
 }
 
