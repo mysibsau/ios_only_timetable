@@ -12,7 +12,10 @@ import PagingKit
 class TimetableViewController: UIViewController {
     
     var type: EntitiesType?
-    var weeks: [Any]?
+    // Any потому что тут будут GroupTimetable, ProfessorTimetable и PlaceTimetable
+    // думаю, можно сделать как то получше (протоколы и т д) но пока не придумал
+    var timetable: Any?
+    // var weeks: [Any]?
     var currWeek = 0
     
     
@@ -64,7 +67,7 @@ class TimetableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // если расписание есть, то нет смысла показывать надпись
-        guard weeks == nil else {
+        guard timetable == nil else {
             alertForChoice.isHidden = true
             return
         }
@@ -119,9 +122,10 @@ class TimetableViewController: UIViewController {
             
             print("IN onDidSelectGroup")
             guard let groupTimetable = userInfo[0] else { return }
-            weeks = [GroupTimetable]()
-            weeks?.append(groupTimetable.weeks[0])
-            weeks?.append(groupTimetable.weeks[1])
+            timetable = groupTimetable
+//            weeks = [GroupTimetable]()
+//            weeks?.append(groupTimetable.weeks[0])
+//            weeks?.append(groupTimetable.weeks[1])
             
             navigationItem.title = groupTimetable.groupName
             
@@ -160,9 +164,10 @@ class TimetableViewController: UIViewController {
         if timetableType == .group {
             guard let groupTimetable = DataManager.shared.getTimetable(forGroupId: timetableId) else { return }
             
-            weeks = [GroupTimetable]()
-            weeks?.append(groupTimetable.weeks[0])
-            weeks?.append(groupTimetable.weeks[1])
+            timetable = groupTimetable
+//            weeks = [GroupTimetable]()
+//            weeks?.append(groupTimetable.weeks[0])
+//            weeks?.append(groupTimetable.weeks[1])
             
             type = timetableType
             
@@ -233,15 +238,15 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         
         //return DayViewController()
         //return dataSource[index].vc
-        guard let weeks = weeks else {
+        guard let timetable = timetable else {
             return UIViewController()
         }
         // тут будет проверка на тип сущности, которой будет отображаться расписание (группа, преподаватель, кабинет)
         // FIXME: Не нужна тут проверка типа, скорее всего
         if type == .group {
-            if let weeks = weeks as? [GroupWeek] {
+            if let timetable = timetable as? GroupTimetable {
                 //return GroupDayViewController(day: weeks[currWeek].days[index])
-                return GroupDayViewController(day: weeks[currWeek].days[index])
+                return GroupDayViewController(day: timetable.weeks[currWeek].days[index])
             }
         }
         return UIViewController()
