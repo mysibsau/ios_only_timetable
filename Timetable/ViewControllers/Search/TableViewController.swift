@@ -202,12 +202,18 @@ extension TableViewController: DetailViewDelegate {
             // FIXME: Тут происходит дизбалансный вызов
             tabBarController?.selectedIndex = 0
             navigationController?.popToRootViewController(animated: true)
-        } else if let group = entitie as? RProfessor {
             
-            //NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: group])
-            //tabBarController?.selectedIndex = 0
-            //navigationController?.popToRootViewController(animated: true)
-        } else if let group = entitie as? RPlace {
+        } else if let professor = entitie as? RProfessor {
+            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
+            guard let timetable = optionalTimetable else {
+                // вставит спинер
+                return
+            }
+            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetable])
+            tabBarController?.selectedIndex = 0
+            navigationController?.popToRootViewController(animated: true)
+            
+        } else if let place = entitie as? RPlace {
             
             //NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: group])
             //tabBarController?.selectedIndex = 0

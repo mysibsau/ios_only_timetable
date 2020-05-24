@@ -30,8 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UserDefaultsConfig.timetableType = EntitiesType.professor.raw
 //        print(UserDefaultsConfig.timetableType)
         
-        Common.addGroupTimetable1()
-        Common.addGroupTimetable5()
+        //Common.addGroupTimetable1()
+        //Common.addGroupTimetable5()
+        
+        //Common.addProfessorTimetable1()
+        //Common.addProfessorTimetable5()
         
         
         

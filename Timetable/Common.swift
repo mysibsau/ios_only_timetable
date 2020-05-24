@@ -345,4 +345,188 @@ class Common {
         DataManager.shared.writeFavorite(groups: groups)
     }
     
+    
+    
+    // MARK: Расписание преопдавателей
+    static func getProfessorDay0() -> RProfessorDay {
+        
+        let lesson1 = RProfessorLesson()
+        lesson1.time = "11:30 - 13:00"
+        
+        let subgroup11 = RProfessorSubgroup()
+        subgroup11.subject = "Не физ культура"
+        subgroup11.type = "(практика)"
+        subgroup11.groups.append(1)
+        subgroup11.groups.append(2)
+        subgroup11.place = "СПОРТЗАЛ"
+        lesson1.subgroups.append(subgroup11)
+        
+        let subgroup12 = RProfessorSubgroup()
+        subgroup12.subject = "из культура"
+        subgroup12.type = "(практика)"
+        subgroup12.groups.append(1)
+        subgroup12.groups.append(2)
+        subgroup12.place = "СПОРТЗАЛ"
+        lesson1.subgroups.append(subgroup12)
+        
+        
+        let lesson2 = RProfessorLesson()
+        lesson2.time = "13:30 - 15:00"
+        
+        let subgroup21 = RProfessorSubgroup()
+        subgroup21.subject = "Архитектура"
+        subgroup21.type = "(лекция)"
+        subgroup21.groups.append(5)
+        subgroup21.place = "Л 319"
+        lesson2.subgroups.append(subgroup21)
+        let subgroup22 = RProfessorSubgroup()
+        subgroup22.subject = "Ахритектура вычислительных систем"
+        subgroup22.type = "(лекция)"
+        subgroup22.groups.append(7)
+        subgroup22.place = "Л 315"
+        
+        
+        let lesson3 = RProfessorLesson()
+        lesson3.time = "15:10 - 16:40"
+        
+        let subgroup31 = RProfessorSubgroup()
+        subgroup31.subject = "Матааан"
+        subgroup31.type = "(практика)"
+        subgroup31.groups.append(4)
+        subgroup31.place = "Н 304"
+        lesson3.subgroups.append(subgroup31)
+        
+        
+        let lesson4 = RProfessorLesson()
+        lesson4.time = "15:10 - 16:40"
+        
+        let subgroup41 = RProfessorSubgroup()
+        subgroup41.subject = "Вычислительная математика"
+        subgroup41.type = "(практика)"
+        subgroup41.groups.append(4)
+        subgroup41.place = "Н 304"
+        lesson4.subgroups.append(subgroup41)
+
+        
+        let day = RProfessorDay()
+        day.number = 0
+        day.lessons.append(lesson1)
+        day.lessons.append(lesson2)
+        day.lessons.append(lesson3)
+        day.lessons.append(lesson4)
+        return day
+    }
+    
+    static func getProfessorDay1() -> RProfessorDay {
+        
+        let lesson1 = RProfessorLesson()
+        lesson1.time = "11:30 - 13:00"
+        
+        let subgroup11 = RProfessorSubgroup()
+        subgroup11.subject = "Физическая культура что-то там еще"
+        subgroup11.type = "(практика)"
+        subgroup11.groups.append(1)
+        subgroup11.groups.append(2)
+        subgroup11.place = "СПОРТЗАЛ"
+        lesson1.subgroups.append(subgroup11)
+        
+        
+        let lesson4 = RProfessorLesson()
+        lesson4.time = "15:10 - 16:40"
+        
+        let subgroup41 = RProfessorSubgroup()
+        subgroup41.subject = "Вычислительная математика"
+        subgroup41.type = "(практика)"
+        subgroup41.groups.append(4)
+        subgroup41.place = "Н 304"
+        lesson4.subgroups.append(subgroup41)
+        
+        
+        let day = RProfessorDay()
+        day.number = 1
+        day.lessons.append(lesson1)
+        day.lessons.append(lesson4)
+        return day
+    }
+    
+    static func getProfessorDay5() -> RProfessorDay {
+        
+        let lesson1 = RProfessorLesson()
+        lesson1.time = "33:33 - 33:00"
+        
+        let subgroup11 = RProfessorSubgroup()
+        subgroup11.subject = "sdsdsdsd"
+        subgroup11.type = "(практика)"
+        subgroup11.groups.append(1)
+        subgroup11.groups.append(2)
+        subgroup11.place = "СПОРТЗАЛ"
+        lesson1.subgroups.append(subgroup11)
+        
+        
+        let lesson3 = RProfessorLesson()
+        lesson3.time = "15:10 - 16:40"
+        
+        let subgroup31 = RProfessorSubgroup()
+        subgroup31.subject = "ffffff"
+        subgroup31.type = "(практика)"
+        subgroup31.groups.append(4)
+        subgroup31.place = "Н 304"
+        lesson3.subgroups.append(subgroup31)
+        
+        
+        let day = RProfessorDay()
+        day.number = 5
+        day.lessons.append(lesson1)
+        day.lessons.append(lesson3)
+        return day
+    }
+    
+    static func getProfessorWeek1() -> RProfessorWeek {
+        let week = RProfessorWeek()
+        week.number = 0
+        week.days.append(getProfessorDay0())
+
+        return week
+    }
+    
+    static func getProfessorWeek2() -> RProfessorWeek {
+        let week = RProfessorWeek()
+        week.number = 1
+        week.days.append(getProfessorDay0())
+        week.days.append(getProfessorDay1())
+        week.days.append(getProfessorDay5())
+
+        return week
+    }
+    
+    static func getProfessorWeek3() -> RProfessorWeek {
+        let week = RProfessorWeek()
+        week.number = 1
+        week.days.append(getProfessorDay1())
+
+        return week
+    }
+    
+    
+    static func addProfessorTimetable1() {
+        
+        let timetable = RProfessorTimetable()
+        timetable.professorId = 10
+
+        timetable.weeks.append(getProfessorWeek1())
+        timetable.weeks.append(getProfessorWeek2())
+        
+        DataManager.shared.write(professorTimetable: timetable)
+    }
+    
+    static func addProfessorTimetable5() {
+        let timetable = RProfessorTimetable()
+        timetable.professorId = 5
+
+        timetable.weeks.append(getProfessorWeek1())
+        timetable.weeks.append(getProfessorWeek3())
+        
+        DataManager.shared.write(professorTimetable: timetable)
+    }
+    
 }

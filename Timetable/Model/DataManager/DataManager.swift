@@ -275,11 +275,15 @@ extension DataManager: GettingTimetable {
         return groupTimetable
     }
     
-    func getTimetable(forProfessorId professorId: Int) -> RProfessorTimetable? {
-        //let timetables = realmDocuments.objects(RProfessorTimetable.self).filter("professorId = \(professorId)")
+    func getTimetable(forProfessorId professorId: Int) -> ProfessorTimetable? {
         let optionalTimetable = realmDocuments.object(ofType: RProfessorTimetable.self, forPrimaryKey: professorId)
+        let optionalProfessor = realmCaches.object(ofType: RProfessor.self, forPrimaryKey: professorId)
         guard let timetable = optionalTimetable else { return nil }
-        return timetable
+        guard let professor = optionalProfessor else { return nil }
+        
+        let profesorTimetable = getProfessorTimetable(from: timetable, professorName: professor.name)
+        
+        return profesorTimetable
     }
     
     func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable? {
@@ -384,6 +388,71 @@ extension DataManager {
     }
     
     // MARK: Перевод объекта РАСПИСАНИЯ ПРОФЕССОРА Realm к структуре, используемой в приложении
+    private func getProfessorTimetable(from timetable: RProfessorTimetable, professorName: String) -> ProfessorTimetable {
+        var professorWeeks = [ProfessorWeek]()
+
+        // пробегаемся по всем неделям (по дву)
+        for week in timetable.weeks {
+
+            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
+            var professorDays: [ProfessorDay?] = [nil, nil, nil, nil, nil, nil]
+
+            // пробегаемся во всем дням недели
+            for day in week.days {
+
+                var professorLessons = [ProfessorLesson]()
+                
+                // пробегаемся по всем занятиям дня
+                for lesson in day.lessons {
+
+                    var professorSubgroups = [ProfessorSubgroup]()
+                    
+                    // пробегаемся по всех подргуппам занятия
+                    for subgroup in lesson.subgroups {
+
+                        var groupsName = [String]()
+                        // берем имя преподавателя из БД с помощью id
+                        for id in subgroup.groups {
+                            let group = getProfessor(withId: id)
+                            if let group = group {
+                                groupsName.append(group.name)
+                            } else {
+                                groupsName.append("Ошибка")
+                            }
+                        }
+                        
+                        // копируем подргуппу
+                        let professorSubgroup = ProfessorSubgroup(
+                            subject: subgroup.subject,
+                            type: subgroup.type,
+                            groups: groupsName,
+                            groupsId: Array(subgroup.groups),
+                            place: subgroup.place)
+
+                        professorSubgroups.append(professorSubgroup)
+                    }
+                    
+                    // добавляем занятие в массив занятий
+                    let professorLesson = ProfessorLesson(time: lesson.time, subgroups: professorSubgroups)
+                    professorLessons.append(professorLesson)
+                }
+                
+                let professorDay = ProfessorDay(lessons: professorLessons)
+                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
+                if day.number >= 0 && day.number <= 5 {
+                    // заменяем nil
+                    professorDays[day.number] = professorDay
+                }
+            }
+
+            let professorWeek = ProfessorWeek(days: professorDays)
+            professorWeeks.append(professorWeek)
+        }
+
+        let professorTimetable = ProfessorTimetable(professorId: timetable.professorId, professorName: professorName, weeks: professorWeeks)
+        return professorTimetable
+    }
+    
     
     // MARK: Перевод объекта РАСПИСАНИЯ КАБИНЕТА Realm к структуре, используемой в приложении
 

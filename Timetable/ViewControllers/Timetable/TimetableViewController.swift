@@ -63,6 +63,10 @@ class TimetableViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+        
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,9 +143,21 @@ class TimetableViewController: UIViewController {
     }
     
     @objc func onDidSelectProfessor(_ notification: Notification) {
-        type = .professor
-        if let a = notification.userInfo as? [Int: RProfessor] {
+        if let userInfo = notification.userInfo as? [Int: ProfessorTimetable] {
+            type = .professor
+            
             print("IN onDidSelectProfessor")
+            guard let professorTimetable = userInfo[0] else { return }
+            timetable = professorTimetable
+            
+            navigationItem.title = professorTimetable.professorName
+            
+            // Сохраняем выбранное расписание в UserDefaults
+            UserDefaultsConfig.timetableType = type?.raw
+            UserDefaultsConfig.timetableId = professorTimetable.professorId
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
         }
     }
     
@@ -165,9 +181,6 @@ class TimetableViewController: UIViewController {
             guard let groupTimetable = DataManager.shared.getTimetable(forGroupId: timetableId) else { return }
             
             timetable = groupTimetable
-//            weeks = [GroupTimetable]()
-//            weeks?.append(groupTimetable.weeks[0])
-//            weeks?.append(groupTimetable.weeks[1])
             
             type = timetableType
             
@@ -175,8 +188,15 @@ class TimetableViewController: UIViewController {
             
             menuViewController.reloadData()
             contentViewController.reloadData()
-        } else if timetableType == .professor {
             
+        } else if timetableType == .professor {
+            guard let professorTimetable = DataManager.shared.getTimetable(forProfessorId: timetableId) else { return }
+            
+            timetable = professorTimetable
+            
+            type = timetableType
+            
+            navigationItem.title = professorTimetable.professorName
             
             menuViewController.reloadData()
             contentViewController.reloadData()
@@ -247,6 +267,11 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
             if let timetable = timetable as? GroupTimetable {
                 //return GroupDayViewController(day: weeks[currWeek].days[index])
                 return GroupDayViewController(day: timetable.weeks[currWeek].days[index])
+            }
+        } else if type == .professor {
+            if let timetable = timetable as? ProfessorTimetable {
+                //dump(timetable.weeks[currWeek].days[index])
+                return ProfessorDayViewController(day: timetable.weeks[currWeek].days[index])
             }
         }
         return UIViewController()

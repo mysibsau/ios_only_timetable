@@ -91,6 +91,11 @@
 		4AC64C832477F63D00081D55 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C822477F63D00081D55 /* AdditionalViewController.swift */; };
 		4AC64C872479728700081D55 /* ProfessorSubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */; };
 		4AC64C892479730100081D55 /* ProfessorSubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */; };
+		4AC64C8B2479A6C700081D55 /* ProfessorDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C8A2479A6C700081D55 /* ProfessorDayViewController.swift */; };
+		4AC64C8E2479A71000081D55 /* ProfessorLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C8D2479A71000081D55 /* ProfessorLesson.swift */; };
+		4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C8F2479A71800081D55 /* ProfessorWeek.swift */; };
+		4AC64C922479A72100081D55 /* ProfessorDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C912479A72100081D55 /* ProfessorDay.swift */; };
+		4AC64C942479A72900081D55 /* ProfessorTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C932479A72900081D55 /* ProfessorTimetable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +185,11 @@
 		4AC64C822477F63D00081D55 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
 		4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorSubgroupView.swift; sourceTree = "<group>"; };
 		4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorSubgroupView.xib; sourceTree = "<group>"; };
+		4AC64C8A2479A6C700081D55 /* ProfessorDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorDayViewController.swift; sourceTree = "<group>"; };
+		4AC64C8D2479A71000081D55 /* ProfessorLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLesson.swift; sourceTree = "<group>"; };
+		4AC64C8F2479A71800081D55 /* ProfessorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorWeek.swift; sourceTree = "<group>"; };
+		4AC64C912479A72100081D55 /* ProfessorDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorDay.swift; sourceTree = "<group>"; };
+		4AC64C932479A72900081D55 /* ProfessorTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorTimetable.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -422,6 +432,7 @@
 			children = (
 				4A920772245DCFF800D050EB /* TimetableViewController.swift */,
 				4AC64C6A24756A8C00081D55 /* GroupDayViewController.swift */,
+				4AC64C8A2479A6C700081D55 /* ProfessorDayViewController.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -565,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				4AC64C7424757F3C00081D55 /* Group */,
+				4AC64C8C2479A6E700081D55 /* Professor */,
 				4AC64C7324757EF500081D55 /* Unused */,
 			);
 			path = Structures;
@@ -584,8 +596,8 @@
 			isa = PBXGroup;
 			children = (
 				4AC64C6D24757D1500081D55 /* GroupLesson.swift */,
-				4AC64C7124757D7A00081D55 /* GroupWeek.swift */,
 				4AC64C6F24757D3F00081D55 /* GroupDay.swift */,
+				4AC64C7124757D7A00081D55 /* GroupWeek.swift */,
 				4AC64C7524757F6400081D55 /* GroupTimetable.swift */,
 			);
 			path = Group;
@@ -638,6 +650,17 @@
 			children = (
 				4AC64C862479728700081D55 /* ProfessorSubgroupView.swift */,
 				4AC64C882479730100081D55 /* ProfessorSubgroupView.xib */,
+			);
+			path = Professor;
+			sourceTree = "<group>";
+		};
+		4AC64C8C2479A6E700081D55 /* Professor */ = {
+			isa = PBXGroup;
+			children = (
+				4AC64C8D2479A71000081D55 /* ProfessorLesson.swift */,
+				4AC64C912479A72100081D55 /* ProfessorDay.swift */,
+				4AC64C8F2479A71800081D55 /* ProfessorWeek.swift */,
+				4AC64C932479A72900081D55 /* ProfessorTimetable.swift */,
 			);
 			path = Professor;
 			sourceTree = "<group>";
@@ -781,7 +804,9 @@
 				4AC64C402472BB5F00081D55 /* GettingTimetable.swift in Sources */,
 				4AC64C7624757F6400081D55 /* GroupTimetable.swift in Sources */,
 				4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */,
+				4AC64C922479A72100081D55 /* ProfessorDay.swift in Sources */,
 				4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */,
+				4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */,
 				4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */,
 				4AC64C6B24756A8C00081D55 /* GroupDayViewController.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
@@ -827,6 +852,9 @@
 				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
+				4AC64C942479A72900081D55 /* ProfessorTimetable.swift in Sources */,
+				4AC64C8B2479A6C700081D55 /* ProfessorDayViewController.swift in Sources */,
+				4AC64C8E2479A71000081D55 /* ProfessorLesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

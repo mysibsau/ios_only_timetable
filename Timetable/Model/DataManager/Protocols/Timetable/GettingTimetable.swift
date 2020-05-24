@@ -11,7 +11,7 @@ import RealmSwift
 protocol GettingTimetable {
     
     func getTimetable(forGroupId groupId: Int) -> GroupTimetable?
-    func getTimetable(forProfessorId professorId: Int) -> RProfessorTimetable?
+    func getTimetable(forProfessorId professorId: Int) -> ProfessorTimetable?
     func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable?
     
 }
