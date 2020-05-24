@@ -1,22 +1,23 @@
 //
-//  GroupDayViewController.swift
+//  DayViewController.swift
 //  Timetable
 //
-//  Created by art-off on 20.05.2020.
+//  Created by art-off on 25.05.2020.
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
 import UIKit
 
-class GroupDayViewController: UIViewController {
+class DayViewController<EntitieDay>: UIViewController {
+    
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    var day: GroupDay?
+    var day: EntitieDay?
     
     // MARK: - Initialization
-    convenience init(day: GroupDay?) {
+    convenience init(day: EntitieDay?) {
         self.init()
         self.day = day
     }
@@ -29,7 +30,7 @@ class GroupDayViewController: UIViewController {
         setupStackView()
 
         view.backgroundColor = Colors.backgroungColor
-        navigationItem.title = "БПИ18-01"
+        navigationItem.title = "Группа"
     }
     
     override func viewDidLoad() {
@@ -57,10 +58,24 @@ class GroupDayViewController: UIViewController {
         }
         
         // заполняем день занятиями
-        for lesson in day.lessons {
-            let lessonView = StackViewCornerRadius(lesson: lesson)
-            stackView.addArrangedSubview(lessonView)
-            lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        if let groupDay = day as? GroupDay {
+            for lesson in groupDay.lessons {
+                let lessonView = StackViewCornerRadius(lesson: lesson)
+                stackView.addArrangedSubview(lessonView)
+                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+            }
+        } else if let professorDay = day as? ProfessorDay {
+            for lesson in professorDay.lessons {
+                let lessonView = StackViewCornerRadius(lesson: lesson)
+                stackView.addArrangedSubview(lessonView)
+                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+            }
+        } else if let placeDay = day as? PlaceDay {
+            for lesson in placeDay.lessons {
+                let lessonView = StackViewCornerRadius(lesson: lesson)
+                stackView.addArrangedSubview(lessonView)
+                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+            }
         }
         
     }

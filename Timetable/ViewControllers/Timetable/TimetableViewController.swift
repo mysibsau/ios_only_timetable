@@ -63,10 +63,6 @@ class TimetableViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
-        
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -279,18 +275,21 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         if type == .group {
             if let timetable = timetable as? GroupTimetable {
                 //return GroupDayViewController(day: weeks[currWeek].days[index])
-                return GroupDayViewController(day: timetable.weeks[currWeek].days[index])
+                //return GroupDayViewController(day: timetable.weeks[currWeek].days[index])
+                return DayViewController<GroupDay>(day: timetable.weeks[currWeek].days[index])
             }
         } else if type == .professor {
             if let timetable = timetable as? ProfessorTimetable {
-                return ProfessorDayViewController(day: timetable.weeks[currWeek].days[index])
+                //return ProfessorDayViewController(day: timetable.weeks[currWeek].days[index])
+                return DayViewController<ProfessorDay>(day: timetable.weeks[currWeek].days[index])
             }
         } else if type == .place {
             if let timetable = timetable as? PlaceTimetable {
-                let vc = UIViewController()
-                vc.view.backgroundColor = .green
+                //let vc = UIViewController()
+                //vc.view.backgroundColor = .green
                 //return vc
-                return PlaceDayViewController(day: timetable.weeks[currWeek].days[index])
+                //return PlaceDayViewController(day: timetable.weeks[currWeek].days[index])
+                return DayViewController<PlaceDay>(day: timetable.weeks[currWeek].days[index])
             }
         }
         return UIViewController()

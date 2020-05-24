@@ -62,7 +62,7 @@ class PlaceSubgroupView: UIView {
         
         subject.textColor = Colors.sibsuBlue
         type.textColor = Colors.sibsuGreen
-        group.textColor = .systemGray
+        professor.textColor = .systemGray
     }
     
     // MARK: - Recongnizers
