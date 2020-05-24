@@ -22,19 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Common.addGroups()
         Common.addProfessors()
         Common.addPlaces()
-        Common.addFavoriteGroups()
+        //Common.addFavoriteGroups()
 //        UserDefaults.standard.set(, forKey: "1111")
-//        print(UserDefaults.standard.object(forKey: "1111"))
         
-//        print(UserDefaultsConfig.timetableType)
 //        UserDefaultsConfig.timetableType = EntitiesType.professor.raw
-//        print(UserDefaultsConfig.timetableType)
         
         //Common.addGroupTimetable1()
         //Common.addGroupTimetable5()
         
         //Common.addProfessorTimetable1()
         //Common.addProfessorTimetable5()
+        
+        //Common.addPlaceTimetable0()
+        //Common.addPlaceTimetable99()
         
         
         

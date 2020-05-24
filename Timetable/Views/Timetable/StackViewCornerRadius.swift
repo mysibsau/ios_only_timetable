@@ -80,6 +80,11 @@ extension StackViewCornerRadius {
         self.set(lesson: lesson)
     }
     
+    convenience init(lesson: PlaceLesson) {
+        self.init()
+        self.set(lesson: lesson)
+    }
+    
     // MARK: Установка нового занятия для группы
     private func set(lesson: GroupLesson) {
         // если тут уже было занятие, то удаляем его
@@ -103,7 +108,6 @@ extension StackViewCornerRadius {
     }
     
     // MARK: Установка нового занятия для проподавателей
-    // FIXME: Тут нужно написать под препода, а то это под группы
     private func set(lesson: ProfessorLesson) {
         // если тут уже было занятие, то удаляем его
         subgroupStackView.removeAllArrangedSubviews()
@@ -125,7 +129,31 @@ extension StackViewCornerRadius {
         }
     }
     
-    // MARK: Добавление времени к расписанию
+    // MARK: Установка нового занятия для кабинетов
+    private func set(lesson: PlaceLesson) {
+        // если тут уже было занятие, то удаляем его
+        subgroupStackView.removeAllArrangedSubviews()
+        
+        addTime(time: lesson.time)
+        
+        var numberSubgroup = 1
+        for subgroup in lesson.subgroups {
+            // добавление номера подгрупп, если больше одной подргуппы
+            if lesson.subgroups.count > 1 {
+                addNumberSubgroup(with: numberSubgroup)
+                numberSubgroup += 1
+            }
+            // перечисляем всех преподавателей через ;\n
+            let professors = subgroup.professors.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+            // перечисляем все группы через ;\n
+            let groups = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+            addSubgroup(subject: subgroup.subject, type: subgroup.type, professors: professors, groups: groups)
+            // добавляем разделительную если это не последняя подгруппа
+            if (lesson.subgroups.count > 1) && (numberSubgroup - 1 != lesson.subgroups.count) { addSeparatorLine() }
+        }
+    }
+    
+    // MARK: Добавление времени к занятию
     private func addTime(time: String) {
         let attribetedTime = NSMutableAttributedString(string: time)
         attribetedTime.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: NSRange(location: 0, length: 5))
@@ -203,6 +231,19 @@ extension StackViewCornerRadius {
         subgroupView.type.text = type
         subgroupView.group.text = groups
         subgroupView.place.text = place
+        
+        subgroupStackView.addArrangedSubview(subgroupView)
+        // возможно эта строчка и не нужна
+        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+    }
+    
+    // MARK: Добавление одргуппы (для КАБИНЕТОВ)
+    private func addSubgroup(subject: String, type: String, professors: String, groups: String) {
+        let subgroupView = PlaceSubgroupView()
+        subgroupView.subject.text = subject
+        subgroupView.type.text = type
+        subgroupView.professor.text = professors
+        subgroupView.group.text = groups
         
         subgroupStackView.addArrangedSubview(subgroupView)
         // возможно эта строчка и не нужна

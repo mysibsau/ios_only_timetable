@@ -270,7 +270,7 @@ extension DataManager: GettingTimetable {
         guard let timetable = optionalTimetable else { return nil }
         guard let group = optionalGroup else { return nil }
         
-        let groupTimetable = getGroupTimetable(from: timetable, groupName: group.name)
+        let groupTimetable = convertGroupTimetable(from: timetable, groupName: group.name)
         
         return groupTimetable
     }
@@ -281,16 +281,20 @@ extension DataManager: GettingTimetable {
         guard let timetable = optionalTimetable else { return nil }
         guard let professor = optionalProfessor else { return nil }
         
-        let profesorTimetable = getProfessorTimetable(from: timetable, professorName: professor.name)
+        let profesorTimetable = convertProfessorTimetable(from: timetable, professorName: professor.name)
         
         return profesorTimetable
     }
     
-    func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable? {
-        //let timetables = realmDocuments.objects(RPlaceTimetable.self).filter("placeId = \(placeId)")
+    func getTimetable(forPlaceId placeId: Int) -> PlaceTimetable? {
         let optionalTimetable = realmDocuments.object(ofType: RPlaceTimetable.self, forPrimaryKey: placeId)
+        let optionalPlace = realmCaches.object(ofType: RPlace.self, forPrimaryKey: placeId)
         guard let timetable = optionalTimetable else { return nil }
-        return timetable
+        guard let place = optionalPlace else { return nil }
+        
+        let placeTimetable = convertPlaceTimetable(from: timetable, placeName: place.name)
+        
+        return placeTimetable
     }
     
 }
@@ -322,7 +326,7 @@ extension DataManager: WritingTimetable {
 extension DataManager {
 
     // MARK: Перевод объекта РАСПИСАНИЯ ГРУППЫ Realm к структуре, используемой в приложении
-    private func getGroupTimetable(from timetable: RGroupTimetable, groupName: String) -> GroupTimetable {
+    private func convertGroupTimetable(from timetable: RGroupTimetable, groupName: String) -> GroupTimetable {
         var groupWeeks = [GroupWeek]()
 
         // пробегаемся по всем неделям (по дву)
@@ -388,7 +392,7 @@ extension DataManager {
     }
     
     // MARK: Перевод объекта РАСПИСАНИЯ ПРОФЕССОРА Realm к структуре, используемой в приложении
-    private func getProfessorTimetable(from timetable: RProfessorTimetable, professorName: String) -> ProfessorTimetable {
+    private func convertProfessorTimetable(from timetable: RProfessorTimetable, professorName: String) -> ProfessorTimetable {
         var professorWeeks = [ProfessorWeek]()
 
         // пробегаемся по всем неделям (по дву)
@@ -455,5 +459,81 @@ extension DataManager {
     
     
     // MARK: Перевод объекта РАСПИСАНИЯ КАБИНЕТА Realm к структуре, используемой в приложении
+    private func convertPlaceTimetable(from timetable: RPlaceTimetable, placeName: String) -> PlaceTimetable {
+        var placeWeeks = [PlaceWeek]()
 
+        // пробегаемся по всем неделям (по дву)
+        for week in timetable.weeks {
+
+            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
+            var placeDays: [PlaceDay?] = [nil, nil, nil, nil, nil, nil]
+
+            // пробегаемся во всем дням недели
+            for day in week.days {
+
+                var placeLessons = [PlaceLesson]()
+                
+                // пробегаемся по всем занятиям дня
+                for lesson in day.lessons {
+
+                    var placeSubgroups = [PlaceSubgroup]()
+                    
+                    // пробегаемся по всех подргуппам занятия
+                    for subgroup in lesson.subgroups {
+
+                        var groupsName = [String]()
+                        // берем имя преподавателя из БД с помощью id
+                        for id in subgroup.groups {
+                            let group = getPlace(withId: id)
+                            if let group = group {
+                                groupsName.append(group.name)
+                            } else {
+                                groupsName.append("Ошибка")
+                            }
+                        }
+                        
+                        var professorsName = [String]()
+                        // берем имя преподаватели из БД с помощью id
+                        for id in subgroup.professors {
+                            let professor = getProfessor(withId: id)
+                            if let professor = professor {
+                                professorsName.append(professor.name)
+                            } else {
+                                professorsName.append("Ошибка")
+                            }
+                        }
+                        
+                        let placeSubgroup = PlaceSubgroup(
+                            subject: subgroup.subject,
+                            type: subgroup.type,
+                            groups: groupsName,
+                            groupsId: Array(subgroup.groups),
+                            professors: professorsName,
+                            professorsId: Array(subgroup.professors))
+
+                        placeSubgroups.append(placeSubgroup)
+                    }
+                    
+                    // добавляем занятие в массив занятий
+                    let placeLesson = PlaceLesson(time: lesson.time, subgroups: placeSubgroups)
+                    placeLessons.append(placeLesson)
+                }
+                
+                let placeDay = PlaceDay(lessons: placeLessons)
+                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
+                if day.number >= 0 && day.number <= 5 {
+                    // заменяем nil
+                    placeDays[day.number] = placeDay
+                }
+            }
+
+            let placeWeek = PlaceWeek(days: placeDays)
+            placeWeeks.append(placeWeek)
+        }
+
+        let placeTimetable = PlaceTimetable(placeId: timetable.placeId, placeName: placeName, weeks: placeWeeks)
+        return placeTimetable
+    }
+    
+    
 }

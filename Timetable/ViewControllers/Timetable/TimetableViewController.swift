@@ -124,12 +124,8 @@ class TimetableViewController: UIViewController {
         if let userInfo = notification.userInfo as? [Int: GroupTimetable] {
             type = .group
             
-            print("IN onDidSelectGroup")
             guard let groupTimetable = userInfo[0] else { return }
             timetable = groupTimetable
-//            weeks = [GroupTimetable]()
-//            weeks?.append(groupTimetable.weeks[0])
-//            weeks?.append(groupTimetable.weeks[1])
             
             navigationItem.title = groupTimetable.groupName
             
@@ -146,7 +142,6 @@ class TimetableViewController: UIViewController {
         if let userInfo = notification.userInfo as? [Int: ProfessorTimetable] {
             type = .professor
             
-            print("IN onDidSelectProfessor")
             guard let professorTimetable = userInfo[0] else { return }
             timetable = professorTimetable
             
@@ -162,9 +157,20 @@ class TimetableViewController: UIViewController {
     }
     
     @objc func onDidSelectPlace(_ notification: Notification) {
-        type = .place
-        if let a = notification.userInfo as? [Int: RPlace] {
-            print("IN onDidSelectPlace")
+        if let userInfo = notification.userInfo as? [Int: PlaceTimetable] {
+            type = .place
+            
+            guard let placeTimetable = userInfo[0] else { return }
+            timetable = placeTimetable
+            
+            navigationItem.title = placeTimetable.placeName
+            
+            // Сохраняем выбранное расписание у UserDefaults
+            UserDefaultsConfig.timetableType = type?.raw
+            UserDefaultsConfig.timetableId = placeTimetable.placeId
+            
+            menuViewController.reloadData()
+            contentViewController.reloadData()
         }
     }
     
@@ -200,8 +206,15 @@ class TimetableViewController: UIViewController {
             
             menuViewController.reloadData()
             contentViewController.reloadData()
-        } else if timetableType == .place {
             
+        } else if timetableType == .place {
+            guard let placeTimetable = DataManager.shared.getTimetable(forPlaceId: timetableId) else { return }
+            
+            timetable = placeTimetable
+            
+            type = timetableType
+            
+            navigationItem.title = placeTimetable.placeName
             
             menuViewController.reloadData()
             contentViewController.reloadData()
@@ -270,8 +283,14 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
             }
         } else if type == .professor {
             if let timetable = timetable as? ProfessorTimetable {
-                //dump(timetable.weeks[currWeek].days[index])
                 return ProfessorDayViewController(day: timetable.weeks[currWeek].days[index])
+            }
+        } else if type == .place {
+            if let timetable = timetable as? PlaceTimetable {
+                let vc = UIViewController()
+                vc.view.backgroundColor = .green
+                //return vc
+                return PlaceDayViewController(day: timetable.weeks[currWeek].days[index])
             }
         }
         return UIViewController()

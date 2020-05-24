@@ -96,6 +96,13 @@
 		4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C8F2479A71800081D55 /* ProfessorWeek.swift */; };
 		4AC64C922479A72100081D55 /* ProfessorDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C912479A72100081D55 /* ProfessorDay.swift */; };
 		4AC64C942479A72900081D55 /* ProfessorTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C932479A72900081D55 /* ProfessorTimetable.swift */; };
+		4AC64C96247A3AC100081D55 /* PlaceDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C95247A3AC100081D55 /* PlaceDayViewController.swift */; };
+		4AC64C99247A3D5600081D55 /* PlaceSubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C98247A3D5600081D55 /* PlaceSubgroupView.swift */; };
+		4AC64C9B247A3E1D00081D55 /* PlaceSubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC64C9A247A3E1C00081D55 /* PlaceSubgroupView.xib */; };
+		4AC64C9E247A400700081D55 /* PlaceLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C9D247A400700081D55 /* PlaceLesson.swift */; };
+		4AC64CA0247A400E00081D55 /* PlaceDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64C9F247A400E00081D55 /* PlaceDay.swift */; };
+		4AC64CA2247A401400081D55 /* PlaceWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CA1247A401400081D55 /* PlaceWeek.swift */; };
+		4AC64CA4247A401C00081D55 /* PlaceTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CA3247A401C00081D55 /* PlaceTimetable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +197,13 @@
 		4AC64C8F2479A71800081D55 /* ProfessorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorWeek.swift; sourceTree = "<group>"; };
 		4AC64C912479A72100081D55 /* ProfessorDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorDay.swift; sourceTree = "<group>"; };
 		4AC64C932479A72900081D55 /* ProfessorTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorTimetable.swift; sourceTree = "<group>"; };
+		4AC64C95247A3AC100081D55 /* PlaceDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDayViewController.swift; sourceTree = "<group>"; };
+		4AC64C98247A3D5600081D55 /* PlaceSubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSubgroupView.swift; sourceTree = "<group>"; };
+		4AC64C9A247A3E1C00081D55 /* PlaceSubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceSubgroupView.xib; sourceTree = "<group>"; };
+		4AC64C9D247A400700081D55 /* PlaceLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceLesson.swift; sourceTree = "<group>"; };
+		4AC64C9F247A400E00081D55 /* PlaceDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDay.swift; sourceTree = "<group>"; };
+		4AC64CA1247A401400081D55 /* PlaceWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceWeek.swift; sourceTree = "<group>"; };
+		4AC64CA3247A401C00081D55 /* PlaceTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTimetable.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -433,6 +447,7 @@
 				4A920772245DCFF800D050EB /* TimetableViewController.swift */,
 				4AC64C6A24756A8C00081D55 /* GroupDayViewController.swift */,
 				4AC64C8A2479A6C700081D55 /* ProfessorDayViewController.swift */,
+				4AC64C95247A3AC100081D55 /* PlaceDayViewController.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -513,6 +528,7 @@
 				4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */,
 				4AC64C842479723D00081D55 /* Group */,
 				4AC64C852479725500081D55 /* Professor */,
+				4AC64C97247A3AE900081D55 /* Place */,
 				4AC64C7924767CE200081D55 /* PagingKit */,
 			);
 			path = Timetable;
@@ -577,6 +593,7 @@
 			children = (
 				4AC64C7424757F3C00081D55 /* Group */,
 				4AC64C8C2479A6E700081D55 /* Professor */,
+				4AC64C9C247A3F9300081D55 /* Place */,
 				4AC64C7324757EF500081D55 /* Unused */,
 			);
 			path = Structures;
@@ -665,6 +682,26 @@
 			path = Professor;
 			sourceTree = "<group>";
 		};
+		4AC64C97247A3AE900081D55 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				4AC64C98247A3D5600081D55 /* PlaceSubgroupView.swift */,
+				4AC64C9A247A3E1C00081D55 /* PlaceSubgroupView.xib */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		4AC64C9C247A3F9300081D55 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				4AC64C9D247A400700081D55 /* PlaceLesson.swift */,
+				4AC64C9F247A400E00081D55 /* PlaceDay.swift */,
+				4AC64CA1247A401400081D55 /* PlaceWeek.swift */,
+				4AC64CA3247A401C00081D55 /* PlaceTimetable.swift */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
 		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,6 +774,7 @@
 				4AC64C892479730100081D55 /* ProfessorSubgroupView.xib in Resources */,
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4AC64C4F2472F8C400081D55 /* AlertView.xib in Resources */,
+				4AC64C9B247A3E1D00081D55 /* PlaceSubgroupView.xib in Resources */,
 				4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
@@ -783,6 +821,7 @@
 				4A9207AD2460531400D050EB /* Common.swift in Sources */,
 				4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */,
 				4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */,
+				4AC64C9E247A400700081D55 /* PlaceLesson.swift in Sources */,
 				4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */,
 				4A415E692458562D005FADD7 /* RPlace.swift in Sources */,
 				4A415E8E24585BF9005FADD7 /* RPlaceTimetable.swift in Sources */,
@@ -810,10 +849,12 @@
 				4A9207BB24606F2C00D050EB /* SubgroupPlaceView.swift in Sources */,
 				4AC64C6B24756A8C00081D55 /* GroupDayViewController.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
+				4AC64C99247A3D5600081D55 /* PlaceSubgroupView.swift in Sources */,
 				4AC64C352472643600081D55 /* TableViewController.swift in Sources */,
 				4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */,
 				4AC64C422472BB8D00081D55 /* GettingConsultations.swift in Sources */,
 				4A9207B1246061AA00D050EB /* RProfessorConsultations.swift in Sources */,
+				4AC64CA0247A400E00081D55 /* PlaceDay.swift in Sources */,
 				4AC64C4D2472F84300081D55 /* AlertView.swift in Sources */,
 				4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */,
 				4AC64C3E2472BAE800081D55 /* DeletingEntities.swift in Sources */,
@@ -822,7 +863,9 @@
 				4AC64C7224757D7A00081D55 /* GroupWeek.swift in Sources */,
 				4A2338FA243CA860002C0746 /* Lesson.swift in Sources */,
 				4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */,
+				4AC64CA2247A401400081D55 /* PlaceWeek.swift in Sources */,
 				4A9207A924604F8200D050EB /* Week.swift in Sources */,
+				4AC64CA4247A401C00081D55 /* PlaceTimetable.swift in Sources */,
 				4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */,
 				4AC64C7024757D3F00081D55 /* GroupDay.swift in Sources */,
 				4AC64C442472BBAD00081D55 /* GettingSession.swift in Sources */,
@@ -835,6 +878,7 @@
 				4A415E7224585886005FADD7 /* RGroupWeek.swift in Sources */,
 				4AC345F62471922200BAA474 /* RGroup+newObject.swift in Sources */,
 				4A9207B5246062D000D050EB /* RProfessorConsultationDay.swift in Sources */,
+				4AC64C96247A3AC100081D55 /* PlaceDayViewController.swift in Sources */,
 				4A415E8124585A12005FADD7 /* RProfessorWeek.swift in Sources */,
 				4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */,
 				4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */,

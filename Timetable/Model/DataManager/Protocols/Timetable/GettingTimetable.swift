@@ -12,6 +12,6 @@ protocol GettingTimetable {
     
     func getTimetable(forGroupId groupId: Int) -> GroupTimetable?
     func getTimetable(forProfessorId professorId: Int) -> ProfessorTimetable?
-    func getTimetable(forPlaceId placeId: Int) -> RPlaceTimetable?
+    func getTimetable(forPlaceId placeId: Int) -> PlaceTimetable?
     
 }
