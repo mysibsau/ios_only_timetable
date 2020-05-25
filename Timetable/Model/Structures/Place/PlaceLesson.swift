@@ -10,6 +10,7 @@ import Foundation
 
 struct PlaceSubgroup {
     
+    let number: Int
     let subject: String
     let type: String
     let groups: [String]

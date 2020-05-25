@@ -9,91 +9,91 @@
 import Foundation
 
 class Common {
-    static func getDay1() -> GroupDay {
-        let lesson1 = GroupLesson(
-            time: "11:30 - 13:00",
-            subgroups: [
-                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
-            ]
-        )
-        
-        let lesson2 = GroupLesson(
-            time: "13:30 - 15:00",
-            subgroups: [
-                GroupSubgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", professors: ["Добрая бабуля"], professorsId: [1, 2, 3, 4], place: "Л 319"),
-                GroupSubgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", professors: ["Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "Л 315")
-            ]
-        )
-        
-        let lesson3 = GroupLesson(
-            time: "15:10 - 16:40",
-            subgroups: [
-                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
-            ]
-        )
-        
-        let lesson4 = GroupLesson(
-            time: "16:50 - 18:20",
-            subgroups: [
-                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
-            ]
-        )
-        
-        let day = GroupDay(lessons: [lesson1, lesson2, lesson3, lesson4])
-        return day
-    }
-    
-    static func getDay2() -> GroupDay {
-        let lesson1 = GroupLesson(
-            time: "11:30 - 13:00",
-            subgroups: [
-                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
-            ]
-        )
-        
-        let lesson4 = GroupLesson(
-            time: "16:50 - 18:20",
-            subgroups: [
-                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
-            ]
-        )
-        
-        let day = GroupDay(lessons: [lesson1, lesson4])
-        return day
-    }
-    
-    static func getDay3() -> GroupDay {
-        let lesson1 = GroupLesson(
-            time: "33:33 - 33:00",
-            subgroups: [
-                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
-            ]
-        )
-        
-        let lesson4 = GroupLesson(
-            time: "16:33 - 18:33",
-            subgroups: [
-                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
-            ]
-        )
-        
-        let day = GroupDay(lessons: [lesson1, lesson4])
-        return day
-    }
-    
-    static func getWeek1() -> GroupWeek {
-        let week = GroupWeek(days: [
-            getDay1(), nil, nil, getDay2(), getDay3(), nil
-        ])
-        return week
-    }
-    
-    static func getWeek2() -> GroupWeek {
-        let week = GroupWeek(days: [
-            nil, nil, getDay3(), getDay1(), getDay1(), nil
-        ])
-        return week
-    }
+//    static func getDay1() -> GroupDay {
+//        let lesson1 = GroupLesson(
+//            time: "11:30 - 13:00",
+//            subgroups: [
+//                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
+//            ]
+//        )
+//
+//        let lesson2 = GroupLesson(
+//            time: "13:30 - 15:00",
+//            subgroups: [
+//                GroupSubgroup(subject: "Объектно-ориентированное программирование", type: "(лекция)", professors: ["Добрая бабуля"], professorsId: [1, 2, 3, 4], place: "Л 319"),
+//                GroupSubgroup(subject: "Ахритектура вычислительных систем", type: "(лекция)", professors: ["Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "Л 315")
+//            ]
+//        )
+//
+//        let lesson3 = GroupLesson(
+//            time: "15:10 - 16:40",
+//            subgroups: [
+//                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
+//            ]
+//        )
+//
+//        let lesson4 = GroupLesson(
+//            time: "16:50 - 18:20",
+//            subgroups: [
+//                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
+//            ]
+//        )
+//
+//        let day = GroupDay(lessons: [lesson1, lesson2, lesson3, lesson4])
+//        return day
+//    }
+//
+//    static func getDay2() -> GroupDay {
+//        let lesson1 = GroupLesson(
+//            time: "11:30 - 13:00",
+//            subgroups: [
+//                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
+//            ]
+//        )
+//
+//        let lesson4 = GroupLesson(
+//            time: "16:50 - 18:20",
+//            subgroups: [
+//                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
+//            ]
+//        )
+//
+//        let day = GroupDay(lessons: [lesson1, lesson4])
+//        return day
+//    }
+//
+//    static func getDay3() -> GroupDay {
+//        let lesson1 = GroupLesson(
+//            time: "33:33 - 33:00",
+//            subgroups: [
+//                GroupSubgroup(subject: "Физическая культура что-то там еще", type: "(практика)", professors: ["Добрая бабуля", "Богданов Константив Васильевич(?)", "Охорзин Дед Почти", "Богданов Константив Васильевич(?)"], professorsId: [1, 2, 3, 4], place: "СПОРТЗАЛ")
+//            ]
+//        )
+//
+//        let lesson4 = GroupLesson(
+//            time: "16:33 - 18:33",
+//            subgroups: [
+//                GroupSubgroup(subject: "Вычислительная математика", type: "(практика)", professors: ["Охорзин Дед Почти"], professorsId: [1, 2, 3, 4], place: "Н 304")
+//            ]
+//        )
+//
+//        let day = GroupDay(lessons: [lesson1, lesson4])
+//        return day
+//    }
+//
+//    static func getWeek1() -> GroupWeek {
+//        let week = GroupWeek(days: [
+//            getDay1(), nil, nil, getDay2(), getDay3(), nil
+//        ])
+//        return week
+//    }
+//
+//    static func getWeek2() -> GroupWeek {
+//        let week = GroupWeek(days: [
+//            nil, nil, getDay3(), getDay1(), getDay1(), nil
+//        ])
+//        return week
+//    }
     
     
     static func getGroupDay0() -> RGroupDay {
@@ -103,12 +103,12 @@ class Common {
         
         let subgroup11 = RGroupSubgroup()
         subgroup11.subject = "Физическая культура что-то там еще"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 0
         subgroup11.professors.append(1)
         subgroup11.professors.append(2)
         subgroup11.professors.append(3)
         subgroup11.professors.append(4)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 3
         lesson1.subgroups.append(subgroup11)
         
         
@@ -117,25 +117,25 @@ class Common {
         
         let subgroup21 = RGroupSubgroup()
         subgroup21.subject = "Объектно-ориентированное программирование"
-        subgroup21.type = "(лекция)"
+        subgroup21.type = 1
         subgroup21.professors.append(5)
-        subgroup21.place = "Л 319"
+        subgroup21.place = 43
         lesson2.subgroups.append(subgroup21)
         let subgroup22 = RGroupSubgroup()
         subgroup22.subject = "Ахритектура вычислительных систем"
-        subgroup22.type = "(лекция)"
+        subgroup22.type = 1
         subgroup22.professors.append(7)
-        subgroup22.place = "Л 315"
+        subgroup22.place = 54
         
         
         let lesson3 = RGroupLesson()
-        lesson3.time = "15:10 - 16:40"
+        lesson3.time = "14:99 - 23:32"
         
         let subgroup31 = RGroupSubgroup()
         subgroup31.subject = "Вычислительная математика"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 0
         subgroup31.professors.append(4)
-        subgroup31.place = "Н 304"
+        subgroup31.place = 38
         lesson3.subgroups.append(subgroup31)
         
         
@@ -144,9 +144,9 @@ class Common {
         
         let subgroup41 = RGroupSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 1
         subgroup41.professors.append(4)
-        subgroup41.place = "Н 304"
+        subgroup41.place = 90
         lesson4.subgroups.append(subgroup41)
 
         
@@ -166,10 +166,10 @@ class Common {
         
         let subgroup11 = RGroupSubgroup()
         subgroup11.subject = "Физическая культура что-то там еще"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 0
         subgroup11.professors.append(1)
         subgroup11.professors.append(2)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 22
         lesson1.subgroups.append(subgroup11)
         
         
@@ -178,9 +178,9 @@ class Common {
         
         let subgroup41 = RGroupSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 2
         subgroup41.professors.append(4)
-        subgroup41.place = "Н 304"
+        subgroup41.place = 33
         lesson4.subgroups.append(subgroup41)
         
         
@@ -198,10 +198,10 @@ class Common {
         
         let subgroup11 = RGroupSubgroup()
         subgroup11.subject = "Физическая культура что-то там еще"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 1
         subgroup11.professors.append(1)
         subgroup11.professors.append(2)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 3
         lesson1.subgroups.append(subgroup11)
         
         
@@ -210,9 +210,9 @@ class Common {
         
         let subgroup31 = RGroupSubgroup()
         subgroup31.subject = "Вычислительная математика"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 1
         subgroup31.professors.append(4)
-        subgroup31.place = "Н 304"
+        subgroup31.place = 2
         lesson3.subgroups.append(subgroup31)
         
         
@@ -284,9 +284,9 @@ class Common {
             group.id = i
             group.name = "\(i)nameGroup"
             group.email = "\(i)emailGroup"
-            group.leaderName = "\(i)lnGroup"
-            group.leaderEmail = nil
-            group.leaderPhone = "\(i)lpGroup"
+            // group.leaderName = "\(i)lnGroup"
+            // group.leaderEmail = nil
+            // group.leaderPhone = "\(i)lpGroup"
             
             groups.append(group)
         }
@@ -335,9 +335,9 @@ class Common {
             group.id = i
             group.name = "\(i)nameGroup"
             group.email = "\(i)emailGroup"
-            group.leaderName = "\(i)lnGroup"
-            group.leaderEmail = nil
-            group.leaderPhone = "\(i)lpGroup"
+            // group.leaderName = "\(i)lnGroup"
+            // group.leaderEmail = nil
+            // group.leaderPhone = "\(i)lpGroup"
             
             groups.append(group)
         }
@@ -355,18 +355,18 @@ class Common {
         
         let subgroup11 = RProfessorSubgroup()
         subgroup11.subject = "Не физ культура"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 1
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 111
         lesson1.subgroups.append(subgroup11)
         
         let subgroup12 = RProfessorSubgroup()
         subgroup12.subject = "из культура"
-        subgroup12.type = "(практика)"
+        subgroup12.type = 1
         subgroup12.groups.append(1)
         subgroup12.groups.append(2)
-        subgroup12.place = "СПОРТЗАЛ"
+        subgroup12.place = 32
         lesson1.subgroups.append(subgroup12)
         
         
@@ -375,15 +375,15 @@ class Common {
         
         let subgroup21 = RProfessorSubgroup()
         subgroup21.subject = "Архитектура"
-        subgroup21.type = "(лекция)"
+        subgroup21.type = 1
         subgroup21.groups.append(5)
-        subgroup21.place = "Л 319"
+        subgroup21.place = 4
         lesson2.subgroups.append(subgroup21)
         let subgroup22 = RProfessorSubgroup()
         subgroup22.subject = "Ахритектура вычислительных систем"
-        subgroup22.type = "(лекция)"
+        subgroup22.type = 1
         subgroup22.groups.append(7)
-        subgroup22.place = "Л 315"
+        subgroup22.place = 24
         
         
         let lesson3 = RProfessorLesson()
@@ -391,9 +391,9 @@ class Common {
         
         let subgroup31 = RProfessorSubgroup()
         subgroup31.subject = "Матааан"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 1
         subgroup31.groups.append(4)
-        subgroup31.place = "Н 304"
+        subgroup31.place = 999
         lesson3.subgroups.append(subgroup31)
         
         
@@ -402,9 +402,9 @@ class Common {
         
         let subgroup41 = RProfessorSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 1
         subgroup41.groups.append(4)
-        subgroup41.place = "Н 304"
+        subgroup41.place = 32
         lesson4.subgroups.append(subgroup41)
 
         
@@ -424,10 +424,10 @@ class Common {
         
         let subgroup11 = RProfessorSubgroup()
         subgroup11.subject = "Физическая культура что-то там еще"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 1
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 12
         lesson1.subgroups.append(subgroup11)
         
         
@@ -436,9 +436,9 @@ class Common {
         
         let subgroup41 = RProfessorSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 1
         subgroup41.groups.append(4)
-        subgroup41.place = "Н 304"
+        subgroup41.place = 32
         lesson4.subgroups.append(subgroup41)
         
         
@@ -456,10 +456,10 @@ class Common {
         
         let subgroup11 = RProfessorSubgroup()
         subgroup11.subject = "sdsdsdsd"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 2
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
-        subgroup11.place = "СПОРТЗАЛ"
+        subgroup11.place = 43
         lesson1.subgroups.append(subgroup11)
         
         
@@ -468,9 +468,9 @@ class Common {
         
         let subgroup31 = RProfessorSubgroup()
         subgroup31.subject = "ffffff"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 2
         subgroup31.groups.append(4)
-        subgroup31.place = "Н 304"
+        subgroup31.place = 55
         lesson3.subgroups.append(subgroup31)
         
         
@@ -537,7 +537,7 @@ class Common {
         
         let subgroup11 = RPlaceSubgroup()
         subgroup11.subject = "Не физ культура"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 1
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
         subgroup11.professors.append(5)
@@ -546,7 +546,7 @@ class Common {
         
         let subgroup12 = RPlaceSubgroup()
         subgroup12.subject = "из культура"
-        subgroup12.type = "(практика)"
+        subgroup12.type = 1
         subgroup12.groups.append(1)
         subgroup12.groups.append(2)
         subgroup12.professors.append(4)
@@ -559,13 +559,13 @@ class Common {
         
         let subgroup21 = RPlaceSubgroup()
         subgroup21.subject = "Архитектура"
-        subgroup21.type = "(лекция)"
+        subgroup21.type = 0
         subgroup21.groups.append(5)
         subgroup21.professors.append(9)
         lesson2.subgroups.append(subgroup21)
         let subgroup22 = RPlaceSubgroup()
         subgroup22.subject = "Ахритектура вычислительных систем"
-        subgroup22.type = "(лекция)"
+        subgroup22.type = 0
         subgroup22.groups.append(7)
         subgroup22.professors.append(7)
         
@@ -575,7 +575,7 @@ class Common {
         
         let subgroup31 = RPlaceSubgroup()
         subgroup31.subject = "Матааан"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 0
         subgroup31.groups.append(4)
         subgroup31.professors.append(14)
         lesson3.subgroups.append(subgroup31)
@@ -586,7 +586,7 @@ class Common {
         
         let subgroup41 = RPlaceSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 0
         subgroup41.groups.append(4)
         subgroup41.professors.append(66)
         lesson4.subgroups.append(subgroup41)
@@ -608,7 +608,7 @@ class Common {
         
         let subgroup11 = RPlaceSubgroup()
         subgroup11.subject = "Физическая культура что-то там еще"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 2
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
         subgroup11.professors.append(78)
@@ -620,7 +620,7 @@ class Common {
         
         let subgroup41 = RPlaceSubgroup()
         subgroup41.subject = "Вычислительная математика"
-        subgroup41.type = "(практика)"
+        subgroup41.type = 2
         subgroup41.groups.append(4)
         subgroup41.professors.append(32)
         lesson4.subgroups.append(subgroup41)
@@ -640,7 +640,7 @@ class Common {
         
         let subgroup11 = RPlaceSubgroup()
         subgroup11.subject = "sdsdsdsd"
-        subgroup11.type = "(практика)"
+        subgroup11.type = 2
         subgroup11.groups.append(1)
         subgroup11.groups.append(2)
         subgroup11.professors.append(32)
@@ -653,7 +653,7 @@ class Common {
         
         let subgroup31 = RPlaceSubgroup()
         subgroup31.subject = "ffffff"
-        subgroup31.type = "(практика)"
+        subgroup31.type = 2
         subgroup31.groups.append(4)
         subgroup31.groups.append(9)
         subgroup31.professors.append(95)

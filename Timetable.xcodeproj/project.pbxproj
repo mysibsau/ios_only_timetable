@@ -314,8 +314,8 @@
 				4A415EA224586488005FADD7 /* Extensions */,
 				4A415E62245855DD005FADD7 /* Entities */,
 				4A415E6B24585802005FADD7 /* Timetable */,
-				4A415E9124585D60005FADD7 /* Session */,
-				4A9207AE246060F400D050EB /* Consultation */,
+				4A415E9124585D60005FADD7 /* Session (пока не использутся) */,
+				4A9207AE246060F400D050EB /* Consultation (пока не используется) */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -373,14 +373,14 @@
 			path = PlaceTimetable;
 			sourceTree = "<group>";
 		};
-		4A415E9124585D60005FADD7 /* Session */ = {
+		4A415E9124585D60005FADD7 /* Session (пока не использутся) */ = {
 			isa = PBXGroup;
 			children = (
 				4A415E9224585E33005FADD7 /* GroupSession */,
 				4A415E9324585E3D005FADD7 /* ProfessorSession */,
 				4A415E9424585E45005FADD7 /* PlaceSession */,
 			);
-			path = Session;
+			path = "Session (пока не использутся)";
 			sourceTree = "<group>";
 		};
 		4A415E9224585E33005FADD7 /* GroupSession */ = {
@@ -473,12 +473,12 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		4A9207AE246060F400D050EB /* Consultation */ = {
+		4A9207AE246060F400D050EB /* Consultation (пока не используется) */ = {
 			isa = PBXGroup;
 			children = (
 				4A9207AF2460617A00D050EB /* ProfessorConsultation */,
 			);
-			path = Consultation;
+			path = "Consultation (пока не используется)";
 			sourceTree = "<group>";
 		};
 		4A9207AF2460617A00D050EB /* ProfessorConsultation */ = {

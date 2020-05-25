@@ -15,6 +15,7 @@ class RProfessor: Object {
     @objc dynamic var name = ""
     @objc dynamic var department: String? = nil
     @objc dynamic var email: String? = nil
+    @objc dynamic var phone: String? = nil
     
     override class func primaryKey() -> String? {
         return "id"

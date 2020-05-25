@@ -58,16 +58,17 @@ class DetailViewController: UIViewController {
             (group.name, nil),
             group.email != nil ? (group.email!, nil) : ("Нет email", UIColor.gray)
         ]
-        let tableData2 = [
-            group.leaderName  != nil ? (group.leaderName!, nil)  : ("Нет ФИО", UIColor.gray),
-            group.leaderEmail != nil ? (group.leaderEmail!, nil) : ("Нет email", UIColor.gray),
-            group.leaderPhone != nil ? (group.leaderPhone!, nil) : ("Нет номера", UIColor.gray)
-        ]
+        // let tableData2 = [
+        //     group.leaderName  != nil ? (group.leaderName!, nil)  : ("Нет ФИО", UIColor.gray),
+        //     group.leaderEmail != nil ? (group.leaderEmail!, nil) : ("Нет email", UIColor.gray),
+        //     group.leaderPhone != nil ? (group.leaderPhone!, nil) : ("Нет номера", UIColor.gray)
+        // ]
         
         firstSectionHeader = "Группа"
         secondSectionHeader = "Староста"
         
-        data = [tableData1, tableData2]
+        //data = [tableData1, tableData2]
+        data = [tableData1]
         type = .group
         id = group.id
         self.isFavorite = isFavorite

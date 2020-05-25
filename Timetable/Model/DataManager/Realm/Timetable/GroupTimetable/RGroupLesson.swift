@@ -18,9 +18,10 @@ class RGroupLesson: Object {
 
 class RGroupSubgroup: Object {
     
+    @objc dynamic var number = 0
     @objc dynamic var subject = ""
-    @objc dynamic var type = ""
-    @objc dynamic var place = ""
+    @objc dynamic var type = 0
+    @objc dynamic var place = 0
     let professors = List<Int>()
     
 }

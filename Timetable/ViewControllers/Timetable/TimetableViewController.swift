@@ -183,7 +183,6 @@ class TimetableViewController: UIViewController {
             guard let groupTimetable = DataManager.shared.getTimetable(forGroupId: timetableId) else { return }
             
             timetable = groupTimetable
-            
             type = timetableType
             
             navigationItem.title = groupTimetable.groupName
@@ -195,7 +194,6 @@ class TimetableViewController: UIViewController {
             guard let professorTimetable = DataManager.shared.getTimetable(forProfessorId: timetableId) else { return }
             
             timetable = professorTimetable
-            
             type = timetableType
             
             navigationItem.title = professorTimetable.professorName
@@ -207,7 +205,6 @@ class TimetableViewController: UIViewController {
             guard let placeTimetable = DataManager.shared.getTimetable(forPlaceId: timetableId) else { return }
             
             timetable = placeTimetable
-            
             type = timetableType
             
             navigationItem.title = placeTimetable.placeName
@@ -265,8 +262,6 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
         // FIXME: сделать нормальные числа и недели
         
-        //return DayViewController()
-        //return dataSource[index].vc
         guard let timetable = timetable else {
             return UIViewController()
         }
@@ -274,21 +269,14 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
         // FIXME: Не нужна тут проверка типа, скорее всего
         if type == .group {
             if let timetable = timetable as? GroupTimetable {
-                //return GroupDayViewController(day: weeks[currWeek].days[index])
-                //return GroupDayViewController(day: timetable.weeks[currWeek].days[index])
                 return DayViewController<GroupDay>(day: timetable.weeks[currWeek].days[index])
             }
         } else if type == .professor {
             if let timetable = timetable as? ProfessorTimetable {
-                //return ProfessorDayViewController(day: timetable.weeks[currWeek].days[index])
                 return DayViewController<ProfessorDay>(day: timetable.weeks[currWeek].days[index])
             }
         } else if type == .place {
             if let timetable = timetable as? PlaceTimetable {
-                //let vc = UIViewController()
-                //vc.view.backgroundColor = .green
-                //return vc
-                //return PlaceDayViewController(day: timetable.weeks[currWeek].days[index])
                 return DayViewController<PlaceDay>(day: timetable.weeks[currWeek].days[index])
             }
         }

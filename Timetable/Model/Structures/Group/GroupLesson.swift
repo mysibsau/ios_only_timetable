@@ -10,12 +10,13 @@ import Foundation
 
 struct GroupSubgroup {
     
+    let number: Int
     let subject: String
     let type: String
     let professors: [String]
     let professorsId: [Int]
     let place: String
-    //let placeId: Int?
+    let placeId: Int?
     
 }
 

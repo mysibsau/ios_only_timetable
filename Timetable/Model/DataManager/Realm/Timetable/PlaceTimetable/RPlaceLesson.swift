@@ -18,8 +18,9 @@ class RPlaceLesson: Object {
 
 class RPlaceSubgroup: Object {
     
+    @objc dynamic var number = 0
     @objc dynamic var subject = ""
-    @objc dynamic var type = ""
+    @objc dynamic var type = 0
     let groups = List<Int>()
     let professors = List<Int>()
     
