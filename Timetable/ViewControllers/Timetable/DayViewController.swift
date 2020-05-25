@@ -60,19 +60,19 @@ class DayViewController<EntitieDay>: UIViewController {
         // заполняем день занятиями
         if let groupDay = day as? GroupDay {
             for lesson in groupDay.lessons {
-                let lessonView = StackViewCornerRadius(lesson: lesson)
+                let lessonView = LessonView(lesson: lesson)
                 stackView.addArrangedSubview(lessonView)
                 lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             }
         } else if let professorDay = day as? ProfessorDay {
             for lesson in professorDay.lessons {
-                let lessonView = StackViewCornerRadius(lesson: lesson)
+                let lessonView = LessonView(lesson: lesson)
                 stackView.addArrangedSubview(lessonView)
                 lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             }
         } else if let placeDay = day as? PlaceDay {
             for lesson in placeDay.lessons {
-                let lessonView = StackViewCornerRadius(lesson: lesson)
+                let lessonView = LessonView(lesson: lesson)
                 stackView.addArrangedSubview(lessonView)
                 lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             }

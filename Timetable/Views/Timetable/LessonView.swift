@@ -1,5 +1,5 @@
 //
-//  StackViewCornerRadius.swift
+//  LessonView.swift
 //  Timetable
 //
 //  Created by art-off on 07.04.2020.
@@ -13,7 +13,7 @@
 
 import UIKit
 
-class StackViewCornerRadius: UIView {
+class LessonView: UIView {
     
     private let contentView = UIView()
     private let wrapperView = UIView()
@@ -68,7 +68,7 @@ class StackViewCornerRadius: UIView {
 
 
 // MARK: - Все для установки нового занятия на это вью (пока только для групп)
-extension StackViewCornerRadius {
+extension LessonView {
     
     convenience init(lesson: GroupLesson) {
         self.init()
@@ -265,7 +265,7 @@ extension StackViewCornerRadius {
 }
 
 // MARK: ВОЗМОЖНО СТОИТ УБРАТЬ ЭТО (Если не буду юзать в итоге)
-extension StackViewCornerRadius {
+extension LessonView {
     // для отрисовки интерфейса при смене темы
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

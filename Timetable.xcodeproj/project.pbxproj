@@ -13,7 +13,7 @@
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
-		4A2338F8243C5BFC002C0746 /* StackViewCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */; };
+		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
 		4A2338FA243CA860002C0746 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F9243CA860002C0746 /* Lesson.swift */; };
 		4A415E652458561F005FADD7 /* RGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E642458561F005FADD7 /* RGroup.swift */; };
 		4A415E6724585627005FADD7 /* RProfessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6624585627005FADD7 /* RProfessor.swift */; };
@@ -115,7 +115,7 @@
 		4A2338E6243C58C5002C0746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewCornerRadius.swift; sourceTree = "<group>"; };
+		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		4A2338F9243CA860002C0746 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		4A415E642458561F005FADD7 /* RGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroup.swift; sourceTree = "<group>"; };
 		4A415E6624585627005FADD7 /* RProfessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessor.swift; sourceTree = "<group>"; };
@@ -526,7 +526,7 @@
 		4AC64C482472C43D00081D55 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
-				4A2338F7243C5BFC002C0746 /* StackViewCornerRadius.swift */,
+				4A2338F7243C5BFC002C0746 /* LessonView.swift */,
 				4AC64C842479723D00081D55 /* Group */,
 				4AC64C852479725500081D55 /* Professor */,
 				4AC64C97247A3AE900081D55 /* Place */,
@@ -839,7 +839,7 @@
 				4A610863243F0AF3008BCB90 /* UIView+addConstraints.swift in Sources */,
 				4A415E7F245859FE005FADD7 /* RProfessorDay.swift in Sources */,
 				4A415E7A245859BD005FADD7 /* RProfessorLesson.swift in Sources */,
-				4A2338F8243C5BFC002C0746 /* StackViewCornerRadius.swift in Sources */,
+				4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */,
 				4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */,
 				4A9207B924606DE200D050EB /* SubgroupProfessorVeiw.swift in Sources */,
 				4AC345FC2471930D00BAA474 /* RPlace+newObject.swift in Sources */,
