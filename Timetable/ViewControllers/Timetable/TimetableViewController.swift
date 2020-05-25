@@ -212,6 +212,8 @@ class TimetableViewController: UIViewController {
             menuViewController.reloadData()
             contentViewController.reloadData()
         }
+        
+        dump(timetable!)
     }
     
     // MARK: - IBActions

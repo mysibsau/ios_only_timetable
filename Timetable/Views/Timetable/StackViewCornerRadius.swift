@@ -94,16 +94,20 @@ extension StackViewCornerRadius {
         
         var numberSubgroup = 1
         for subgroup in lesson.subgroups {
-            // добавление номера подгрупп, если больше одной подргуппы
-            if lesson.subgroups.count > 1 {
-                addNumberSubgroup(with: numberSubgroup)
-                numberSubgroup += 1
+            // добавляем номер подргуппы, если это необходимо
+            if subgroup.number != 0 {
+                addNumberSubgroup(with: subgroup.number)
             }
+            
             // перечисляем всех преподавателей через ;\n
             let professors = subgroup.professors.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
             addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: professors, place: subgroup.place)
-            // добавляем разделительную если это не последняя подгруппа
-            if (lesson.subgroups.count > 1) && (numberSubgroup - 1 != lesson.subgroups.count) { addSeparatorLine() }
+            
+            // добавляем разделительную если это необходимо
+            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
+                addSeparatorLine()
+            }
+            numberSubgroup += 1
         }
     }
     
@@ -116,16 +120,20 @@ extension StackViewCornerRadius {
         
         var numberSubgroup = 1
         for subgroup in lesson.subgroups {
-            // добавление номера подгрупп, если больше одной подргуппы
-            if lesson.subgroups.count > 1 {
-                addNumberSubgroup(with: numberSubgroup)
-                numberSubgroup += 1
+            // добавляем номер подргуппы, если это необходимо
+            if subgroup.number != 0 {
+                addNumberSubgroup(with: subgroup.number)
             }
+            
             // перечисляем все группы через ;\n
-            let groups = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
-            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: groups, place: subgroup.place)
-            // добавляем разделительную если это не последняя подгруппа
-            if (lesson.subgroups.count > 1) && (numberSubgroup - 1 != lesson.subgroups.count) { addSeparatorLine() }
+            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: professors, place: subgroup.place)
+            
+            // добавляем разделительную если это необходимо
+            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
+                addSeparatorLine()
+            }
+            numberSubgroup += 1
         }
     }
     
@@ -138,18 +146,22 @@ extension StackViewCornerRadius {
         
         var numberSubgroup = 1
         for subgroup in lesson.subgroups {
-            // добавление номера подгрупп, если больше одной подргуппы
-            if lesson.subgroups.count > 1 {
-                addNumberSubgroup(with: numberSubgroup)
-                numberSubgroup += 1
+            // добавляем номер подргуппы, если это необходимо
+            if subgroup.number != 0 {
+                addNumberSubgroup(with: subgroup.number)
             }
-            // перечисляем всех преподавателей через ;\n
-            let professors = subgroup.professors.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+            
+            // перечисляем все группы через ;\n
+            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
             // перечисляем все группы через ;\n
             let groups = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
             addSubgroup(subject: subgroup.subject, type: subgroup.type, professors: professors, groups: groups)
-            // добавляем разделительную если это не последняя подгруппа
-            if (lesson.subgroups.count > 1) && (numberSubgroup - 1 != lesson.subgroups.count) { addSeparatorLine() }
+            
+            // добавляем разделительную если это необходимо
+            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
+                addSeparatorLine()
+            }
+            numberSubgroup += 1
         }
     }
     
