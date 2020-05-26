@@ -16,4 +16,6 @@ struct UserDefaultsConfig {
     @UserDefaultsWrapper(key: "com.user.timetableId", defaultValue: Int?(nil))
     static var timetableId: Int?
     
+    //@UserDefaultsWrapper(key: "com.system.")
+    
 }

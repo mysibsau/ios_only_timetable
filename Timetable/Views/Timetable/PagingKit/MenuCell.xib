@@ -52,8 +52,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="dataLabel" destination="Wgm-XL-lQh" id="6x5-o1-f9q"/>
-                <outlet property="weekLabel" destination="hHU-wh-fud" id="Lwe-DG-ucg"/>
+                <outlet property="dateLabel" destination="hHU-wh-fud" id="RIi-0l-pTQ"/>
+                <outlet property="dayLabel" destination="Wgm-XL-lQh" id="g3k-IT-ahY"/>
             </connections>
             <point key="canvasLocation" x="-78.985507246376812" y="-115.51339285714285"/>
         </view>

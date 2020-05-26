@@ -11,18 +11,18 @@ import PagingKit
 
 class MenuCell: PagingMenuViewCell {
     
-    @IBOutlet weak var weekLabel: UILabel!
-    @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
     
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                weekLabel.textColor = .systemBlue
-                dataLabel.textColor = .systemBlue
+                dayLabel.textColor = .systemBlue
+                dateLabel.textColor = .systemBlue
             } else {
-                weekLabel.textColor = Colors.label
-                dataLabel.textColor = Colors.label
+                dayLabel.textColor = Colors.label
+                dateLabel.textColor = Colors.label
             }
         }
     }

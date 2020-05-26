@@ -104,6 +104,7 @@
 		4AC64CA2247A401400081D55 /* PlaceWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CA1247A401400081D55 /* PlaceWeek.swift */; };
 		4AC64CA4247A401C00081D55 /* PlaceTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CA3247A401C00081D55 /* PlaceTimetable.swift */; };
 		4AC64CA6247AF72700081D55 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CA5247AF72700081D55 /* DayViewController.swift */; };
+		4AC64CAB247C3F3200081D55 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC64CAA247C3F3200081D55 /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,7 @@
 		4AC64CA1247A401400081D55 /* PlaceWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceWeek.swift; sourceTree = "<group>"; };
 		4AC64CA3247A401C00081D55 /* PlaceTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTimetable.swift; sourceTree = "<group>"; };
 		4AC64CA5247AF72700081D55 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
+		4AC64CAA247C3F3200081D55 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,9 +292,11 @@
 			isa = PBXGroup;
 			children = (
 				4A9207A524604E5E00D050EB /* Enums */,
+				4AC64C6524750E1800081D55 /* UserDefaults */,
 				4A4C94A9245B58B1008105DE /* DataManager */,
 				4AC64C6C24757CCB00081D55 /* Structures */,
 				4A60025E243CD1CC00077C81 /* Colors.swift */,
+				4AC64CAA247C3F3200081D55 /* DateHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,7 +428,6 @@
 		4A4C94A9245B58B1008105DE /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
-				4AC64C6524750E1800081D55 /* UserDefaults */,
 				4AC64C372472BA6B00081D55 /* Protocols */,
 				4A4C94AA245B58E4008105DE /* DataManager.swift */,
 				4A415E61245855A8005FADD7 /* Realm */,
@@ -831,6 +834,7 @@
 				4A9207AB24604FC300D050EB /* Day.swift in Sources */,
 				4A9207AD2460531400D050EB /* Common.swift in Sources */,
 				4A415E9C24585EB5005FADD7 /* RProfessorSession.swift in Sources */,
+				4AC64CAB247C3F3200081D55 /* DateHelper.swift in Sources */,
 				4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */,
 				4AC64C9E247A400700081D55 /* PlaceLesson.swift in Sources */,
 				4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */,

@@ -19,22 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        Common.addGroups()
-        Common.addProfessors()
-        Common.addPlaces()
+        //Common.addGroups()
+        //Common.addProfessors()
+        //Common.addPlaces()
         //Common.addFavoriteGroups()
 //        UserDefaults.standard.set(, forKey: "1111")
         
 //        UserDefaultsConfig.timetableType = EntitiesType.professor.raw
         
-        Common.addGroupTimetable1()
-        Common.addGroupTimetable5()
+        //Common.addGroupTimetable1()
+        //Common.addGroupTimetable5()
         
-        Common.addProfessorTimetable1()
-        Common.addProfessorTimetable5()
+        //Common.addProfessorTimetable1()
+        //Common.addProfessorTimetable5()
         
-        Common.addPlaceTimetable0()
-        Common.addPlaceTimetable99()
+        //Common.addPlaceTimetable0()
+        //Common.addPlaceTimetable99()
         
         
         

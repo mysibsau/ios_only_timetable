@@ -18,6 +18,9 @@ class TimetableViewController: UIViewController {
     // var weeks: [Any]?
     var currWeek = 0
     
+    // Данные для ячеек дня недели и даты
+    private var menuData: [[(day: String, date: String)]]?
+    
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!
     @IBOutlet weak var numberWeekSegmented: UISegmentedControl!
@@ -44,6 +47,25 @@ class TimetableViewController: UIViewController {
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        menuData = [
+            [
+                ("Пн", "22.10"),
+                ("Вт", "23.10"),
+                ("Ср", "24.10"),
+                ("Чт", "25.10"),
+                ("Пт", "26.10"),
+                ("Сб", "27.10"),
+            ],
+            [
+                ("Пн", "28.10"),
+                ("Вт", "29.10"),
+                ("Ср", "30.10"),
+                ("Чт", "01.11"),
+                ("Пн", "02.11"),
+                ("Сб", "03.11"),
+            ]
+        ]
         
         // убираем нижний бордер у navigaton bar
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -212,8 +234,6 @@ class TimetableViewController: UIViewController {
             menuViewController.reloadData()
             contentViewController.reloadData()
         }
-        
-        dump(timetable!)
     }
     
     // MARK: - IBActions
@@ -239,7 +259,8 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
         // FIXME: сделать нормальные числа и недели
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
-        //cell.titleLabel.text = dataSource[index].menuTitle
+        cell.dayLabel.text = menuData?[currWeek][index].day
+        cell.dateLabel.text = menuData?[currWeek][index].date
         return cell
     }
     
