@@ -22,10 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addGroups()
         //Common.addProfessors()
         //Common.addPlaces()
-        //Common.addFavoriteGroups()
-//        UserDefaults.standard.set(, forKey: "1111")
         
-//        UserDefaultsConfig.timetableType = EntitiesType.professor.raw
         
         //Common.addGroupTimetable1()
         //Common.addGroupTimetable5()
@@ -35,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Common.addPlaceTimetable0()
         //Common.addPlaceTimetable99()
-        
         
         
         return true
