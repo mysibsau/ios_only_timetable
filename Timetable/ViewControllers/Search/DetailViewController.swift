@@ -8,15 +8,18 @@
 
 import UIKit
 
+typealias CellData = (text: String, color: UIColor?)
+private typealias Button = (text: String, color: UIColor, action: () -> ())
+
 class DetailViewController: UIViewController {
 
-    var data: [[(text: String, color: UIColor?)]]!
+    var data: [[CellData]]!
     var isFavorite: Bool!
     var delegate: DetailViewDelegate?
     
     // MARK: - Private
     // MARK: Массив кнопок
-    private var buttons: [(text: String, color: UIColor, action: () -> ())]!
+    private var buttons: [Button]!
     
     private var type: EntitiesType!
     private var id: Int!
@@ -65,7 +68,7 @@ class DetailViewController: UIViewController {
         // ]
         
         firstSectionHeader = "Группа"
-        secondSectionHeader = "Староста"
+        //secondSectionHeader = "Староста"
         
         //data = [tableData1, tableData2]
         data = [tableData1]

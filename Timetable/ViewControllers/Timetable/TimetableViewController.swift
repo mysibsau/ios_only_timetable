@@ -9,17 +9,18 @@
 import UIKit
 import PagingKit
 
+private typealias MenuCellData = (day: String, date: String)
+
 class TimetableViewController: UIViewController {
     
     var type: EntitiesType?
     // Any потому что тут будут GroupTimetable, ProfessorTimetable и PlaceTimetable
     // думаю, можно сделать как то получше (протоколы и т д) но пока не придумал
     var timetable: Any?
-    // var weeks: [Any]?
     var currWeek = 0
     
     // Данные для ячеек дня недели и даты
-    private var menuData: [[(day: String, date: String)]]?
+    private var menuData: [[MenuCellData]]?
     
     
     @IBOutlet weak var numberWeekSegmentedView: UIView!

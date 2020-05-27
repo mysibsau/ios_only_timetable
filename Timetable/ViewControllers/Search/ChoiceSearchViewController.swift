@@ -10,7 +10,6 @@ import UIKit
 
 class ChoiceSearchViewController: UITableViewController{
     
-    // Первый элемент массива - сохранненные группа, второй - все
     private let data = [
         "Группы",
         "Преподаватели",
