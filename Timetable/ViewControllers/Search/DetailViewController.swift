@@ -58,19 +58,13 @@ class DetailViewController: UIViewController {
         
         // Формируем данные для отображения в таблице
         let tableData1 = [
-            (group.name, nil),
-            group.email != nil ? (group.email!, nil) : ("Нет email", UIColor.gray)
+            (group.name, UIColor?(nil)),
+            // убрал из-за конфидеальность бла бла
+            //group.email != nil ? (group.email!, nil) : ("Нет email", UIColor.gray)
         ]
-        // let tableData2 = [
-        //     group.leaderName  != nil ? (group.leaderName!, nil)  : ("Нет ФИО", UIColor.gray),
-        //     group.leaderEmail != nil ? (group.leaderEmail!, nil) : ("Нет email", UIColor.gray),
-        //     group.leaderPhone != nil ? (group.leaderPhone!, nil) : ("Нет номера", UIColor.gray)
-        // ]
         
         firstSectionHeader = "Группа"
-        //secondSectionHeader = "Староста"
         
-        //data = [tableData1, tableData2]
         data = [tableData1]
         type = .group
         id = group.id
@@ -89,7 +83,8 @@ class DetailViewController: UIViewController {
         let tableData = [
             (professor.name, nil),
             professor.department != nil ? (professor.department!, nil) : ("Нет кафедры", UIColor.gray),
-            professor.email      != nil ? (professor.email!, nil)      : ("Нет email", UIColor.gray)
+            professor.email      != nil ? (professor.email!, nil)      : ("Нет email", UIColor.gray),
+            professor.phone      != nil ? (professor.phone!, nil)      : ("Нет номера", UIColor.gray)
         ]
         
         firstSectionHeader = "Преподаватель"
