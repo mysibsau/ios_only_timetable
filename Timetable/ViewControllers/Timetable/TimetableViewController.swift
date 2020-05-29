@@ -11,6 +11,12 @@ import PagingKit
 
 private typealias MenuCellData = (weekday: String, date: String)
 
+// ####### ВАЖНО ##########
+// reloadData вызывается только перед появлением view (viewWillAppear)
+// и при смене недели
+// у других местах его лучше не вызывать, неадекватное поведение
+// ########################
+
 class TimetableViewController: UIViewController {
     
     var type: EntitiesType?
@@ -64,7 +70,7 @@ class TimetableViewController: UIViewController {
         numberWeekSegmented.selectedSegmentIndex = currWeek
         
         setupPagingKit()
-        
+
         // загружаем расписание с помощью его id из UserDefaults, если там есть информация
         loadTimetableFromUserDetaults()
         
@@ -75,6 +81,13 @@ class TimetableViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        selectToday()
+        
+        menuViewController.reloadData()
+        contentViewController.reloadData()
+        
         // если расписание есть, то нет смысла показывать надпись
         guard timetable == nil else {
             alertForChoice.isHidden = true
@@ -124,6 +137,20 @@ class TimetableViewController: UIViewController {
         }
     }
     
+    private func selectToday() {
+        // выбираем нужную неделю
+        if DateHelper.currWeekIsEven() {
+            numberWeekSegmented.selectedSegmentIndex = 1
+        } else {
+            numberWeekSegmented.selectedSegmentIndex = 0
+        }
+        currWeek = numberWeekSegmented.selectedSegmentIndex
+        
+        // Выбираем текущий день
+        menuViewController.scroll(index: DateHelper.getCurrNumberWeekday() - 1, animated: false)
+        contentViewController.scroll(to: DateHelper.getCurrNumberWeekday() - 1, animated: false)
+    }
+    
     // MARK: - Методы для Notification Center
     @objc func onDidSelectGroup(_ notification: Notification) {
         if let userInfo = notification.userInfo as? [Int: GroupTimetable] {
@@ -137,9 +164,6 @@ class TimetableViewController: UIViewController {
             // Сохраняем выбранное расписание в UserDefaults
             UserDefaultsConfig.timetableType = type?.raw
             UserDefaultsConfig.timetableId = groupTimetable.groupId
-            
-            menuViewController.reloadData()
-            contentViewController.reloadData()
         }
     }
     
@@ -155,9 +179,6 @@ class TimetableViewController: UIViewController {
             // Сохраняем выбранное расписание в UserDefaults
             UserDefaultsConfig.timetableType = type?.raw
             UserDefaultsConfig.timetableId = professorTimetable.professorId
-            
-            menuViewController.reloadData()
-            contentViewController.reloadData()
         }
     }
     
@@ -173,9 +194,6 @@ class TimetableViewController: UIViewController {
             // Сохраняем выбранное расписание у UserDefaults
             UserDefaultsConfig.timetableType = type?.raw
             UserDefaultsConfig.timetableId = placeTimetable.placeId
-            
-            menuViewController.reloadData()
-            contentViewController.reloadData()
         }
     }
     
@@ -196,9 +214,6 @@ class TimetableViewController: UIViewController {
             
             navigationItem.title = groupTimetable.groupName
             
-            menuViewController.reloadData()
-            contentViewController.reloadData()
-            
         } else if timetableType == .professor {
             guard let professorTimetable = DataManager.shared.getTimetable(forProfessorId: timetableId) else { return }
             
@@ -207,9 +222,6 @@ class TimetableViewController: UIViewController {
             
             navigationItem.title = professorTimetable.professorName
             
-            menuViewController.reloadData()
-            contentViewController.reloadData()
-            
         } else if timetableType == .place {
             guard let placeTimetable = DataManager.shared.getTimetable(forPlaceId: timetableId) else { return }
             
@@ -217,9 +229,6 @@ class TimetableViewController: UIViewController {
             type = timetableType
             
             navigationItem.title = placeTimetable.placeName
-            
-            menuViewController.reloadData()
-            contentViewController.reloadData()
         }
     }
     
@@ -244,7 +253,6 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     
     // MARK: Формирование ячейки ( НУЖНО ДОПИСАТЬ ЕЩЕЕЕЕ )
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
-        // FIXME: сделать нормальные числа и недели
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
         cell.weekdayLabel.text = menuData?[currWeek][index].weekday
         cell.dateLabel.text = menuData?[currWeek][index].date
@@ -270,8 +278,6 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
 
     // MARK: Отправка ViewController'а для индекса
     func contentViewController(viewController: PagingContentViewController, viewControllerAt index: Int) -> UIViewController {
-        // FIXME: сделать нормальные числа и недели
-        
         guard let timetable = timetable else {
             return UIViewController()
         }

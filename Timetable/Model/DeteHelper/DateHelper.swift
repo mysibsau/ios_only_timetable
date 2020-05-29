@@ -10,8 +10,7 @@ import Foundation
 
 class DateHelper {
     
-    // FIXME: Объединить с нижним методом
-    static func getDatesEvenWeek() -> [(weekday: String, date: String)] {
+    static func currWeekIsEven() -> Bool {
         // номер текущей недели
         let currWeek = Calendar.current.component(.weekOfYear, from: Date.today)
         
@@ -19,8 +18,29 @@ class DateHelper {
         let currWeekIsEven = (currWeek % 2 == 1 && UserDefaultsConfig.firstWeekIsEven)
                               || (currWeek % 2 == 0 && !UserDefaultsConfig.firstWeekIsEven)
         
+        return currWeekIsEven
+    }
+    
+    
+    // FIXME: возвращает на один номер больше
+    static func getCurrNumberWeekday() -> Int {
+        let calendar = Calendar.current
+        
+        // - 1 потому что он возвращает номер начиная с воскресенья
+        var numberCurrWeek = calendar.component(.weekday, from: Date.today) - 1
+        
+        if numberCurrWeek < 1 {
+            numberCurrWeek += 7
+        }
+        
+        return numberCurrWeek
+    }
+    
+    // FIXME: Объединить с нижним методом
+    static func getDatesEvenWeek() -> [(weekday: String, date: String)] {
+        
         let evenWeekMonday: Date
-        if currWeekIsEven {
+        if currWeekIsEven() {
             /// если четная, то понедельник четной недели - предыдущий
             evenWeekMonday = Date.today.previous(.monday, considerToday: true)
         } else {
@@ -46,15 +66,9 @@ class DateHelper {
     }
     
     static func getDatesNotEvenWeek() -> [(weekday: String, date: String)] {
-        // номер текущей недели
-        let currWeek = Calendar.current.component(.weekOfYear, from: Date.today)
-        
-        // проверяем, четная ли текущая неделя
-        let currWeekIsEven = (currWeek % 2 == 1 && UserDefaultsConfig.firstWeekIsEven)
-                              || (currWeek % 2 == 0 && !UserDefaultsConfig.firstWeekIsEven)
         
         let evenWeekMonday: Date
-        if !currWeekIsEven {
+        if !currWeekIsEven() {
             /// если четная, то понедельник четной недели - предыдущий
             evenWeekMonday = Date.today.previous(.monday, considerToday: true)
         } else {
