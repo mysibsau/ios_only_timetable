@@ -53,7 +53,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="dateLabel" destination="hHU-wh-fud" id="RIi-0l-pTQ"/>
-                <outlet property="dayLabel" destination="Wgm-XL-lQh" id="g3k-IT-ahY"/>
+                <outlet property="weekdayLabel" destination="Wgm-XL-lQh" id="G77-YP-tIP"/>
             </connections>
             <point key="canvasLocation" x="-78.985507246376812" y="-115.51339285714285"/>
         </view>

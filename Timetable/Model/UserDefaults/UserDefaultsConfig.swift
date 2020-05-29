@@ -16,6 +16,7 @@ struct UserDefaultsConfig {
     @UserDefaultsWrapper(key: "com.user.timetableId", defaultValue: Int?(nil))
     static var timetableId: Int?
     
-    //@UserDefaultsWrapper(key: "com.system.")
+    @UserDefaultsWrapper(key: "com.system.firstWeekIsEven", defaultValue: true)
+    static var firstWeekIsEven: Bool
     
 }

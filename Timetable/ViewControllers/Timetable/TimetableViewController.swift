@@ -9,7 +9,7 @@
 import UIKit
 import PagingKit
 
-private typealias MenuCellData = (day: String, date: String)
+private typealias MenuCellData = (weekday: String, date: String)
 
 class TimetableViewController: UIViewController {
     
@@ -50,22 +50,8 @@ class TimetableViewController: UIViewController {
         super.viewDidLoad()
         
         menuData = [
-            [
-                ("Пн", "22.10"),
-                ("Вт", "23.10"),
-                ("Ср", "24.10"),
-                ("Чт", "25.10"),
-                ("Пт", "26.10"),
-                ("Сб", "27.10"),
-            ],
-            [
-                ("Пн", "28.10"),
-                ("Вт", "29.10"),
-                ("Ср", "30.10"),
-                ("Чт", "01.11"),
-                ("Пн", "02.11"),
-                ("Сб", "03.11"),
-            ]
+            DateHelper.getDatesNotEvenWeek(),
+            DateHelper.getDatesEvenWeek()
         ]
         
         // убираем нижний бордер у navigaton bar
@@ -260,7 +246,7 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
         // FIXME: сделать нормальные числа и недели
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
-        cell.dayLabel.text = menuData?[currWeek][index].day
+        cell.weekdayLabel.text = menuData?[currWeek][index].weekday
         cell.dateLabel.text = menuData?[currWeek][index].date
         return cell
     }

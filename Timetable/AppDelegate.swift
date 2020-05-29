@@ -24,14 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addPlaces()
         
         
-        Common.addGroupTimetable1()
-        Common.addGroupTimetable5()
+        //Common.addGroupTimetable1()
+        //Common.addGroupTimetable5()
         
-        Common.addProfessorTimetable1()
-        Common.addProfessorTimetable5()
+        //Common.addProfessorTimetable1()
+        //Common.addProfessorTimetable5()
         
-        Common.addPlaceTimetable0()
-        Common.addPlaceTimetable99()
+        //Common.addPlaceTimetable0()
+        //Common.addPlaceTimetable99()
         
         
         return true
