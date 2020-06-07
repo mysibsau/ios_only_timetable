@@ -34,6 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addPlaceTimetable99()
         
         
+        ApiManager.loadGroupsTask { groups in
+            print(groups!)
+        }.resume()
+        
+        ApiManager.loadProfessorsTask { professors in
+            print(professors!)
+        }.resume()
+        
+        ApiManager.loadPlacesDataTask { places in
+            print(places)
+        }.resume()
+        
         return true
     }
 

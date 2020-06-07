@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RProfessor: Object {
+class RProfessor: Object, Decodable {
     
     @objc dynamic var id = 0
     @objc dynamic var name = ""
@@ -19,6 +19,14 @@ class RProfessor: Object {
     
     override class func primaryKey() -> String? {
         return "id"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case department
+        case phone
+        case email = "mail"
     }
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RPlace: Object {
+class RPlace: Object, Decodable {
     
     @objc dynamic var id = 0
     @objc dynamic var name = ""

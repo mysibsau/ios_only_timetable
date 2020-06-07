@@ -44,6 +44,7 @@
 		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
 		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
 		4A67CBDB248D28AC00F1D1FA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDA248D28AC00F1D1FA /* API.swift */; };
+		4A67CBDD248D447D00F1D1FA /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDC248D447D00F1D1FA /* ApiManager.swift */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */; };
 		4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */; };
@@ -151,6 +152,7 @@
 		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
 		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		4A67CBDA248D28AC00F1D1FA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		4A67CBDC248D447D00F1D1FA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsTableViewController.swift; sourceTree = "<group>"; };
 		4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				4A67CBDA248D28AC00F1D1FA /* API.swift */,
+				4A67CBDC248D447D00F1D1FA /* ApiManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -944,6 +947,7 @@
 				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,
 				4A415E8824585B5D005FADD7 /* RPlaceLesson.swift in Sources */,
+				4A67CBDD248D447D00F1D1FA /* ApiManager.swift in Sources */,
 				4AC64C942479A72900081D55 /* ProfessorTimetable.swift in Sources */,
 				4AC64C8B2479A6C700081D55 /* ProfessorDayViewController.swift in Sources */,
 				4AC64C8E2479A71000081D55 /* ProfessorLesson.swift in Sources */,
