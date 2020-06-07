@@ -43,6 +43,7 @@
 		4A610865243FAE77008BCB90 /* UIStackView+remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A610864243FAE77008BCB90 /* UIStackView+remove.swift */; };
 		4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */; };
 		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
+		4A67CBDB248D28AC00F1D1FA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDA248D28AC00F1D1FA /* API.swift */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */; };
 		4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */; };
@@ -149,6 +150,7 @@
 		4A610864243FAE77008BCB90 /* UIStackView+remove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+remove.swift"; sourceTree = "<group>"; };
 		4A67A374245C49B5003765D2 /* ChoiceSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSearchViewController.swift; sourceTree = "<group>"; };
 		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		4A67CBDA248D28AC00F1D1FA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsTableViewController.swift; sourceTree = "<group>"; };
 		4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 		4A2338F3243C5AC7002C0746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A67CBD9248D278300F1D1FA /* API */,
 				4A9207A524604E5E00D050EB /* Enums */,
 				4AC64C6524750E1800081D55 /* UserDefaults */,
 				4A4C94A9245B58B1008105DE /* DataManager */,
@@ -451,6 +454,14 @@
 				4AC64C5A2473FABF00081D55 /* UIDevice+vibrate.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A67CBD9248D278300F1D1FA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				4A67CBDA248D28AC00F1D1FA /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		4A6C1CF2246B26270048CD1A /* Timetable */ = {
@@ -928,6 +939,7 @@
 				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
 				4AC64CA6247AF72700081D55 /* DayViewController.swift in Sources */,
 				4A9207A724604E7900D050EB /* EntitiesType.swift in Sources */,
+				4A67CBDB248D28AC00F1D1FA /* API.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,
 				4A9207A424604B2400D050EB /* Notification+Name.swift in Sources */,
 				4A415E8324585A28005FADD7 /* RProfessorTimetable.swift in Sources */,

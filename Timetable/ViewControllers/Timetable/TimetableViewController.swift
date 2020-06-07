@@ -88,18 +88,24 @@ class TimetableViewController: UIViewController {
         menuViewController.reloadData()
         contentViewController.reloadData()
         
-        // если расписание есть, то нет смысла показывать надпись
-        guard timetable == nil else {
+        if timetable == nil {
+            showAlertForChoice()
+        } else {
             alertForChoice.isHidden = true
-            return
         }
         
-        // добавляем, если view с этой надписью еще не добавлена в subview
-        if !view.subviews.contains(alertForChoice) {
-            view.addSubview(alertForChoice)
-            alertForChoice.frame = view.bounds
-        }
-        alertForChoice.isHidden = false
+//        // если расписание есть, то нет смысла показывать надпись
+//        guard timetable == nil else {
+//            alertForChoice.isHidden = true
+//            return
+//        }
+//
+//        // добавляем, если view с этой надписью еще не добавлена в subview
+//        if !view.subviews.contains(alertForChoice) {
+//            view.addSubview(alertForChoice)
+//            alertForChoice.frame = view.bounds
+//        }
+//        alertForChoice.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -147,8 +153,14 @@ class TimetableViewController: UIViewController {
         currWeek = numberWeekSegmented.selectedSegmentIndex
         
         // Выбираем текущий день
-        menuViewController.scroll(index: DateHelper.getCurrNumberWeekday() - 1, animated: false)
-        contentViewController.scroll(to: DateHelper.getCurrNumberWeekday() - 1, animated: false)
+        var currNumberWeekday = DateHelper.getCurrNumberWeekday()
+        /// Воскресенья у меня тут нет
+        if currNumberWeekday == 7 {
+            currNumberWeekday -= 1
+        }
+        
+        menuViewController.scroll(index: currNumberWeekday - 1, animated: false)
+        contentViewController.scroll(to: currNumberWeekday - 1, animated: false)
     }
     
     // MARK: - Методы для Notification Center
@@ -230,6 +242,17 @@ class TimetableViewController: UIViewController {
             
             navigationItem.title = placeTimetable.placeName
         }
+    }
+    
+    // MARK: - Show Alert
+    // MARK: Show Alert For Choice
+    func showAlertForChoice() {
+        // добавляем, если view с этой надписью еще не добавлена в subview
+        if !view.subviews.contains(alertForChoice) {
+            view.addSubview(alertForChoice)
+            alertForChoice.frame = view.bounds
+        }
+        alertForChoice.isHidden = false
     }
     
     // MARK: - IBActions
