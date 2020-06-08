@@ -34,17 +34,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Common.addPlaceTimetable99()
         
         
-        ApiManager.loadGroupsTask { groups in
-            print(groups!)
-        }.resume()
+//        ApiManager.loadGroupsTask { groups in
+//            print(groups!)
+//        }.resume()
+//
+//        ApiManager.loadProfessorsTask { professors in
+//            print(professors!)
+//        }.resume()
+//
+//        ApiManager.loadPlacesDataTask { places in
+//            print(places)
+//        }.resume()
         
-        ApiManager.loadProfessorsTask { professors in
-            print(professors!)
-        }.resume()
+//        ApiManager.loadCurrWeekIsEwenTask { isEven in
+//            print(isEven.self)
+//            print(isEven)
+//        }.resume()
         
-        ApiManager.loadPlacesDataTask { places in
-            print(places)
-        }.resume()
+//        ApiManager.loadDaysOfWeekTask(forGroupId: 1, weekNumber: 1) { timetable in
+//            for t in timetable! {
+//                print(t.number)
+//                print(t.lessons)
+//            }
+//        }.resume()
+        
+//        ApiManager.loadTimetableTask(forProfessorId: 1) { timetable in
+//            print(timetable)
+//        }.start()
+//        
+//        ApiManager.loadTimetableTask(forProfessorId: 3) { timetable in
+//            print(timetable)
+//        }.start()
+//        
+//        ApiManager.loadTimetableTask(forPlaceId: 5) { timetable in
+//            print(timetable)
+//        }.start()
         
         return true
     }

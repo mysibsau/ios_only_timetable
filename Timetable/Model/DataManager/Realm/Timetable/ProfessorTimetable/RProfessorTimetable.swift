@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RProfessorTimetable: Object {
+class RProfessorTimetable: Object, Decodable {
     
     @objc dynamic var professorId = 0
     let weeks = List<RProfessorWeek>()

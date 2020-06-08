@@ -9,9 +9,14 @@
 import Foundation
 import RealmSwift
 
-class RProfessorDay: Object {
+class RProfessorDay: Object, Decodable {
     
     @objc dynamic var number = 0
-    let lessons = List<RProfessorLesson>()
+    var lessons = List<RProfessorLesson>()
+    
+    enum CodingKeys: String, CodingKey {
+        case number = "day"
+        case lessons = "lesson"
+    }
     
 }

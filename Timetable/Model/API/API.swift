@@ -12,6 +12,11 @@ struct API {
     
     static let address = "https://timetable.mysibsau.ru"
     
+    // MARK: Curr Week Is Even
+    static func currWeekIsEven() -> URL {
+        return URL(string: "\(address)/CurrentWeekIsEven/")!
+    }
+    
     // MARK: - Group
     static func groups() -> URL {
         return URL(string: "\(address)/groups")!

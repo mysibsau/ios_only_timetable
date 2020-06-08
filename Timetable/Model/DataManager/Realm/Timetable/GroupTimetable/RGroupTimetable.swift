@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RGroupTimetable: Object {
+class RGroupTimetable: Object, Decodable {
     
     @objc dynamic var groupId = 0
     let weeks = List<RGroupWeek>()

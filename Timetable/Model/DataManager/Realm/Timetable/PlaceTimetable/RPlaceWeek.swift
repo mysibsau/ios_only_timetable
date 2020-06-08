@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RPlaceWeek: Object {
+class RPlaceWeek: Object, Decodable {
     
     @objc dynamic var number = 0
     let days = List<RPlaceDay>()
