@@ -27,8 +27,14 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         return searchController.isActive && !searchBarIsEmpty
     }
     
-    // MARK: Для загрузки расписаний
-    var task: Thread?
+    // MARK: - Для загрузки расписаний
+    var tasks: DataTasks?
+    
+    // MARK: - UI
+    // MARK: Activity Indicator
+    let viewWithActivityIndicator = ActivityIndicatorView()
+    // MARK: Alert View
+    let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
 
     // MARK: - Overrides
     override func viewDidLoad() {
@@ -46,13 +52,21 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         setupSearchController()
         
         //view.backgroundColor = Colors.backgroungColor
+        
+//        if !view.subviews.contains(viewWithActivityIndicator) {
+//            view.addSubview(viewWithActivityIndicator)
+//            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
+//        }
+//        viewWithActivityIndicator.isHidden = false
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Если уходят с эгото экрана - прекращаем загрузку
-        task?.cancel()
+        tasks?.cancelAll()
     }
     
     // MARK: - Добавление обработки длинного нажатия на ячейку ДЛЯ ОТКРЫТИЯ ДЕТАЛЬНОГО ПРОСМОТА
@@ -173,11 +187,11 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         let object = data[indexPath.section][indexPath.row]
         
         if let object = object as? RGroup {
-            showTimetable(withId: object.id)
+            showTimetable(withId: object.id, animatingViewController: self)
         } else if let object = object as? RProfessor {
-            showTimetable(withId: object.id)
+            showTimetable(withId: object.id, animatingViewController: self)
         } else if let object = object as? RPlace {
-            showTimetable(withId: object.id)
+            showTimetable(withId: object.id, animatingViewController: self)
         }
     }
     
@@ -196,8 +210,13 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
 // MARK: - Detail View Delegate
 extension TableViewController: DetailViewDelegate {
     
-    // MARK: Открытие расписания
-    func showTimetable(withId id: Int) {
+    // MARK: Открыть расписания
+    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
+        
+    }
+    
+    // MARK: Сделать расписание основным
+    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
         guard let entitie = data[1].filter("id = \(id)").first else { return }
@@ -207,35 +226,31 @@ extension TableViewController: DetailViewDelegate {
             let optionalTimetable = DataManager.shared.getTimetable(forGroupId: group.id)
             
             if let timetable = optionalTimetable {
-                NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetable])
-                // FIXME: Тут происходит дизбалансный вызов
-                tabBarController?.selectedIndex = 0
-                navigationController?.popToRootViewController(animated: true)
-            } else {
                 
-                print("Качаем...")
+                NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetable])
+                
+            } else {
                 /// Иначе качаем из API, если нет в БД
-                // начинаем спинер
-                task = ApiManager.loadTimetableTask(forGroupId: group.id) { optionalTimetable in
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forGroupId: group.id) { optionalTimetable in
                     
                     DispatchQueue.main.async {
                         if let timetable = optionalTimetable {
                             DataManager.shared.write(groupTimetable: timetable)
                             let timetableForShowing = DataManager.shared.getTimetable(forGroupId: group.id)!
                             NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetableForShowing])
-                            // FIXME: Тут происходит дизбалансный вызов
-                            self.tabBarController?.selectedIndex = 0
-                            self.navigationController?.popToRootViewController(animated: true)
                         } else {
-                            // Тут показываем алерт
-                            print("Не вышло")
+                            animatingViewController.showAlertForNetwork()
                         }
-                        // останавливаем спинер
+                        
+                        animatingViewController.stopActivityIndicator()
                     }
                     
                 }
                 
-                task?.start()
+                tasks?.resumeAll()
             }
             
         } else if let professor = entitie as? RProfessor {
@@ -243,35 +258,31 @@ extension TableViewController: DetailViewDelegate {
             let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
             
             if let timetable = optionalTimetable {
+                
                 NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetable])
-                tabBarController?.selectedIndex = 0
-                navigationController?.popToRootViewController(animated: true)
                 
             } else {
-                
-                print("Качаем...")
                 /// Иначе качаем из API, если нет в БД
-                // начинаем спинер
-                task = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
                     
                     DispatchQueue.main.async {
                         if let timetable = optionalTimetable {
                             DataManager.shared.write(professorTimetable: timetable)
                             let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
                             NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetableForShowing])
-                            // FIXME: Тут происходит дизбалансный вызов
-                            self.tabBarController?.selectedIndex = 0
-                            self.navigationController?.popToRootViewController(animated: true)
                         } else {
-                            // Тут показываем алерт
-                            print("Не вышло")
+                            animatingViewController.showAlertForNetwork()
                         }
-                        // останавливаем спинер
+                        
+                        animatingViewController.stopActivityIndicator()
                     }
                     
                 }
                 
-                task?.start()
+                tasks?.resumeAll()
                 
             }
             
@@ -280,38 +291,33 @@ extension TableViewController: DetailViewDelegate {
             let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
             
             if let timetable = optionalTimetable {
+                
                 NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetable])
-                tabBarController?.selectedIndex = 0
-                navigationController?.popToRootViewController(animated: true)
                 
             } else {
-                
-                print("Качаем...")
                 /// Иначе качаем из API, если нет в БД
-                // начинаем спинер
-                task = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
                     
                     DispatchQueue.main.async {
                         if let timetable = optionalTimetable {
                             DataManager.shared.write(placeTimetable: timetable)
                             let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
                             NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetableForShowing])
-                            // FIXME: Тут происходит дизбалансный вызов
-                            self.tabBarController?.selectedIndex = 0
-                            self.navigationController?.popToRootViewController(animated: true)
                         } else {
-                            // Тут показываем алерт
-                            print("Не вышло")
+                            animatingViewController.showAlertForNetwork()
                         }
-                        // останавливаем спинер
+                        
+                        animatingViewController.stopActivityIndicator()
                     }
                     
                 }
                 
-                task?.start()
+                tasks?.resumeAll()
             }
         }
-        
     }
     
     // MARK: Добавление в избранные
@@ -355,40 +361,40 @@ extension TableViewController: DetailViewDelegate {
         
         tableView.reloadData()
     }
-//
-//    func showActivityIndicatory(uiView: UIView) {
-//        let container: UIView = UIView()
-//        container.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0) // UIColor.fromHex(0xffffff, alpha: 0.3)
-//
-//        uiView.addSubview(container)
-//        container.translatesAutoresizingMaskIntoConstraints = false
-//        container.addConstraintsOnAllSides(to: uiView.safeAreaLayoutGuide, withConstantForTop: 0, leadint: 0, trailing: 0, bottom: 0)
-//
-//        let loadingView: UIView = UIView()
-//        loadingView.backgroundColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 0.7) // UIColorFromHex(0x444444, alpha: 0.7)
-//        loadingView.clipsToBounds = true
-//        loadingView.layer.cornerRadius = 10
-//
-//        container.addSubview(loadingView)
-//        loadingView.translatesAutoresizingMaskIntoConstraints = false
-//        loadingView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-//        loadingView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
-//        loadingView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-//        loadingView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-//
-//        let activityIndicator = UIActivityIndicatorView()
-//        activityIndicator.style = .whiteLarge
-//
-//        loadingView.addSubview(activityIndicator)
-//
-//        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-//        activityIndicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor).isActive = true
-//        activityIndicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor).isActive = true
-//        activityIndicator.widthAnchor.constraint(equalToConstant: 40).isActive = true
-//        activityIndicator.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//
-//
-//        activityIndicator.startAnimating()
-//        tableView.isScrollEnabled = false
-//    }
+
+}
+
+
+// MARK: - Animating Network View Protocol
+extension TableViewController: AnimatingNetworkViewProtocol {
+    
+    // MARK: Activity Indicator
+    func startActivityIndicator() {
+        if !view.subviews.contains(viewWithActivityIndicator) {
+            view.addSubview(viewWithActivityIndicator)
+            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
+        }
+        viewWithActivityIndicator.startAnimating()
+        tableView.isScrollEnabled = false
+    }
+    
+    func stopActivityIndicator() {
+        viewWithActivityIndicator.stopAnimating()
+        tableView.isScrollEnabled = true
+    }
+    
+    // MARK: Arert View
+    func showAlertForNetwork() {
+        if !view.subviews.contains(alertViewForNetrowk) {
+            view.addSubview(alertViewForNetrowk)
+            
+            alertViewForNetrowk.translatesAutoresizingMaskIntoConstraints = false
+            alertViewForNetrowk.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+            alertViewForNetrowk.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        }
+        
+        alertViewForNetrowk.hideWithAnimation()
+    }
+    
 }

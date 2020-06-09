@@ -166,7 +166,7 @@ class ApiManager {
         return task
     }
     
-    static func loadTimetableTask(forGroupId groupId: Int, complition: @escaping (RGroupTimetable?) -> Void) -> Thread {
+    static func loadTimetableTask(forGroupId groupId: Int, complition: @escaping (RGroupTimetable?) -> Void) -> DataTasks {
         
         let timetable = RGroupTimetable()
         timetable.groupId = groupId
@@ -221,12 +221,11 @@ class ApiManager {
             taskDone()
         }
         
-        let task = Thread {
-            task1.resume()
-            task2.resume()
-        }
+        let dataTasks = DataTasks()
+        dataTasks.add(task: task1)
+        dataTasks.add(task: task2)
         
-        return task
+        return dataTasks
     }
     
     
@@ -259,7 +258,7 @@ class ApiManager {
     }
     
     
-    static func loadTimetableTask(forProfessorId professorId: Int, complition: @escaping (RProfessorTimetable?) -> Void) -> Thread {
+    static func loadTimetableTask(forProfessorId professorId: Int, complition: @escaping (RProfessorTimetable?) -> Void) -> DataTasks {
         
         let timetable = RProfessorTimetable()
         timetable.professorId = professorId
@@ -314,12 +313,11 @@ class ApiManager {
             taskDone()
         }
         
-        let task = Thread {
-            task1.resume()
-            task2.resume()
-        }
+        let dataTasks = DataTasks()
+        dataTasks.add(task: task1)
+        dataTasks.add(task: task2)
         
-        return task
+        return dataTasks
     }
     
     
@@ -352,7 +350,7 @@ class ApiManager {
     }
     
     
-    static func loadTimetableTask(forPlaceId placeId: Int, complition: @escaping (RPlaceTimetable?) -> Void) -> Thread {
+    static func loadTimetableTask(forPlaceId placeId: Int, complition: @escaping (RPlaceTimetable?) -> Void) -> DataTasks {
         
         let timetable = RPlaceTimetable()
         timetable.placeId = placeId
@@ -407,12 +405,11 @@ class ApiManager {
             taskDone()
         }
         
-        let task = Thread {
-            task1.resume()
-            task2.resume()
-        }
+        let dataTasks = DataTasks()
+        dataTasks.add(task: task1)
+        dataTasks.add(task: task2)
         
-        return task
+        return dataTasks
     }
 
 }

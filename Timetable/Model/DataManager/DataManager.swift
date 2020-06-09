@@ -47,7 +47,7 @@ class DataManager {
         print(downloadedURL)
         print(userURL)
         
-        // deleteTimetable(forGroupId: 1)
+        deleteTimetable(forGroupId: 1)
     }
     
 }

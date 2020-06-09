@@ -30,8 +30,10 @@ class DetailViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
-    // MARK: Нижняя надпись, которыя появляется при копировании текста
-    private let alertView = AlertView(alertText: "Текст скопирован")
+    private let alertViewForCoppy = AlertView(alertText: "Текст скопирован")
+    
+    let alertViewForNetwork = AlertView(alertText: "Проблема с сетью")
+    let viewWithActivityIndicator = ActivityIndicatorView()
     
     
     // MARK: - Overrides
@@ -47,7 +49,7 @@ class DetailViewController: UIViewController {
         view.backgroundColor = Colors.backgroungColor
         
         // скрываем алерт надпись
-        alertView.isHidden = true
+        alertViewForCoppy.isHidden = true
     }
 
     // MARK: - Initialization
@@ -149,25 +151,22 @@ class DetailViewController: UIViewController {
             UIPasteboard.general.string = cellText
             // Леграя вибрация в конце длинного нажатия
             UIDevice.vibrate()
-            showAlertView()
+            showAlertViewForCoppy()
         }
     }
     
-    private func showAlertView() {
-        if !view.subviews.contains(alertView) {
-            view.addSubview(alertView)
+    private func showAlertViewForCoppy() {
+        if !view.subviews.contains(alertViewForCoppy) {
+            view.addSubview(alertViewForCoppy)
             
-            alertView.translatesAutoresizingMaskIntoConstraints = false
+            alertViewForCoppy.translatesAutoresizingMaskIntoConstraints = false
             
-            alertView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-            alertView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-            alertView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+            alertViewForCoppy.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+            alertViewForCoppy.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
+            alertViewForCoppy.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
         }
         
-        alertView.alpha = 1.0
-        alertView.isHidden = false
-        
-        alertView.hideWithAnimation()
+        alertViewForCoppy.hideWithAnimation()
     }
 
 }
@@ -184,10 +183,13 @@ extension DetailViewController {
             addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFavorite)
         }
         
+        let makeBasicButton = ("Сделать основным", UIColor.blue, makeTimetableBasiHandler)
+        
         let showButton = ("Показать расписание", UIColor.systemBlue, showTimetableHandler)
         
         buttons = [
             addOrDeleteButton,
+            makeBasicButton,
             showButton
         ]
     }
@@ -206,9 +208,14 @@ extension DetailViewController {
         tableView.reloadData()
     }
     
+    private func makeTimetableBasiHandler() {
+        guard let delegate = delegate else { return }
+        delegate.makeTimetableBasic(withId: id, animatingViewController: self)
+    }
+    
     private func showTimetableHandler() {
         guard let delegate = delegate else { return }
-        delegate.showTimetable(withId: id)
+        delegate.showTimetable(withId: id, animatingViewController: self)
     }
 }
 
@@ -273,4 +280,38 @@ extension DetailViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+}
+
+
+extension DetailViewController: AnimatingNetworkViewProtocol {
+    
+    // MARK: Activity Indicator
+    func startActivityIndicator() {
+        if !view.subviews.contains(viewWithActivityIndicator) {
+            view.addSubview(viewWithActivityIndicator)
+            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
+        }
+        viewWithActivityIndicator.startAnimating()
+        tableView.isScrollEnabled = false
+    }
+    
+    func stopActivityIndicator() {
+        viewWithActivityIndicator.stopAnimating()
+        tableView.isScrollEnabled = true
+    }
+    
+    // MARK: Arert View
+    func showAlertForNetwork() {
+        if !view.subviews.contains(alertViewForNetwork) {
+            view.addSubview(alertViewForNetwork)
+            
+            alertViewForNetwork.translatesAutoresizingMaskIntoConstraints = false
+            alertViewForNetwork.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+            alertViewForNetwork.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        }
+        
+        alertViewForNetwork.hideWithAnimation()
+    }
+    
 }
