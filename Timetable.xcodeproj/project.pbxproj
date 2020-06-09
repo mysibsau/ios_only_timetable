@@ -49,6 +49,7 @@
 		4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */; };
 		4A67CBE3248F641F00F1D1FA /* DataTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE2248F641F00F1D1FA /* DataTasks.swift */; };
 		4A67CBE7248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */; };
+		4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */; };
 		4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */; };
@@ -161,6 +162,7 @@
 		4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		4A67CBE2248F641F00F1D1FA /* DataTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTasks.swift; sourceTree = "<group>"; };
 		4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingNetworkViewProtocol.swift; sourceTree = "<group>"; };
+		4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMood.swift; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsTableViewController.swift; sourceTree = "<group>"; };
 		4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 		4A6C1CF2246B26270048CD1A /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
+				4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */,
 				4A920772245DCFF800D050EB /* TimetableViewController.swift */,
 				4AC64CA5247AF72700081D55 /* DayViewController.swift */,
 				4AC64CA7247AF94200081D55 /* Unused */,
@@ -939,6 +942,7 @@
 				4A415E9824585E87005FADD7 /* RGroupSession.swift in Sources */,
 				4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */,
 				4AC64C872479728700081D55 /* ProfessorSubgroupView.swift in Sources */,
+				4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */,
 				4A415E6E2458584F005FADD7 /* RGroupLesson.swift in Sources */,
 				4A415E6724585627005FADD7 /* RProfessor.swift in Sources */,
 				4A415EA4245864BF005FADD7 /* Realm+CascadeDeleting.swift in Sources */,

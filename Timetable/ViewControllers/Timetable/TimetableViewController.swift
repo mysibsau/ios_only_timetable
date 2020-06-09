@@ -20,6 +20,7 @@ private typealias MenuCellData = (weekday: String, date: String)
 class TimetableViewController: UIViewController {
     
     var type: EntitiesType?
+    var mood: TimetableMood = .basic
     // Any потому что тут будут GroupTimetable, ProfessorTimetable и PlaceTimetable
     // думаю, можно сделать как то получше (протоколы и т д) но пока не придумал
     var timetable: Any?
@@ -71,28 +72,47 @@ class TimetableViewController: UIViewController {
         
         setupPagingKit()
 
-        // загружаем расписание с помощью его id из UserDefaults, если там есть информация
-        loadTimetableFromUserDetaults()
-        
-        // регистрируем наблюдателя за уведомлениями
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+        // и если это основной экран расписания
+        if mood == .basic {
+            // загружаем расписание с помощью его id из UserDefaults, если там есть информация
+            loadTimetableFromUserDetaults()
+            
+            // регистрируем наблюдателя за уведомлениями
+            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+        } else if mood == .notBasic {
+            if let timetable = timetable as? GroupTimetable {
+                navigationItem.title = timetable.groupName
+            } else if let timetable = timetable as? ProfessorTimetable {
+                navigationItem.title = timetable.professorName
+            } else if let timetable = timetable as? PlaceTimetable {
+                navigationItem.title = timetable.placeName
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        guard timetable != nil else {
+            showAlertForChoice()
+            return
+        }
+        alertForChoice.isHidden = true
+        
+        // Да, нужно юзать 2 раза (это первый) - сраный PagingKit
         selectToday()
         
         menuViewController.reloadData()
         contentViewController.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        if timetable == nil {
-            showAlertForChoice()
-        } else {
-            alertForChoice.isHidden = true
-        }
+        // Да, нужно юзать 2 раза (это второй) - сраный PagingKit
+        selectToday()
     }
     
     override func viewDidLayoutSubviews() {
@@ -146,8 +166,8 @@ class TimetableViewController: UIViewController {
             currNumberWeekday -= 1
         }
         
-        menuViewController.scroll(index: currNumberWeekday - 1, animated: false)
-        contentViewController.scroll(to: currNumberWeekday - 1, animated: false)
+        menuViewController.scroll(index: currNumberWeekday - 1, animated: true)
+        contentViewController.scroll(to: currNumberWeekday - 1, animated: true)
     }
     
     // MARK: - Методы для Notification Center
@@ -229,6 +249,11 @@ class TimetableViewController: UIViewController {
             
             navigationItem.title = placeTimetable.placeName
         }
+    }
+    
+    // MARK: - Для использования в Search
+    func set(timetable: Any) {
+        self.timetable = timetable
     }
     
     // MARK: - Show Alert

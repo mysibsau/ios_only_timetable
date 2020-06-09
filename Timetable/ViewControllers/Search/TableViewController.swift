@@ -212,7 +212,127 @@ extension TableViewController: DetailViewDelegate {
     
     // MARK: Открыть расписания
     func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
+        // берем группу с нужным id из всех групп
+        // потом нужно просто запросить расписание из бд
+        guard let entitie = data[1].filter("id = \(id)").first else { return }
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let timetableViewController = storyboard.instantiateViewController(withIdentifier: "TimetableViewControllerId") as! TimetableViewController
+        timetableViewController.mood = .notBasic
+        
+        if let group = entitie as? RGroup {
+            
+            timetableViewController.type = .group
+            
+            let optionalTimetable = DataManager.shared.getTimetable(forGroupId: group.id)
+            
+            if let timetable = optionalTimetable {
+                
+                timetableViewController.timetable = timetable
+                navigationController?.pushViewController(timetableViewController, animated: true)
+                
+            } else {
+                /// Иначе качаем из API, если нет в БД
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forGroupId: group.id) { optionalTimetable in
+                    
+                    DispatchQueue.main.async {
+                        if let timetable = optionalTimetable {
+                            DataManager.shared.write(groupTimetable: timetable)
+                            let timetableForShowing = DataManager.shared.getTimetable(forGroupId: group.id)!
+                            
+                            timetableViewController.timetable = timetableForShowing
+                            self.navigationController?.pushViewController(timetableViewController, animated: true)
+                        } else {
+                            animatingViewController.showAlertForNetwork()
+                        }
+                        
+                        animatingViewController.stopActivityIndicator()
+                    }
+                    
+                }
+                
+                tasks?.resumeAll()
+            }
+            
+        } else if let professor = entitie as? RProfessor {
+            
+            timetableViewController.type = .professor
+            
+            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
+            
+            if let timetable = optionalTimetable {
+                
+                timetableViewController.timetable = timetable
+                navigationController?.pushViewController(timetableViewController, animated: true)
+                
+            } else {
+                /// Иначе качаем из API, если нет в БД
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
+                    
+                    DispatchQueue.main.async {
+                        if let timetable = optionalTimetable {
+                            DataManager.shared.write(professorTimetable: timetable)
+                            let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
+                            
+                            timetableViewController.timetable = timetableForShowing
+                            self.navigationController?.pushViewController(timetableViewController, animated: true)
+                        } else {
+                            animatingViewController.showAlertForNetwork()
+                        }
+                        
+                        animatingViewController.stopActivityIndicator()
+                    }
+                    
+                }
+                
+                tasks?.resumeAll()
+                
+            }
+            
+        } else if let place = entitie as? RPlace {
+            
+            timetableViewController.type = .place
+            
+            let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
+            
+            if let timetable = optionalTimetable {
+                
+                timetableViewController.timetable = timetable
+                navigationController?.pushViewController(timetableViewController, animated: true)
+                
+            } else {
+                /// Иначе качаем из API, если нет в БД
+                
+                animatingViewController.startActivityIndicator()
+                
+                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
+                    
+                    DispatchQueue.main.async {
+                        if let timetable = optionalTimetable {
+                            DataManager.shared.write(placeTimetable: timetable)
+                            let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
+                            
+                            timetableViewController.timetable = timetableForShowing
+                            self.navigationController?.pushViewController(timetableViewController, animated: true)
+                            
+                        } else {
+                            animatingViewController.showAlertForNetwork()
+                        }
+                        
+                        animatingViewController.stopActivityIndicator()
+                    }
+                    
+                }
+                
+                tasks?.resumeAll()
+            }
+        }
     }
     
     // MARK: Сделать расписание основным
