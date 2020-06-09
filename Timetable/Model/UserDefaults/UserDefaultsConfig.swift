@@ -19,4 +19,14 @@ struct UserDefaultsConfig {
     @UserDefaultsWrapper(key: "com.system.firstWeekIsEven", defaultValue: true)
     static var firstWeekIsEven: Bool
     
+    // MARK: Hash для определения версии таблиц
+    @UserDefaultsWrapper(key: "com.system.groupsHash", defaultValue: "")
+    static var groupsHash: String
+    
+    @UserDefaultsWrapper(key: "com.system.professorsHash", defaultValue: "")
+    static var professorsHash: String
+    
+    @UserDefaultsWrapper(key: "com.system.placesHash", defaultValue: "")
+    static var placesHash: String
+    
 }

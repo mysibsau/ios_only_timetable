@@ -168,13 +168,14 @@ class ApiManager {
     
     static func loadTimetableTask(forGroupId groupId: Int, complition: @escaping (RGroupTimetable?) -> Void) -> Thread {
         
-        var timetable = RGroupTimetable()
+        let timetable = RGroupTimetable()
         timetable.groupId = groupId
         
         var countDownloadedWeeks = 0
         let taskDone = {
             countDownloadedWeeks += 1
             
+            // Если выполнены обе задачи - выходим
             if countDownloadedWeeks == 2 {
                 complition(timetable)
             }
@@ -260,13 +261,14 @@ class ApiManager {
     
     static func loadTimetableTask(forProfessorId professorId: Int, complition: @escaping (RProfessorTimetable?) -> Void) -> Thread {
         
-        var timetable = RProfessorTimetable()
+        let timetable = RProfessorTimetable()
         timetable.professorId = professorId
         
         var countDownloadedWeeks = 0
         let taskDone = {
             countDownloadedWeeks += 1
             
+            // Если выполнены обе задачи - выходим
             if countDownloadedWeeks == 2 {
                 complition(timetable)
             }
@@ -352,13 +354,14 @@ class ApiManager {
     
     static func loadTimetableTask(forPlaceId placeId: Int, complition: @escaping (RPlaceTimetable?) -> Void) -> Thread {
         
-        var timetable = RPlaceTimetable()
+        let timetable = RPlaceTimetable()
         timetable.placeId = placeId
         
         var countDownloadedWeeks = 0
         let taskDone = {
             countDownloadedWeeks += 1
             
+            // Если выполнены обе задачи - выходим
             if countDownloadedWeeks == 2 {
                 complition(timetable)
             }

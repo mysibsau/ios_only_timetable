@@ -46,6 +46,8 @@ class DataManager {
         
         print(downloadedURL)
         print(userURL)
+        
+        // deleteTimetable(forGroupId: 1)
     }
     
 }
@@ -201,73 +203,73 @@ extension DataManager: DeletingEntities {
     
     func deleteFavorite(groups: [RGroup]) {
         try? userRealm.write {
-            userRealm.delete(groups)
+            userRealm.delete(groups, cascading: true)
         }
     }
     
     func deleteFavorite(group: RGroup) {
         try? userRealm.write {
-            userRealm.delete(group)
+            userRealm.delete(group, cascading: true)
         }
     }
     
     func deleteFavorite(professors: [RProfessor]) {
         try? userRealm.write {
-            userRealm.delete(professors)
+            userRealm.delete(professors, cascading: true)
         }
     }
     
     func deleteFavorite(professor: RProfessor) {
         try? userRealm.write {
-            userRealm.delete(professor)
+            userRealm.delete(professor, cascading: true)
         }
     }
     
     func deleteFavorite(places: [RPlace]) {
         try? userRealm.write {
-            userRealm.delete(places)
+            userRealm.delete(places, cascading: true)
         }
     }
     
     func deleteFavorite(place: RPlace) {
         try? userRealm.write {
-            userRealm.delete(place)
+            userRealm.delete(place, cascading: true)
         }
     }
     
     func delete(groups: [RGroup]) {
         try? userRealm.write {
-            userRealm.delete(groups)
+            userRealm.delete(groups, cascading: true)
         }
     }
     
     func delete(group: RGroup) {
         try? userRealm.write {
-            userRealm.delete(group)
+            userRealm.delete(group, cascading: true)
         }
     }
     
     func delete(professors: [RProfessor]) {
         try? userRealm.write {
-            userRealm.delete(professors)
+            userRealm.delete(professors, cascading: true)
         }
     }
     
     func delete(professor: RProfessor) {
         try? userRealm.write {
-            userRealm.delete(professor)
+            userRealm.delete(professor, cascading: true)
         }
     }
     
     func delete(places: [RPlace]) {
         try? userRealm.write {
-            userRealm.delete(places)
+            userRealm.delete(places, cascading: true)
         }
     }
     
     func delete(place: RPlace) {
         try? userRealm.write {
-            userRealm.delete(place)
+            userRealm.delete(place, cascading: true)
         }
     }
     
@@ -331,5 +333,36 @@ extension DataManager: WritingTimetable {
             userRealm.add(placeTimetable, update: .modified)
         }
     }
+    
+}
+
+// MARK: - Deleting Timetable
+extension DataManager: DeletingTimetable {
+    func deleteTimetable(forGroupId groupId: Int) {
+        let optionalTimetable = userRealm.object(ofType: RGroupTimetable.self, forPrimaryKey: groupId)
+        guard let timetable = optionalTimetable else { return }
+        try? userRealm.write {
+            userRealm.delete(timetable, cascading: true)
+        }
+    }
+    
+    func deleteTimetable(forProfessorId professorId: Int) {
+        let optionalTimetable = userRealm.object(ofType: RProfessorTimetable.self, forPrimaryKey: professorId)
+        guard let timetable = optionalTimetable else { return }
+        try? userRealm.write {
+            userRealm.delete(timetable, cascading: true)
+        }
+    }
+    
+    func deleteTimetable(forPlaceId placeId: Int) {
+        let optionalTimetable = userRealm.object(ofType: RPlaceTimetable.self, forPrimaryKey: placeId)
+        guard let timetable = optionalTimetable else { return }
+        try? userRealm.write {
+            userRealm.delete(timetable, cascading: true)
+        }
+    }
+    
+    
+    
     
 }

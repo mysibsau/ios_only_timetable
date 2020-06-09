@@ -45,6 +45,8 @@
 		4A67A37C245C7BA7003765D2 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */; };
 		4A67CBDB248D28AC00F1D1FA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDA248D28AC00F1D1FA /* API.swift */; };
 		4A67CBDD248D447D00F1D1FA /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDC248D447D00F1D1FA /* ApiManager.swift */; };
+		4A67CBDF248E66EA00F1D1FA /* DeletingTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDE248E66EA00F1D1FA /* DeletingTimetable.swift */; };
+		4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A87DF7D246EC576007CA804 /* ProfessorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */; };
 		4A87DF7F246ED9AB007CA804 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */; };
@@ -153,6 +155,8 @@
 		4A67A37B245C7BA7003765D2 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		4A67CBDA248D28AC00F1D1FA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		4A67CBDC248D447D00F1D1FA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		4A67CBDE248E66EA00F1D1FA /* DeletingTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingTimetable.swift; sourceTree = "<group>"; };
+		4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A87DF7C246EC576007CA804 /* ProfessorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsTableViewController.swift; sourceTree = "<group>"; };
 		4A87DF7E246ED9AB007CA804 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
@@ -582,6 +586,7 @@
 			children = (
 				4AC64C3F2472BB5F00081D55 /* GettingTimetable.swift */,
 				4AC64C5F24742D1800081D55 /* WritingTimetable.swift */,
+				4A67CBDE248E66EA00F1D1FA /* DeletingTimetable.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -658,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				4AC64C7B2477B44100081D55 /* WrapperViewWithLabel.swift */,
+				4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -885,6 +891,7 @@
 				4AC345F42471773400BAA474 /* DetailViewDelegate.swift in Sources */,
 				4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */,
 				4AC64C6E24757D1500081D55 /* GroupLesson.swift in Sources */,
+				4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */,
 				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
 				4AD6951424811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift in Sources */,
 				4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */,
@@ -892,6 +899,7 @@
 				4AC64C402472BB5F00081D55 /* GettingTimetable.swift in Sources */,
 				4AC64C7624757F6400081D55 /* GroupTimetable.swift in Sources */,
 				4A415E9E24585ED0005FADD7 /* RPlaceExam.swift in Sources */,
+				4A67CBDF248E66EA00F1D1FA /* DeletingTimetable.swift in Sources */,
 				4AC64C922479A72100081D55 /* ProfessorDay.swift in Sources */,
 				4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */,
 				4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */,

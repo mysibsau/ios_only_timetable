@@ -93,19 +93,6 @@ class TimetableViewController: UIViewController {
         } else {
             alertForChoice.isHidden = true
         }
-        
-//        // если расписание есть, то нет смысла показывать надпись
-//        guard timetable == nil else {
-//            alertForChoice.isHidden = true
-//            return
-//        }
-//
-//        // добавляем, если view с этой надписью еще не добавлена в subview
-//        if !view.subviews.contains(alertForChoice) {
-//            view.addSubview(alertForChoice)
-//            alertForChoice.frame = view.bounds
-//        }
-//        alertForChoice.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
