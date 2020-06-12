@@ -13,12 +13,24 @@ class DateHelper {
     static func currWeekIsEven() -> Bool {
         // номер текущей недели
         let currWeek = Calendar.current.component(.weekOfYear, from: Date.today)
+        let firstWeekIsEven = UserDefaultsConfig.firstWeekIsEven
         
         // проверяем, четная ли текущая неделя
-        let currWeekIsEven = (currWeek % 2 == 1 && UserDefaultsConfig.firstWeekIsEven)
-                              || (currWeek % 2 == 0 && !UserDefaultsConfig.firstWeekIsEven)
+        let currWeekIsEven = (currWeek % 2 == 1 && firstWeekIsEven)
+                              || (currWeek % 2 == 0 && !firstWeekIsEven)
         
         return currWeekIsEven
+    }
+    
+    
+    static func setFirstWeekIsEven(fromCurrWeekIsEven currWeekIsEven: Bool) {
+        
+        let currWeek = Calendar.current.component(.weekOfYear, from: Date.today)
+        
+        let firstWeekIsEven = (currWeek % 2 == 1 && currWeekIsEven)
+                               || (currWeek % 2 == 0 && !currWeekIsEven)
+        
+        UserDefaultsConfig.firstWeekIsEven = firstWeekIsEven
     }
     
     

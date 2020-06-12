@@ -28,9 +28,10 @@ class ApiManager {
             }
             
             do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let currWeekIsEven = json["isEven"] as? String else {
-                    complition(nil)
-                    return
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                    let currWeekIsEven = json["isEven"] as? String else {
+                        complition(nil)
+                        return
                 }
                 
                 if currWeekIsEven.lowercased() == "true" {
@@ -40,6 +41,44 @@ class ApiManager {
                 } else {
                     complition(nil)
                 }
+            } catch let jsonError {
+                print(jsonError)
+                complition(nil)
+            }
+        }
+        
+        return task
+    }
+    
+    static func loadHashTask(for entitie: EntitiesType, complition: @escaping (String?) -> Void) -> URLSessionDataTask {
+        let url: URL
+        if entitie == .group {
+            url = API.groupsHash()
+        } else if entitie == .professor {
+            url = API.professorsHash()
+        } else {
+            url = API.placesHash()
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode) else {
+                    complition(nil)
+                    return
+            }
+            
+            guard let data = data else {
+                complition(nil)
+                return
+            }
+            
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                    let hash = json["hash"] as? String else {
+                        complition(nil)
+                        return
+                }
+                complition(hash)
             } catch let jsonError {
                 print(jsonError)
                 complition(nil)
@@ -176,7 +215,7 @@ class ApiManager {
             countDownloadedWeeks += 1
             
             // Если выполнены обе задачи - выходим
-            if countDownloadedWeeks == 2 {
+            if countDownloadedWeeks == 6 {
                 complition(timetable)
             }
         }
@@ -217,13 +256,48 @@ class ApiManager {
             // если загрузится первая - встанет на первое место, затем первая неделя insert at 0
             // если вторая - просто встанет на второе место
             timetable.weeks.append(week2)
+            print("task2")
             
             taskDone()
         }
         
+        let task0 = loadCurrWeekIsEwenTask { isEven in
+            guard let isEven = isEven else {
+                taskDone()
+                return
+            }
+            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
+            print("task0")
+            
+            taskDone()
+        }
+        
+        let task01 = loadHashTask(for: .group) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task02 = loadHashTask(for: .professor) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task03 = loadHashTask(for: .place) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        
         let dataTasks = DataTasks()
         dataTasks.add(task: task1)
         dataTasks.add(task: task2)
+        dataTasks.add(task: task0)
+        dataTasks.add(task: task01)
+        dataTasks.add(task: task02)
+        dataTasks.add(task: task03)
         
         return dataTasks
     }
@@ -268,7 +342,7 @@ class ApiManager {
             countDownloadedWeeks += 1
             
             // Если выполнены обе задачи - выходим
-            if countDownloadedWeeks == 2 {
+            if countDownloadedWeeks == 6 {
                 complition(timetable)
             }
         }
@@ -313,9 +387,41 @@ class ApiManager {
             taskDone()
         }
         
+        let task0 = loadCurrWeekIsEwenTask { isEven in
+            guard let isEven = isEven else {
+                taskDone()
+                return
+            }
+            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
+            
+            taskDone()
+        }
+        
+        let task01 = loadHashTask(for: .group) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task02 = loadHashTask(for: .professor) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task03 = loadHashTask(for: .place) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
         let dataTasks = DataTasks()
         dataTasks.add(task: task1)
         dataTasks.add(task: task2)
+        dataTasks.add(task: task0)
+        dataTasks.add(task: task01)
+        dataTasks.add(task: task02)
+        dataTasks.add(task: task03)
         
         return dataTasks
     }
@@ -360,7 +466,7 @@ class ApiManager {
             countDownloadedWeeks += 1
             
             // Если выполнены обе задачи - выходим
-            if countDownloadedWeeks == 2 {
+            if countDownloadedWeeks == 6 {
                 complition(timetable)
             }
         }
@@ -405,9 +511,41 @@ class ApiManager {
             taskDone()
         }
         
+        let task0 = loadCurrWeekIsEwenTask { isEven in
+            guard let isEven = isEven else {
+                taskDone()
+                return
+            }
+            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
+            
+            taskDone()
+        }
+        
+        let task01 = loadHashTask(for: .group) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task02 = loadHashTask(for: .professor) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
+        let task03 = loadHashTask(for: .place) { hash in
+            // тут сверять хеш
+            
+            taskDone()
+        }
+        
         let dataTasks = DataTasks()
         dataTasks.add(task: task1)
         dataTasks.add(task: task2)
+        dataTasks.add(task: task0)
+        dataTasks.add(task: task01)
+        dataTasks.add(task: task02)
+        dataTasks.add(task: task03)
         
         return dataTasks
     }

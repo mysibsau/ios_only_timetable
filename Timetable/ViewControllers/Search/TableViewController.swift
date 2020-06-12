@@ -52,14 +52,6 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         setupSearchController()
         
         //view.backgroundColor = Colors.backgroungColor
-        
-//        if !view.subviews.contains(viewWithActivityIndicator) {
-//            view.addSubview(viewWithActivityIndicator)
-//            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-//            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
-//        }
-//        viewWithActivityIndicator.isHidden = false
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -70,6 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(timetable)
 //        }.start()
         
+        
+        let a = Bundle.main.url(forResource: "Common", withExtension: "swift")
+        
+        print(a)
+        
         return true
     }
 
