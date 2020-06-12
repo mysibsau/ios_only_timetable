@@ -47,7 +47,17 @@ class DataManager {
         print(downloadedURL)
         print(userURL)
         
-        deleteTimetable(forGroupId: 1)
+        // deleteTimetable(forGroupId: 1)
+        // saveToInitData()
+    }
+    
+    // MARK: Функция для формирования БД для вставки в приложение в эпстор (нужно закинуть в InitRealm)
+    private func saveToInitData() {
+        do {
+            try downloadedRealm.writeCopy(toFile: URL(string: "/Users/art-off/Desktop/initData.realm")!)
+        } catch let error {
+            print(error)
+        }
     }
     
 }
@@ -87,22 +97,16 @@ extension DataManager: GettingEntities {
     
     func getGroup(withId id: Int) -> RGroup? {
         let group = downloadedRealm.object(ofType: RGroup.self, forPrimaryKey: 1)
-        //let groups = realmCaches.objects(RGroup.self).filter("id = \(id)")
-        //guard let group = groups.first else { return nil }
         return group
     }
     
     func getProfessor(withId id: Int) -> RProfessor? {
         let professor = downloadedRealm.object(ofType: RProfessor.self, forPrimaryKey: id)
-        //let professors = realmCaches.objects(RProfessor.self).filter("id = \(id)")
-        //guard let professor = professors.first else { return nil }
         return professor
     }
     
     func getPlace(withId id: Int) -> RPlace? {
         let place = downloadedRealm.object(ofType: RPlace.self, forPrimaryKey: id)
-        //let places = realmCaches.objects(RPlace.self).filter("id = \(id)")
-        //guard let place = places.first else { return nil }
         return place
     }
     

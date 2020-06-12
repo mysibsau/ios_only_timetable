@@ -48,6 +48,7 @@
 		4A67CBE3248F641F00F1D1FA /* DataTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE2248F641F00F1D1FA /* DataTasks.swift */; };
 		4A67CBE7248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */; };
 		4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */; };
+		4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */ = {isa = PBXBuildFile; fileRef = 4A67CBF62493A28C00F1D1FA /* init-data.realm */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
 		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
@@ -150,6 +151,7 @@
 		4A67CBE2248F641F00F1D1FA /* DataTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTasks.swift; sourceTree = "<group>"; };
 		4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingNetworkViewProtocol.swift; sourceTree = "<group>"; };
 		4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMood.swift; sourceTree = "<group>"; };
+		4A67CBF62493A28C00F1D1FA /* init-data.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "init-data.realm"; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 		4A415E61245855A8005FADD7 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				4A67CBED24936F9A00F1D1FA /* InitData */,
 				4A415EA224586488005FADD7 /* Extensions */,
 				4A415E62245855DD005FADD7 /* Entities */,
 				4A415E6B24585802005FADD7 /* Timetable */,
@@ -452,6 +455,14 @@
 				4A67CBE2248F641F00F1D1FA /* DataTasks.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		4A67CBED24936F9A00F1D1FA /* InitData */ = {
+			isa = PBXGroup;
+			children = (
+				4A67CBF62493A28C00F1D1FA /* init-data.realm */,
+			);
+			path = InitData;
 			sourceTree = "<group>";
 		};
 		4A6C1CF2246B26270048CD1A /* Timetable */ = {
@@ -762,6 +773,7 @@
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4AC64C4F2472F8C400081D55 /* AlertView.xib in Resources */,
 				4AC64C9B247A3E1D00081D55 /* PlaceSubgroupView.xib in Resources */,
+				4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */,
 				4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);

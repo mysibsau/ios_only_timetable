@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -70,12 +69,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(timetable)
 //        }.start()
         
-        
-        let a = Bundle.main.url(forResource: "Common", withExtension: "swift")
-        
-        print(a)
+        openRealm()
         
         return true
+    }
+    
+    func openRealm() {
+        guard let bundleDownloadedURL = Bundle.main.path(forResource: "init-data", ofType: "realm") else { return }
+        //print(bundleDownloadedURL)
+        
+        let fileManager = FileManager.default
+
+        // создаем дирректорию для приложения в Documents
+        let sibsuURL = try! fileManager
+            .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("sibsu")
+
+        if !fileManager.fileExists(atPath: sibsuURL.path) {
+            do {
+                try fileManager.createDirectory(at: sibsuURL, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                NSLog("Не выходит создать папку в Document директории")
+            }
+        }
+        
+        // Конечное нахождение файла realm
+        let downloadedURL = sibsuURL.appendingPathComponent("sibsu-downloaded.realm").path
+        
+        if !fileManager.fileExists(atPath: downloadedURL) {
+            do {
+                try fileManager.copyItem(atPath: bundleDownloadedURL, toPath: downloadedURL)
+            } catch let error {
+                print(error)
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle
