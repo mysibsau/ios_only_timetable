@@ -6,10 +6,10 @@
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-
-struct ProfessorWeek {
-    
-    var days: [ProfessorDay?]
-    
-}
+//import Foundation
+//
+//struct ProfessorWeek {
+//    
+//    var days: [ProfessorDay?]
+//    
+//}

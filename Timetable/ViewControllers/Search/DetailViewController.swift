@@ -75,49 +75,49 @@ class DetailViewController: UIViewController {
         updateButtons()
     }
     
-    convenience init(professor: RProfessor, isFavorite: Bool) {
-        self.init()
-        
-        // Фамилия преподавателя в nav bar
-        navigationItem.title = String(professor.name.split(separator: " ")[0])
-        
-        // Формируем данные для отображения в таблице
-        let tableData = [
-            (professor.name, nil),
-            professor.department != nil ? (professor.department!, nil) : ("Нет кафедры", UIColor.gray),
-            professor.email      != nil ? (professor.email!, nil)      : ("Нет email", UIColor.gray),
-            professor.phone      != nil ? (professor.phone!, nil)      : ("Нет номера", UIColor.gray)
-        ]
-        
-        firstSectionHeader = "Преподаватель"
-        
-        data = [tableData]
-        type = .professor
-        id = professor.id
-        self.isFavorite = isFavorite
-        
-        updateButtons()
-    }
+//    convenience init(professor: RProfessor, isFavorite: Bool) {
+//        self.init()
+//
+//        // Фамилия преподавателя в nav bar
+//        navigationItem.title = String(professor.name.split(separator: " ")[0])
+//
+//        // Формируем данные для отображения в таблице
+//        let tableData = [
+//            (professor.name, nil),
+//            professor.department != nil ? (professor.department!, nil) : ("Нет кафедры", UIColor.gray),
+//            professor.email      != nil ? (professor.email!, nil)      : ("Нет email", UIColor.gray),
+//            professor.phone      != nil ? (professor.phone!, nil)      : ("Нет номера", UIColor.gray)
+//        ]
+//
+//        firstSectionHeader = "Преподаватель"
+//
+//        data = [tableData]
+//        type = .professor
+//        id = professor.id
+//        self.isFavorite = isFavorite
+//
+//        updateButtons()
+//    }
     
-    convenience init(place: RPlace, isFavorite: Bool) {
-        self.init()
-        
-        navigationItem.title = place.name
-        
-        // Формируем данные для отображения в таблице
-        let tableData = [
-            (place.name, UIColor?(nil))
-        ]
-        
-        firstSectionHeader = "Кабинет"
-        
-        data = [tableData]
-        type = .place
-        id = place.id
-        self.isFavorite = isFavorite
-        
-        updateButtons()
-    }
+//    convenience init(place: RPlace, isFavorite: Bool) {
+//        self.init()
+//
+//        navigationItem.title = place.name
+//
+//        // Формируем данные для отображения в таблице
+//        let tableData = [
+//            (place.name, UIColor?(nil))
+//        ]
+//
+//        firstSectionHeader = "Кабинет"
+//
+//        data = [tableData]
+//        type = .place
+//        id = place.id
+//        self.isFavorite = isFavorite
+//
+//        updateButtons()
+//    }
     
     //MARK: - Setup View
     private func setupTableView() {

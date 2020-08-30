@@ -18,19 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Common.addGroups()
-        //Common.addProfessors()
-        //Common.addPlaces()
+//        Common.addGroups()
+//        Common.addProfessors()
+//        Common.addPlaces()
         
         
-        //Common.addGroupTimetable1()
-        //Common.addGroupTimetable5()
+//        Common.addGroupTimetable1()
+//        Common.addGroupTimetable5()
         
-        //Common.addProfessorTimetable1()
-        //Common.addProfessorTimetable5()
-        
-        //Common.addPlaceTimetable0()
-        //Common.addPlaceTimetable99()
+//        Common.addProfessorTimetable1()
+//        Common.addProfessorTimetable5()
+//
+//        Common.addPlaceTimetable0()
+//        Common.addPlaceTimetable99()
         
         
 //        ApiManager.loadGroupsTask { groups in
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(timetable)
 //        }.start()
         
-        openRealm()
+        //openRealm()
         
         return true
     }

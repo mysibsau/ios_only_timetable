@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2982.608695652174" y="-984.375"/>
+            <point key="canvasLocation" x="2983" y="-369"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3gD-ws-3Vz">
@@ -96,7 +96,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="smH-Jh-YnI" kind="relationship" relationship="viewControllers" id="yFF-ND-APT"/>
-                        <segue destination="eDN-Kh-o0e" kind="relationship" relationship="viewControllers" id="aid-0I-03S"/>
                         <segue destination="Yd6-d0-eJt" kind="relationship" relationship="viewControllers" id="ig2-J7-D0P"/>
                         <segue destination="7AX-45-lRT" kind="relationship" relationship="viewControllers" id="Qai-XG-Spu"/>
                     </connections>
@@ -104,22 +103,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yya-2V-y3O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1270" y="144"/>
-        </scene>
-        <!--Session View Controller-->
-        <scene sceneID="6h9-eR-cZe">
-            <objects>
-                <viewController id="WRP-ah-zxY" customClass="SessionViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MBU-Fo-yij">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="nDd-vP-COS"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ndh-iQ-AKh"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fn5-Cp-IjR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2983" y="-256"/>
         </scene>
         <!--Расписание-->
         <scene sceneID="XOe-9r-RAR">
@@ -138,26 +121,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1E9-Sn-IZO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2203" y="-984"/>
-        </scene>
-        <!--Сессия-->
-        <scene sceneID="YxU-IY-vyk">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eDN-Kh-o0e" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Сессия" image="session" id="050-Sz-m10"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pAl-8g-oWK">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="WRP-ah-zxY" kind="relationship" relationship="rootViewController" id="smi-3A-NN6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hca-S5-Y4S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2203" y="-256"/>
+            <point key="canvasLocation" x="2203" y="-369"/>
         </scene>
         <!--Поиск-->
         <scene sceneID="bjd-Y4-7lo">
@@ -245,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxB-9P-3bX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3709" y="-1218"/>
+            <point key="canvasLocation" x="3709" y="-592"/>
         </scene>
         <!--Paging Content View Controller-->
         <scene sceneID="SvL-F2-gLc">
@@ -260,13 +224,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIs-nr-3St" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3709" y="-928"/>
+            <point key="canvasLocation" x="3709" y="-286"/>
         </scene>
     </scenes>
     <resources>
         <image name="menu" width="24" height="24"/>
         <image name="search" width="24" height="24"/>
-        <image name="session" width="24" height="24"/>
         <image name="timetable" width="24" height="24"/>
     </resources>
 </document>

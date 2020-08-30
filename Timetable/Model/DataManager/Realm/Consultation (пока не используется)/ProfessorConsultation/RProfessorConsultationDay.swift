@@ -6,12 +6,12 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RProfessorConsultationDay: Object {
-    
-    @objc dynamic var number = 0
-    let lessons = List<RProfessorConsultation>()
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RProfessorConsultationDay: Object {
+//    
+//    @objc dynamic var number = 0
+//    let lessons = List<RProfessorConsultation>()
+//    
+//}

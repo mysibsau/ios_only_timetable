@@ -6,12 +6,12 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RProfessorConsultation: Object {
-    
-    @objc dynamic var time = ""
-    @objc dynamic var place = ""
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RProfessorConsultation: Object {
+//    
+//    @objc dynamic var time = ""
+//    @objc dynamic var place = ""
+//    
+//}

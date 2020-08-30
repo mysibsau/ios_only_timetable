@@ -53,13 +53,8 @@ class TimetableViewController: UIViewController {
     }
     
     // MARK: - Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        menuData = [
-            DateHelper.getDatesNotEvenWeek(),
-            DateHelper.getDatesEvenWeek()
-        ]
+    override func loadView() {
+        super.loadView()
         
         // убираем нижний бордер у navigaton bar
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -69,8 +64,17 @@ class TimetableViewController: UIViewController {
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
         numberWeekSegmented.selectedSegmentIndex = currWeek
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setupPagingKit()
+        
+        menuData = [
+            DateHelper.getDatesNotEvenWeek(),
+            DateHelper.getDatesEvenWeek()
+        ]
 
         // и если это основной экран расписания
         if mood == .basic {
@@ -79,16 +83,16 @@ class TimetableViewController: UIViewController {
             
             // регистрируем наблюдателя за уведомлениями
             NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+            //NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
+            //NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
         } else if mood == .notBasic {
             if let timetable = timetable as? GroupTimetable {
                 navigationItem.title = timetable.groupName
-            } else if let timetable = timetable as? ProfessorTimetable {
-                navigationItem.title = timetable.professorName
-            } else if let timetable = timetable as? PlaceTimetable {
-                navigationItem.title = timetable.placeName
-            }
+            }// else if let timetable = timetable as? ProfessorTimetable {
+            //    navigationItem.title = timetable.professorName
+            //} else if let timetable = timetable as? PlaceTimetable {
+            //    navigationItem.title = timetable.placeName
+            //}
         }
     }
     
@@ -150,6 +154,7 @@ class TimetableViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Methods
     private func selectToday() {
         // выбираем нужную неделю
         if DateHelper.currWeekIsEven() {
@@ -186,35 +191,35 @@ class TimetableViewController: UIViewController {
         }
     }
     
-    @objc func onDidSelectProfessor(_ notification: Notification) {
-        if let userInfo = notification.userInfo as? [Int: ProfessorTimetable] {
-            type = .professor
-            
-            guard let professorTimetable = userInfo[0] else { return }
-            timetable = professorTimetable
-            
-            navigationItem.title = professorTimetable.professorName
-            
-            // Сохраняем выбранное расписание в UserDefaults
-            UserDefaultsConfig.timetableType = type?.raw
-            UserDefaultsConfig.timetableId = professorTimetable.professorId
-        }
-    }
-    
-    @objc func onDidSelectPlace(_ notification: Notification) {
-        if let userInfo = notification.userInfo as? [Int: PlaceTimetable] {
-            type = .place
-            
-            guard let placeTimetable = userInfo[0] else { return }
-            timetable = placeTimetable
-            
-            navigationItem.title = placeTimetable.placeName
-            
-            // Сохраняем выбранное расписание у UserDefaults
-            UserDefaultsConfig.timetableType = type?.raw
-            UserDefaultsConfig.timetableId = placeTimetable.placeId
-        }
-    }
+//    @objc func onDidSelectProfessor(_ notification: Notification) {
+//        if let userInfo = notification.userInfo as? [Int: ProfessorTimetable] {
+//            type = .professor
+//
+//            guard let professorTimetable = userInfo[0] else { return }
+//            timetable = professorTimetable
+//
+//            navigationItem.title = professorTimetable.professorName
+//
+//            // Сохраняем выбранное расписание в UserDefaults
+//            UserDefaultsConfig.timetableType = type?.raw
+//            UserDefaultsConfig.timetableId = professorTimetable.professorId
+//        }
+//    }
+//
+//    @objc func onDidSelectPlace(_ notification: Notification) {
+//        if let userInfo = notification.userInfo as? [Int: PlaceTimetable] {
+//            type = .place
+//
+//            guard let placeTimetable = userInfo[0] else { return }
+//            timetable = placeTimetable
+//
+//            navigationItem.title = placeTimetable.placeName
+//
+//            // Сохраняем выбранное расписание у UserDefaults
+//            UserDefaultsConfig.timetableType = type?.raw
+//            UserDefaultsConfig.timetableId = placeTimetable.placeId
+//        }
+//    }
     
     // MARK: - Загрузка расписания из UserDefaults
     private func loadTimetableFromUserDetaults() {
@@ -233,22 +238,22 @@ class TimetableViewController: UIViewController {
             
             navigationItem.title = groupTimetable.groupName
             
-        } else if timetableType == .professor {
-            guard let professorTimetable = DataManager.shared.getTimetable(forProfessorId: timetableId) else { return }
-            
-            timetable = professorTimetable
-            type = timetableType
-            
-            navigationItem.title = professorTimetable.professorName
-            
-        } else if timetableType == .place {
-            guard let placeTimetable = DataManager.shared.getTimetable(forPlaceId: timetableId) else { return }
-            
-            timetable = placeTimetable
-            type = timetableType
-            
-            navigationItem.title = placeTimetable.placeName
-        }
+        }// else if timetableType == .professor {
+        //    guard let professorTimetable = DataManager.shared.getTimetable(forProfessorId: timetableId) else { return }
+        //
+        //    timetable = professorTimetable
+        //    type = timetableType
+        //
+        //    navigationItem.title = professorTimetable.professorName
+        //
+        //} else if timetableType == .place {
+        //    guard let placeTimetable = DataManager.shared.getTimetable(forPlaceId: timetableId) else { return }
+        //
+        //    timetable = placeTimetable
+        //    type = timetableType
+        //
+        //    navigationItem.title = placeTimetable.placeName
+        //}
     }
     
     // MARK: - Для использования в Search
@@ -322,15 +327,15 @@ extension TimetableViewController: PagingContentViewControllerDataSource {
             if let timetable = timetable as? GroupTimetable {
                 return DayViewController<GroupDay>(day: timetable.weeks[currWeek].days[index])
             }
-        } else if type == .professor {
-            if let timetable = timetable as? ProfessorTimetable {
-                return DayViewController<ProfessorDay>(day: timetable.weeks[currWeek].days[index])
-            }
-        } else if type == .place {
-            if let timetable = timetable as? PlaceTimetable {
-                return DayViewController<PlaceDay>(day: timetable.weeks[currWeek].days[index])
-            }
-        }
+        }// else if type == .professor {
+        //    if let timetable = timetable as? ProfessorTimetable {
+        //        return DayViewController<ProfessorDay>(day: timetable.weeks[currWeek].days[index])
+        //    }
+        //} else if type == .place {
+        //    if let timetable = timetable as? PlaceTimetable {
+        //        return DayViewController<PlaceDay>(day: timetable.weeks[currWeek].days[index])
+        //    }
+        //}
         return UIViewController()
     }
 

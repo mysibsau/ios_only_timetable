@@ -75,15 +75,15 @@ extension LessonView {
         self.set(lesson: lesson)
     }
     
-    convenience init(lesson: ProfessorLesson) {
-        self.init()
-        self.set(lesson: lesson)
-    }
+//    convenience init(lesson: ProfessorLesson) {
+//        self.init()
+//        self.set(lesson: lesson)
+//    }
     
-    convenience init(lesson: PlaceLesson) {
-        self.init()
-        self.set(lesson: lesson)
-    }
+//    convenience init(lesson: PlaceLesson) {
+//        self.init()
+//        self.set(lesson: lesson)
+//    }
     
     // MARK: Установка нового занятия для группы
     private func set(lesson: GroupLesson) {
@@ -100,8 +100,8 @@ extension LessonView {
             }
             
             // перечисляем всех преподавателей через ;\n
-            let professors = subgroup.professors.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
-            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: professors, place: subgroup.place)
+            //let professors = subgroup.professors.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: subgroup.professor, place: subgroup.place)
             
             // добавляем разделительную если это необходимо
             if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
@@ -111,59 +111,59 @@ extension LessonView {
         }
     }
     
-    // MARK: Установка нового занятия для проподавателей
-    private func set(lesson: ProfessorLesson) {
-        // если тут уже было занятие, то удаляем его
-        subgroupStackView.removeAllArrangedSubviews()
-        
-        addTime(time: lesson.time)
-        
-        var numberSubgroup = 1
-        for subgroup in lesson.subgroups {
-            // добавляем номер подргуппы, если это необходимо
-            if subgroup.number != 0 {
-                addNumberSubgroup(with: subgroup.number)
-            }
-            
-            // перечисляем все группы через ;\n
-            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
-            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: professors, place: subgroup.place)
-            
-            // добавляем разделительную если это необходимо
-            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
-                addSeparatorLine()
-            }
-            numberSubgroup += 1
-        }
-    }
-    
-    // MARK: Установка нового занятия для кабинетов
-    private func set(lesson: PlaceLesson) {
-        // если тут уже было занятие, то удаляем его
-        subgroupStackView.removeAllArrangedSubviews()
-        
-        addTime(time: lesson.time)
-        
-        var numberSubgroup = 1
-        for subgroup in lesson.subgroups {
-            // добавляем номер подргуппы, если это необходимо
-            if subgroup.number != 0 {
-                addNumberSubgroup(with: subgroup.number)
-            }
-            
-            // перечисляем все группы через ;\n
-            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
-            // перечисляем все группы через ;\n
-            let groups = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
-            addSubgroup(subject: subgroup.subject, type: subgroup.type, professors: professors, groups: groups)
-            
-            // добавляем разделительную если это необходимо
-            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
-                addSeparatorLine()
-            }
-            numberSubgroup += 1
-        }
-    }
+//    // MARK: Установка нового занятия для проподавателей
+//    private func set(lesson: ProfessorLesson) {
+//        // если тут уже было занятие, то удаляем его
+//        subgroupStackView.removeAllArrangedSubviews()
+//
+//        addTime(time: lesson.time)
+//
+//        var numberSubgroup = 1
+//        for subgroup in lesson.subgroups {
+//            // добавляем номер подргуппы, если это необходимо
+//            if subgroup.number != 0 {
+//                addNumberSubgroup(with: subgroup.number)
+//            }
+//
+//            // перечисляем все группы через ;\n
+//            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+//            addSubgroup(subject: subgroup.subject, type: subgroup.type, proffesor: professors, place: subgroup.place)
+//
+//            // добавляем разделительную если это необходимо
+//            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
+//                addSeparatorLine()
+//            }
+//            numberSubgroup += 1
+//        }
+//    }
+//
+//    // MARK: Установка нового занятия для кабинетов
+//    private func set(lesson: PlaceLesson) {
+//        // если тут уже было занятие, то удаляем его
+//        subgroupStackView.removeAllArrangedSubviews()
+//
+//        addTime(time: lesson.time)
+//
+//        var numberSubgroup = 1
+//        for subgroup in lesson.subgroups {
+//            // добавляем номер подргуппы, если это необходимо
+//            if subgroup.number != 0 {
+//                addNumberSubgroup(with: subgroup.number)
+//            }
+//
+//            // перечисляем все группы через ;\n
+//            let professors = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+//            // перечисляем все группы через ;\n
+//            let groups = subgroup.groups.reduce("", { $0 + ($0 != "" ? ";\n": "") + $1 })
+//            addSubgroup(subject: subgroup.subject, type: subgroup.type, professors: professors, groups: groups)
+//
+//            // добавляем разделительную если это необходимо
+//            if lesson.subgroups.count > 1 && lesson.subgroups.count != numberSubgroup {
+//                addSeparatorLine()
+//            }
+//            numberSubgroup += 1
+//        }
+//    }
     
     // MARK: Добавление времени к занятию
     private func addTime(time: String) {
@@ -236,31 +236,31 @@ extension LessonView {
         //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
     }
     
-    // MARK: Добавление подргуппы (для ПРЕПОДАВАТЕЛЕЙ)
-    private func addSubgroup(subject: String, type: String, groups: String, place: String) {
-        let subgroupView = ProfessorSubgroupView()
-        subgroupView.subject.text = subject
-        subgroupView.type.text = type
-        subgroupView.group.text = groups
-        subgroupView.place.text = place
-        
-        subgroupStackView.addArrangedSubview(subgroupView)
-        // возможно эта строчка и не нужна
-        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
-    }
-    
-    // MARK: Добавление одргуппы (для КАБИНЕТОВ)
-    private func addSubgroup(subject: String, type: String, professors: String, groups: String) {
-        let subgroupView = PlaceSubgroupView()
-        subgroupView.subject.text = subject
-        subgroupView.type.text = type
-        subgroupView.professor.text = professors
-        subgroupView.group.text = groups
-        
-        subgroupStackView.addArrangedSubview(subgroupView)
-        // возможно эта строчка и не нужна
-        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
-    }
+//    // MARK: Добавление подргуппы (для ПРЕПОДАВАТЕЛЕЙ)
+//    private func addSubgroup(subject: String, type: String, groups: String, place: String) {
+//        let subgroupView = ProfessorSubgroupView()
+//        subgroupView.subject.text = subject
+//        subgroupView.type.text = type
+//        subgroupView.group.text = groups
+//        subgroupView.place.text = place
+//
+//        subgroupStackView.addArrangedSubview(subgroupView)
+//        // возможно эта строчка и не нужна
+//        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+//    }
+//
+//    // MARK: Добавление одргуппы (для КАБИНЕТОВ)
+//    private func addSubgroup(subject: String, type: String, professors: String, groups: String) {
+//        let subgroupView = PlaceSubgroupView()
+//        subgroupView.subject.text = subject
+//        subgroupView.type.text = type
+//        subgroupView.professor.text = professors
+//        subgroupView.group.text = groups
+//
+//        subgroupStackView.addArrangedSubview(subgroupView)
+//        // возможно эта строчка и не нужна
+//        //subgroupView.widthAnchor.constraint(equalTo: subgroupStackView.widthAnchor).isActive = true
+//    }
     
 }
 

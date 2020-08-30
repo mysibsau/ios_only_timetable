@@ -6,16 +6,16 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RProfessorSession: Object {
-    
-    @objc dynamic var professorId = 0
-    let exams = List<RProfessorExam>()
-    
-    override class func primaryKey() -> String? {
-        return "professorId"
-    }
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RProfessorSession: Object {
+//    
+//    @objc dynamic var professorId = 0
+//    let exams = List<RProfessorExam>()
+//    
+//    override class func primaryKey() -> String? {
+//        return "professorId"
+//    }
+//    
+//}

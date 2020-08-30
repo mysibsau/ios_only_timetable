@@ -6,16 +6,16 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RPlaceExam: Object {
-    
-    @objc dynamic var date = ""
-    @objc dynamic var time = ""
-    @objc dynamic var subject = ""
-    @objc dynamic var type = ""
-    @objc dynamic var group = ""
-    @objc dynamic var professor = ""
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RPlaceExam: Object {
+//    
+//    @objc dynamic var date = ""
+//    @objc dynamic var time = ""
+//    @objc dynamic var subject = ""
+//    @objc dynamic var type = ""
+//    @objc dynamic var group = ""
+//    @objc dynamic var professor = ""
+//    
+//}

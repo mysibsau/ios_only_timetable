@@ -6,16 +6,16 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RGroupSession: Object {
-    
-    @objc dynamic var groupId = 0
-    let exams = List<RGroupExam>()
-    
-    override class func primaryKey() -> String? {
-        return "groupId"
-    }
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RGroupSession: Object {
+//    
+//    @objc dynamic var groupId = 0
+//    let exams = List<RGroupExam>()
+//    
+//    override class func primaryKey() -> String? {
+//        return "groupId"
+//    }
+//    
+//}

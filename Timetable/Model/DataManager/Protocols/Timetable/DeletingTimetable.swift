@@ -11,7 +11,7 @@ import Foundation
 protocol DeletingTimetable {
     
     func deleteTimetable(forGroupId groupId: Int)
-    func deleteTimetable(forProfessorId professorId: Int)
-    func deleteTimetable(forPlaceId placeId: Int)
+    //func deleteTimetable(forProfessorId professorId: Int)
+    //func deleteTimetable(forPlaceId placeId: Int)
     
 }

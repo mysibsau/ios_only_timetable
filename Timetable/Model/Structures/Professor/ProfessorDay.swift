@@ -6,10 +6,10 @@
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-
-struct ProfessorDay {
-    
-    var lessons: [ProfessorLesson]
-    
-}
+//import Foundation
+//
+//struct ProfessorDay {
+//    
+//    var lessons: [ProfessorLesson]
+//    
+//}

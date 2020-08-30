@@ -37,8 +37,8 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
     let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
 
     // MARK: - Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         navigationItem.title = "Группы"
         
@@ -46,10 +46,14 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
+        setupSearchController()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         // добавляем отработку длинного нажатия (открытие расписания)
         addLongGestureRecognizer()
-        
-        setupSearchController()
         
         //view.backgroundColor = Colors.backgroungColor
     }
@@ -92,19 +96,19 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
             detailVC.delegate = self
             navigationController?.pushViewController(detailVC, animated: true)
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-        } else if let object = object as? RProfessor {
-            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
-            detailVC = DetailViewController(professor: object, isFavorite: isFavorite)
-            detailVC.delegate = self
-            navigationController?.pushViewController(detailVC, animated: true)
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-        } else if let object = object as? RPlace {
-            isFavorite = !data[0].filter("id = \(object.id)").isEmpty
-            detailVC = DetailViewController(place: object, isFavorite: isFavorite)
-            detailVC.delegate = self
-            navigationController?.pushViewController(detailVC, animated: true)
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-        }
+        }// else if let object = object as? RProfessor {
+        //    isFavorite = !data[0].filter("id = \(object.id)").isEmpty
+        //    detailVC = DetailViewController(professor: object, isFavorite: isFavorite)
+        //    detailVC.delegate = self
+        //    navigationController?.pushViewController(detailVC, animated: true)
+        //    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        //} else if let object = object as? RPlace {
+        //    isFavorite = !data[0].filter("id = \(object.id)").isEmpty
+        //    detailVC = DetailViewController(place: object, isFavorite: isFavorite)
+        //    detailVC.delegate = self
+        //    navigationController?.pushViewController(detailVC, animated: true)
+        //    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        //}
         
         // Леграя вибрация в конце длинного нажатия
         UIDevice.vibrate()
@@ -120,7 +124,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         definesPresentationContext = true
         
         // Для того, чтобы поиск был доступен сразу, без необходимости свайпать вниз нужно поставить false
-        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     // MARK: - Table view data source
@@ -165,11 +169,11 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         
         if let object = object as? RGroup {
             cell.textLabel?.text = object.name
-        } else if let object = object as? RProfessor {
-            cell.textLabel?.text = object.name
-        } else if let object = object as? RPlace {
-            cell.textLabel?.text = object.name
-        }
+        }// else if let object = object as? RProfessor {
+        //    cell.textLabel?.text = object.name
+        //} else if let object = object as? RPlace {
+        //    cell.textLabel?.text = object.name
+        //}
 
         return cell
     }
@@ -180,11 +184,11 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         
         if let object = object as? RGroup {
             showTimetable(withId: object.id, animatingViewController: self)
-        } else if let object = object as? RProfessor {
-            showTimetable(withId: object.id, animatingViewController: self)
-        } else if let object = object as? RPlace {
-            showTimetable(withId: object.id, animatingViewController: self)
-        }
+        }// else if let object = object as? RProfessor {
+        //    showTimetable(withId: object.id, animatingViewController: self)
+        //} else if let object = object as? RPlace {
+        //    showTimetable(withId: object.id, animatingViewController: self)
+        //}
     }
     
     // MARK: - Search Result Updating (не в качетстве расширения потому что дженерини не умеют работать с @objc в расширениях)
@@ -249,82 +253,82 @@ extension TableViewController: DetailViewDelegate {
                 tasks?.resumeAll()
             }
             
-        } else if let professor = entitie as? RProfessor {
-            
-            timetableViewController.type = .professor
-            
-            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
-            
-            if let timetable = optionalTimetable {
-                
-                timetableViewController.timetable = timetable
-                navigationController?.pushViewController(timetableViewController, animated: true)
-                
-            } else {
-                /// Иначе качаем из API, если нет в БД
-                
-                animatingViewController.startActivityIndicator()
-                
-                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
-                    
-                    DispatchQueue.main.async {
-                        if let timetable = optionalTimetable {
-                            DataManager.shared.write(professorTimetable: timetable)
-                            let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
-                            
-                            timetableViewController.timetable = timetableForShowing
-                            self.navigationController?.pushViewController(timetableViewController, animated: true)
-                        } else {
-                            animatingViewController.showAlertForNetwork()
-                        }
-                        
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    
-                }
-                
-                tasks?.resumeAll()
-                
-            }
-            
-        } else if let place = entitie as? RPlace {
-            
-            timetableViewController.type = .place
-            
-            let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
-            
-            if let timetable = optionalTimetable {
-                
-                timetableViewController.timetable = timetable
-                navigationController?.pushViewController(timetableViewController, animated: true)
-                
-            } else {
-                /// Иначе качаем из API, если нет в БД
-                
-                animatingViewController.startActivityIndicator()
-                
-                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
-                    
-                    DispatchQueue.main.async {
-                        if let timetable = optionalTimetable {
-                            DataManager.shared.write(placeTimetable: timetable)
-                            let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
-                            
-                            timetableViewController.timetable = timetableForShowing
-                            self.navigationController?.pushViewController(timetableViewController, animated: true)
-                            
-                        } else {
-                            animatingViewController.showAlertForNetwork()
-                        }
-                        
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    
-                }
-                
-                tasks?.resumeAll()
-            }
-        }
+        }// else if let professor = entitie as? RProfessor {
+//
+//            timetableViewController.type = .professor
+//
+//            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
+//
+//            if let timetable = optionalTimetable {
+//
+//                timetableViewController.timetable = timetable
+//                navigationController?.pushViewController(timetableViewController, animated: true)
+//
+//            } else {
+//                /// Иначе качаем из API, если нет в БД
+//
+//                animatingViewController.startActivityIndicator()
+//
+//                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
+//
+//                    DispatchQueue.main.async {
+//                        if let timetable = optionalTimetable {
+//                            DataManager.shared.write(professorTimetable: timetable)
+//                            let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
+//
+//                            timetableViewController.timetable = timetableForShowing
+//                            self.navigationController?.pushViewController(timetableViewController, animated: true)
+//                        } else {
+//                            animatingViewController.showAlertForNetwork()
+//                        }
+//
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//
+//                }
+//
+//                tasks?.resumeAll()
+//
+//            }
+//
+//        } else if let place = entitie as? RPlace {
+//
+//            timetableViewController.type = .place
+//
+//            let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
+//
+//            if let timetable = optionalTimetable {
+//
+//                timetableViewController.timetable = timetable
+//                navigationController?.pushViewController(timetableViewController, animated: true)
+//
+//            } else {
+//                /// Иначе качаем из API, если нет в БД
+//
+//                animatingViewController.startActivityIndicator()
+//
+//                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
+//
+//                    DispatchQueue.main.async {
+//                        if let timetable = optionalTimetable {
+//                            DataManager.shared.write(placeTimetable: timetable)
+//                            let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
+//
+//                            timetableViewController.timetable = timetableForShowing
+//                            self.navigationController?.pushViewController(timetableViewController, animated: true)
+//
+//                        } else {
+//                            animatingViewController.showAlertForNetwork()
+//                        }
+//
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//
+//                }
+//
+//                tasks?.resumeAll()
+//            }
+//        }
     }
     
     // MARK: Сделать расписание основным
@@ -365,71 +369,71 @@ extension TableViewController: DetailViewDelegate {
                 tasks?.resumeAll()
             }
             
-        } else if let professor = entitie as? RProfessor {
-            
-            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
-            
-            if let timetable = optionalTimetable {
-                
-                NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetable])
-                
-            } else {
-                /// Иначе качаем из API, если нет в БД
-                
-                animatingViewController.startActivityIndicator()
-                
-                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
-                    
-                    DispatchQueue.main.async {
-                        if let timetable = optionalTimetable {
-                            DataManager.shared.write(professorTimetable: timetable)
-                            let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
-                            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetableForShowing])
-                        } else {
-                            animatingViewController.showAlertForNetwork()
-                        }
-                        
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    
-                }
-                
-                tasks?.resumeAll()
-                
-            }
-            
-        } else if let place = entitie as? RPlace {
-            
-            let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
-            
-            if let timetable = optionalTimetable {
-                
-                NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetable])
-                
-            } else {
-                /// Иначе качаем из API, если нет в БД
-                
-                animatingViewController.startActivityIndicator()
-                
-                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
-                    
-                    DispatchQueue.main.async {
-                        if let timetable = optionalTimetable {
-                            DataManager.shared.write(placeTimetable: timetable)
-                            let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
-                            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetableForShowing])
-                        } else {
-                            animatingViewController.showAlertForNetwork()
-                        }
-                        
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    
-                }
-                
-                tasks?.resumeAll()
-            }
-        }
+        }// else if let professor = entitie as? RProfessor {
+//
+//            let optionalTimetable = DataManager.shared.getTimetable(forProfessorId: professor.id)
+//
+//            if let timetable = optionalTimetable {
+//
+//                NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetable])
+//
+//            } else {
+//                /// Иначе качаем из API, если нет в БД
+//
+//                animatingViewController.startActivityIndicator()
+//
+//                tasks = ApiManager.loadTimetableTask(forProfessorId: professor.id) { optionalTimetable in
+//
+//                    DispatchQueue.main.async {
+//                        if let timetable = optionalTimetable {
+//                            DataManager.shared.write(professorTimetable: timetable)
+//                            let timetableForShowing = DataManager.shared.getTimetable(forProfessorId: professor.id)!
+//                            NotificationCenter.default.post(name: .didSelectProfessor, object: nil, userInfo: [0: timetableForShowing])
+//                        } else {
+//                            animatingViewController.showAlertForNetwork()
+//                        }
+//
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//
+//                }
+//
+//                tasks?.resumeAll()
+//
+//            }
+//
+//        } else if let place = entitie as? RPlace {
+//
+//            let optionalTimetable = DataManager.shared.getTimetable(forPlaceId: place.id)
+//
+//            if let timetable = optionalTimetable {
+//
+//                NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetable])
+//
+//            } else {
+//                /// Иначе качаем из API, если нет в БД
+//
+//                animatingViewController.startActivityIndicator()
+//
+//                tasks = ApiManager.loadTimetableTask(forPlaceId: place.id) { optionalTimetable in
+//
+//                    DispatchQueue.main.async {
+//                        if let timetable = optionalTimetable {
+//                            DataManager.shared.write(placeTimetable: timetable)
+//                            let timetableForShowing = DataManager.shared.getTimetable(forPlaceId: place.id)!
+//                            NotificationCenter.default.post(name: .didSelectPlace, object: nil, userInfo: [0: timetableForShowing])
+//                        } else {
+//                            animatingViewController.showAlertForNetwork()
+//                        }
+//
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//
+//                }
+//
+//                tasks?.resumeAll()
+//            }
+//        }
     }
     
     // MARK: Добавление в избранные
@@ -444,11 +448,11 @@ extension TableViewController: DetailViewDelegate {
         // добавляем в избранные
         if let object = object as? RGroup {
             DataManager.shared.writeFavorite(group: object)
-        } else if let object = object as? RProfessor {
-            DataManager.shared.writeFavorite(professor: object)
-        } else if let object = object as? RPlace {
-            DataManager.shared.writeFavorite(place: object)
-        }
+        }// else if let object = object as? RProfessor {
+        //    DataManager.shared.writeFavorite(professor: object)
+        //} else if let object = object as? RPlace {
+        //    DataManager.shared.writeFavorite(place: object)
+        //}
         
         tableView.reloadData()
     }
@@ -465,11 +469,11 @@ extension TableViewController: DetailViewDelegate {
         // Удаляем из избранных
         if let object = object as? RGroup {
             DataManager.shared.deleteFavorite(group: object)
-        } else if let object = object as? RProfessor {
-            DataManager.shared.deleteFavorite(professor: object)
-        } else if let object = object as? RPlace {
-            DataManager.shared.deleteFavorite(place: object)
-        }
+        }// else if let object = object as? RProfessor {
+        //    DataManager.shared.deleteFavorite(professor: object)
+        //} else if let object = object as? RPlace {
+        //    DataManager.shared.deleteFavorite(place: object)
+        //}
         
         tableView.reloadData()
     }

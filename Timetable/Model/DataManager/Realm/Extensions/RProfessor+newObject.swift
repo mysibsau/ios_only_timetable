@@ -6,20 +6,20 @@
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-extension RProfessor {
-    
-    func newObject() -> RProfessor {
-        let newProfessor = RProfessor()
-        newProfessor.id = id
-        newProfessor.name = name
-        newProfessor.phone = phone
-        newProfessor.email = email
-        newProfessor.department = department
-        
-        return newProfessor
-    }
-}
-
+//import Foundation
+//import RealmSwift
+//
+//extension RProfessor {
+//    
+//    func newObject() -> RProfessor {
+//        let newProfessor = RProfessor()
+//        newProfessor.id = id
+//        newProfessor.name = name
+//        newProfessor.phone = phone
+//        newProfessor.email = email
+//        newProfessor.department = department
+//        
+//        return newProfessor
+//    }
+//}
+//

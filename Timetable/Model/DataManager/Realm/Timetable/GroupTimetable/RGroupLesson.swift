@@ -26,15 +26,15 @@ class RGroupSubgroup: Object, Decodable {
     @objc dynamic var number = 0
     @objc dynamic var subject = ""
     @objc dynamic var type = 0
-    @objc dynamic var place = 0
-    var professors = List<Int>()
+    @objc dynamic var place = ""
+    @objc dynamic var professor = ""
     
     enum CodingKeys: String, CodingKey {
         case number = "num"
-        case subject
+        case subject = "name"
         case type
         case place
-        case professors
+        case professor = "teacher"
     }
     
 }

@@ -45,36 +45,13 @@ class Converter {
                     
                     // пробегаемся по всех подргуппам занятия
                     for subgroup in lesson.subgroups {
-
-                        var professorsName = [String]()
-                        // берем имя преподавателя из БД с помощью id
-                        for id in subgroup.professors {
-                            let optionalProfessor = DataManager.shared.getProfessor(withId: id)
-                            if let professor = optionalProfessor {
-                                professorsName.append(professor.name)
-                            } else {
-                                professorsName.append("Необознанный")
-                            }
-                        }
                         
-                        // берем имя кабинета с помощью id
-                        let optionalPlace = DataManager.shared.getPlace(withId: subgroup.place)
-                        let placeName: String
-                        if let place = optionalPlace {
-                            placeName = place.name
-                        } else {
-                            placeName = "Неопознанное"
-                        }
-                        
-                        // копируем подргуппу
                         let groupSubgroup = GroupSubgroup(
                             number: subgroup.number,
                             subject: subgroup.subject,
                             type: subgroupType[subgroup.type] ?? "(Неопознанный)",
-                            professors: professorsName,
-                            professorsId: Array(subgroup.professors),
-                            place: placeName,
-                            placeId: subgroup.place)
+                            professor: subgroup.professor,
+                            place: subgroup.place)
 
                         groupSubgroups.append(groupSubgroup)
                     }
@@ -100,159 +77,159 @@ class Converter {
         return groupTimetable
     }
     
-    // MARK: Перевод объекта РАСПИСАНИЯ ПРОФЕССОРА Realm к структуре, используемой в приложении
-    func convertProfessorTimetable(from timetable: RProfessorTimetable, professorName: String) -> ProfessorTimetable {
-        var professorWeeks = [ProfessorWeek]()
-
-        // пробегаемся по всем неделям (по дву)
-        for week in timetable.weeks {
-
-            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
-            var professorDays: [ProfessorDay?] = [nil, nil, nil, nil, nil, nil]
-
-            // пробегаемся во всем дням недели
-            for day in week.days {
-
-                var professorLessons = [ProfessorLesson]()
-                
-                // пробегаемся по всем занятиям дня
-                for lesson in day.lessons {
-
-                    var professorSubgroups = [ProfessorSubgroup]()
-                    
-                    // пробегаемся по всех подргуппам занятия
-                    for subgroup in lesson.subgroups {
-
-                        var groupsName = [String]()
-                        // берем имя групп из БД с помощью id
-                        for id in subgroup.groups {
-                            let group = DataManager.shared.getProfessor(withId: id)
-                            if let group = group {
-                                groupsName.append(group.name)
-                            } else {
-                                groupsName.append("Ошибка")
-                            }
-                        }
-                        
-                        // берем имя кабинета с помощью id
-                        let optionalPlace = DataManager.shared.getPlace(withId: subgroup.place)
-                        let placeName: String
-                        if let place = optionalPlace {
-                            placeName = place.name
-                        } else {
-                            placeName = "Неопознанное"
-                        }
-                        
-                        // копируем подргуппу
-                        let professorSubgroup = ProfessorSubgroup(
-                            number: subgroup.number,
-                            subject: subgroup.subject,
-                            type: subgroupType[subgroup.type] ?? "(Неопознанный)",
-                            groups: groupsName,
-                            groupsId: Array(subgroup.groups),
-                            place: placeName,
-                            placeId: subgroup.place)
-
-                        professorSubgroups.append(professorSubgroup)
-                    }
-                    
-                    // добавляем занятие в массив занятий
-                    let professorLesson = ProfessorLesson(time: lesson.time, subgroups: professorSubgroups)
-                    professorLessons.append(professorLesson)
-                }
-                
-                let professorDay = ProfessorDay(lessons: professorLessons)
-                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
-                if day.number >= 0 && day.number <= 5 {
-                    // заменяем nil
-                    professorDays[day.number] = professorDay
-                }
-            }
-
-            let professorWeek = ProfessorWeek(days: professorDays)
-            professorWeeks.append(professorWeek)
-        }
-
-        let professorTimetable = ProfessorTimetable(professorId: timetable.professorId, professorName: professorName, weeks: professorWeeks)
-        return professorTimetable
-    }
-    
-    // MARK: Перевод объекта РАСПИСАНИЯ КАБИНЕТА Realm к структуре, используемой в приложении
-    func convertPlaceTimetable(from timetable: RPlaceTimetable, placeName: String) -> PlaceTimetable {
-        var placeWeeks = [PlaceWeek]()
-
-        // пробегаемся по всем неделям (по дву)
-        for week in timetable.weeks {
-
-            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
-            var placeDays: [PlaceDay?] = [nil, nil, nil, nil, nil, nil]
-
-            // пробегаемся во всем дням недели
-            for day in week.days {
-
-                var placeLessons = [PlaceLesson]()
-                
-                // пробегаемся по всем занятиям дня
-                for lesson in day.lessons {
-
-                    var placeSubgroups = [PlaceSubgroup]()
-                    
-                    // пробегаемся по всех подргуппам занятия
-                    for subgroup in lesson.subgroups {
-
-                        var groupsName = [String]()
-                        // берем имя группы из БД с помощью id
-                        for id in subgroup.groups {
-                            let group = DataManager.shared.getPlace(withId: id)
-                            if let group = group {
-                                groupsName.append(group.name)
-                            } else {
-                                groupsName.append("Ошибка")
-                            }
-                        }
-                        
-                        var professorsName = [String]()
-                        // берем имя преподаватели из БД с помощью id
-                        for id in subgroup.professors {
-                            let professor = DataManager.shared.getProfessor(withId: id)
-                            if let professor = professor {
-                                professorsName.append(professor.name)
-                            } else {
-                                professorsName.append("Ошибка")
-                            }
-                        }
-                        
-                        let placeSubgroup = PlaceSubgroup(
-                            number: subgroup.number,
-                            subject: subgroup.subject,
-                            type: subgroupType[subgroup.type] ?? "(Неопознанный)",
-                            groups: groupsName,
-                            groupsId: Array(subgroup.groups),
-                            professors: professorsName,
-                            professorsId: Array(subgroup.professors))
-
-                        placeSubgroups.append(placeSubgroup)
-                    }
-                    
-                    // добавляем занятие в массив занятий
-                    let placeLesson = PlaceLesson(time: lesson.time, subgroups: placeSubgroups)
-                    placeLessons.append(placeLesson)
-                }
-                
-                let placeDay = PlaceDay(lessons: placeLessons)
-                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
-                if day.number >= 0 && day.number <= 5 {
-                    // заменяем nil
-                    placeDays[day.number] = placeDay
-                }
-            }
-
-            let placeWeek = PlaceWeek(days: placeDays)
-            placeWeeks.append(placeWeek)
-        }
-
-        let placeTimetable = PlaceTimetable(placeId: timetable.placeId, placeName: placeName, weeks: placeWeeks)
-        return placeTimetable
-    }
+//    // MARK: Перевод объекта РАСПИСАНИЯ ПРОФЕССОРА Realm к структуре, используемой в приложении
+//    func convertProfessorTimetable(from timetable: RProfessorTimetable, professorName: String) -> ProfessorTimetable {
+//        var professorWeeks = [ProfessorWeek]()
+//
+//        // пробегаемся по всем неделям (по дву)
+//        for week in timetable.weeks {
+//
+//            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
+//            var professorDays: [ProfessorDay?] = [nil, nil, nil, nil, nil, nil]
+//
+//            // пробегаемся во всем дням недели
+//            for day in week.days {
+//
+//                var professorLessons = [ProfessorLesson]()
+//                
+//                // пробегаемся по всем занятиям дня
+//                for lesson in day.lessons {
+//
+//                    var professorSubgroups = [ProfessorSubgroup]()
+//                    
+//                    // пробегаемся по всех подргуппам занятия
+//                    for subgroup in lesson.subgroups {
+//
+//                        var groupsName = [String]()
+//                        // берем имя групп из БД с помощью id
+//                        for id in subgroup.groups {
+//                            let group = DataManager.shared.getProfessor(withId: id)
+//                            if let group = group {
+//                                groupsName.append(group.name)
+//                            } else {
+//                                groupsName.append("Ошибка")
+//                            }
+//                        }
+//                        
+//                        // берем имя кабинета с помощью id
+//                        let optionalPlace = DataManager.shared.getPlace(withId: subgroup.place)
+//                        let placeName: String
+//                        if let place = optionalPlace {
+//                            placeName = place.name
+//                        } else {
+//                            placeName = "Неопознанное"
+//                        }
+//                        
+//                        // копируем подргуппу
+//                        let professorSubgroup = ProfessorSubgroup(
+//                            number: subgroup.number,
+//                            subject: subgroup.subject,
+//                            type: subgroupType[subgroup.type] ?? "(Неопознанный)",
+//                            groups: groupsName,
+//                            groupsId: Array(subgroup.groups),
+//                            place: placeName,
+//                            placeId: subgroup.place)
+//
+//                        professorSubgroups.append(professorSubgroup)
+//                    }
+//                    
+//                    // добавляем занятие в массив занятий
+//                    let professorLesson = ProfessorLesson(time: lesson.time, subgroups: professorSubgroups)
+//                    professorLessons.append(professorLesson)
+//                }
+//                
+//                let professorDay = ProfessorDay(lessons: professorLessons)
+//                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
+//                if day.number >= 0 && day.number <= 5 {
+//                    // заменяем nil
+//                    professorDays[day.number] = professorDay
+//                }
+//            }
+//
+//            let professorWeek = ProfessorWeek(days: professorDays)
+//            professorWeeks.append(professorWeek)
+//        }
+//
+//        let professorTimetable = ProfessorTimetable(professorId: timetable.professorId, professorName: professorName, weeks: professorWeeks)
+//        return professorTimetable
+//    }
+//    
+//    // MARK: Перевод объекта РАСПИСАНИЯ КАБИНЕТА Realm к структуре, используемой в приложении
+//    func convertPlaceTimetable(from timetable: RPlaceTimetable, placeName: String) -> PlaceTimetable {
+//        var placeWeeks = [PlaceWeek]()
+//
+//        // пробегаемся по всем неделям (по дву)
+//        for week in timetable.weeks {
+//
+//            // заполняем массив дней nil, потом если будут учебные дни в этой недели - заменю значение
+//            var placeDays: [PlaceDay?] = [nil, nil, nil, nil, nil, nil]
+//
+//            // пробегаемся во всем дням недели
+//            for day in week.days {
+//
+//                var placeLessons = [PlaceLesson]()
+//                
+//                // пробегаемся по всем занятиям дня
+//                for lesson in day.lessons {
+//
+//                    var placeSubgroups = [PlaceSubgroup]()
+//                    
+//                    // пробегаемся по всех подргуппам занятия
+//                    for subgroup in lesson.subgroups {
+//
+//                        var groupsName = [String]()
+//                        // берем имя группы из БД с помощью id
+//                        for id in subgroup.groups {
+//                            let group = DataManager.shared.getPlace(withId: id)
+//                            if let group = group {
+//                                groupsName.append(group.name)
+//                            } else {
+//                                groupsName.append("Ошибка")
+//                            }
+//                        }
+//                        
+//                        var professorsName = [String]()
+//                        // берем имя преподаватели из БД с помощью id
+//                        for id in subgroup.professors {
+//                            let professor = DataManager.shared.getProfessor(withId: id)
+//                            if let professor = professor {
+//                                professorsName.append(professor.name)
+//                            } else {
+//                                professorsName.append("Ошибка")
+//                            }
+//                        }
+//                        
+//                        let placeSubgroup = PlaceSubgroup(
+//                            number: subgroup.number,
+//                            subject: subgroup.subject,
+//                            type: subgroupType[subgroup.type] ?? "(Неопознанный)",
+//                            groups: groupsName,
+//                            groupsId: Array(subgroup.groups),
+//                            professors: professorsName,
+//                            professorsId: Array(subgroup.professors))
+//
+//                        placeSubgroups.append(placeSubgroup)
+//                    }
+//                    
+//                    // добавляем занятие в массив занятий
+//                    let placeLesson = PlaceLesson(time: lesson.time, subgroups: placeSubgroups)
+//                    placeLessons.append(placeLesson)
+//                }
+//                
+//                let placeDay = PlaceDay(lessons: placeLessons)
+//                // проверяем, подходит ли number для вставки в массив groupDays (0-понедельник, 5-суббота)
+//                if day.number >= 0 && day.number <= 5 {
+//                    // заменяем nil
+//                    placeDays[day.number] = placeDay
+//                }
+//            }
+//
+//            let placeWeek = PlaceWeek(days: placeDays)
+//            placeWeeks.append(placeWeek)
+//        }
+//
+//        let placeTimetable = PlaceTimetable(placeId: timetable.placeId, placeName: placeName, weeks: placeWeeks)
+//        return placeTimetable
+//    }
     
 }

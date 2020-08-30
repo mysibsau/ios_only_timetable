@@ -12,20 +12,24 @@ class ChoiceSearchViewController: UITableViewController{
     
     private let data = [
         "Группы",
-        "Преподаватели",
-        "Кабинеты"
+        //"Преподаватели",
+        //"Кабинеты"
     ]
     
 
     // MARK: - Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         navigationItem.title = "Поиск"
         
         // Меняем слишь table view на .grouped
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         //view.backgroundColor = Colors.backgroungColor
     }
@@ -67,21 +71,21 @@ class ChoiceSearchViewController: UITableViewController{
                     DataManager.shared.getGroups()
                 ]
                 navigationController?.pushViewController(groupTableViewController, animated: true)
-        } else if indexPath.row == 1 {
-                let professorTableViewController = TableViewController<RProfessor>()
-                professorTableViewController.data = [
-                    DataManager.shared.getFavoriteProfessors(),
-                    DataManager.shared.getProfessors()
-                ]
-                navigationController?.pushViewController(professorTableViewController, animated: true)
-        } else if indexPath.row == 2 {
-                let placeTableViewController = TableViewController<RPlace>()
-                placeTableViewController.data = [
-                    DataManager.shared.getFavoritePlaces(),
-                    DataManager.shared.getPlaces()
-                ]
-                navigationController?.pushViewController(placeTableViewController, animated: true)
-        }
+        }// else if indexPath.row == 1 {
+        //        let professorTableViewController = TableViewController<RProfessor>()
+        //        professorTableViewController.data = [
+        //            DataManager.shared.getFavoriteProfessors(),
+        //            DataManager.shared.getProfessors()
+        //        ]
+        //        navigationController?.pushViewController(professorTableViewController, animated: true)
+        //} else if indexPath.row == 2 {
+        //        let placeTableViewController = TableViewController<RPlace>()
+        //        placeTableViewController.data = [
+        //            DataManager.shared.getFavoritePlaces(),
+        //            DataManager.shared.getPlaces()
+        //        ]
+        //        navigationController?.pushViewController(placeTableViewController, animated: true)
+        //}
     }
 
 }

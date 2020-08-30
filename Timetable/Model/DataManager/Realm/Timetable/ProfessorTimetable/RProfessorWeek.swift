@@ -6,12 +6,12 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RProfessorWeek: Object, Decodable {
-    
-    @objc dynamic var number = 0
-    let days = List<RProfessorDay>()
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RProfessorWeek: Object, Decodable {
+//    
+//    @objc dynamic var number = 0
+//    let days = List<RProfessorDay>()
+//    
+//}

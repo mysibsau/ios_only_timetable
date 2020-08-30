@@ -118,62 +118,62 @@ class ApiManager {
     }
     
     
-    // MARK: Professors
-    static func loadProfessorsTask(complition: @escaping ([RProfessor]?) -> Void) -> URLSessionDataTask {
-        let url = API.professors()
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode) else {
-                    complition(nil)
-                    return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                let professors = try JSONDecoder().decode([RProfessor].self, from: data)
-                complition(professors)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
-    }
-    
-    
-    // MARK: Places
-    static func loadPlacesDataTask(complition: @escaping ([RPlace]?) -> Void) -> URLSessionDataTask {
-        let url = API.places()
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode) else {
-                    complition(nil)
-                    return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                let places = try JSONDecoder().decode([RPlace].self, from: data)
-                complition(places)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
-    }
+//    // MARK: Professors
+//    static func loadProfessorsTask(complition: @escaping ([RProfessor]?) -> Void) -> URLSessionDataTask {
+//        let url = API.professors()
+//
+//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                (200..<300).contains(httpResponse.statusCode) else {
+//                    complition(nil)
+//                    return
+//            }
+//            
+//            guard let data = data else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            do {
+//                let professors = try JSONDecoder().decode([RProfessor].self, from: data)
+//                complition(professors)
+//            } catch let jsonError {
+//                print(jsonError)
+//                complition(nil)
+//            }
+//        }
+//        
+//        return task
+//    }
+//    
+//    
+//    // MARK: Places
+//    static func loadPlacesDataTask(complition: @escaping ([RPlace]?) -> Void) -> URLSessionDataTask {
+//        let url = API.places()
+//        
+//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                (200..<300).contains(httpResponse.statusCode) else {
+//                    complition(nil)
+//                    return
+//            }
+//            
+//            guard let data = data else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            do {
+//                let places = try JSONDecoder().decode([RPlace].self, from: data)
+//                complition(places)
+//            } catch let jsonError {
+//                print(jsonError)
+//                complition(nil)
+//            }
+//        }
+//        
+//        return task
+//    }
     
     
     // MARK: - Timetalbe
@@ -303,251 +303,251 @@ class ApiManager {
     }
     
     
-    // MARK: Professor
-    static func loadDaysOfWeekTask(forProfessorId professorId: Int, weekNumber: Int, complition: @escaping ([RProfessorDay]?) -> Void) -> URLSessionDataTask {
-        let url = API.timetable(forProfessorId: professorId, week: weekNumber)
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode) else {
-                    complition(nil)
-                    return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                let professorDays = try JSONDecoder().decode([RProfessorDay].self, from: data)
-                complition(professorDays)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
-    }
-    
-    
-    static func loadTimetableTask(forProfessorId professorId: Int, complition: @escaping (RProfessorTimetable?) -> Void) -> DataTasks {
-        
-        let timetable = RProfessorTimetable()
-        timetable.professorId = professorId
-        
-        var countDownloadedWeeks = 0
-        let taskDone = {
-            countDownloadedWeeks += 1
-            
-            // Если выполнены обе задачи - выходим
-            if countDownloadedWeeks == 6 {
-                complition(timetable)
-            }
-        }
-        
-        let task1 = loadDaysOfWeekTask(forProfessorId: professorId, weekNumber: 1) { days1 in
-            let week1 = RProfessorWeek()
-            week1.number = 0
-            
-            guard let days1 = days1 else {
-                complition(nil)
-                return
-            }
-            
-            for day in days1 {
-                week1.days.append(day)
-            }
-            
-            // если загрузится первая - просто встанет на первое место
-            // если вторая - то тоже встанет на перове
-            timetable.weeks.insert(week1, at: 0)
-            
-            taskDone()
-        }
-        
-        let task2 = loadDaysOfWeekTask(forProfessorId: professorId, weekNumber: 2) { days2 in
-            let week2 = RProfessorWeek()
-            week2.number = 1
-            
-            guard let days2 = days2 else {
-                complition(nil)
-                return
-            }
-            
-            for day in days2 {
-                week2.days.append(day)
-            }
-            
-            // если загрузится первая - встанет на первое место, затем первая неделя insert at 0
-            // если вторая - просто встанет на второе место
-            timetable.weeks.append(week2)
-            
-            taskDone()
-        }
-        
-        let task0 = loadCurrWeekIsEwenTask { isEven in
-            guard let isEven = isEven else {
-                taskDone()
-                return
-            }
-            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
-            
-            taskDone()
-        }
-        
-        let task01 = loadHashTask(for: .group) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let task02 = loadHashTask(for: .professor) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let task03 = loadHashTask(for: .place) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let dataTasks = DataTasks()
-        dataTasks.add(task: task1)
-        dataTasks.add(task: task2)
-        dataTasks.add(task: task0)
-        dataTasks.add(task: task01)
-        dataTasks.add(task: task02)
-        dataTasks.add(task: task03)
-        
-        return dataTasks
-    }
-    
-    
-    // MARK: Place
-    static func loadDaysOfWeekTask(forPlaceId placeId: Int, weekNumber: Int, complition: @escaping ([RPlaceDay]?) -> Void) -> URLSessionDataTask {
-        let url = API.timetable(forPlaceId: placeId, week: weekNumber)
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode) else {
-                    complition(nil)
-                    return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                let placeDays = try JSONDecoder().decode([RPlaceDay].self, from: data)
-                complition(placeDays)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
-    }
-    
-    
-    static func loadTimetableTask(forPlaceId placeId: Int, complition: @escaping (RPlaceTimetable?) -> Void) -> DataTasks {
-        
-        let timetable = RPlaceTimetable()
-        timetable.placeId = placeId
-        
-        var countDownloadedWeeks = 0
-        let taskDone = {
-            countDownloadedWeeks += 1
-            
-            // Если выполнены обе задачи - выходим
-            if countDownloadedWeeks == 6 {
-                complition(timetable)
-            }
-        }
-        
-        let task1 = loadDaysOfWeekTask(forPlaceId: placeId, weekNumber: 1) { days1 in
-            let week1 = RPlaceWeek()
-            week1.number = 0
-            
-            guard let days1 = days1 else {
-                complition(nil)
-                return
-            }
-            
-            for day in days1 {
-                week1.days.append(day)
-            }
-            
-            // если загрузится первая - просто встанет на первое место
-            // если вторая - то тоже встанет на перове
-            timetable.weeks.insert(week1, at: 0)
-            
-            taskDone()
-        }
-        
-        let task2 = loadDaysOfWeekTask(forPlaceId: placeId, weekNumber: 2) { days2 in
-            let week2 = RPlaceWeek()
-            week2.number = 1
-            
-            guard let days2 = days2 else {
-                complition(nil)
-                return
-            }
-            
-            for day in days2 {
-                week2.days.append(day)
-            }
-            
-            // если загрузится первая - встанет на первое место, затем первая неделя insert at 0
-            // если вторая - просто встанет на второе место
-            timetable.weeks.append(week2)
-            
-            taskDone()
-        }
-        
-        let task0 = loadCurrWeekIsEwenTask { isEven in
-            guard let isEven = isEven else {
-                taskDone()
-                return
-            }
-            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
-            
-            taskDone()
-        }
-        
-        let task01 = loadHashTask(for: .group) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let task02 = loadHashTask(for: .professor) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let task03 = loadHashTask(for: .place) { hash in
-            // тут сверять хеш
-            
-            taskDone()
-        }
-        
-        let dataTasks = DataTasks()
-        dataTasks.add(task: task1)
-        dataTasks.add(task: task2)
-        dataTasks.add(task: task0)
-        dataTasks.add(task: task01)
-        dataTasks.add(task: task02)
-        dataTasks.add(task: task03)
-        
-        return dataTasks
-    }
+//    // MARK: Professor
+//    static func loadDaysOfWeekTask(forProfessorId professorId: Int, weekNumber: Int, complition: @escaping ([RProfessorDay]?) -> Void) -> URLSessionDataTask {
+//        let url = API.timetable(forProfessorId: professorId, week: weekNumber)
+//        
+//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                (200..<300).contains(httpResponse.statusCode) else {
+//                    complition(nil)
+//                    return
+//            }
+//            
+//            guard let data = data else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            do {
+//                let professorDays = try JSONDecoder().decode([RProfessorDay].self, from: data)
+//                complition(professorDays)
+//            } catch let jsonError {
+//                print(jsonError)
+//                complition(nil)
+//            }
+//        }
+//        
+//        return task
+//    }
+//    
+//    
+//    static func loadTimetableTask(forProfessorId professorId: Int, complition: @escaping (RProfessorTimetable?) -> Void) -> DataTasks {
+//        
+//        let timetable = RProfessorTimetable()
+//        timetable.professorId = professorId
+//        
+//        var countDownloadedWeeks = 0
+//        let taskDone = {
+//            countDownloadedWeeks += 1
+//            
+//            // Если выполнены обе задачи - выходим
+//            if countDownloadedWeeks == 6 {
+//                complition(timetable)
+//            }
+//        }
+//        
+//        let task1 = loadDaysOfWeekTask(forProfessorId: professorId, weekNumber: 1) { days1 in
+//            let week1 = RProfessorWeek()
+//            week1.number = 0
+//            
+//            guard let days1 = days1 else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            for day in days1 {
+//                week1.days.append(day)
+//            }
+//            
+//            // если загрузится первая - просто встанет на первое место
+//            // если вторая - то тоже встанет на перове
+//            timetable.weeks.insert(week1, at: 0)
+//            
+//            taskDone()
+//        }
+//        
+//        let task2 = loadDaysOfWeekTask(forProfessorId: professorId, weekNumber: 2) { days2 in
+//            let week2 = RProfessorWeek()
+//            week2.number = 1
+//            
+//            guard let days2 = days2 else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            for day in days2 {
+//                week2.days.append(day)
+//            }
+//            
+//            // если загрузится первая - встанет на первое место, затем первая неделя insert at 0
+//            // если вторая - просто встанет на второе место
+//            timetable.weeks.append(week2)
+//            
+//            taskDone()
+//        }
+//        
+//        let task0 = loadCurrWeekIsEwenTask { isEven in
+//            guard let isEven = isEven else {
+//                taskDone()
+//                return
+//            }
+//            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
+//            
+//            taskDone()
+//        }
+//        
+//        let task01 = loadHashTask(for: .group) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let task02 = loadHashTask(for: .professor) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let task03 = loadHashTask(for: .place) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let dataTasks = DataTasks()
+//        dataTasks.add(task: task1)
+//        dataTasks.add(task: task2)
+//        dataTasks.add(task: task0)
+//        dataTasks.add(task: task01)
+//        dataTasks.add(task: task02)
+//        dataTasks.add(task: task03)
+//        
+//        return dataTasks
+//    }
+//    
+//    
+//    // MARK: Place
+//    static func loadDaysOfWeekTask(forPlaceId placeId: Int, weekNumber: Int, complition: @escaping ([RPlaceDay]?) -> Void) -> URLSessionDataTask {
+//        let url = API.timetable(forPlaceId: placeId, week: weekNumber)
+//        
+//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                (200..<300).contains(httpResponse.statusCode) else {
+//                    complition(nil)
+//                    return
+//            }
+//            
+//            guard let data = data else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            do {
+//                let placeDays = try JSONDecoder().decode([RPlaceDay].self, from: data)
+//                complition(placeDays)
+//            } catch let jsonError {
+//                print(jsonError)
+//                complition(nil)
+//            }
+//        }
+//        
+//        return task
+//    }
+//    
+//    
+//    static func loadTimetableTask(forPlaceId placeId: Int, complition: @escaping (RPlaceTimetable?) -> Void) -> DataTasks {
+//        
+//        let timetable = RPlaceTimetable()
+//        timetable.placeId = placeId
+//        
+//        var countDownloadedWeeks = 0
+//        let taskDone = {
+//            countDownloadedWeeks += 1
+//            
+//            // Если выполнены обе задачи - выходим
+//            if countDownloadedWeeks == 6 {
+//                complition(timetable)
+//            }
+//        }
+//        
+//        let task1 = loadDaysOfWeekTask(forPlaceId: placeId, weekNumber: 1) { days1 in
+//            let week1 = RPlaceWeek()
+//            week1.number = 0
+//            
+//            guard let days1 = days1 else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            for day in days1 {
+//                week1.days.append(day)
+//            }
+//            
+//            // если загрузится первая - просто встанет на первое место
+//            // если вторая - то тоже встанет на перове
+//            timetable.weeks.insert(week1, at: 0)
+//            
+//            taskDone()
+//        }
+//        
+//        let task2 = loadDaysOfWeekTask(forPlaceId: placeId, weekNumber: 2) { days2 in
+//            let week2 = RPlaceWeek()
+//            week2.number = 1
+//            
+//            guard let days2 = days2 else {
+//                complition(nil)
+//                return
+//            }
+//            
+//            for day in days2 {
+//                week2.days.append(day)
+//            }
+//            
+//            // если загрузится первая - встанет на первое место, затем первая неделя insert at 0
+//            // если вторая - просто встанет на второе место
+//            timetable.weeks.append(week2)
+//            
+//            taskDone()
+//        }
+//        
+//        let task0 = loadCurrWeekIsEwenTask { isEven in
+//            guard let isEven = isEven else {
+//                taskDone()
+//                return
+//            }
+//            DateHelper.setFirstWeekIsEven(fromCurrWeekIsEven: isEven)
+//            
+//            taskDone()
+//        }
+//        
+//        let task01 = loadHashTask(for: .group) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let task02 = loadHashTask(for: .professor) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let task03 = loadHashTask(for: .place) { hash in
+//            // тут сверять хеш
+//            
+//            taskDone()
+//        }
+//        
+//        let dataTasks = DataTasks()
+//        dataTasks.add(task: task1)
+//        dataTasks.add(task: task2)
+//        dataTasks.add(task: task0)
+//        dataTasks.add(task: task01)
+//        dataTasks.add(task: task02)
+//        dataTasks.add(task: task03)
+//        
+//        return dataTasks
+//    }
 
 }

@@ -11,7 +11,7 @@ import RealmSwift
 protocol WritingTimetable {
 
     func write(groupTimetable: RGroupTimetable)
-    func write(professorTimetable: RProfessorTimetable)
-    func write(placeTimetable: RPlaceTimetable)
+    //func write(professorTimetable: RProfessorTimetable)
+    //func write(placeTimetable: RPlaceTimetable)
     
 }

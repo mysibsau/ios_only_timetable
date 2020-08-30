@@ -6,16 +6,16 @@
 //Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-class RPlaceTimetable: Object, Decodable {
-    
-    @objc dynamic var placeId = 0
-    let weeks = List<RPlaceWeek>()
-    
-    override class func primaryKey() -> String? {
-        return "placeId"
-    }
-    
-}
+//import Foundation
+//import RealmSwift
+//
+//class RPlaceTimetable: Object, Decodable {
+//    
+//    @objc dynamic var placeId = 0
+//    let weeks = List<RPlaceWeek>()
+//    
+//    override class func primaryKey() -> String? {
+//        return "placeId"
+//    }
+//    
+//}

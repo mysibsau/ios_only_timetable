@@ -6,17 +6,17 @@
 //  Copyright © 2020 art-off. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
-
-extension RPlace {
-    
-    func newObject() -> RPlace {
-        let newPlace = RPlace()
-        newPlace.id = id
-        newPlace.name = name
-        
-        return newPlace
-    }
-}
-
+//import Foundation
+//import RealmSwift
+//
+//extension RPlace {
+//    
+//    func newObject() -> RPlace {
+//        let newPlace = RPlace()
+//        newPlace.id = id
+//        newPlace.name = name
+//        
+//        return newPlace
+//    }
+//}
+//

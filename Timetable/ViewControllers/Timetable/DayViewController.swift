@@ -64,19 +64,19 @@ class DayViewController<EntitieDay>: UIViewController {
                 stackView.addArrangedSubview(lessonView)
                 lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             }
-        } else if let professorDay = day as? ProfessorDay {
-            for lesson in professorDay.lessons {
-                let lessonView = LessonView(lesson: lesson)
-                stackView.addArrangedSubview(lessonView)
-                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-            }
-        } else if let placeDay = day as? PlaceDay {
-            for lesson in placeDay.lessons {
-                let lessonView = LessonView(lesson: lesson)
-                stackView.addArrangedSubview(lessonView)
-                lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-            }
-        }
+        }// else if let professorDay = day as? ProfessorDay {
+        //    for lesson in professorDay.lessons {
+        //        let lessonView = LessonView(lesson: lesson)
+        //        stackView.addArrangedSubview(lessonView)
+        //        lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        //    }
+        //} else if let placeDay = day as? PlaceDay {
+        //    for lesson in placeDay.lessons {
+        //        let lessonView = LessonView(lesson: lesson)
+        //        stackView.addArrangedSubview(lessonView)
+        //        lessonView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        //    }
+        //}
         
     }
     
