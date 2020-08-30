@@ -19,7 +19,6 @@ class DataManager {
     private let userRealm: Realm
     
     init() {
-        
         let fileManager = FileManager.default
         
         // создаем дирректорию для приложения в Documents

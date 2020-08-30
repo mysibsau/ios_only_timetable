@@ -15,6 +15,7 @@ extension RProfessor {
         let newProfessor = RProfessor()
         newProfessor.id = id
         newProfessor.name = name
+        newProfessor.phone = phone
         newProfessor.email = email
         newProfessor.department = department
         
