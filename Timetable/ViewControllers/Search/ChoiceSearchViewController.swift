@@ -16,6 +16,15 @@ class ChoiceSearchViewController: UITableViewController{
         //"Кабинеты"
     ]
     
+    // MARK: - UI
+    // MARK: Activity Indicator
+    let viewWithActivityIndicator = ActivityIndicatorView()
+    // MARK: Alert View
+    let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
+    
+    // MARK: - Для загрузки таблиц групп/преподавателей/кабинетов
+    var task: URLSessionDataTask?
+    var taskForHash: URLSessionDataTask?
 
     // MARK: - Overrides
     override func loadView() {
@@ -32,6 +41,14 @@ class ChoiceSearchViewController: UITableViewController{
         super.viewDidLoad()
         
         //view.backgroundColor = Colors.backgroungColor
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        task?.cancel()
+        taskForHash?.cancel()
+        stopActivityIndicator()
     }
     
     // MARK: - Table view data source
@@ -65,27 +82,86 @@ class ChoiceSearchViewController: UITableViewController{
         // Сейчас создал один класс с дженериками
         
         if indexPath.row == 0 {
-            let groupTableViewController = TableViewController<RGroup>()
-                groupTableViewController.data = [
-                    DataManager.shared.getFavoriteGruops(),
-                    DataManager.shared.getGroups()
-                ]
-                navigationController?.pushViewController(groupTableViewController, animated: true)
-        }// else if indexPath.row == 1 {
-        //        let professorTableViewController = TableViewController<RProfessor>()
-        //        professorTableViewController.data = [
-        //            DataManager.shared.getFavoriteProfessors(),
-        //            DataManager.shared.getProfessors()
-        //        ]
-        //        navigationController?.pushViewController(professorTableViewController, animated: true)
-        //} else if indexPath.row == 2 {
-        //        let placeTableViewController = TableViewController<RPlace>()
-        //        placeTableViewController.data = [
-        //            DataManager.shared.getFavoritePlaces(),
-        //            DataManager.shared.getPlaces()
-        //        ]
-        //        navigationController?.pushViewController(placeTableViewController, animated: true)
-        //}
+            // Если нет таблицы с группами - качаем
+            if UserDefaultsConfig.groupsHash == nil || DataManager.shared.getGroups().isEmpty {
+                startActivityIndicator()
+                task = ApiManager.loadGroupsTask { optionalGroups in
+                    guard let groups = optionalGroups else {
+                        DispatchQueue.main.async {
+                            self.showAlertForNetwork()
+                            self.stopActivityIndicator()
+                        }
+                        return
+                    }
+                    
+                    // Если таблица загрузилась - загружаем хеш таблицы
+                    self.taskForHash = ApiManager.loadHashTask(for: .group) { optionalGroupHash in
+                        guard let groupHash = optionalGroupHash else {
+                            DispatchQueue.main.async {
+                                self.showAlertForNetwork()
+                                self.stopActivityIndicator()
+                            }
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            DataManager.shared.write(groups: groups)
+                            UserDefaultsConfig.groupsHash = groupHash
+                            self.stopActivityIndicator()
+                            self.pushGroupTableViewController()
+                        }
+                    }
+                    self.taskForHash?.resume()
+                }
+                task?.resume()
+            // Если есть, то все норм - открываем
+            } else {
+                pushGroupTableViewController()
+            }
+        }
+    }
+    
+    private func pushGroupTableViewController() {
+        let groupTableViewController = TableViewController<RGroup>()
+        groupTableViewController.data = [
+            DataManager.shared.getFavoriteGruops(),
+            DataManager.shared.getGroups()
+        ]
+        navigationController?.pushViewController(groupTableViewController, animated: true)
     }
 
+}
+
+
+extension ChoiceSearchViewController: AnimatingNetworkViewProtocol {
+    
+    // MARK: Activity Indicator
+    func startActivityIndicator() {
+        if !view.subviews.contains(viewWithActivityIndicator) {
+            view.addSubview(viewWithActivityIndicator)
+            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
+        }
+        viewWithActivityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func stopActivityIndicator() {
+        viewWithActivityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
+    
+    // MARK: Arert View
+    func showAlertForNetwork() {
+        if !view.subviews.contains(alertViewForNetrowk) {
+            view.addSubview(alertViewForNetrowk)
+            
+            alertViewForNetrowk.translatesAutoresizingMaskIntoConstraints = false
+            alertViewForNetrowk.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+            alertViewForNetrowk.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        }
+        
+        alertViewForNetrowk.hideWithAnimation()
+    }
+    
 }

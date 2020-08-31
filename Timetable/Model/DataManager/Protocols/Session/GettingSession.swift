@@ -8,10 +8,10 @@
 
 import RealmSwift
 
-protocol GettingSession {
-    
-    func getSession(forGroup group: Int)          // ->
-    func getSession(forProfessor professor: Int)  // ->
-    func getSession(forPlace place: Int)          // ->
-
-}
+//protocol GettingSession {
+//    
+//    func getSession(forGroup group: Int)          // ->
+//    func getSession(forProfessor professor: Int)  // ->
+//    func getSession(forPlace place: Int)          // ->
+//
+//}

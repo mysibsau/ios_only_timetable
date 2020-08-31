@@ -9,19 +9,19 @@
 import Foundation
 import RealmSwift
 
-class RGroupLesson: Object, Decodable {
+class RGroupLesson: Object{
     
     @objc dynamic var time = ""
     var subgroups = List<RGroupSubgroup>()
     
-    enum CodingKeys: String, CodingKey {
-        case time
-        case subgroups
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case time
+//        case subgroups
+//    }
     
 }
 
-class RGroupSubgroup: Object, Decodable {
+class RGroupSubgroup: Object {
     
     @objc dynamic var number = 0
     @objc dynamic var subject = ""
@@ -29,12 +29,12 @@ class RGroupSubgroup: Object, Decodable {
     @objc dynamic var place = ""
     @objc dynamic var professor = ""
     
-    enum CodingKeys: String, CodingKey {
-        case number = "num"
-        case subject = "name"
-        case type
-        case place
-        case professor = "teacher"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case number = "num"
+//        case subject = "name"
+//        case type
+//        case place
+//        case professor = "teacher"
+//    }
     
 }

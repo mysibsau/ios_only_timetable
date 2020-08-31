@@ -8,10 +8,10 @@
 
 import RealmSwift
 
-protocol WritingSession {
-    
-    func writeSession(forGroup group: Int)
-    func writeSession(forProfessor professor: Int)
-    func writeSession(forPlace place: Int)
-    
-}
+//protocol WritingSession {
+//    
+//    func writeSession(forGroup group: Int)
+//    func writeSession(forProfessor professor: Int)
+//    func writeSession(forPlace place: Int)
+//    
+//}

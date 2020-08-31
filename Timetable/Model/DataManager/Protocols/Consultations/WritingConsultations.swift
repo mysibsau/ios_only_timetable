@@ -8,10 +8,10 @@
 
 import RealmSwift
 
-protocol WritingConsultations {
-    
-    func writeConsultations(forGroup group: Int)
-    func writeConsultations(forProfessor professor: Int)
-    func writeConsultations(forPlace place: Int)
-    
-}
+//protocol WritingConsultations {
+//    
+//    func writeConsultations(forGroup group: Int)
+//    func writeConsultations(forProfessor professor: Int)
+//    func writeConsultations(forPlace place: Int)
+//    
+//}

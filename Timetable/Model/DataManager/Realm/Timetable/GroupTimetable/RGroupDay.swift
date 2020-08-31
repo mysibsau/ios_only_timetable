@@ -9,14 +9,14 @@
 import Foundation
 import RealmSwift
 
-class RGroupDay: Object, Decodable {
+class RGroupDay: Object {
     
     @objc dynamic var number = 0
     var lessons = List<RGroupLesson>()
     
-    enum CodingKeys: String, CodingKey {
-        case number = "day"
-        case lessons = "lesson"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case number = "day"
+//        case lessons = "lesson"
+//    }
     
 }

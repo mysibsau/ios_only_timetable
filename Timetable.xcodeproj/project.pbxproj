@@ -14,6 +14,8 @@
 		4A2338E7243C58C5002C0746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E6243C58C5002C0746 /* Assets.xcassets */; };
 		4A2338EA243C58C5002C0746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E8243C58C5002C0746 /* LaunchScreen.storyboard */; };
 		4A2338F8243C5BFC002C0746 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338F7243C5BFC002C0746 /* LessonView.swift */; };
+		4A2B145624FD39DF002942A9 /* GroupTimetableResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B145524FD39DF002942A9 /* GroupTimetableResponse.swift */; };
+		4A2B145824FD42D9002942A9 /* ResponseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B145724FD42D9002942A9 /* ResponseConverter.swift */; };
 		4A415E652458561F005FADD7 /* RGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E642458561F005FADD7 /* RGroup.swift */; };
 		4A415E6724585627005FADD7 /* RProfessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E6624585627005FADD7 /* RProfessor.swift */; };
 		4A415E692458562D005FADD7 /* RPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A415E682458562D005FADD7 /* RPlace.swift */; };
@@ -45,7 +47,6 @@
 		4A67CBDD248D447D00F1D1FA /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDC248D447D00F1D1FA /* ApiManager.swift */; };
 		4A67CBDF248E66EA00F1D1FA /* DeletingTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBDE248E66EA00F1D1FA /* DeletingTimetable.swift */; };
 		4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */; };
-		4A67CBE3248F641F00F1D1FA /* DataTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE2248F641F00F1D1FA /* DataTasks.swift */; };
 		4A67CBE7248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */; };
 		4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */; };
 		4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */ = {isa = PBXBuildFile; fileRef = 4A67CBF62493A28C00F1D1FA /* init-data.realm */; };
@@ -116,6 +117,8 @@
 		4A2338E9243C58C5002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2338EB243C58C5002C0746 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A2338F7243C5BFC002C0746 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
+		4A2B145524FD39DF002942A9 /* GroupTimetableResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTimetableResponse.swift; sourceTree = "<group>"; };
+		4A2B145724FD42D9002942A9 /* ResponseConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseConverter.swift; sourceTree = "<group>"; };
 		4A415E642458561F005FADD7 /* RGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGroup.swift; sourceTree = "<group>"; };
 		4A415E6624585627005FADD7 /* RProfessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessor.swift; sourceTree = "<group>"; };
 		4A415E682458562D005FADD7 /* RPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPlace.swift; sourceTree = "<group>"; };
@@ -147,7 +150,6 @@
 		4A67CBDC248D447D00F1D1FA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		4A67CBDE248E66EA00F1D1FA /* DeletingTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingTimetable.swift; sourceTree = "<group>"; };
 		4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		4A67CBE2248F641F00F1D1FA /* DataTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTasks.swift; sourceTree = "<group>"; };
 		4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingNetworkViewProtocol.swift; sourceTree = "<group>"; };
 		4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMood.swift; sourceTree = "<group>"; };
 		4A67CBF62493A28C00F1D1FA /* init-data.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "init-data.realm"; sourceTree = "<group>"; };
@@ -308,6 +310,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4A2B145224FD3557002942A9 /* ResponseObjects */ = {
+			isa = PBXGroup;
+			children = (
+				4A2B145724FD42D9002942A9 /* ResponseConverter.swift */,
+				4A2B145524FD39DF002942A9 /* GroupTimetableResponse.swift */,
+			);
+			path = ResponseObjects;
+			sourceTree = "<group>";
+		};
 		4A415E61245855A8005FADD7 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,9 +458,9 @@
 		4A67CBD9248D278300F1D1FA /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4A2B145224FD3557002942A9 /* ResponseObjects */,
 				4A67CBDA248D28AC00F1D1FA /* API.swift */,
 				4A67CBDC248D447D00F1D1FA /* ApiManager.swift */,
-				4A67CBE2248F641F00F1D1FA /* DataTasks.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -841,6 +852,7 @@
 				4AC64C352472643600081D55 /* TableViewController.swift in Sources */,
 				4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */,
 				4AC64C422472BB8D00081D55 /* GettingConsultations.swift in Sources */,
+				4A2B145824FD42D9002942A9 /* ResponseConverter.swift in Sources */,
 				4A9207B1246061AA00D050EB /* RProfessorConsultations.swift in Sources */,
 				4AC64CA0247A400E00081D55 /* PlaceDay.swift in Sources */,
 				4AC64C4D2472F84300081D55 /* AlertView.swift in Sources */,
@@ -857,6 +869,7 @@
 				4AC64C442472BBAD00081D55 /* GettingSession.swift in Sources */,
 				4AC64C6024742D1800081D55 /* WritingTimetable.swift in Sources */,
 				4AC64C832477F63D00081D55 /* AdditionalViewController.swift in Sources */,
+				4A2B145624FD39DF002942A9 /* GroupTimetableResponse.swift in Sources */,
 				4AC64C6224742EC500081D55 /* WritingConsultations.swift in Sources */,
 				4AC64C7C2477B44100081D55 /* WrapperViewWithLabel.swift in Sources */,
 				4AC64C5B2473FAC000081D55 /* UIDevice+vibrate.swift in Sources */,
@@ -877,7 +890,6 @@
 				4A67A375245C49B5003765D2 /* ChoiceSearchViewController.swift in Sources */,
 				4AC64CA6247AF72700081D55 /* DayViewController.swift in Sources */,
 				4A67CBE7248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift in Sources */,
-				4A67CBE3248F641F00F1D1FA /* DataTasks.swift in Sources */,
 				4A9207A724604E7900D050EB /* EntitiesType.swift in Sources */,
 				4A67CBDB248D28AC00F1D1FA /* API.swift in Sources */,
 				4A415E9A24585E9F005FADD7 /* RProfessorExam.swift in Sources */,

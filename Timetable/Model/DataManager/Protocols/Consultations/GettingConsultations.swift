@@ -8,10 +8,10 @@
 
 import RealmSwift
 
-protocol GettingConsultations {
-    
-    func getConsultations(forGroup group: Int)          // ->
-    func getConsultations(forProfessor professor: Int)  // ->
-    func getConsultations(forPlace place: Int)          // ->
-    
-}
+//protocol GettingConsultations {
+//    
+//    func getConsultations(forGroup group: Int)          // ->
+//    func getConsultations(forProfessor professor: Int)  // ->
+//    func getConsultations(forPlace place: Int)          // ->
+//    
+//}

@@ -10,18 +10,21 @@ import Foundation
 
 struct UserDefaultsConfig {
     
-    @UserDefaultsWrapper(key: "com.user.timetableType", defaultValue: String?(nil))
+    @UserDefaultsWrapper(key: "com.sibsu.user.timetableType", defaultValue: String?(nil))
     static var timetableType: String?
     
-    @UserDefaultsWrapper(key: "com.user.timetableId", defaultValue: Int?(nil))
+    @UserDefaultsWrapper(key: "com.sibsu.user.timetableId", defaultValue: Int?(nil))
     static var timetableId: Int?
     
-    @UserDefaultsWrapper(key: "com.system.firstWeekIsEven", defaultValue: false)
+    @UserDefaultsWrapper(key: "com.sibsu.system.firstWeekIsEven", defaultValue: true)
     static var firstWeekIsEven: Bool
     
     // MARK: Hash для определения версии таблиц
-    @UserDefaultsWrapper(key: "com.system.groupsHash", defaultValue: "")
-    static var groupsHash: String
+    @UserDefaultsWrapper(key: "com.sibsu.system.groupsHash", defaultValue: String?(nil))
+    static var groupsHash: String?
+    
+    //@UserDefaultsWrapper(key: "com.sibsu.system.versionGroupsFromBundle", defaultValue: Int?(nil))
+    //static var versionGroupsFromBundle: Int?
     
     //@UserDefaultsWrapper(key: "com.system.professorsHash", defaultValue: "")
     //static var professorsHash: String

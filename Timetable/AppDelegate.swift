@@ -32,44 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Common.addPlaceTimetable0()
 //        Common.addPlaceTimetable99()
         
+        //openRealm()
         
-//        ApiManager.loadGroupsTask { groups in
-//            print(groups!)
-//        }.resume()
-//
-//        ApiManager.loadProfessorsTask { professors in
-//            print(professors!)
-//        }.resume()
-//
-//        ApiManager.loadPlacesDataTask { places in
-//            print(places)
+//        ApiManager.loadGroupTimetableTask(forGroupId: 1073) { timetable in
+//            print(timetable)
 //        }.resume()
         
-//        ApiManager.loadCurrWeekIsEwenTask { isEven in
-//            print(isEven.self)
-//            print(isEven)
-//        }.resume()
         
-//        ApiManager.loadDaysOfWeekTask(forGroupId: 1, weekNumber: 1) { timetable in
-//            for t in timetable! {
-//                print(t.number)
-//                print(t.lessons)
+//        ApiManager.loadGroupsTask { optionalGroups in
+//            guard let groups = optionalGroups else { return }
+//            DispatchQueue.main.async {
+//                DataManager.shared.write(groups: groups)
 //            }
 //        }.resume()
-        
-//        ApiManager.loadTimetableTask(forProfessorId: 1) { timetable in
-//            print(timetable)
-//        }.start()
-//        
-//        ApiManager.loadTimetableTask(forProfessorId: 3) { timetable in
-//            print(timetable)
-//        }.start()
-//        
-//        ApiManager.loadTimetableTask(forPlaceId: 5) { timetable in
-//            print(timetable)
-//        }.start()
-        
-        //openRealm()
         
         return true
     }

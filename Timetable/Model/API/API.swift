@@ -22,38 +22,38 @@ struct API {
         return URL(string: "\(address)/groups")!
     }
     
+    static func timetable(forGroupId groupId: Int) -> URL {
+        return URL(string: "\(address)/timetable/\(groupId)")!
+    }
+    
     static func groupsHash() -> URL {
-        return URL(string: "\(address)/groups/hash")!
+        return URL(string: "\(address)/hash")!
     }
     
-    static func timetable(forGroupId groupId: Int, week: Int) -> URL {
-        return URL(string: "\(address)/timetable/group/\(groupId)/\(week)")!
-    }
-    
-    // MARK: - Professor
-    static func professors() -> URL {
-        return URL(string: "\(address)/professors")!
-    }
-    
-    static func professorsHash() -> URL {
-        return URL(string: "\(address)/professors/hash")!
-    }
-    
-    static func timetable(forProfessorId professorId: Int, week: Int) -> URL {
-        return URL(string: "\(address)/timetable/professor/\(professorId)/\(week)")!
-    }
-    
-    // MARK: - Place
-    static func places() -> URL {
-        return URL(string: "\(address)/places")!
-    }
-    
-    static func placesHash() -> URL {
-        return URL(string: "\(address)/places/hash")!
-    }
-    
-    static func timetable(forPlaceId placeId: Int, week: Int) -> URL {
-        return URL(string: "\(address)/timetable/place/\(placeId)/\(week)")!
-    }
+//    // MARK: - Professor
+//    static func professors() -> URL {
+//        return URL(string: "\(address)/professors")!
+//    }
+//
+//    static func professorsHash() -> URL {
+//        return URL(string: "\(address)/professors/hash")!
+//    }
+//
+//    static func timetable(forProfessorId professorId: Int, week: Int) -> URL {
+//        return URL(string: "\(address)/timetable/professor/\(professorId)/\(week)")!
+//    }
+//
+//    // MARK: - Place
+//    static func places() -> URL {
+//        return URL(string: "\(address)/places")!
+//    }
+//
+//    static func placesHash() -> URL {
+//        return URL(string: "\(address)/places/hash")!
+//    }
+//
+//    static func timetable(forPlaceId placeId: Int, week: Int) -> URL {
+//        return URL(string: "\(address)/timetable/place/\(placeId)/\(week)")!
+//    }
     
 }
