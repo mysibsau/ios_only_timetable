@@ -11,12 +11,11 @@ import Foundation
 class ResponseConverter {
     
     static func converteGroupTimetableResponseToRGroupTimetable(groupTimetableResponse: GroupTimetableResponse, groupId: Int) -> RGroupTimetable {
-        
         let groupTimetable = RGroupTimetable()
         groupTimetable.groupId = groupId
         
-        let groupEvenWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.evenWeek)
-        let groupOddWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.oddWeek)
+        let groupEvenWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.oddWeek)
+        let groupOddWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.evenWeek)
         groupTimetable.weeks.append(groupEvenWeek)
         groupTimetable.weeks.append(groupOddWeek)
         
