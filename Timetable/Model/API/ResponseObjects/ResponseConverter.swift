@@ -14,10 +14,10 @@ class ResponseConverter {
         let groupTimetable = RGroupTimetable()
         groupTimetable.groupId = groupId
         
-        let groupEvenWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.oddWeek)
-        let groupOddWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.evenWeek)
-        groupTimetable.weeks.append(groupEvenWeek)
+        let groupOddWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.oddWeek)
+        let groupEvenWeek = converteGroupDaysResponseToRGroupWeek(groupDaysResponse: groupTimetableResponse.evenWeek)
         groupTimetable.weeks.append(groupOddWeek)
+        groupTimetable.weeks.append(groupEvenWeek)
         
         return groupTimetable
     }

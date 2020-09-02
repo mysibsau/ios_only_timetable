@@ -18,9 +18,9 @@ class Converter {
     static let shared = Converter()
     
     private let subgroupType = [
-        0: "(Лекция)",
-        1: "(Практика)",
+        1: "(Лекция)",
         2: "(Лабораторная работа)",
+        3: "(Практика)",
     ]
     
     // MARK: Перевод объекта РАСПИСАНИЯ ГРУППЫ Realm к структуре, используемой в приложении
@@ -45,7 +45,6 @@ class Converter {
                     
                     // пробегаемся по всех подргуппам занятия
                     for subgroup in lesson.subgroups {
-                        
                         let groupSubgroup = GroupSubgroup(
                             number: subgroup.number,
                             subject: subgroup.subject,
