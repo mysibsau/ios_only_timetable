@@ -8,11 +8,6 @@
 
 import Foundation
 
-// FIXME: Цикличные связи
-// Этот класс использует методы DataManager (для взятия сущностей по id)
-// Но и DataManager использует методы этого класса (конвертирует)
-// Некоторая циаличная связь вышла, не очень хорошо
-
 class Converter {
     
     static let shared = Converter()
