@@ -56,7 +56,11 @@ class Converter {
                     }
                     
                     // добавляем занятие в массив занятий
-                    let groupLesson = GroupLesson(time: lesson.time, subgroups: groupSubgroups)
+                    let groupLesson = GroupLesson(
+                        // Если получается преобразовать время, иначе вставляем такое как есть
+                        time: converte(time: lesson.time) ?? lesson.time,
+                        subgroups: groupSubgroups)
+                    
                     groupLessons.append(groupLesson)
                 }
                 
@@ -74,6 +78,27 @@ class Converter {
 
         let groupTimetable = GroupTimetable(groupId: timetable.groupId, groupName: groupName, weeks: groupWeeks)
         return groupTimetable
+    }
+    
+    private func converte(time: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: #"\d\d.\d\d"#) else { return nil }
+        
+        let range = NSRange(location: 0, length: time.utf16.count)
+        let matches = regex.matches(in: time, options: [], range: range)
+        
+        // Если нет ни одного совпадения
+        guard !matches.isEmpty else { return nil }
+        
+        var times = [String]()
+        
+        for match in matches {
+            times.append((time as NSString).substring(with: match.range))
+        }
+        
+        // Если совпадений не 2 (должен быть только начало и конец)
+        guard times.count == 2 else { return nil }
+        
+        return "\(times[0]) - \(times[1])"
     }
     
 }
