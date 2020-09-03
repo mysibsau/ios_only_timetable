@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31CCDB5DD4C3128432E8B38B /* libPods-Timetable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */; };
+		4A12169E250110E000047092 /* String+capitalizingFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */; };
 		4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DA243C58C2002C0746 /* AppDelegate.swift */; };
 		4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DC243C58C2002C0746 /* SceneDelegate.swift */; };
 		4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2338E0243C58C2002C0746 /* Main.storyboard */; };
@@ -109,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Timetable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizingFirstLetter.swift"; sourceTree = "<group>"; };
 		4A2338D7243C58C2002C0746 /* Timetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338DA243C58C2002C0746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A2338DC243C58C2002C0746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,14 @@
 				C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4A12169C250110AD00047092 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		4A2338CE243C58C2002C0746 = {
@@ -436,6 +446,7 @@
 		4A4C94A9245B58B1008105DE /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				4A12169C250110AD00047092 /* Extensions */,
 				4AC64C372472BA6B00081D55 /* Protocols */,
 				4A4C94AA245B58E4008105DE /* DataManager.swift */,
 				4AD694FB247EBCCB00A4A2B7 /* Converter.swift */,
@@ -849,6 +860,7 @@
 				4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4AC64C99247A3D5600081D55 /* PlaceSubgroupView.swift in Sources */,
+				4A12169E250110E000047092 /* String+capitalizingFirstLetter.swift in Sources */,
 				4AC64C352472643600081D55 /* TableViewController.swift in Sources */,
 				4A415E9624585E6E005FADD7 /* RGroupExam.swift in Sources */,
 				4AC64C422472BB8D00081D55 /* GettingConsultations.swift in Sources */,
