@@ -23,19 +23,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Очень длинное название предмета которых не бывает" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaa-nk-Ete">
-                    <rect key="frame" x="0.0" y="0.0" width="354" height="19.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="(вид занятия)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hr-Xk-F6o">
-                    <rect key="frame" x="0.0" y="21.5" width="354" height="17"/>
+                    <rect key="frame" x="0.0" y="20.5" width="354" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Преподаватель" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdc-KZ-NWX">
-                    <rect key="frame" x="0.0" y="46.5" width="354" height="36.5"/>
+                    <rect key="frame" x="0.0" y="45.5" width="354" height="37.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
             <constraints>
                 <constraint firstItem="jaa-nk-Ete" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DAc-Qa-lIS"/>
                 <constraint firstAttribute="trailing" secondItem="jaa-nk-Ete" secondAttribute="trailing" id="IEr-UJ-zct"/>
-                <constraint firstItem="7Hr-Xk-F6o" firstAttribute="top" secondItem="jaa-nk-Ete" secondAttribute="bottom" constant="2" id="K6Z-Bc-uw5"/>
+                <constraint firstItem="7Hr-Xk-F6o" firstAttribute="top" secondItem="jaa-nk-Ete" secondAttribute="bottom" id="K6Z-Bc-uw5"/>
                 <constraint firstItem="7Hr-Xk-F6o" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Q9U-29-vdX"/>
                 <constraint firstItem="LUb-Cj-ZWS" firstAttribute="top" secondItem="Rdc-KZ-NWX" secondAttribute="bottom" constant="2" id="SRY-b8-yad"/>
                 <constraint firstItem="Rdc-KZ-NWX" firstAttribute="top" secondItem="7Hr-Xk-F6o" secondAttribute="bottom" constant="8" id="T4u-zf-Ltu"/>
