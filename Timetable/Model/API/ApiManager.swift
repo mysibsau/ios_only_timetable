@@ -82,6 +82,37 @@ class ApiManager {
         return task
     }
     
+    static func handleGroupsResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> [RGroup]? {
+        guard error == nil else { return nil }
+        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
+        guard let data = data else { return nil }
+        
+        do {
+            let groupsResponse = try JSONDecoder().decode([RGroup].self, from: data)
+            return groupsResponse
+        } catch let jsonError {
+            print(jsonError)
+            return nil
+        }
+    }
+    
+    static func handleHashResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> String? {
+        guard error == nil else { return nil }
+        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
+        guard let data = data else { return nil }
+        
+        do {
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let hash = json["hash"] as? String else {
+                    return nil
+            }
+            return hash
+        } catch let jsonError {
+            print(jsonError)
+            return nil
+        }
+    }
+    
     // MARK: Скачивание расписания группы
     static func loadGroupTimetableTask(forGroupId groupId: Int, complition: @escaping (RGroupTimetable?, _ groupHash: String?) -> Void) -> URLSessionDataTask {
         let url = API.timetable(forGroupId: groupId)

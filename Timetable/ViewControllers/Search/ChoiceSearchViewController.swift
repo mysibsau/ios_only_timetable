@@ -23,8 +23,15 @@ class ChoiceSearchViewController: UITableViewController{
     let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
     
     // MARK: - Для загрузки таблиц групп/преподавателей/кабинетов
-    var task: URLSessionDataTask?
-    var taskForHash: URLSessionDataTask?
+    //var task: URLSessionDataTask?
+    //var taskForHash: URLSessionDataTask?
+    let downloadingQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    let session = URLSession(configuration: URLSessionConfiguration.default)
 
     // MARK: - Overrides
     override func loadView() {
@@ -41,13 +48,15 @@ class ChoiceSearchViewController: UITableViewController{
         super.viewDidLoad()
         
         //view.backgroundColor = Colors.backgroungColor
+        UserDefaultsConfig.groupsHash = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        task?.cancel()
-        taskForHash?.cancel()
+        //task?.cancel()
+        //taskForHash?.cancel()
+        downloadingQueue.cancelAllOperations()
         stopActivityIndicator()
     }
     
@@ -85,8 +94,15 @@ class ChoiceSearchViewController: UITableViewController{
             // Если нет таблицы с группами - качаем
             if UserDefaultsConfig.groupsHash == nil || DataManager.shared.getGroups().isEmpty {
                 startActivityIndicator()
-                task = ApiManager.loadGroupsTask { optionalGroups in
-                    guard let groups = optionalGroups else {
+                
+                var downloadedGroups: [RGroup]?
+                var downloadedHash: String?
+                
+                let completionOperation = BlockOperation {
+                    guard
+                        let downloadedGroups = downloadedGroups,
+                        let downloadedHash = downloadedHash
+                    else {
                         DispatchQueue.main.async {
                             self.showAlertForNetwork()
                             self.stopActivityIndicator()
@@ -94,26 +110,47 @@ class ChoiceSearchViewController: UITableViewController{
                         return
                     }
                     
-                    // Если таблица загрузилась - загружаем хеш таблицы
-                    self.taskForHash = ApiManager.loadHashTask(for: .group) { optionalGroupHash in
-                        guard let groupHash = optionalGroupHash else {
-                            DispatchQueue.main.async {
-                                self.showAlertForNetwork()
-                                self.stopActivityIndicator()
-                            }
-                            return
-                        }
+                    DispatchQueue.main.async {
+                        UserDefaultsConfig.groupsHash = downloadedHash
+                        DataManager.shared.write(groups: downloadedGroups)
                         
-                        DispatchQueue.main.async {
-                            DataManager.shared.write(groups: groups)
-                            UserDefaultsConfig.groupsHash = groupHash
-                            self.stopActivityIndicator()
-                            self.pushGroupTableViewController()
-                        }
+                        self.pushGroupTableViewController()
                     }
-                    self.taskForHash?.resume()
                 }
-                task?.resume()
+                
+                let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+                    guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+                        DispatchQueue.main.async {
+                            self.showAlertForNetwork()
+                            self.stopActivityIndicator()
+                        }
+                        self.downloadingQueue.cancelAllOperations()
+                        return
+                    }
+                    
+                    downloadedGroups = groups
+                }
+                
+                let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+                    guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+                        DispatchQueue.main.async {
+                            self.showAlertForNetwork()
+                            self.stopActivityIndicator()
+                        }
+                        self.downloadingQueue.cancelAllOperations()
+                        return
+                    }
+                    
+                    downloadedHash = hash
+                }
+                
+                hashDownloadOperation.addDependency(groupsDownloadOperation)
+                completionOperation.addDependency(hashDownloadOperation)
+                completionOperation.addDependency(groupsDownloadOperation)
+                
+                downloadingQueue.addOperation(groupsDownloadOperation)
+                downloadingQueue.addOperation(hashDownloadOperation)
+                downloadingQueue.addOperation(completionOperation)
             // Если есть, то все норм - открываем
             } else {
                 pushGroupTableViewController()

@@ -52,6 +52,7 @@
 		4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */; };
 		4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */ = {isa = PBXBuildFile; fileRef = 4A67CBF62493A28C00F1D1FA /* init-data.realm */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
+		4A6E6F012503DA880007931E /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E6F002503DA880007931E /* DownloadOperation.swift */; };
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
 		4A920777245DDEED00D050EB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920776245DDEED00D050EB /* MenuCell.swift */; };
 		4A920779245DDF4000D050EB /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A920778245DDF4000D050EB /* MenuCell.xib */; };
@@ -156,6 +157,7 @@
 		4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMood.swift; sourceTree = "<group>"; };
 		4A67CBF62493A28C00F1D1FA /* init-data.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "init-data.realm"; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4A6E6F002503DA880007931E /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
 		4A920776245DDEED00D050EB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		4A920778245DDF4000D050EB /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				4A2B145224FD3557002942A9 /* ResponseObjects */,
 				4A67CBDA248D28AC00F1D1FA /* API.swift */,
 				4A67CBDC248D447D00F1D1FA /* ApiManager.swift */,
+				4A6E6F002503DA880007931E /* DownloadOperation.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				4A67CBDF248E66EA00F1D1FA /* DeletingTimetable.swift in Sources */,
 				4AC64C922479A72100081D55 /* ProfessorDay.swift in Sources */,
 				4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */,
+				4A6E6F012503DA880007931E /* DownloadOperation.swift in Sources */,
 				4AC64C902479A71800081D55 /* ProfessorWeek.swift in Sources */,
 				4A60025F243CD1CC00077C81 /* Colors.swift in Sources */,
 				4AC64C99247A3D5600081D55 /* PlaceSubgroupView.swift in Sources */,
