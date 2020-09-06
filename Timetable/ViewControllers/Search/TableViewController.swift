@@ -225,7 +225,6 @@ extension TableViewController: DetailViewDelegate {
             var downloadedGroupTimetable: RGroupTimetable?
             var downloadedGroupsHash: String?
             
-            // Обычный ход скачивания
             let completionOperation = BlockOperation {
                 DispatchQueue.main.async {
                     if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
@@ -235,7 +234,7 @@ extension TableViewController: DetailViewDelegate {
                             groupId: group.id,
                             animatingViewController: animatingViewController)
                     } else {
-                        self.loadNewGroups()
+                        self.loadNewGroups(animatingViewController: animatingViewController)
                     }
                 }
             }
@@ -250,8 +249,8 @@ extension TableViewController: DetailViewDelegate {
                         let groupHash = optionalGroupHash
                     else {
                         DispatchQueue.main.async {
-                            self.showAlertForNetwork()
-                            self.stopActivityIndicator()
+                            animatingViewController.showAlertForNetwork()
+                            animatingViewController.stopActivityIndicator()
                         }
                         // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
                         self.downloadingQueue.cancelAllOperations()
@@ -308,7 +307,6 @@ extension TableViewController: DetailViewDelegate {
             var downloadedGroupTimetable: RGroupTimetable?
             var downloadedGroupsHash: String?
             
-            // Обычный ход скачивания
             let completionOperation = BlockOperation {
                 DispatchQueue.main.async {
                     if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
@@ -317,7 +315,7 @@ extension TableViewController: DetailViewDelegate {
                             groupId: group.id,
                             animatingViewController: animatingViewController)
                     } else {
-                        self.loadNewGroups()
+                        self.loadNewGroups(animatingViewController: animatingViewController)
                     }
                 }
             }
@@ -332,8 +330,8 @@ extension TableViewController: DetailViewDelegate {
                         let groupHash = optionalGroupHash
                     else {
                         DispatchQueue.main.async {
-                            self.showAlertForNetwork()
-                            self.stopActivityIndicator()
+                            animatingViewController.showAlertForNetwork()
+                            animatingViewController.stopActivityIndicator()
                         }
                         // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
                         self.downloadingQueue.cancelAllOperations()
@@ -375,7 +373,7 @@ extension TableViewController: DetailViewDelegate {
         animatingViewController.stopActivityIndicator()
     }
     
-    private func loadNewGroups() {
+    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol) {
         // Тут качаем группы и хеш групп
         
         //var downloadedGroupTimetable: RGroupTimetable?
@@ -389,15 +387,15 @@ extension TableViewController: DetailViewDelegate {
                     let downloadedGroupsHash = downloadedGroupsHash
                 else {
                     DispatchQueue.main.async {
-                        self.showAlertForNetwork()
-                        self.stopActivityIndicator()
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
                     }
                     return
                 }
 
                 UserDefaultsConfig.groupsHash = downloadedGroupsHash
                 DataManager.shared.write(groups: downloadedGroups)
-                self.stopActivityIndicator()
+                animatingViewController.stopActivityIndicator()
                 self.tableView.reloadData()
                 print("Все норм братан")
             }
@@ -407,8 +405,8 @@ extension TableViewController: DetailViewDelegate {
             DispatchQueue.main.async {
                 guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
                     DispatchQueue.main.async {
-                        self.showAlertForNetwork()
-                        self.stopActivityIndicator()
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
                     }
                     self.downloadingQueue.cancelAllOperations()
                     return
@@ -421,8 +419,8 @@ extension TableViewController: DetailViewDelegate {
         let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
             guard let hash = ApiManager.handleHashResponse(data, response, error) else {
                 DispatchQueue.main.async {
-                    self.showAlertForNetwork()
-                    self.stopActivityIndicator()
+                    animatingViewController.showAlertForNetwork()
+                    animatingViewController.stopActivityIndicator()
                 }
                 self.downloadingQueue.cancelAllOperations()
                 return
