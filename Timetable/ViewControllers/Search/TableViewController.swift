@@ -28,9 +28,13 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
     }
     
     // MARK: - Для загрузки расписаний
-    var task: URLSessionDataTask?
-    var taskForGroups: URLSessionDataTask?
-    var taskForSecongTimetable: URLSessionDataTask?
+    let downloadingQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        return queue
+    }()
+    
+    let session = URLSession(configuration: URLSessionConfiguration.default)
     
     // MARK: - UI
     // MARK: Activity Indicator
@@ -64,9 +68,8 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         super.viewWillDisappear(animated)
         
         // Если уходят с эгото экрана - прекращаем загрузку
-        task?.cancel()
-        taskForGroups?.cancel()
-        taskForSecongTimetable?.cancel()
+        downloadingQueue.cancelAllOperations()
+        stopActivityIndicator()
     }
     
     // MARK: - Добавление обработки длинного нажатия на ячейку ДЛЯ ОТКРЫТИЯ ДЕТАЛЬНОГО ПРОСМОТА
@@ -219,62 +222,58 @@ extension TableViewController: DetailViewDelegate {
             
             timetableViewController.type = .group
             
-            task = ApiManager.loadGroupTimetableTask(forGroupId: group.id) { optionalTimetable, optionalGroupsHash in
-                guard let groupsHash = optionalGroupsHash else {
-                    DispatchQueue.main.async {
-                        self.showAlertForNetwork()
-                        self.stopActivityIndicator()
-                        // Открываем старое расписание
+            var downloadedGroupTimetable: RGroupTimetable?
+            var downloadedGroupsHash: String?
+            
+            // Обычный ход скачивания
+            let completionOperation = BlockOperation {
+                DispatchQueue.main.async {
+                    if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
                         self.push(
                             timetableViewController: timetableViewController,
-                            optionalDownloadedTimetable: optionalTimetable,
+                            optionalDownloadedTimetable: downloadedGroupTimetable,
                             groupId: group.id,
                             animatingViewController: animatingViewController)
+                    } else {
+                        self.loadNewGroups()
                     }
-                    return
-                }
-                
-                if UserDefaultsConfig.groupsHash == groupsHash {
-                    DispatchQueue.main.async {
-                        self.push(
-                            timetableViewController: timetableViewController,
-                            optionalDownloadedTimetable: optionalTimetable,
-                            groupId: group.id,
-                            animatingViewController: animatingViewController)
-                    }
-                } else {
-                    self.taskForGroups = ApiManager.loadGroupsTask { optionalGroups in
-                        guard let groups = optionalGroups else {
-                            DispatchQueue.main.async {
-                                self.showAlertForNetwork()
-                                self.stopActivityIndicator()
-                                // Открываем старое расписание
-                                self.push(
-                                    timetableViewController: timetableViewController,
-                                    optionalDownloadedTimetable: optionalTimetable,
-                                    groupId: group.id,
-                                    animatingViewController: animatingViewController)
-                            }
-                            return
-                        }
-                        
-                        DispatchQueue.main.async {
-                            DataManager.shared.write(groups: groups)
-                            UserDefaultsConfig.groupsHash = groupsHash
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.push(
-                                timetableViewController: timetableViewController,
-                                optionalDownloadedTimetable: optionalTimetable,
-                                groupId: group.id,
-                                animatingViewController: animatingViewController)
-                        }
-                    }
-                    self.taskForGroups?.resume()
                 }
             }
-            task?.resume()
+            
+            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: group.id)) { data, response, error in
+                DispatchQueue.main.async {
+                    // Вот из-за этого в главном потоке все :)
+                    let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: group.id, data, response, error)
+                    
+                    guard
+                        let groupTimetable = optionalGroupTimetable,
+                        let groupHash = optionalGroupHash
+                    else {
+                        DispatchQueue.main.async {
+                            self.showAlertForNetwork()
+                            self.stopActivityIndicator()
+                        }
+                        // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
+                        self.downloadingQueue.cancelAllOperations()
+                        self.push(
+                            timetableViewController: timetableViewController,
+                            optionalDownloadedTimetable: downloadedGroupTimetable,
+                            groupId: group.id,
+                            animatingViewController: animatingViewController)
+                        return
+                    }
+                    
+                    downloadedGroupsHash = groupHash
+                    downloadedGroupTimetable = groupTimetable
+                }
+            }
+            
+            // Добавляем зависимости
+            completionOperation.addDependency(groupTimetableDownloadOperation)
+            
+            // Добавляем все в очередь
+            downloadingQueue.addOperation(groupTimetableDownloadOperation)
+            downloadingQueue.addOperation(completionOperation)
         }
     }
     
@@ -306,83 +305,57 @@ extension TableViewController: DetailViewDelegate {
         if let group = entitie as? RGroup {
             animatingViewController.startActivityIndicator()
             
-            task = ApiManager.loadGroupTimetableTask(forGroupId: group.id) { optionalTimetable, optionalGroupsHash in
-                guard let groupsHash = optionalGroupsHash else {
-                    DispatchQueue.main.async {
-                        self.showAlertForNetwork()
-                        self.stopActivityIndicator()
-                        // Открываем старое расписание
+            var downloadedGroupTimetable: RGroupTimetable?
+            var downloadedGroupsHash: String?
+            
+            // Обычный ход скачивания
+            let completionOperation = BlockOperation {
+                DispatchQueue.main.async {
+                    if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
                         self.post(
-                            optionalDownloadedTimetable: optionalTimetable,
+                            optionalDownloadedTimetable: downloadedGroupTimetable,
                             groupId: group.id,
                             animatingViewController: animatingViewController)
+                    } else {
+                        self.loadNewGroups()
                     }
-                    return
-                }
-                
-                if UserDefaultsConfig.groupsHash == groupsHash {
-                    DispatchQueue.main.async {
-                        self.post(
-                            optionalDownloadedTimetable: optionalTimetable,
-                            groupId: group.id,
-                            animatingViewController: animatingViewController)
-                    }
-                } else {
-                    self.taskForGroups = ApiManager.loadGroupsTask { optionalGroups in
-                        guard let groups = optionalGroups else {
-                            DispatchQueue.main.async {
-                                self.showAlertForNetwork()
-                                self.stopActivityIndicator()
-                                // Открываем старое расписание
-                                self.post(
-                                    optionalDownloadedTimetable: optionalTimetable,
-                                    groupId: group.id,
-                                    animatingViewController: animatingViewController)
-                            }
-                            return
-                        }
-                        
-                        DispatchQueue.main.async {
-                            DataManager.shared.write(groups: groups)
-                            UserDefaultsConfig.groupsHash = groupsHash
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.post(
-                                optionalDownloadedTimetable: optionalTimetable,
-                                groupId: group.id,
-                                animatingViewController: animatingViewController)
-                        }
-                    }
-                    self.taskForGroups?.resume()
                 }
             }
-            task?.resume()
+            
+            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: group.id)) { data, response, error in
+                DispatchQueue.main.async {
+                    // Вот из-за этого в главном потоке все :)
+                    let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: group.id, data, response, error)
+                    
+                    guard
+                        let groupTimetable = optionalGroupTimetable,
+                        let groupHash = optionalGroupHash
+                    else {
+                        DispatchQueue.main.async {
+                            self.showAlertForNetwork()
+                            self.stopActivityIndicator()
+                        }
+                        // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
+                        self.downloadingQueue.cancelAllOperations()
+                        self.post(
+                            optionalDownloadedTimetable: downloadedGroupTimetable,
+                            groupId: group.id,
+                            animatingViewController: animatingViewController)
+                        return
+                    }
+                    
+                    downloadedGroupsHash = groupHash
+                    downloadedGroupTimetable = groupTimetable
+                }
+            }
+            
+            // Добавляем зависимости
+            completionOperation.addDependency(groupTimetableDownloadOperation)
+            
+            // Добавляем все в очередь
+            downloadingQueue.addOperation(groupTimetableDownloadOperation)
+            downloadingQueue.addOperation(completionOperation)
         }
-//
-//        if let group = entitie as? RGroup {
-//            animatingViewController.startActivityIndicator()
-//
-//            task = ApiManager.loadGroupTimetableTask(forGroupId: group.id) { optionalTimetable, isEqualGroupsHash in
-//                DispatchQueue.main.async {
-//                    // Если скачивание успешно - открываем скачанное
-//                    if let downloadedTimetable = optionalTimetable {
-//                        DataManager.shared.write(groupTimetable: downloadedTimetable)
-//                        guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: group.id) else { return }
-//                        NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: timetableForShowing])
-//                    // Если скачивание не успешно, но есть уже загруженно до этого - открываем его
-//                    } else if let localTimetable = DataManager.shared.getTimetable(forGroupId: group.id) {
-//                        animatingViewController.showAlertForNetwork()
-//                        NotificationCenter.default.post(name: .didSelectGroup, object: nil, userInfo: [0: localTimetable])
-//                    // Иначе грустим
-//                    } else {
-//                        animatingViewController.showAlertForNetwork()
-//                    }
-//                    animatingViewController.stopActivityIndicator()
-//                }
-//            }
-//            task?.resume()
-//        }
     }
     
     private func post(optionalDownloadedTimetable: RGroupTimetable?, groupId: Int, animatingViewController: AnimatingNetworkViewProtocol) {
@@ -400,6 +373,70 @@ extension TableViewController: DetailViewDelegate {
             animatingViewController.showAlertForNetwork()
         }
         animatingViewController.stopActivityIndicator()
+    }
+    
+    private func loadNewGroups() {
+        // Тут качаем группы и хеш групп
+        
+        //var downloadedGroupTimetable: RGroupTimetable?
+        var downloadedGroupsHash: String?
+        var downloadedGroups: [RGroup]?
+
+        let completionOperation = BlockOperation {
+            DispatchQueue.main.async {
+                guard
+                    let downloadedGroups = downloadedGroups,
+                    let downloadedGroupsHash = downloadedGroupsHash
+                else {
+                    DispatchQueue.main.async {
+                        self.showAlertForNetwork()
+                        self.stopActivityIndicator()
+                    }
+                    return
+                }
+
+                UserDefaultsConfig.groupsHash = downloadedGroupsHash
+                DataManager.shared.write(groups: downloadedGroups)
+                self.stopActivityIndicator()
+                self.tableView.reloadData()
+                print("Все норм братан")
+            }
+        }
+
+        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+            DispatchQueue.main.async {
+                guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+                    DispatchQueue.main.async {
+                        self.showAlertForNetwork()
+                        self.stopActivityIndicator()
+                    }
+                    self.downloadingQueue.cancelAllOperations()
+                    return
+                }
+
+                downloadedGroups = groups
+            }
+        }
+        
+        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+                DispatchQueue.main.async {
+                    self.showAlertForNetwork()
+                    self.stopActivityIndicator()
+                }
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroupsHash = hash
+        }
+
+        completionOperation.addDependency(groupsDownloadOperation)
+        completionOperation.addDependency(hashDownloadOperation)
+
+        downloadingQueue.addOperation(groupsDownloadOperation)
+        downloadingQueue.addOperation(hashDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
     }
     
     // MARK: Добавление в избранные

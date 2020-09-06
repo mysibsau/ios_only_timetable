@@ -22,17 +22,17 @@ class ChoiceSearchViewController: UITableViewController{
     // MARK: Alert View
     let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
     
+    
     // MARK: - Для загрузки таблиц групп/преподавателей/кабинетов
-    //var task: URLSessionDataTask?
-    //var taskForHash: URLSessionDataTask?
     let downloadingQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
+        queue.maxConcurrentOperationCount = 2
         return queue
     }()
     
     let session = URLSession(configuration: URLSessionConfiguration.default)
 
+    
     // MARK: - Overrides
     override func loadView() {
         super.loadView()
@@ -48,7 +48,6 @@ class ChoiceSearchViewController: UITableViewController{
         super.viewDidLoad()
         
         //view.backgroundColor = Colors.backgroungColor
-        UserDefaultsConfig.groupsHash = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -144,10 +143,12 @@ class ChoiceSearchViewController: UITableViewController{
                     downloadedHash = hash
                 }
                 
+                // Добавляем зависимости
                 hashDownloadOperation.addDependency(groupsDownloadOperation)
                 completionOperation.addDependency(hashDownloadOperation)
                 completionOperation.addDependency(groupsDownloadOperation)
                 
+                // Добавляем в очередь все
                 downloadingQueue.addOperation(groupsDownloadOperation)
                 downloadingQueue.addOperation(hashDownloadOperation)
                 downloadingQueue.addOperation(completionOperation)

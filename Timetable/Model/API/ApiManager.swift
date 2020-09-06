@@ -50,38 +50,7 @@ class ApiManager {
         return task
     }
     
-    // MARK: - Скачивание всех групп
-    static func loadGroupsTask(complition: @escaping ([RGroup]?) -> Void) -> URLSessionDataTask {
-        let url = API.groups()
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                complition(nil)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
-                complition(nil)
-                return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                let groupsResponse = try JSONDecoder().decode([RGroup].self, from: data)
-                complition(groupsResponse)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
-    }
-    
+    // MARK: - Обработка скачанных групп
     static func handleGroupsResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> [RGroup]? {
         guard error == nil else { return nil }
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
@@ -96,6 +65,7 @@ class ApiManager {
         }
     }
     
+    // MARK: - Обработка скачанного хеша
     static func handleHashResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> String? {
         guard error == nil else { return nil }
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
@@ -113,89 +83,27 @@ class ApiManager {
         }
     }
     
-    // MARK: Скачивание расписания группы
-    static func loadGroupTimetableTask(forGroupId groupId: Int, complition: @escaping (RGroupTimetable?, _ groupHash: String?) -> Void) -> URLSessionDataTask {
-        let url = API.timetable(forGroupId: groupId)
+    // MARK: - Обработка скачанного расписания групп
+    static func handleGroupTimetableResponse(groupId: Int, _ data: Data?, _ response: URLResponse?, _ error: Error?) -> (timetable: RGroupTimetable?, groupHash: String?) {
+        guard error == nil else { return (nil, nil) }
+        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return (nil, nil) }
+        guard let data = data else { return (nil, nil) }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                complition(nil, nil)
-                return
-            }
+        do {
+            let groupTimetableResponse = try JSONDecoder().decode([GroupTimetableResponse].self, from: data)
             
-            guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
-                complition(nil, nil)
-                return
-            }
+            // Антон отправляет массивом с одним элементом (:
+            guard let groupTimetableResponseFirst = groupTimetableResponse.first else { return (nil, nil) }
             
-            guard let data = data else {
-                complition(nil, nil)
-                return
-            }
+            let groupTimetable = ResponseConverter.converteGroupTimetableResponseToRGroupTimetable(
+                groupTimetableResponse: groupTimetableResponseFirst,
+                groupId: groupId)
             
-            do {
-                let groupTimetableResponse = try JSONDecoder().decode([GroupTimetableResponse].self, from: data)
-                
-                // Антон отправляет массивом с одним элементом (:
-                guard let groupTimetableResponseFirst = groupTimetableResponse.first else {
-                    complition(nil, nil)
-                    return
-                }
-                
-                let groupTimetable = ResponseConverter.converteGroupTimetableResponseToRGroupTimetable(
-                    groupTimetableResponse: groupTimetableResponseFirst,
-                    groupId: groupId)
-                
-                complition(groupTimetable, groupTimetableResponseFirst.groupHash)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil, nil)
-            }
+            return (groupTimetable, groupTimetableResponseFirst.groupHash)
+        } catch let jsonError {
+            print(jsonError)
+            return (nil, nil)
         }
-        
-        return task
-    }
-    
-    static func loadHashTask(for entitie: EntitiesType, complition: @escaping (String?) -> Void) -> URLSessionDataTask {
-        let url: URL = API.groupsHash()
-//        if entitie == .group {
-//            url = API.groupsHash()
-//        } else if entitie == .professor {
-//            url = API.professorsHash()
-//        } else {
-//            url = API.placesHash()
-//        }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                complition(nil)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
-                complition(nil)
-                return
-            }
-            
-            guard let data = data else {
-                complition(nil)
-                return
-            }
-            
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                    let hash = json["hash"] as? String else {
-                        complition(nil)
-                        return
-                }
-                complition(hash)
-            } catch let jsonError {
-                print(jsonError)
-                complition(nil)
-            }
-        }
-        
-        return task
     }
 
 }

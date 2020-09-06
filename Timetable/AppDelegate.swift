@@ -34,18 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //openRealm()
         
-//        ApiManager.loadGroupTimetableTask(forGroupId: 1073) { timetable in
-//            print(timetable)
-//        }.resume()
-        
-        
-//        ApiManager.loadGroupsTask { optionalGroups in
-//            guard let groups = optionalGroups else { return }
-//            DispatchQueue.main.async {
-//                DataManager.shared.write(groups: groups)
-//            }
-//        }.resume()
-        
         return true
     }
     
