@@ -10,8 +10,8 @@ import Foundation
 
 protocol DetailViewDelegate {
     
-    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol)
-    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol)
+    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool)
+    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool)
     func addToFavorite(objectWithId id: Int)
     func removeFromFavorite(objectWithId id: Int)
     

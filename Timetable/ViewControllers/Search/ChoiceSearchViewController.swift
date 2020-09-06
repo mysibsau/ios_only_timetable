@@ -202,4 +202,8 @@ extension ChoiceSearchViewController: AnimatingNetworkViewProtocol {
         alertViewForNetrowk.hideWithAnimation()
     }
     
+    func popViewController() {
+        //
+    }
+    
 }

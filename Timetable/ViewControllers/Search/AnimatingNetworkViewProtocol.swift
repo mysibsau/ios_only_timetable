@@ -14,4 +14,6 @@ protocol AnimatingNetworkViewProtocol {
     func stopActivityIndicator()
     func showAlertForNetwork()
     
+    func popViewController()
+    
 }

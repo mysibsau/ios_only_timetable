@@ -210,12 +210,12 @@ extension DetailViewController {
     
     private func makeTimetableBasiHandler() {
         guard let delegate = delegate else { return }
-        delegate.makeTimetableBasic(withId: id, animatingViewController: self)
+        delegate.makeTimetableBasic(withId: id, animatingViewController: self, isFromDetailVC: true)
     }
     
     private func showTimetableHandler() {
         guard let delegate = delegate else { return }
-        delegate.showTimetable(withId: id, animatingViewController: self)
+        delegate.showTimetable(withId: id, animatingViewController: self, isFromDetailVC: true)
     }
 }
 
@@ -312,6 +312,10 @@ extension DetailViewController: AnimatingNetworkViewProtocol {
         }
         
         alertViewForNetwork.hideWithAnimation()
+    }
+    
+    func popViewController() {
+        navigationController?.popViewController(animated: true)
     }
     
 }

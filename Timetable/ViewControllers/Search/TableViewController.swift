@@ -183,7 +183,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         }
         
         if let object = object as? RGroup {
-            showTimetable(withId: object.id, animatingViewController: self)
+            showTimetable(withId: object.id, animatingViewController: self, isFromDetailVC: false)
         }// else if let object = object as? RProfessor {
         //    showTimetable(withId: object.id, animatingViewController: self)
         //} else if let object = object as? RPlace {
@@ -208,7 +208,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
 extension TableViewController: DetailViewDelegate {
     
     // MARK: Открыть расписания
-    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
+    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
         guard let entitie = data[1].filter("id = \(id)").first else { return }
@@ -234,7 +234,7 @@ extension TableViewController: DetailViewDelegate {
                             groupId: group.id,
                             animatingViewController: animatingViewController)
                     } else {
-                        self.loadNewGroups(animatingViewController: animatingViewController)
+                        self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
                     }
                 }
             }
@@ -296,7 +296,7 @@ extension TableViewController: DetailViewDelegate {
     }
     
     // MARK: Сделать расписание основным
-    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
+    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
         guard let entitie = data[1].filter("id = \(id)").first else { return }
@@ -315,7 +315,7 @@ extension TableViewController: DetailViewDelegate {
                             groupId: group.id,
                             animatingViewController: animatingViewController)
                     } else {
-                        self.loadNewGroups(animatingViewController: animatingViewController)
+                        self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
                     }
                 }
             }
@@ -373,7 +373,7 @@ extension TableViewController: DetailViewDelegate {
         animatingViewController.stopActivityIndicator()
     }
     
-    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol) {
+    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
         // Тут качаем группы и хеш групп
         
         //var downloadedGroupTimetable: RGroupTimetable?
@@ -397,6 +397,12 @@ extension TableViewController: DetailViewDelegate {
                 DataManager.shared.write(groups: downloadedGroups)
                 animatingViewController.stopActivityIndicator()
                 self.tableView.reloadData()
+                // Если сейчас на детальном экране - выкидываем на прошлый, где все группы,
+                // потому что группы обновились и сейчас открыта группа уже с неверными данными
+                // типо индексы поменяться могли
+                if isFromDetailVC {
+                    animatingViewController.popViewController()
+                }
                 print("Все норм братан")
             }
         }
@@ -512,6 +518,10 @@ extension TableViewController: AnimatingNetworkViewProtocol {
         }
         
         alertViewForNetrowk.hideWithAnimation()
+    }
+    
+    func popViewController() {
+        //
     }
     
 }
