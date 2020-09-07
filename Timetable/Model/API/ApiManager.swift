@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 class ApiManager {
     
@@ -57,8 +56,9 @@ class ApiManager {
         guard let data = data else { return nil }
         
         do {
-            let groupsResponse = try JSONDecoder().decode([RGroup].self, from: data)
-            return groupsResponse
+            let groupsResponse = try JSONDecoder().decode([GroupResponse].self, from: data)
+            let groups = ResponseConverter.converteGroupResponseToRGroup(groupsResponse: groupsResponse)
+            return groups
         } catch let jsonError {
             print(jsonError)
             return nil

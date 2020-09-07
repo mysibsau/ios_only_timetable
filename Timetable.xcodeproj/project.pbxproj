@@ -63,6 +63,7 @@
 		4A9207B3246061FD00D050EB /* RProfessorConsultation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B2246061FD00D050EB /* RProfessorConsultation.swift */; };
 		4A9207B5246062D000D050EB /* RProfessorConsultationDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B4246062D000D050EB /* RProfessorConsultationDay.swift */; };
 		4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */; };
+		4A9B32E3250699ED00E7E5B9 /* GroupsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B32E2250699ED00E7E5B9 /* GroupsResponse.swift */; };
 		4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9C9137243DCB04009F67A8 /* GroupSubgroupView.xib */; };
 		4A9C913A243DCB3E009F67A8 /* GroupSubgroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9C9139243DCB3E009F67A8 /* GroupSubgroupView.swift */; };
 		4AC345F42471773400BAA474 /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC345F32471773400BAA474 /* DetailViewDelegate.swift */; };
@@ -168,6 +169,7 @@
 		4A9207B2246061FD00D050EB /* RProfessorConsultation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultation.swift; sourceTree = "<group>"; };
 		4A9207B4246062D000D050EB /* RProfessorConsultationDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultationDay.swift; sourceTree = "<group>"; };
 		4A9207B6246063A700D050EB /* RProfessorConsultationWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RProfessorConsultationWeek.swift; sourceTree = "<group>"; };
+		4A9B32E2250699ED00E7E5B9 /* GroupsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsResponse.swift; sourceTree = "<group>"; };
 		4A9C9137243DCB04009F67A8 /* GroupSubgroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSubgroupView.xib; sourceTree = "<group>"; };
 		4A9C9139243DCB3E009F67A8 /* GroupSubgroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubgroupView.swift; sourceTree = "<group>"; };
 		4AC345F32471773400BAA474 /* DetailViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			children = (
 				4A2B145724FD42D9002942A9 /* ResponseConverter.swift */,
 				4A2B145524FD39DF002942A9 /* GroupTimetableResponse.swift */,
+				4A9B32E2250699ED00E7E5B9 /* GroupsResponse.swift */,
 			);
 			path = ResponseObjects;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				4A9207B7246063A700D050EB /* RProfessorConsultationWeek.swift in Sources */,
 				4AC64C6E24757D1500081D55 /* GroupLesson.swift in Sources */,
 				4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */,
+				4A9B32E3250699ED00E7E5B9 /* GroupsResponse.swift in Sources */,
 				4A415E652458561F005FADD7 /* RGroup.swift in Sources */,
 				4AD6951424811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift in Sources */,
 				4A415E74245858A0005FADD7 /* RGroupTimetable.swift in Sources */,

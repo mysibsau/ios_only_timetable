@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RGroup: Object, Decodable {
+class RGroup: Object {
     
     @objc dynamic var id = 0
     @objc dynamic var name = ""
@@ -21,12 +21,6 @@ class RGroup: Object, Decodable {
     
     override class func primaryKey() -> String? {
         return "id"
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case email = "mail"
     }
     
 }

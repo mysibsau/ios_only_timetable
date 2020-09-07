@@ -58,4 +58,19 @@ class ResponseConverter {
         return groupWeek
     }
     
+    static func converteGroupResponseToRGroup(groupsResponse: [GroupResponse]) -> [RGroup] {
+        var rGroups = [RGroup]()
+        
+        for groupResponse in groupsResponse {
+            let rGroup = RGroup()
+            rGroup.id = groupResponse.id
+            rGroup.name = groupResponse.name
+            rGroup.email = groupResponse.email
+            
+            rGroups.append(rGroup)
+        }
+        
+        return rGroups
+    }
+    
 }

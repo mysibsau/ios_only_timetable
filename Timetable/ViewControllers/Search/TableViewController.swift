@@ -222,49 +222,48 @@ extension TableViewController: DetailViewDelegate {
             
             timetableViewController.type = .group
             
+            let groupId = group.id
+            
             var downloadedGroupTimetable: RGroupTimetable?
             var downloadedGroupsHash: String?
             
             let completionOperation = BlockOperation {
-                DispatchQueue.main.async {
                     if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
-                        self.push(
+                        DispatchQueue.main.async {
+                            self.push(
                             timetableViewController: timetableViewController,
                             optionalDownloadedTimetable: downloadedGroupTimetable,
-                            groupId: group.id,
+                            groupId: groupId,
                             animatingViewController: animatingViewController)
+                        }
                     } else {
                         self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
                     }
-                }
             }
             
-            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: group.id)) { data, response, error in
-                DispatchQueue.main.async {
-                    // Вот из-за этого в главном потоке все :)
-                    let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: group.id, data, response, error)
-                    
-                    guard
-                        let groupTimetable = optionalGroupTimetable,
-                        let groupHash = optionalGroupHash
-                    else {
-                        DispatchQueue.main.async {
-                            animatingViewController.showAlertForNetwork()
-                            animatingViewController.stopActivityIndicator()
-                        }
-                        // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
-                        self.downloadingQueue.cancelAllOperations()
+            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: groupId)) { data, response, error in
+                let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: groupId, data, response, error)
+                
+                guard
+                    let groupTimetable = optionalGroupTimetable,
+                    let groupHash = optionalGroupHash
+                else {
+                    // Есил не вышло скачать - прекращаем все загрузки и пытаемся открыть старое
+                    self.downloadingQueue.cancelAllOperations()
+                    DispatchQueue.main.async {
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
                         self.push(
                             timetableViewController: timetableViewController,
                             optionalDownloadedTimetable: downloadedGroupTimetable,
-                            groupId: group.id,
+                            groupId: groupId,
                             animatingViewController: animatingViewController)
-                        return
                     }
-                    
-                    downloadedGroupsHash = groupHash
-                    downloadedGroupTimetable = groupTimetable
+                    return
                 }
+                
+                downloadedGroupsHash = groupHash
+                downloadedGroupTimetable = groupTimetable
             }
             
             // Добавляем зависимости
@@ -304,47 +303,46 @@ extension TableViewController: DetailViewDelegate {
         if let group = entitie as? RGroup {
             animatingViewController.startActivityIndicator()
             
+            let groupId = group.id
+            
             var downloadedGroupTimetable: RGroupTimetable?
             var downloadedGroupsHash: String?
             
             let completionOperation = BlockOperation {
-                DispatchQueue.main.async {
                     if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
-                        self.post(
-                            optionalDownloadedTimetable: downloadedGroupTimetable,
-                            groupId: group.id,
-                            animatingViewController: animatingViewController)
+                        DispatchQueue.main.async {
+                            self.post(
+                                optionalDownloadedTimetable: downloadedGroupTimetable,
+                                groupId: groupId,
+                                animatingViewController: animatingViewController)
+                        }
                     } else {
                         self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
                     }
-                }
             }
             
-            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: group.id)) { data, response, error in
-                DispatchQueue.main.async {
-                    // Вот из-за этого в главном потоке все :)
-                    let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: group.id, data, response, error)
-                    
-                    guard
-                        let groupTimetable = optionalGroupTimetable,
-                        let groupHash = optionalGroupHash
-                    else {
-                        DispatchQueue.main.async {
-                            animatingViewController.showAlertForNetwork()
-                            animatingViewController.stopActivityIndicator()
-                        }
-                        // Если не вышло скачать - прекращаем остальные загрузки и пытаемся открыть старое
-                        self.downloadingQueue.cancelAllOperations()
+            let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: groupId)) { data, response, error in
+                let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: groupId, data, response, error)
+                
+                guard
+                    let groupTimetable = optionalGroupTimetable,
+                    let groupHash = optionalGroupHash
+                else {
+                    // Есил не вышло скачать - прекращаем все загрузки и пытаемся открыть старое
+                    self.downloadingQueue.cancelAllOperations()
+                    DispatchQueue.main.async {
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
                         self.post(
-                            optionalDownloadedTimetable: downloadedGroupTimetable,
-                            groupId: group.id,
+                            optionalDownloadedTimetable: optionalGroupTimetable,
+                            groupId: groupId,
                             animatingViewController: animatingViewController)
-                        return
                     }
-                    
-                    downloadedGroupsHash = groupHash
-                    downloadedGroupTimetable = groupTimetable
+                    return
                 }
+                
+                downloadedGroupsHash = groupHash
+                downloadedGroupTimetable = groupTimetable
             }
             
             // Добавляем зависимости
