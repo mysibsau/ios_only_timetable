@@ -60,6 +60,8 @@ class TimetableViewController: UIViewController {
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "Расписание"
         
+        tabBarController?.delegate = self
+        
         // настройка сегментера
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         numberWeekSegmentedView.backgroundColor = Colors.topBarColor
@@ -107,9 +109,6 @@ class TimetableViewController: UIViewController {
         
         // Да, нужно юзать 2 раза (это первый) - сраный PagingKit
         selectToday()
-        
-        menuViewController.reloadData()
-        contentViewController.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -173,6 +172,9 @@ class TimetableViewController: UIViewController {
         
         menuViewController.scroll(index: currNumberWeekday - 1, animated: true)
         contentViewController.scroll(to: currNumberWeekday - 1, animated: true)
+        
+        menuViewController.reloadData()
+        contentViewController.reloadData()
     }
     
     // MARK: - Методы для Notification Center
@@ -279,7 +281,27 @@ class TimetableViewController: UIViewController {
         menuViewController.reloadData()
         contentViewController.reloadData()
     }
+    
 }
+
+
+// MARK: - UI Tab Bar Delegate
+extension TimetableViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        // будет работать только для тапа по текущей вкладке
+        if self.navigationController == viewController {
+            if tabBarController.selectedViewController == self.navigationController {
+                // Ставим на текущий день
+                selectToday()
+            }
+        }
+        
+        return true
+    }
+    
+}
+
 
 
 // MARK: - Настройка меню

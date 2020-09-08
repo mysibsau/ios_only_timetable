@@ -10,7 +10,10 @@ import Foundation
 
 class DownloadOperation: Operation {
     
-    private var task: URLSessionDataTask!
+    private var task: URLSessionDataTask?
+    private let session: URLSession
+    private let url: URL
+    private let completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
     
     
     // MARK: - State
@@ -40,14 +43,11 @@ class DownloadOperation: Operation {
     
     // MARK: - Initialization
     init(session: URLSession, url: URL, completionHandler: ((Data?, URLResponse?, Error?) -> Void)?) {
-        super.init()
+        self.session = session
+        self.url = url
+        self.completionHandler = completionHandler
         
-        task = session.dataTask(with: url) { [weak self] data, response, error in
-            if let completionHandler = completionHandler {
-                completionHandler(data, response, error)
-            }
-            self?.state = .finished
-        }
+        super.init()
     }
     
     
@@ -63,20 +63,27 @@ class DownloadOperation: Operation {
             return
         }
         
+        task = session.dataTask(with: url) { [weak self] data, response, error in
+            if let completionHandler = self?.completionHandler {
+                completionHandler(data, response, error)
+            }
+            self?.state = .finished
+        }
+        
         // set the state to executing
         state = .executing
         
-        print("downloading \(self.task.originalRequest?.url?.absoluteString ?? "")")
+        print("downloading \(self.task?.originalRequest?.url?.absoluteString ?? "")")
         
         // start the downloading
-        self.task.resume()
+        self.task?.resume()
     }
     
     override func cancel() {
         super.cancel()
         
         // cancel the downloading
-        self.task.cancel()
+        self.task?.cancel()
     }
     
 }
