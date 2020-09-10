@@ -165,26 +165,35 @@ class TimetableViewController: UIViewController {
     
     // MARK: - Private Methods
     private func selectToday() {
-        // выбираем нужную неделю
-        if DateHelper.currWeekIsEven() {
-            numberWeekSegmented.selectedSegmentIndex = 1
-        } else {
-            numberWeekSegmented.selectedSegmentIndex = 0
-        }
-        currWeek = numberWeekSegmented.selectedSegmentIndex
+        let (currWeekNumber, currWeekdayNumber) = getCurrWeekNumberAndCurrWeekdayNumber()
         
-        // Выбираем текущий день
-        var currNumberWeekday = DateHelper.getCurrNumberWeekday()
-        /// Воскресенья у меня тут нет
-        if currNumberWeekday == 7 {
-            currNumberWeekday -= 1
-        }
+        numberWeekSegmented.selectedSegmentIndex = currWeekNumber
+        currWeek = currWeekNumber
         
-        menuViewController.scroll(index: currNumberWeekday - 1, animated: true)
-        contentViewController.scroll(to: currNumberWeekday - 1, animated: true)
+        menuViewController.scroll(index: currWeekdayNumber - 1, animated: true)
+        contentViewController.scroll(to: currWeekdayNumber - 1, animated: true)
         
         menuViewController.reloadData()
         contentViewController.reloadData()
+    }
+    
+    private func getCurrWeekNumberAndCurrWeekdayNumber() -> (currWeekNumber: Int, currWeekdayNumber: Int) {
+        // Выбираем текущую неделю
+        let currWeekNumber: Int
+        if DateHelper.currWeekIsEven() {
+            currWeekNumber = 1
+        } else {
+            currWeekNumber = 0
+        }
+        
+        // Выбираем текущий день
+        var currWeekdayNumber = DateHelper.getCurrNumberWeekday()
+        // Воскресенья у меня тут нет
+        if currWeekdayNumber == 7 {
+            currWeekdayNumber -= 1
+        }
+        
+        return (currWeekNumber, currWeekdayNumber)
     }
     
     // MARK: - Методы для Notification Center
@@ -314,6 +323,7 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
         cell.weekdayLabel.text = menuData?[currWeek][index].weekday
         cell.dateLabel.text = menuData?[currWeek][index].date
+        cell.isToday = isToday(weekNumber: currWeek, weekdayNumber: index + 1)
         return cell
     }
     
@@ -321,6 +331,12 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     func menuViewController(viewController: PagingMenuViewController, widthForItemAt index: Int) -> CGFloat {
         //return viewController.view.bounds.width / CGFloat(dataSource.count)
         return viewController.view.bounds.width / CGFloat(6)
+    }
+    
+    private func isToday(weekNumber: Int, weekdayNumber: Int) -> Bool {
+        let (currWeekNumber, currWeekdayNumber) = getCurrWeekNumberAndCurrWeekdayNumber()
+        
+        return currWeekNumber == weekNumber && currWeekdayNumber == weekdayNumber
     }
 
 }

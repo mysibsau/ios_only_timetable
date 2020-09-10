@@ -15,9 +15,19 @@ class MenuCell: PagingMenuViewCell {
     //@IBOutlet weak var weekday: UILabel!
     @IBOutlet weak var weekdayLabel: UILabel!
     
+    var isToday: Bool = false {
+        didSet {
+            if isToday {
+                weekdayLabel.textColor = .systemRed
+                dateLabel.textColor = .systemRed
+            }
+        }
+    }
     
     override var isSelected: Bool {
         didSet {
+            // Если текущий день (она будет красным) - не меняем цвет
+            guard !isToday else { return }
             if isSelected {
                 weekdayLabel.textColor = .systemBlue
                 dateLabel.textColor = .systemBlue
