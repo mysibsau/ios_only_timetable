@@ -52,11 +52,11 @@ class TimetableViewController: UIViewController {
         self?.firstLoadForPagingKit = nil
     }
     
+    // MARK: Для показывания сегодняшнего дня только при первом появлении view
     private lazy var firstLoadForViewWillAppearSelectToday: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
         self?.selectToday()
         self?.firstLoadForViewWillAppearSelectToday = nil
     }
-    
     private lazy var firstLoadForViewDidAppearSelectToday: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
         self?.selectToday()
         self?.firstLoadForViewDidAppearSelectToday = nil
@@ -69,8 +69,6 @@ class TimetableViewController: UIViewController {
         // убираем нижний бордер у navigaton bar
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationItem.title = "Расписание"
-        
-        tabBarController?.delegate = self
         
         // настройка сегментера
         numberWeekSegmented.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -294,26 +292,12 @@ class TimetableViewController: UIViewController {
         contentViewController.reloadData()
     }
     
-}
-
-
-// MARK: - UI Tab Bar Delegate
-extension TimetableViewController: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        // будет работать только для тапа по текущей вкладке
-        if self.navigationController == viewController {
-            if tabBarController.selectedViewController == self.navigationController {
-                // Ставим на текущий день
-                selectToday()
-            }
-        }
-        
-        return true
+    // MARK: Для выбора текущего дня
+    @IBAction func selectTodayTapped(_ sender: UIBarButtonItem) {
+        selectToday()
     }
     
 }
-
 
 
 // MARK: - Настройка меню
