@@ -44,12 +44,22 @@ class TimetableViewController: UIViewController {
     
     
     // MARK: Для того, чтобы menuViewController занимал ровно весь экран
-    private lazy var firstLoad: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
+    private lazy var firstLoadForPagingKit: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
         menuViewController?.reloadData()
         contentViewController?.reloadData { [weak self] in
             self?.adjustfocusViewWidth(index: 0, percent: 0)
         }
-        self?.firstLoad = nil
+        self?.firstLoadForPagingKit = nil
+    }
+    
+    private lazy var firstLoadForViewWillAppearSelectToday: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
+        self?.selectToday()
+        self?.firstLoadForViewWillAppearSelectToday = nil
+    }
+    
+    private lazy var firstLoadForViewDidAppearSelectToday: (() -> Void)? = { [weak self, menuViewController, contentViewController] in
+        self?.selectToday()
+        self?.firstLoadForViewDidAppearSelectToday = nil
     }
     
     // MARK: - Overrides
@@ -108,19 +118,21 @@ class TimetableViewController: UIViewController {
         alertForChoice.isHidden = true
         
         // Да, нужно юзать 2 раза (это первый) - сраный PagingKit
-        selectToday()
+        //selectToday()
+        firstLoadForViewWillAppearSelectToday?()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Да, нужно юзать 2 раза (это второй) - сраный PagingKit
-        selectToday()
+        //selectToday()
+        firstLoadForViewDidAppearSelectToday?()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        firstLoad?()
+        firstLoadForPagingKit?()
     }
     
     // MARK: - Для настройки PagingKit
