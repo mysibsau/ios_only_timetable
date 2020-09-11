@@ -183,7 +183,7 @@ extension DetailViewController {
             addOrDeleteButton = ("Добавить в 'Избранное'", Colors.sibsuGreen, addOrDeleteFavorite)
         }
         
-        let makeBasicButton = ("Сделать основным", UIColor.blue, makeTimetableBasiHandler)
+        let makeBasicButton = ("Сделать основным", UIColor.systemBlue, makeTimetableBasiHandler)
         
         let showButton = ("Показать расписание", UIColor.systemBlue, showTimetableHandler)
         
