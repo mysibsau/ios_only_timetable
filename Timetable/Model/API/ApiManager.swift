@@ -10,24 +10,26 @@ import Foundation
 
 class ApiManager {
     
-    let downloadingQueue: OperationQueue = {
+    static let shared = ApiManager()
+    
+    // MARK: - Privates properties
+    private let downloadingQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 2
         return queue
     }()
     
-    let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     
     
-    static let shared = ApiManager()
+    // MARK: - Прекращение всех загрузок
+    func cancellAllDownloading() {
+        downloadingQueue.cancelAllOperations()
+    }
     
     
-    
-    
-    
+    // MARK: - Скачивание группы и хэша
     func loadGroupsAndGroupsHash(completion: @escaping (_ groupsHash: String?, _ groups: [RGroup]?) -> Void) {
-        // Тут качаем группы и хеш групп
-        
         var downloadedGroupsHash: String?
         var downloadedGroups: [RGroup]?
 
@@ -64,13 +66,94 @@ class ApiManager {
     }
     
     
+    // MARK: - Скачивание расписания для группы
+    func loadGroupTimetable(withId id: Int,
+                            completionIfNeedNotLoadGroups: @escaping (_ groupsHash: String?, _ groupTimetable: RGroupTimetable?) -> Void,
+                            startIfNeedLoadGroups: @escaping () -> Void,
+                            completionIfNeedLoadGroups: @escaping (_ groupsHash: String?, _ groups: [RGroup]?, _ groupTimetable: RGroupTimetable?) -> Void) {
+        
+        var downloadedGroupTimetable: RGroupTimetable?
+        var downloadedGroupsHash: String?
+        
+        let completionOperation = BlockOperation {
+            guard
+                let downloadedGroupTimetable = downloadedGroupTimetable,
+                let downloadedGroupsHash = downloadedGroupsHash
+            else {
+                completionIfNeedNotLoadGroups(nil, nil)
+                return
+            }
+            
+            if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
+                completionIfNeedNotLoadGroups(downloadedGroupsHash, downloadedGroupTimetable)
+            } else {
+                startIfNeedLoadGroups()
+                self.loadGroupsAndGroupsHashForLoadTimetable(groupTimegable: downloadedGroupTimetable, completion: completionIfNeedLoadGroups)
+            }
+        }
+        
+        let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: id)) { data, response, error in
+            let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: id, data, response, error)
+            
+            guard
+                let groupTimetable = optionalGroupTimetable,
+                let groupHash = optionalGroupHash
+            else {
+                // Есил не вышло скачать - прекращаем все загрузки и пытаемся открыть старое
+                self.downloadingQueue.cancelAllOperations()
+                completionIfNeedNotLoadGroups(nil, nil)
+                return
+            }
+            
+            downloadedGroupsHash = groupHash
+            downloadedGroupTimetable = groupTimetable
+        }
+        
+        // Добавляем зависимости
+        completionOperation.addDependency(groupTimetableDownloadOperation)
+        
+        // Добавляем все в очередь
+        downloadingQueue.addOperation(groupTimetableDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
+    }
     
+    private func loadGroupsAndGroupsHashForLoadTimetable(groupTimegable: RGroupTimetable, completion: @escaping (_ groupsHash: String?, _ groups: [RGroup]?, _ groupTimetable: RGroupTimetable?) -> Void) {
+        var downloadedGroupsHash: String?
+        var downloadedGroups: [RGroup]?
+
+        let completionOperation = BlockOperation {
+            completion(downloadedGroupsHash, downloadedGroups, groupTimegable)
+        }
+
+        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+            guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+                completion(nil, nil, nil)
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroups = groups
+        }
+        
+        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+                completion(nil, nil, nil)
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroupsHash = hash
+        }
+
+        completionOperation.addDependency(groupsDownloadOperation)
+        completionOperation.addDependency(hashDownloadOperation)
+
+        downloadingQueue.addOperation(groupsDownloadOperation)
+        downloadingQueue.addOperation(hashDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
+    }
     
-    
-    
-    
-    
-    // MARK: Curr Week Number
+    // MARK: - Curr Week Number
     static func loadCurrWeekIsEwenTask(complition: @escaping (Bool?) -> Void) -> URLSessionDataTask {
         let url = API.currWeekIsEven()
         
@@ -108,16 +191,14 @@ class ApiManager {
         
         return task
     }
-    
 
+}
+
+
+// MARK: - Обработка ответов
+extension ApiManager {
     
-    
-    
-    
-    
-    
-    
-    // MARK: - Обработка скачанных групп
+    // MARK: Обработка скачанных групп
     static func handleGroupsResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> [RGroup]? {
         guard error == nil else { return nil }
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
@@ -133,7 +214,7 @@ class ApiManager {
         }
     }
     
-    // MARK: - Обработка скачанного хеша
+    // MARK: Обработка скачанного хеша
     static func handleHashResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> String? {
         guard error == nil else { return nil }
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
@@ -151,7 +232,7 @@ class ApiManager {
         }
     }
     
-    // MARK: - Обработка скачанного расписания групп
+    // MARK: Обработка скачанного расписания групп
     static func handleGroupTimetableResponse(groupId: Int, _ data: Data?, _ response: URLResponse?, _ error: Error?) -> (timetable: RGroupTimetable?, groupHash: String?) {
         guard error == nil else { return (nil, nil) }
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return (nil, nil) }
@@ -173,5 +254,5 @@ class ApiManager {
             return (nil, nil)
         }
     }
-
+    
 }

@@ -32,34 +32,42 @@ extension AnimatingNetworkViewProtocol {
     
     // MARK: Activity Indicator
     func startActivityIndicator() {
-        if !animatingSuperViewForDisplay().subviews.contains(animatingActivityIndicatorView()) {
-            animatingSuperViewForDisplay().addSubview(animatingActivityIndicatorView())
-            animatingActivityIndicatorView().translatesAutoresizingMaskIntoConstraints = false
-            animatingActivityIndicatorView().addConstraintsOnAllSides(to: animatingSuperViewForDisplay().safeAreaLayoutGuide, withConstant: 0)
+        let _animatingSuperViewForDisplay = animatingSuperViewForDisplay()
+        let _animatingActivityIndicatioView = animatingActivityIndicatorView()
+        let _animatingViewForDisableUserInteraction = animatingViewForDisableUserInteraction()
+        
+        if !_animatingSuperViewForDisplay.subviews.contains(_animatingActivityIndicatioView) {
+            _animatingSuperViewForDisplay.addSubview(_animatingActivityIndicatioView)
+            _animatingActivityIndicatioView.translatesAutoresizingMaskIntoConstraints = false
+            _animatingActivityIndicatioView.addConstraintsOnAllSides(to: _animatingSuperViewForDisplay.safeAreaLayoutGuide, withConstant: 0)
         }
-        animatingActivityIndicatorView().startAnimating()
-        //tableView.isScrollEnabled = false
-        //tableView.isUserInteractionEnabled = false
-        animatingViewForDisableUserInteraction().isUserInteractionEnabled = false
+        _animatingActivityIndicatioView.startAnimating()
+        _animatingViewForDisableUserInteraction.isUserInteractionEnabled = false
     }
     
     func stopActivityIndicator() {
-        animatingActivityIndicatorView().stopAnimating()
-        animatingViewForDisableUserInteraction().isUserInteractionEnabled = true
+        let _animatingActivityIndicatorView = animatingActivityIndicatorView()
+        let _animatingViewForDisableUserInteraction = animatingViewForDisableUserInteraction()
+        
+        _animatingActivityIndicatorView.stopAnimating()
+        _animatingViewForDisableUserInteraction.isUserInteractionEnabled = true
     }
     
     // MARK: Alert View
     func showAlert(withText alertText: String) {
-        if !animatingSuperViewForDisplay().subviews.contains(animatingAlertView()) {
-            animatingSuperViewForDisplay().addSubview(animatingAlertView())
+        let _animatingSuperViewForDisplay = animatingSuperViewForDisplay()
+        let _animatingAlertView = animatingAlertView()
+        
+        if !_animatingSuperViewForDisplay.subviews.contains(_animatingAlertView) {
+            _animatingSuperViewForDisplay.addSubview(_animatingAlertView)
             
-            animatingAlertView().translatesAutoresizingMaskIntoConstraints = false
-            animatingAlertView().centerYAnchor.constraint(equalTo: animatingSuperViewForDisplay().safeAreaLayoutGuide.centerYAnchor).isActive = true
-            animatingAlertView().centerXAnchor.constraint(equalTo: animatingSuperViewForDisplay().safeAreaLayoutGuide.centerXAnchor).isActive = true
+            _animatingAlertView.translatesAutoresizingMaskIntoConstraints = false
+            _animatingAlertView.centerYAnchor.constraint(equalTo: _animatingSuperViewForDisplay.safeAreaLayoutGuide.centerYAnchor).isActive = true
+            _animatingAlertView.centerXAnchor.constraint(equalTo: _animatingSuperViewForDisplay.safeAreaLayoutGuide.centerXAnchor).isActive = true
         }
         
-        animatingAlertView().alertLabel.text = alertText
-        animatingAlertView().hideWithAnimation()
+        _animatingAlertView.alertLabel.text = alertText
+        _animatingAlertView.hideWithAnimation()
     }
     
     func showAlertForNetwork() {
