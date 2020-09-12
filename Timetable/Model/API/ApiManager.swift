@@ -10,6 +10,66 @@ import Foundation
 
 class ApiManager {
     
+    let downloadingQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        return queue
+    }()
+    
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    
+    
+    static let shared = ApiManager()
+    
+    
+    
+    
+    
+    func loadGroupsAndGroupsHash(completion: @escaping (_ groupsHash: String?, _ groups: [RGroup]?) -> Void) {
+        // Тут качаем группы и хеш групп
+        
+        var downloadedGroupsHash: String?
+        var downloadedGroups: [RGroup]?
+
+        let completionOperation = BlockOperation {
+            completion(downloadedGroupsHash, downloadedGroups)
+        }
+
+        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+            guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+                completion(nil, nil)
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroups = groups
+        }
+        
+        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+                completion(nil, nil)
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroupsHash = hash
+        }
+
+        completionOperation.addDependency(groupsDownloadOperation)
+        completionOperation.addDependency(hashDownloadOperation)
+
+        downloadingQueue.addOperation(groupsDownloadOperation)
+        downloadingQueue.addOperation(hashDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     // MARK: Curr Week Number
     static func loadCurrWeekIsEwenTask(complition: @escaping (Bool?) -> Void) -> URLSessionDataTask {
         let url = API.currWeekIsEven()
@@ -48,6 +108,14 @@ class ApiManager {
         
         return task
     }
+    
+
+    
+    
+    
+    
+    
+    
     
     // MARK: - Обработка скачанных групп
     static func handleGroupsResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> [RGroup]? {

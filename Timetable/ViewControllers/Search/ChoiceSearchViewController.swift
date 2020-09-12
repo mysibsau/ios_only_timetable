@@ -46,13 +46,12 @@ class ChoiceSearchViewController: UITableViewController{
         super.viewDidLoad()
         
         //view.backgroundColor = Colors.backgroungColor
+        //UserDefaultsConfig.groupsHash = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //task?.cancel()
-        //taskForHash?.cancel()
+
         downloadingQueue.cancelAllOperations()
         stopActivityIndicator()
     }
@@ -90,15 +89,11 @@ class ChoiceSearchViewController: UITableViewController{
         if indexPath.row == 0 {
             // Если нет таблицы с группами - качаем
             if UserDefaultsConfig.groupsHash == nil || DataManager.shared.getGroups().isEmpty {
-                startActivityIndicator()
-                
-                var downloadedGroups: [RGroup]?
-                var downloadedHash: String?
-                
-                let completionOperation = BlockOperation {
+                self.startActivityIndicator()
+                ApiManager.shared.loadGroupsAndGroupsHash { optionalGroupsHash, optionalGroups in
                     guard
-                        let downloadedGroups = downloadedGroups,
-                        let downloadedHash = downloadedHash
+                        let groupsHash = optionalGroupsHash,
+                        let groups = optionalGroups
                     else {
                         DispatchQueue.main.async {
                             self.showAlertForNetwork()
@@ -108,48 +103,12 @@ class ChoiceSearchViewController: UITableViewController{
                     }
                     
                     DispatchQueue.main.async {
-                        UserDefaultsConfig.groupsHash = downloadedHash
-                        DataManager.shared.write(groups: downloadedGroups)
+                        UserDefaultsConfig.groupsHash = groupsHash
+                        DataManager.shared.write(groups: groups)
                         
                         self.pushGroupTableViewController()
                     }
                 }
-                
-                let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
-                    guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
-                        DispatchQueue.main.async {
-                            self.showAlertForNetwork()
-                            self.stopActivityIndicator()
-                        }
-                        self.downloadingQueue.cancelAllOperations()
-                        return
-                    }
-                    
-                    downloadedGroups = groups
-                }
-                
-                let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
-                    guard let hash = ApiManager.handleHashResponse(data, response, error) else {
-                        DispatchQueue.main.async {
-                            self.showAlertForNetwork()
-                            self.stopActivityIndicator()
-                        }
-                        self.downloadingQueue.cancelAllOperations()
-                        return
-                    }
-                    
-                    downloadedHash = hash
-                }
-                
-                // Добавляем зависимости
-                hashDownloadOperation.addDependency(groupsDownloadOperation)
-                completionOperation.addDependency(hashDownloadOperation)
-                completionOperation.addDependency(groupsDownloadOperation)
-                
-                // Добавляем в очередь все
-                downloadingQueue.addOperation(groupsDownloadOperation)
-                downloadingQueue.addOperation(hashDownloadOperation)
-                downloadingQueue.addOperation(completionOperation)
             // Если есть, то все норм - открываем
             } else {
                 pushGroupTableViewController()

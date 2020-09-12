@@ -61,6 +61,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         addLongGestureRecognizer()
         
         //view.backgroundColor = Colors.backgroungColor
+        UserDefaultsConfig.groupsHash = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -182,7 +183,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         }
         
         if let object = object as? RGroup {
-            showTimetable(withId: object.id, animatingViewController: self, isFromDetailVC: false)
+            showTimetable(withId: object.id, animatingViewController: self)
         }// else if let object = object as? RProfessor {
         //    showTimetable(withId: object.id, animatingViewController: self)
         //} else if let object = object as? RPlace {
@@ -207,7 +208,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
 extension TableViewController: DetailViewDelegate {
     
     // MARK: Открыть расписания
-    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
+    func showTimetable(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
         guard let entitie = data[1].filter("id = \(id)").first else { return }
@@ -236,7 +237,13 @@ extension TableViewController: DetailViewDelegate {
                             animatingViewController: animatingViewController)
                     }
                 } else {
-                    self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
+                    self.loadNewGroups(animatingViewController: animatingViewController, completionIfAccess: {
+                        self.push(
+                            timetableViewController: timetableViewController,
+                            optionalDownloadedTimetable: downloadedGroupTimetable,
+                            groupId: groupId,
+                            animatingViewController: animatingViewController)
+                    })
                 }
             }
             
@@ -253,10 +260,10 @@ extension TableViewController: DetailViewDelegate {
                         animatingViewController.showAlertForNetwork()
                         animatingViewController.stopActivityIndicator()
                         self.push(
-                            timetableViewController: timetableViewController,
-                            optionalDownloadedTimetable: downloadedGroupTimetable,
-                            groupId: groupId,
-                            animatingViewController: animatingViewController)
+                                timetableViewController: timetableViewController,
+                                optionalDownloadedTimetable: downloadedGroupTimetable,
+                                groupId: groupId,
+                                animatingViewController: animatingViewController)
                     }
                     return
                 }
@@ -294,7 +301,7 @@ extension TableViewController: DetailViewDelegate {
     }
     
     // MARK: Сделать расписание основным
-    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
+    func makeTimetableBasic(withId id: Int, animatingViewController: AnimatingNetworkViewProtocol) {
         // берем группу с нужным id из всех групп
         // потом нужно просто запросить расписание из бд
         guard let entitie = data[1].filter("id = \(id)").first else { return }
@@ -316,7 +323,12 @@ extension TableViewController: DetailViewDelegate {
                                 animatingViewController: animatingViewController)
                         }
                     } else {
-                        self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
+                        self.loadNewGroups(animatingViewController: animatingViewController, completionIfAccess: {
+                            self.post(
+                                optionalDownloadedTimetable: downloadedGroupTimetable,
+                                groupId: groupId,
+                                animatingViewController: animatingViewController)
+                        })
                     }
             }
             
@@ -370,74 +382,29 @@ extension TableViewController: DetailViewDelegate {
         animatingViewController.stopActivityIndicator()
     }
     
-    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol, isFromDetailVC: Bool) {
+    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol, completionIfAccess: @escaping () -> Void) {
         // Тут качаем группы и хеш групп
-        
-        //var downloadedGroupTimetable: RGroupTimetable?
-        var downloadedGroupsHash: String?
-        var downloadedGroups: [RGroup]?
-
-        let completionOperation = BlockOperation {
-            DispatchQueue.main.async {
-                guard
-                    let downloadedGroups = downloadedGroups,
-                    let downloadedGroupsHash = downloadedGroupsHash
-                else {
-                    DispatchQueue.main.async {
-                        animatingViewController.showAlertForNetwork()
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    return
-                }
-
-                UserDefaultsConfig.groupsHash = downloadedGroupsHash
-                DataManager.shared.write(groups: downloadedGroups)
-                animatingViewController.stopActivityIndicator()
-                self.tableView.reloadData()
-                // Если сейчас на детальном экране - выкидываем на прошлый, где все группы,
-                // потому что группы обновились и сейчас открыта группа уже с неверными данными
-                // типо индексы поменяться могли
-                if isFromDetailVC {
-                    animatingViewController.popViewController()
-                }
-                print("Все норм братан")
-            }
-        }
-
-        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
-            DispatchQueue.main.async {
-                guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
-                    DispatchQueue.main.async {
-                        animatingViewController.showAlertForNetwork()
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    self.downloadingQueue.cancelAllOperations()
-                    return
-                }
-
-                downloadedGroups = groups
-            }
-        }
-        
-        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
-            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+        ApiManager.shared.loadGroupsAndGroupsHash { optionalGroupsHash, optionalGroups in
+            guard
+                let groupsHash = optionalGroupsHash,
+                let groups = optionalGroups
+            else {
                 DispatchQueue.main.async {
                     animatingViewController.showAlertForNetwork()
                     animatingViewController.stopActivityIndicator()
                 }
-                self.downloadingQueue.cancelAllOperations()
                 return
             }
             
-            downloadedGroupsHash = hash
+            DispatchQueue.main.async {
+                UserDefaultsConfig.groupsHash = groupsHash
+                DataManager.shared.write(groups: groups)
+                self.tableView.reloadData()
+                animatingViewController.stopActivityIndicator()
+                completionIfAccess()
+                print("Все норм братан")
+            }
         }
-
-        completionOperation.addDependency(groupsDownloadOperation)
-        completionOperation.addDependency(hashDownloadOperation)
-
-        downloadingQueue.addOperation(groupsDownloadOperation)
-        downloadingQueue.addOperation(hashDownloadOperation)
-        downloadingQueue.addOperation(completionOperation)
     }
     
     // MARK: Добавление в избранные

@@ -92,6 +92,12 @@ class TimetableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        ApiManager.shared.loadGroupsAndGroupsHash { groupsHash, groups in
+//            print(groupsHash)
+//            print(groups)
+//        }
+        //UserDefaultsConfig.groupsHash = nil
+        
         setupPagingKit()
         
         menuData = [
@@ -473,12 +479,13 @@ extension TimetableViewController {
         var downloadedGroupsHash: String?
         
         let completionOperation = BlockOperation {
+            guard let downloadedGroupTimetable = downloadedGroupTimetable else {
+                self.showAlertForNetwork()
+                self.stopActivityIndicator()
+                return
+            }
+            
             if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
-                guard let downloadedGroupTimetable = downloadedGroupTimetable else {
-                    self.showAlertForNetwork()
-                    self.stopActivityIndicator()
-                    return
-                }
                 DispatchQueue.main.async {
                     DataManager.shared.write(groupTimetable: downloadedGroupTimetable)
                     guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: downloadedGroupTimetable.groupId) else {
@@ -490,7 +497,31 @@ extension TimetableViewController {
                     animatingViewController.stopActivityIndicator()
                 }
             } else {
-                self.loadNewGroups(animatingViewController: animatingViewController)
+                // Тогда скачиваем группы
+                ApiManager.shared.loadGroupsAndGroupsHash { optionalGroupsHash, optionalGroups in
+                    guard
+                        let groupsHash = optionalGroupsHash,
+                        let groups = optionalGroups
+                    else {
+                        DispatchQueue.main.async {
+                            animatingViewController.showAlertForNetwork()
+                            animatingViewController.stopActivityIndicator()
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        UserDefaultsConfig.groupsHash = groupsHash
+                        DataManager.shared.write(groups: groups)
+                        DataManager.shared.write(groupTimetable: downloadedGroupTimetable)
+                        
+                        guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: downloadedGroupTimetable.groupId) else { return }
+                        self.set(timetable: timetableForShowing)
+                        
+                        animatingViewController.stopActivityIndicator()
+                        print("Все норм братан")
+                    }
+                }
             }
         }
         
@@ -522,71 +553,71 @@ extension TimetableViewController {
         downloadingQueue.addOperation(completionOperation)
     }
     
-    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol) {
-        // Тут качаем группы и хеш групп
-        
-        //var downloadedGroupTimetable: RGroupTimetable?
-        var downloadedGroupsHash: String?
-        var downloadedGroups: [RGroup]?
-
-        let completionOperation = BlockOperation {
-            DispatchQueue.main.async {
-                guard
-                    let downloadedGroups = downloadedGroups,
-                    let downloadedGroupsHash = downloadedGroupsHash
-                else {
-                    DispatchQueue.main.async {
-                        animatingViewController.showAlertForNetwork()
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    return
-                }
-
-                UserDefaultsConfig.groupsHash = downloadedGroupsHash
-                DataManager.shared.write(groups: downloadedGroups)
-                animatingViewController.stopActivityIndicator()
-
-                self.set(timetable: nil)
-                self.showAlertForChoice()
-                
-                print("Все норм братан")
-            }
-        }
-
-        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
-            DispatchQueue.main.async {
-                guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
-                    DispatchQueue.main.async {
-                        animatingViewController.showAlertForNetwork()
-                        animatingViewController.stopActivityIndicator()
-                    }
-                    self.downloadingQueue.cancelAllOperations()
-                    return
-                }
-
-                downloadedGroups = groups
-            }
-        }
-        
-        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
-            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
-                DispatchQueue.main.async {
-                    animatingViewController.showAlertForNetwork()
-                    animatingViewController.stopActivityIndicator()
-                }
-                self.downloadingQueue.cancelAllOperations()
-                return
-            }
-            
-            downloadedGroupsHash = hash
-        }
-
-        completionOperation.addDependency(groupsDownloadOperation)
-        completionOperation.addDependency(hashDownloadOperation)
-
-        downloadingQueue.addOperation(groupsDownloadOperation)
-        downloadingQueue.addOperation(hashDownloadOperation)
-        downloadingQueue.addOperation(completionOperation)
-    }
+//    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol) {
+//        // Тут качаем группы и хеш групп
+//
+//        //var downloadedGroupTimetable: RGroupTimetable?
+//        var downloadedGroupsHash: String?
+//        var downloadedGroups: [RGroup]?
+//
+//        let completionOperation = BlockOperation {
+//            DispatchQueue.main.async {
+//                guard
+//                    let downloadedGroups = downloadedGroups,
+//                    let downloadedGroupsHash = downloadedGroupsHash
+//                else {
+//                    DispatchQueue.main.async {
+//                        animatingViewController.showAlertForNetwork()
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//                    return
+//                }
+//
+//                UserDefaultsConfig.groupsHash = downloadedGroupsHash
+//                DataManager.shared.write(groups: downloadedGroups)
+//                animatingViewController.stopActivityIndicator()
+//
+//                self.set(timetable: nil)
+//                self.showAlertForChoice()
+//
+//                print("Все норм братан")
+//            }
+//        }
+//
+//        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+//            DispatchQueue.main.async {
+//                guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+//                    DispatchQueue.main.async {
+//                        animatingViewController.showAlertForNetwork()
+//                        animatingViewController.stopActivityIndicator()
+//                    }
+//                    self.downloadingQueue.cancelAllOperations()
+//                    return
+//                }
+//
+//                downloadedGroups = groups
+//            }
+//        }
+//
+//        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+//            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+//                DispatchQueue.main.async {
+//                    animatingViewController.showAlertForNetwork()
+//                    animatingViewController.stopActivityIndicator()
+//                }
+//                self.downloadingQueue.cancelAllOperations()
+//                return
+//            }
+//
+//            downloadedGroupsHash = hash
+//        }
+//
+//        completionOperation.addDependency(groupsDownloadOperation)
+//        completionOperation.addDependency(hashDownloadOperation)
+//
+//        downloadingQueue.addOperation(groupsDownloadOperation)
+//        downloadingQueue.addOperation(hashDownloadOperation)
+//        downloadingQueue.addOperation(completionOperation)
+//    }
     
 }

@@ -211,12 +211,12 @@ extension DetailViewController {
     
     private func makeTimetableBasiHandler() {
         guard let delegate = delegate else { return }
-        delegate.makeTimetableBasic(withId: id, animatingViewController: self, isFromDetailVC: true)
+        delegate.makeTimetableBasic(withId: id, animatingViewController: self)
     }
     
     private func showTimetableHandler() {
         guard let delegate = delegate else { return }
-        delegate.showTimetable(withId: id, animatingViewController: self, isFromDetailVC: true)
+        delegate.showTimetable(withId: id, animatingViewController: self)
     }
 }
 
