@@ -32,8 +32,9 @@ class DetailViewController: UIViewController {
     
     private let alertViewForCoppy = AlertView(alertText: "Текст скопирован")
     
-    let alertViewForNetwork = AlertView(alertText: "Проблема с сетью")
-    let viewWithActivityIndicator = ActivityIndicatorView()
+    // MARK: Animating Network
+    let activityIndicatorView = ActivityIndicatorView()
+    let alertView = AlertView()
     
     
     // MARK: - Overrides
@@ -285,33 +286,23 @@ extension DetailViewController: UITableViewDelegate {
 
 extension DetailViewController: AnimatingNetworkViewProtocol {
     
-    // MARK: Activity Indicator
-    func startActivityIndicator() {
-        if !view.subviews.contains(viewWithActivityIndicator) {
-            view.addSubview(viewWithActivityIndicator)
-            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
-        }
-        viewWithActivityIndicator.startAnimating()
-        tableView.isScrollEnabled = false
+    func animatingSuperViewForDisplay() -> UIView {
+        return view
     }
     
-    func stopActivityIndicator() {
-        viewWithActivityIndicator.stopAnimating()
-        tableView.isScrollEnabled = true
+    func animatingViewForDisableUserInteraction() -> UIView {
+        if let navBar = navigationController?.navigationBar {
+            return navBar
+        }
+        return view
     }
     
-    // MARK: Arert View
-    func showAlertForNetwork() {
-        if !view.subviews.contains(alertViewForNetwork) {
-            view.addSubview(alertViewForNetwork)
-            
-            alertViewForNetwork.translatesAutoresizingMaskIntoConstraints = false
-            alertViewForNetwork.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-            alertViewForNetwork.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        }
-        
-        alertViewForNetwork.hideWithAnimation()
+    func animatingActivityIndicatorView() -> ActivityIndicatorView {
+        return activityIndicatorView
+    }
+    
+    func animatingAlertView() -> AlertView {
+        return alertView
     }
     
     func popViewController() {

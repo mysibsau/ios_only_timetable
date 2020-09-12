@@ -16,11 +16,9 @@ class ChoiceSearchViewController: UITableViewController{
         //"Кабинеты"
     ]
     
-    // MARK: - UI
-    // MARK: Activity Indicator
-    let viewWithActivityIndicator = ActivityIndicatorView()
-    // MARK: Alert View
-    let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
+    // MARK: - Animating Network
+    let activityIndicatorView = ActivityIndicatorView()
+    let alertView = AlertView()
     
     
     // MARK: - Для загрузки таблиц групп/преподавателей/кабинетов
@@ -172,34 +170,23 @@ class ChoiceSearchViewController: UITableViewController{
 
 
 extension ChoiceSearchViewController: AnimatingNetworkViewProtocol {
-    
-    // MARK: Activity Indicator
-    func startActivityIndicator() {
-        if !view.subviews.contains(viewWithActivityIndicator) {
-            view.addSubview(viewWithActivityIndicator)
-            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
-        }
-        viewWithActivityIndicator.startAnimating()
-        view.isUserInteractionEnabled = false
+    func animatingSuperViewForDisplay() -> UIView {
+        return view
     }
     
-    func stopActivityIndicator() {
-        viewWithActivityIndicator.stopAnimating()
-        view.isUserInteractionEnabled = true
+    func animatingViewForDisableUserInteraction() -> UIView {
+        if let navBar = navigationController?.navigationBar {
+            return navBar
+        }
+        return view
     }
     
-    // MARK: Arert View
-    func showAlertForNetwork() {
-        if !view.subviews.contains(alertViewForNetrowk) {
-            view.addSubview(alertViewForNetrowk)
-            
-            alertViewForNetrowk.translatesAutoresizingMaskIntoConstraints = false
-            alertViewForNetrowk.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-            alertViewForNetrowk.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        }
-        
-        alertViewForNetrowk.hideWithAnimation()
+    func animatingActivityIndicatorView() -> ActivityIndicatorView {
+        return activityIndicatorView
+    }
+    
+    func animatingAlertView() -> AlertView {
+        return alertView
     }
     
     func popViewController() {

@@ -36,11 +36,10 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
     
     let session = URLSession(configuration: URLSessionConfiguration.default)
     
-    // MARK: - UI
-    // MARK: Activity Indicator
-    let viewWithActivityIndicator = ActivityIndicatorView()
-    // MARK: Alert View
-    let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
+    // MARK: - Animating Network
+    let activityIndicatorView = ActivityIndicatorView()
+    let alertView = AlertView()
+    
 
     // MARK: - Overrides
     override func loadView() {
@@ -280,12 +279,12 @@ extension TableViewController: DetailViewDelegate {
         if let downloadedTimetable = optionalDownloadedTimetable {
             DataManager.shared.write(groupTimetable: downloadedTimetable)
             guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: groupId) else { return }
-            timetableViewController.set(timetable: timetableForShowing)
+            timetableViewController.timetable = timetableForShowing
             self.navigationController?.pushViewController(timetableViewController, animated: true)
         // Если скачивание не успешно, но есть уже загруженно до этого - открываем его
         } else if let localTimetable = DataManager.shared.getTimetable(forGroupId: groupId) {
             animatingViewController.showAlertForNetwork()
-            timetableViewController.set(timetable: localTimetable)
+            timetableViewController.timetable = localTimetable
             self.navigationController?.pushViewController(timetableViewController, animated: true)
         // Иначе грустим
         } else {
@@ -489,33 +488,23 @@ extension TableViewController: DetailViewDelegate {
 // MARK: - Animating Network View Protocol
 extension TableViewController: AnimatingNetworkViewProtocol {
     
-    // MARK: Activity Indicator
-    func startActivityIndicator() {
-        if !view.subviews.contains(viewWithActivityIndicator) {
-            view.addSubview(viewWithActivityIndicator)
-            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
-        }
-        viewWithActivityIndicator.startAnimating()
-        tableView.isScrollEnabled = false
+    func animatingSuperViewForDisplay() -> UIView {
+        return view
     }
     
-    func stopActivityIndicator() {
-        viewWithActivityIndicator.stopAnimating()
-        tableView.isScrollEnabled = true
+    func animatingViewForDisableUserInteraction() -> UIView {
+        if let navBar = navigationController?.navigationBar {
+            return navBar
+        }
+        return view
     }
     
-    // MARK: Arert View
-    func showAlertForNetwork() {
-        if !view.subviews.contains(alertViewForNetrowk) {
-            view.addSubview(alertViewForNetrowk)
-            
-            alertViewForNetrowk.translatesAutoresizingMaskIntoConstraints = false
-            alertViewForNetrowk.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-            alertViewForNetrowk.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        }
-        
-        alertViewForNetrowk.hideWithAnimation()
+    func animatingActivityIndicatorView() -> ActivityIndicatorView {
+        return activityIndicatorView
+    }
+    
+    func animatingAlertView() -> AlertView {
+        return alertView
     }
     
     func popViewController() {
