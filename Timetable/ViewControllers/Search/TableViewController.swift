@@ -58,7 +58,7 @@ class TableViewController<REntitie: Object>: UITableViewController, UISearchResu
         super.viewWillDisappear(animated)
         
         // Если уходят с эгото экрана - прекращаем загрузку
-        ApiManager.shared.cancellAllDownloading()
+        ApiManager.shared.cancelAllDownloading()
         stopActivityIndicator()
     }
     

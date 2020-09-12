@@ -23,7 +23,7 @@ class ApiManager {
     
     
     // MARK: - Прекращение всех загрузок
-    func cancellAllDownloading() {
+    func cancelAllDownloading() {
         downloadingQueue.cancelAllOperations()
     }
     
@@ -38,7 +38,7 @@ class ApiManager {
         }
 
         let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
-            guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+            guard let groups = ResponseHandler.handleGroupsResponse(data, response, error) else {
                 completion(nil, nil)
                 self.downloadingQueue.cancelAllOperations()
                 return
@@ -48,7 +48,7 @@ class ApiManager {
         }
         
         let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
-            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+            guard let hash = ResponseHandler.handleHashResponse(data, response, error) else {
                 completion(nil, nil)
                 self.downloadingQueue.cancelAllOperations()
                 return
@@ -93,7 +93,7 @@ class ApiManager {
         }
         
         let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: id)) { data, response, error in
-            let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: id, data, response, error)
+            let (optionalGroupTimetable, optionalGroupHash) = ResponseHandler.handleGroupTimetableResponse(groupId: id, data, response, error)
             
             guard
                 let groupTimetable = optionalGroupTimetable,
@@ -126,7 +126,7 @@ class ApiManager {
         }
 
         let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
-            guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+            guard let groups = ResponseHandler.handleGroupsResponse(data, response, error) else {
                 completion(nil, nil, nil)
                 self.downloadingQueue.cancelAllOperations()
                 return
@@ -136,7 +136,7 @@ class ApiManager {
         }
         
         let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
-            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+            guard let hash = ResponseHandler.handleHashResponse(data, response, error) else {
                 completion(nil, nil, nil)
                 self.downloadingQueue.cancelAllOperations()
                 return
@@ -192,67 +192,4 @@ class ApiManager {
         return task
     }
 
-}
-
-
-// MARK: - Обработка ответов
-extension ApiManager {
-    
-    // MARK: Обработка скачанных групп
-    static func handleGroupsResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> [RGroup]? {
-        guard error == nil else { return nil }
-        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
-        guard let data = data else { return nil }
-        
-        do {
-            let groupsResponse = try JSONDecoder().decode([GroupResponse].self, from: data)
-            let groups = ResponseConverter.converteGroupResponseToRGroup(groupsResponse: groupsResponse)
-            return groups
-        } catch let jsonError {
-            print(jsonError)
-            return nil
-        }
-    }
-    
-    // MARK: Обработка скачанного хеша
-    static func handleHashResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> String? {
-        guard error == nil else { return nil }
-        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return nil }
-        guard let data = data else { return nil }
-        
-        do {
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let hash = json["hash"] as? String else {
-                    return nil
-            }
-            return hash
-        } catch let jsonError {
-            print(jsonError)
-            return nil
-        }
-    }
-    
-    // MARK: Обработка скачанного расписания групп
-    static func handleGroupTimetableResponse(groupId: Int, _ data: Data?, _ response: URLResponse?, _ error: Error?) -> (timetable: RGroupTimetable?, groupHash: String?) {
-        guard error == nil else { return (nil, nil) }
-        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else { return (nil, nil) }
-        guard let data = data else { return (nil, nil) }
-        
-        do {
-            let groupTimetableResponse = try JSONDecoder().decode([GroupTimetableResponse].self, from: data)
-            
-            // Антон отправляет массивом с одним элементом (:
-            guard let groupTimetableResponseFirst = groupTimetableResponse.first else { return (nil, nil) }
-            
-            let groupTimetable = ResponseConverter.converteGroupTimetableResponseToRGroupTimetable(
-                groupTimetableResponse: groupTimetableResponseFirst,
-                groupId: groupId)
-            
-            return (groupTimetable, groupTimetableResponseFirst.groupHash)
-        } catch let jsonError {
-            print(jsonError)
-            return (nil, nil)
-        }
-    }
-    
 }

@@ -108,6 +108,7 @@
 		4AD694FC247EBCCB00A4A2B7 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD694FB247EBCCB00A4A2B7 /* Converter.swift */; };
 		4AD69512248049C600A4A2B7 /* Date+Exnentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69511248049C600A4A2B7 /* Date+Exnentions.swift */; };
 		4AD6951424811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6951324811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift */; };
+		4AF964F1250D143B00AC4BB6 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF964F0250D143B00AC4BB6 /* ResponseHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -214,6 +215,7 @@
 		4AD694FB247EBCCB00A4A2B7 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		4AD69511248049C600A4A2B7 /* Date+Exnentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Exnentions.swift"; sourceTree = "<group>"; };
 		4AD6951324811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+shortDateFormatter.swift"; sourceTree = "<group>"; };
+		4AF964F0250D143B00AC4BB6 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		C5E21437120D1879818B1CFF /* Pods-Timetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.release.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.release.xcconfig"; sourceTree = "<group>"; };
 		EEB8593AA93F4C799B58DCA8 /* Pods-Timetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timetable.debug.xcconfig"; path = "Target Support Files/Pods-Timetable/Pods-Timetable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -475,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				4A2B145224FD3557002942A9 /* ResponseObjects */,
+				4AF964F0250D143B00AC4BB6 /* ResponseHandler.swift */,
 				4A67CBDA248D28AC00F1D1FA /* API.swift */,
 				4A67CBDC248D447D00F1D1FA /* ApiManager.swift */,
 				4A6E6F002503DA880007931E /* DownloadOperation.swift */,
@@ -829,6 +832,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9C913A243DCB3E009F67A8 /* GroupSubgroupView.swift in Sources */,
+				4AF964F1250D143B00AC4BB6 /* ResponseHandler.swift in Sources */,
 				4AC64C6424742EFD00081D55 /* WritingSession.swift in Sources */,
 				4A415EA024585EED005FADD7 /* RPlaceSession.swift in Sources */,
 				4A415E8C24585BE5005FADD7 /* RPlaceWeek.swift in Sources */,

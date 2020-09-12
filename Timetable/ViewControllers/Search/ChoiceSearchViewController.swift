@@ -19,16 +19,6 @@ class ChoiceSearchViewController: UITableViewController{
     // MARK: - Animating Network
     let activityIndicatorView = ActivityIndicatorView()
     let alertView = AlertView()
-    
-    
-    // MARK: - Для загрузки таблиц групп/преподавателей/кабинетов
-    let downloadingQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 2
-        return queue
-    }()
-    
-    let session = URLSession(configuration: URLSessionConfiguration.default)
 
     
     // MARK: - Overrides
@@ -52,7 +42,7 @@ class ChoiceSearchViewController: UITableViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        downloadingQueue.cancelAllOperations()
+        ApiManager.shared.cancelAllDownloading()
         stopActivityIndicator()
     }
     
