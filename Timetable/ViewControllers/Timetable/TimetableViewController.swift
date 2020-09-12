@@ -100,6 +100,11 @@ class TimetableViewController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectGroup(_:)), name: .didSelectGroup, object: nil)
             //NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectProfessor(_:)), name: .didSelectProfessor, object: nil)
             //NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectPlace(_:)), name: .didSelectPlace, object: nil)
+            
+            // загружаем текущее расписание заново, если оно есть
+            if timetable != nil {
+                loadCurrGroupTimetable(animatingViewController: self)
+            }
         } else if mood == .notBasic {
             if let timetable = timetable as? GroupTimetable {
                 navigationItem.title = timetable.groupName
@@ -455,6 +460,7 @@ extension TimetableViewController: AnimatingNetworkViewProtocol {
 // MARK: - Скачивание расписания для групп
 extension TimetableViewController {
     
+    // TODO: Убрать отсюда animatingViewController потому что тут всегда будет self
     func loadCurrGroupTimetable(animatingViewController: AnimatingNetworkViewProtocol) {
         guard let groupId = (timetable as? GroupTimetable)?.groupId else { return }
         
