@@ -228,17 +228,17 @@ extension TableViewController: DetailViewDelegate {
             var downloadedGroupsHash: String?
             
             let completionOperation = BlockOperation {
-                    if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
-                        DispatchQueue.main.async {
-                            self.push(
+                if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
+                    DispatchQueue.main.async {
+                        self.push(
                             timetableViewController: timetableViewController,
                             optionalDownloadedTimetable: downloadedGroupTimetable,
                             groupId: groupId,
                             animatingViewController: animatingViewController)
-                        }
-                    } else {
-                        self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
                     }
+                } else {
+                    self.loadNewGroups(animatingViewController: animatingViewController, isFromDetailVC: isFromDetailVC)
+                }
             }
             
             let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: groupId)) { data, response, error in
@@ -280,12 +280,12 @@ extension TableViewController: DetailViewDelegate {
         if let downloadedTimetable = optionalDownloadedTimetable {
             DataManager.shared.write(groupTimetable: downloadedTimetable)
             guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: groupId) else { return }
-            timetableViewController.timetable = timetableForShowing
+            timetableViewController.set(timetable: timetableForShowing)
             self.navigationController?.pushViewController(timetableViewController, animated: true)
         // Если скачивание не успешно, но есть уже загруженно до этого - открываем его
         } else if let localTimetable = DataManager.shared.getTimetable(forGroupId: groupId) {
             animatingViewController.showAlertForNetwork()
-            timetableViewController.timetable = localTimetable
+            timetableViewController.set(timetable: localTimetable)
             self.navigationController?.pushViewController(timetableViewController, animated: true)
         // Иначе грустим
         } else {

@@ -24,7 +24,21 @@ class TimetableViewController: UIViewController {
     // Any потому что тут будут GroupTimetable, ProfessorTimetable и PlaceTimetable
     // думаю, можно сделать как то получше (протоколы и т д) но пока не придумал
     var timetable: Any?
+    //var entitieId: Int?
     var currWeek = 0
+    
+    // MARK: Для скачивания расписания
+    let downloadingQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        return queue
+    }()
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    
+    // MARK: Activity Indicator
+    let viewWithActivityIndicator = ActivityIndicatorView()
+    // MARK: Alert View
+    let alertViewForNetrowk = AlertView(alertText: "Проблемы с сетью")
     
     // Данные для ячеек дня недели и даты
     private var menuData: [[MenuCellData]]?
@@ -202,7 +216,8 @@ class TimetableViewController: UIViewController {
             type = .group
             
             guard let groupTimetable = userInfo[0] else { return }
-            timetable = groupTimetable
+            set(timetable: groupTimetable)
+            //entitieId = groupTimetable.groupId
             
             navigationItem.title = groupTimetable.groupName
             
@@ -278,8 +293,10 @@ class TimetableViewController: UIViewController {
     }
     
     // MARK: - Для использования в Search
-    func set(timetable: Any) {
+    func set(timetable: Any?) {
         self.timetable = timetable
+        self.contentViewController.reloadData()
+        self.menuViewController.reloadData()
     }
     
     // MARK: - Show Alert
@@ -304,6 +321,10 @@ class TimetableViewController: UIViewController {
     // MARK: Для выбора текущего дня
     @IBAction func selectTodayTapped(_ sender: UIBarButtonItem) {
         selectToday()
+    }
+    
+    @IBAction func refreshTimetableTapped(_ sender: UIBarButtonItem) {
+        loadCurrGroupTimetable(animatingViewController: self)
     }
     
 }
@@ -335,6 +356,11 @@ extension TimetableViewController: PagingMenuViewControllerDataSource {
     
     private func isToday(weekNumber: Int, weekdayNumber: Int) -> Bool {
         let (currWeekNumber, currWeekdayNumber) = getCurrWeekNumberAndCurrWeekdayNumber()
+        
+        // Если сейчас воскресенье - нет текущего дня
+        if DateHelper.getCurrNumberWeekday() == 7 {
+            return false
+        }
         
         return currWeekNumber == weekNumber && currWeekdayNumber == weekdayNumber
     }
@@ -402,4 +428,175 @@ extension TimetableViewController: PagingContentViewControllerDelegate {
         focusView.underlineWidth = rightCell.calcIntermediateLabelSize(with: leftCell, percent: percent)
     }
 
+}
+
+
+// MARK: - Animating Network View Protocol
+extension TimetableViewController: AnimatingNetworkViewProtocol {
+    
+    // MARK: Activity Indicator
+    func startActivityIndicator() {
+        if !view.subviews.contains(viewWithActivityIndicator) {
+            view.addSubview(viewWithActivityIndicator)
+            viewWithActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            viewWithActivityIndicator.addConstraintsOnAllSides(to: view.safeAreaLayoutGuide, withConstant: 0)
+        }
+        viewWithActivityIndicator.startAnimating()
+        // tableView.isScrollEnabled = false
+        view.isUserInteractionEnabled = false
+    }
+    
+    func stopActivityIndicator() {
+        viewWithActivityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
+    
+    // MARK: Arert View
+    func showAlertForNetwork() {
+        if !view.subviews.contains(alertViewForNetrowk) {
+            view.addSubview(alertViewForNetrowk)
+            
+            alertViewForNetrowk.translatesAutoresizingMaskIntoConstraints = false
+            alertViewForNetrowk.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+            alertViewForNetrowk.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        }
+        
+        alertViewForNetrowk.hideWithAnimation()
+    }
+    
+    func popViewController() {
+        //
+    }
+    
+}
+
+
+// MARK: - Скачивание расписания для групп
+extension TimetableViewController {
+    
+    func loadCurrGroupTimetable(animatingViewController: AnimatingNetworkViewProtocol) {
+        //guard let groupId = entitieId else { return }
+        guard let groupId = (timetable as? GroupTimetable)?.groupId else { return }
+        animatingViewController.startActivityIndicator()
+        
+        var downloadedGroupTimetable: RGroupTimetable?
+        var downloadedGroupsHash: String?
+        
+        let completionOperation = BlockOperation {
+            if downloadedGroupsHash == UserDefaultsConfig.groupsHash {
+                guard let downloadedGroupTimetable = downloadedGroupTimetable else {
+                    self.showAlertForNetwork()
+                    self.stopActivityIndicator()
+                    return
+                }
+                DispatchQueue.main.async {
+                    DataManager.shared.write(groupTimetable: downloadedGroupTimetable)
+                    guard let timetableForShowing = DataManager.shared.getTimetable(forGroupId: downloadedGroupTimetable.groupId) else {
+                        self.showAlertForNetwork()
+                        return
+                    }
+                    
+                    self.set(timetable: timetableForShowing)
+                    animatingViewController.stopActivityIndicator()
+                }
+            } else {
+                self.loadNewGroups(animatingViewController: animatingViewController)
+            }
+        }
+        
+        let groupTimetableDownloadOperation = DownloadOperation(session: session, url: API.timetable(forGroupId: groupId)) { data, response, error in
+            let (optionalGroupTimetable, optionalGroupHash) = ApiManager.handleGroupTimetableResponse(groupId: groupId, data, response, error)
+            
+            guard
+                let groupTimetable = optionalGroupTimetable,
+                let groupHash = optionalGroupHash
+            else {
+                // Есил не вышло скачать - прекращаем все загрузки и пытаемся открыть старое
+                self.downloadingQueue.cancelAllOperations()
+                DispatchQueue.main.async {
+                    animatingViewController.showAlertForNetwork()
+                    animatingViewController.stopActivityIndicator()
+                }
+                return
+            }
+            
+            downloadedGroupsHash = groupHash
+            downloadedGroupTimetable = groupTimetable
+        }
+        
+        // Добавляем зависимости
+        completionOperation.addDependency(groupTimetableDownloadOperation)
+        
+        // Добавляем все в очередь
+        downloadingQueue.addOperation(groupTimetableDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
+    }
+    
+    private func loadNewGroups(animatingViewController: AnimatingNetworkViewProtocol) {
+        // Тут качаем группы и хеш групп
+        
+        //var downloadedGroupTimetable: RGroupTimetable?
+        var downloadedGroupsHash: String?
+        var downloadedGroups: [RGroup]?
+
+        let completionOperation = BlockOperation {
+            DispatchQueue.main.async {
+                guard
+                    let downloadedGroups = downloadedGroups,
+                    let downloadedGroupsHash = downloadedGroupsHash
+                else {
+                    DispatchQueue.main.async {
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
+                    }
+                    return
+                }
+
+                UserDefaultsConfig.groupsHash = downloadedGroupsHash
+                DataManager.shared.write(groups: downloadedGroups)
+                animatingViewController.stopActivityIndicator()
+
+                self.set(timetable: nil)
+                self.showAlertForChoice()
+                
+                print("Все норм братан")
+            }
+        }
+
+        let groupsDownloadOperation = DownloadOperation(session: session, url: API.groups()) { data, response, error in
+            DispatchQueue.main.async {
+                guard let groups = ApiManager.handleGroupsResponse(data, response, error) else {
+                    DispatchQueue.main.async {
+                        animatingViewController.showAlertForNetwork()
+                        animatingViewController.stopActivityIndicator()
+                    }
+                    self.downloadingQueue.cancelAllOperations()
+                    return
+                }
+
+                downloadedGroups = groups
+            }
+        }
+        
+        let hashDownloadOperation = DownloadOperation(session: session, url: API.groupsHash()) { data, response, error in
+            guard let hash = ApiManager.handleHashResponse(data, response, error) else {
+                DispatchQueue.main.async {
+                    animatingViewController.showAlertForNetwork()
+                    animatingViewController.stopActivityIndicator()
+                }
+                self.downloadingQueue.cancelAllOperations()
+                return
+            }
+            
+            downloadedGroupsHash = hash
+        }
+
+        completionOperation.addDependency(groupsDownloadOperation)
+        completionOperation.addDependency(hashDownloadOperation)
+
+        downloadingQueue.addOperation(groupsDownloadOperation)
+        downloadingQueue.addOperation(hashDownloadOperation)
+        downloadingQueue.addOperation(completionOperation)
+    }
+    
 }

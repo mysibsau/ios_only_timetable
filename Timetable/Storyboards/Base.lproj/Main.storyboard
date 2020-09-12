@@ -75,11 +75,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="l2c-ty-aTX">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Сегодня" id="tw8-lL-JyP">
-                            <connections>
-                                <action selector="selectTodayTapped:" destination="BYZ-38-t0r" id="XAl-R4-mVD"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="T17-sh-Hdi">
+                                <connections>
+                                    <action selector="refreshTimetableTapped:" destination="BYZ-38-t0r" id="4cj-Cf-su9"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Сегодня" id="tw8-lL-JyP">
+                                <connections>
+                                    <action selector="selectTodayTapped:" destination="BYZ-38-t0r" id="XAl-R4-mVD"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="numberWeekSegmented" destination="4NW-hl-8PI" id="v5L-NP-RT3"/>
