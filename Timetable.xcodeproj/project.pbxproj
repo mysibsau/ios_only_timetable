@@ -114,7 +114,7 @@
 /* Begin PBXFileReference section */
 		4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Timetable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizingFirstLetter.swift"; sourceTree = "<group>"; };
-		4A2338D7243C58C2002C0746 /* Timetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2338D7243C58C2002C0746 /* Расписание.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Расписание.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338DA243C58C2002C0746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A2338DC243C58C2002C0746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4A2338E1243C58C2002C0746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		4A2338D8243C58C2002C0746 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4A2338D7243C58C2002C0746 /* Timetable.app */,
+				4A2338D7243C58C2002C0746 /* Расписание.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -746,7 +746,7 @@
 			);
 			name = Timetable;
 			productName = Timetable;
-			productReference = 4A2338D7243C58C2002C0746 /* Timetable.app */;
+			productReference = 4A2338D7243C58C2002C0746 /* Расписание.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1068,14 +1068,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HM9WL9QKWM;
 				INFOPLIST_FILE = Timetable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sibsu.timetable;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Расписание";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1087,14 +1089,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HM9WL9QKWM;
 				INFOPLIST_FILE = Timetable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sibsu.timetable;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Расписание";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
