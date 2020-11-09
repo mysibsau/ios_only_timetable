@@ -10,7 +10,7 @@ import Foundation
 
 struct API {
     
-    static let address = "https://timetable.mysibsau.ru/v2" // "http://185.228.233.243"
+    static let address = "https://timetable.mysibsau.ru" // "http://185.228.233.243"
     
     // MARK: Curr Week Is Even
     static func currWeekIsEven() -> URL {
