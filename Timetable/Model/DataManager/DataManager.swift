@@ -325,7 +325,7 @@ extension DataManager: WritingTimetable {
     
     func write(groupTimetable: RGroupTimetable) {
         try? userRealm.write {
-            userRealm.add(groupTimetable, update: .modified)
+            userRealm.add(groupTimetable, update: .all)
         }
     }
     
