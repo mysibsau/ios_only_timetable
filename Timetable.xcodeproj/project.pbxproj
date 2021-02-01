@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31CCDB5DD4C3128432E8B38B /* libPods-Timetable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */; };
 		4A12169E250110E000047092 /* String+capitalizingFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */; };
 		4A2338DB243C58C2002C0746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DA243C58C2002C0746 /* AppDelegate.swift */; };
 		4A2338DD243C58C2002C0746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2338DC243C58C2002C0746 /* SceneDelegate.swift */; };
@@ -50,7 +49,6 @@
 		4A67CBE1248EAB6F00F1D1FA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */; };
 		4A67CBE7248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */; };
 		4A67CBEB248FB62700F1D1FA /* TimetableMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */; };
-		4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */ = {isa = PBXBuildFile; fileRef = 4A67CBF62493A28C00F1D1FA /* init-data.realm */; };
 		4A6C1CF7246B28890048CD1A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C1CF5246B28890048CD1A /* DetailViewController.swift */; };
 		4A6E6F012503DA880007931E /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E6F002503DA880007931E /* DownloadOperation.swift */; };
 		4A920773245DCFF800D050EB /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A920772245DCFF800D050EB /* TimetableViewController.swift */; };
@@ -109,10 +107,11 @@
 		4AD69512248049C600A4A2B7 /* Date+Exnentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69511248049C600A4A2B7 /* Date+Exnentions.swift */; };
 		4AD6951424811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6951324811E7800A4A2B7 /* DateFormatter+shortDateFormatter.swift */; };
 		4AF964F1250D143B00AC4BB6 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF964F0250D143B00AC4BB6 /* ResponseHandler.swift */; };
+		F35B5C320B6EFF0C4C2512DD /* Pods_Timetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CBBCD85FF99DE002D16E1C /* Pods_Timetable.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Timetable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22CBBCD85FF99DE002D16E1C /* Pods_Timetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A12169D250110E000047092 /* String+capitalizingFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizingFirstLetter.swift"; sourceTree = "<group>"; };
 		4A2338D7243C58C2002C0746 /* Расписание.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Расписание.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2338DA243C58C2002C0746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +156,6 @@
 		4A67CBE0248EAB6F00F1D1FA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		4A67CBE6248F978400F1D1FA /* AnimatingNetworkViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingNetworkViewProtocol.swift; sourceTree = "<group>"; };
 		4A67CBEA248FB62700F1D1FA /* TimetableMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMood.swift; sourceTree = "<group>"; };
-		4A67CBF62493A28C00F1D1FA /* init-data.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "init-data.realm"; sourceTree = "<group>"; };
 		4A6C1CF5246B28890048CD1A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A6E6F002503DA880007931E /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
 		4A920772245DCFF800D050EB /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
@@ -225,7 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31CCDB5DD4C3128432E8B38B /* libPods-Timetable.a in Frameworks */,
+				F35B5C320B6EFF0C4C2512DD /* Pods_Timetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +486,6 @@
 		4A67CBED24936F9A00F1D1FA /* InitData */ = {
 			isa = PBXGroup;
 			children = (
-				4A67CBF62493A28C00F1D1FA /* init-data.realm */,
 			);
 			path = InitData;
 			sourceTree = "<group>";
@@ -723,7 +720,7 @@
 		65C6908D043D41676AB2D7E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A0D13F800DFF7E9ACAE03D3 /* libPods-Timetable.a */,
+				22CBBCD85FF99DE002D16E1C /* Pods_Timetable.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -739,6 +736,7 @@
 				4A2338D3243C58C2002C0746 /* Sources */,
 				4A2338D4243C58C2002C0746 /* Frameworks */,
 				4A2338D5243C58C2002C0746 /* Resources */,
+				E17019DA861ADBEE8F11FE1A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -793,7 +791,6 @@
 				4A920779245DDF4000D050EB /* MenuCell.xib in Resources */,
 				4AC64C4F2472F8C400081D55 /* AlertView.xib in Resources */,
 				4AC64C9B247A3E1D00081D55 /* PlaceSubgroupView.xib in Resources */,
-				4A67CBF72493A28C00F1D1FA /* init-data.realm in Resources */,
 				4A9C9138243DCB04009F67A8 /* GroupSubgroupView.xib in Resources */,
 				4A2338E2243C58C2002C0746 /* Main.storyboard in Resources */,
 			);
@@ -822,6 +819,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E17019DA861ADBEE8F11FE1A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Timetable/Pods-Timetable-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1075,7 +1089,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sibsu.timetable;
 				PRODUCT_NAME = "Расписание";
 				SWIFT_VERSION = 5.0;
@@ -1096,7 +1110,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sibsu.timetable;
 				PRODUCT_NAME = "Расписание";
 				SWIFT_VERSION = 5.0;

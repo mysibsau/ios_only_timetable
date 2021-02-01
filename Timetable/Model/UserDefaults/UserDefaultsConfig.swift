@@ -16,7 +16,7 @@ struct UserDefaultsConfig {
     @UserDefaultsWrapper(key: "com.sibsu.user.timetableId", defaultValue: Int?(nil))
     static var timetableId: Int?
     
-    @UserDefaultsWrapper(key: "com.sibsu.system.firstWeekIsEven", defaultValue: true)
+    @UserDefaultsWrapper(key: "com.sibsu.system.firstWeekIsEven", defaultValue: false)
     static var firstWeekIsEven: Bool
     
     // MARK: Hash для определения версии таблиц

@@ -24,7 +24,6 @@ class DateHelper {
     
     
     static func setFirstWeekIsEven(fromCurrWeekIsEven currWeekIsEven: Bool) {
-        
         let currWeek = Calendar.current.component(.weekOfYear, from: Date.today)
         
         let firstWeekIsEven = (currWeek % 2 == 1 && currWeekIsEven)
@@ -50,7 +49,6 @@ class DateHelper {
     
     // FIXME: Объединить с нижним методом
     static func getDatesEvenWeek() -> [(weekday: String, date: String)] {
-        
         let evenWeekMonday: Date
         if currWeekIsEven() {
             /// если четная, то понедельник четной недели - предыдущий
@@ -78,7 +76,6 @@ class DateHelper {
     }
     
     static func getDatesNotEvenWeek() -> [(weekday: String, date: String)] {
-        
         let evenWeekMonday: Date
         if !currWeekIsEven() {
             /// если четная, то понедельник четной недели - предыдущий
