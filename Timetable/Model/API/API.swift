@@ -10,7 +10,7 @@ import Foundation
 
 struct API {
     
-    static let address = "https://mysibsau.ru/v1" // "http://185.228.233.243"
+    static let address = "https://mysibsau.ru/v1/timetable" // "http://185.228.233.243"
     
     // MARK: Curr Week Is Even
     static func currWeekIsEven() -> URL {
@@ -23,7 +23,7 @@ struct API {
     }
     
     static func timetable(forGroupId groupId: Int) -> URL {
-        return URL(string: "\(address)/timetable/\(groupId)")!
+        return URL(string: "\(address)/timetable/\(groupId)/")!
     }
     
     static func groupsHash() -> URL {
